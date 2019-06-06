@@ -31,12 +31,12 @@ local          0.000GB
 lstm           0.001GB
 ```
 
-Drop a database:\\
+Drop a database:
 ```
 use lstm
 db.dropDatabase()
 ```
-Create a database:\\
+Create a database:
 ```
 use DATABASE_NAME
 ```
@@ -50,9 +50,10 @@ db.movie.insert({"name":"hoi"})
 ```
 
 Run:
-```omniboard -m hostname:port:database
 ```
-for example 
+omniboard -m hostname:port:database
+```
+for example
 ```
 > omniboard -m localhost:27017:model
 Omniboard is listening on port 9000!
