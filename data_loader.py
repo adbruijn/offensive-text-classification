@@ -89,7 +89,7 @@ def load_data():
     train_cola = train_cola.drop_duplicates("tweet")
     test = test.drop_duplicates("tweet")
 
-    train_cola.to_csv("./data/SemEval/train_no_val.csv", index=False)
+    #train_cola.to_csv("./data/SemEval/train_no_val.csv", index=False)
 
     train, val = train_test_split(train_cola, test_size=0.2, random_state=RANDOM_STATE)
     train.reset_index(drop=True)
