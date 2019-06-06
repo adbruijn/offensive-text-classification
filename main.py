@@ -36,13 +36,19 @@ warnings.filterwarnings('ignore')
 #Sacred
 #Sources
 #https://github.com/gereleth/kaggle-telstra/blob/master/Automatic%20model%20tuning%20with%20Sacred%20and%20Hyperopt.ipynb
-#https://github.com/maartjeth/sacred-_runample-pytorch
+#https://github.com/maartjeth/sacred-example-pytorch
 
 from sacred import Experiment
 from sacred.observers import FileStorageObserver
+from sacred.observers import MongoObserver
+
+EXPERIMENT_NAME = 'experiment'
+DATABASE_NAME = 'bert'
+URL_NAME = 'mongodb://localhost:27017/'
 
 ex = Experiment()
-ex.observers.append(FileStorageObserver.create('runs'))
+#ex.observers.append(FileStorageObserver.create('runs'))
+ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
 
 #Device
 if torch.cuda.is_available():
@@ -149,8 +155,8 @@ def congig():
     bs = 32 #Train batch size (default=32)
     val_bs = 32 #Validation batch size (default=32)
     test_bs = 32 #Test batch size (default=32)
-    num_epochs = 1 #Number of epochs (default=1)
-    max_seq_length = 40 #Maximum sequence length of the sentences (default=40)
+    num_epochs = 3 #Number of epochs (default=1)
+    max_seq_length = 45 #Maximum sequence length of the sentences (default=40)
     learning_rate = 3e-5 #Learning rate for the model (default=3e-5)
     warmup_proportion = 0.1 #Warmup proportion (default=0.1)
     early_stopping_criteria = 10 #Early stopping cri(default=10)
