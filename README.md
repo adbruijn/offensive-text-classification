@@ -16,7 +16,8 @@ OMNIBOARD\\
 Install: ```npm install -g omniboard```
 
 Open a terminal:
-```sudo mongod
+```
+sudo mongod
 ```
 
 Open another terminal:
@@ -48,7 +49,11 @@ There has to be at least one document in the database.
 db.movie.insert({"name":"hoi"})
 ```
 
-Run: ```omniboard -m hostname:port:database```, for example ```
+Run:
+```omniboard -m hostname:port:database
+```
+for example 
+```
 > omniboard -m localhost:27017:model
 Omniboard is listening on port 9000!
 ```
