@@ -43,7 +43,7 @@ from sacred.observers import FileStorageObserver
 from sacred.observers import MongoObserver
 
 EXPERIMENT_NAME = 'experiment'
-DATABASE_NAME = 'bert'
+DATABASE_NAME = 'experiments'
 URL_NAME = 'mongodb://localhost:27017/'
 
 ex = Experiment()
@@ -91,7 +91,7 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, dataloader, val_da
     Returns train and evaluation metrics with epoch, loss, accuracy, recall, precision and f1-score
     """
 
-    metrics = pd.DataFrame(columns=['epoch', 'loss', 'accuracy', 'recall', 'precision', 'f1'])
+    train_metrics = pd.DataFrame(columns=['epoch', 'loss', 'accuracy', 'recall', 'precision', 'f1'])
     val_metrics = pd.DataFrame(columns=['epoch', 'loss', 'accuracy', 'recall', 'precision', 'f1'])
 
     best_val_loss = float("inf")
@@ -101,14 +101,14 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, dataloader, val_da
     for epoch in trange(num_epochs, desc="Epoch"):
 
         ### TRAINING ###
-        results = train_model(model, optimizer, loss_fn, dataloader, device)
-        metrics.loc[len(metrics)] = {'epoch':epoch, 'loss':results['loss'], 'accuracy':results['accuracy'], 'recall':results['recall'], 'precision':results['precision'], 'f1':results['f1']}
-        log_scalars(results, "Train")
+        train_results = train_model(model, optimizer, loss_fn, dataloader, device)
+        train_metrics.loc[len(train_metrics)] = {'epoch':epoch, 'loss':train_results['loss'], 'accuracy':train_results['accuracy'], 'recall':train_results['recall'], 'precision':train_results['precision'], 'f1':train_results['f1']}
+        log_scalars(train_results, "Train")
 
         ### EVALUATION ###
         val_results = evaluate_model(model, optimizer, loss_fn, val_dataloader, device)
         val_metrics.loc[len(val_metrics)] = {'epoch':epoch, 'loss':val_results['loss'], 'accuracy':val_results['accuracy'], 'recall':val_results['recall'], 'precision':val_results['precision'], 'f1':val_results['f1']}
-        log_scalars(results, "Validation")
+        log_scalars(val_results, "Validation")
 
         #Save best and latest state
         best_model = val_results['loss'] <= best_val_loss
@@ -131,6 +131,7 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, dataloader, val_da
         #Early stopping
         if val_results['loss'] >= best_val_loss:
             early_stop_step += 1
+            print("Early stop step:", early_stop_step)
         else:
             best_val_loss = val_results['loss']
             early_stop_step = 0
@@ -138,13 +139,13 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, dataloader, val_da
         stop_early = early_stop_step >= early_stopping_criteria
 
         if stop_early:
-            print("Stopping early at epoch %i", epoch)
-            break
+            print("Stopping early at epoch {}".format(epoch))
+            return train_metrics, val_metrics
 
         #Scheduler
         scheduler.step()
 
-    return metrics, val_metrics
+    return train_metrics, val_metrics
 
 @ex.config
 def congig():
@@ -152,17 +153,18 @@ def congig():
     """Configuration"""
 
     num_labels = 2 #Number of labels (default=2)
-    bs = 32 #Train batch size (default=32)
+    train_bs = 32 #Train batch size (default=32)
     val_bs = 32 #Validation batch size (default=32)
     test_bs = 32 #Test batch size (default=32)
-    num_epochs = 3 #Number of epochs (default=1)
-    max_seq_length = 45 #Maximum sequence length of the sentences (default=40)
+    num_epochs = 100 #Number of epochs (default=1)
+    max_seq_length = 50 #Maximum sequence length of the sentences (default=40)
     learning_rate = 3e-5 #Learning rate for the model (default=3e-5)
     warmup_proportion = 0.1 #Warmup proportion (default=0.1)
-    early_stopping_criteria = 10 #Early stopping cri(default=10)
+    early_stopping_criteria = 5 #Early stopping cri(default=10)
+    model_name = "bert"
 
 @ex.automain
-def run(num_labels, bs, val_bs, test_bs, num_epochs, max_seq_length, learning_rate, early_stopping_criteria, warmup_proportion, _run):
+def run(num_labels, train_bs, val_bs, test_bs, num_epochs, max_seq_length, learning_rate, early_stopping_criteria, warmup_proportion, _run):
     #Logger
     directory = f"runs/{_run._id}/"
 
@@ -173,20 +175,20 @@ def run(num_labels, bs, val_bs, test_bs, num_epochs, max_seq_length, learning_ra
     print('Load datasets...')
 
     #Data
-    data, val_data, test_data = load_data()
-    df, val_df, test_df = clean_data(data), clean_data(val_data), clean_data(test_data)
+    train_data, val_data, test_data = load_data()
+    train_df, val_df, test_df = clean_data(train_data), clean_data(val_data), clean_data(test_data)
 
     #Data _runamples
-    examples = convert_examples_to_features(df.head(10), max_seq_length, tokenizer)
-    val_examples = convert_examples_to_features(val_df.head(2), max_seq_length, tokenizer)
+    train_examples = convert_examples_to_features(train_df, max_seq_length, tokenizer)
+    val_examples = convert_examples_to_features(val_df, max_seq_length, tokenizer)
     test_examples = convert_examples_to_features(test_df, max_seq_length, tokenizer)
 
     #Dataloaders
-    dataloader = get_dataloader(examples, bs)
+    train_dataloader = get_dataloader(train_examples, train_bs)
     val_dataloader = get_dataloader(val_examples, val_bs)
     test_dataloader = get_dataloader(test_examples, test_bs)
 
-    num_optimization_steps = int(len(df) / bs) * num_epochs
+    num_optimization_steps = int(len(train_df) / train_bs) * num_epochs
 
     #Model
     model = BertForSequenceClassification.from_pretrained("bert-base-uncased", num_labels=num_labels)
@@ -203,7 +205,7 @@ def run(num_labels, bs, val_bs, test_bs, num_epochs, max_seq_length, learning_ra
 
     #Training and evaluation
     print('Training and evaluation for {} epochs...'.format(num_epochs))
-    train_metrics, val_metrics = train_and_evaluate(num_epochs, model, optimizer, loss_fn, dataloader, val_dataloader, scheduler, early_stopping_criteria, directory)
+    train_metrics, val_metrics = train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, val_dataloader, scheduler, early_stopping_criteria, directory)
     train_metrics.to_csv(directory+"train_metrics.csv"), val_metrics.to_csv(directory+"val_metrics.csv")
 
     #Test
