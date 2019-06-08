@@ -25,97 +25,121 @@ from torch.utils.data import (DataLoader, RandomSampler, SequentialSampler,
                               TensorDataset)
 
 from utils import convert_examples_to_features
+from utils import clean_tweet
 
-#Preprocess Data
-def clean_bert(tweet):
+from pytorch_pretrained_bert.file_utils import PYTORCH_PRETRAINED_BERT_CACHE, WEIGHTS_NAME, CONFIG_NAME
+from pytorch_pretrained_bert.modeling import BertForSequenceClassification, BertConfig
+from pytorch_pretrained_bert.tokenization import BertTokenizer
 
-    #Remove emojis
-    tweet = re.sub(":[a-zA-Z\-\_]*:","", emoji.demojize(tweet)) #:hear-no-evil_monkey:
-    tweet = re.sub(":\w+:","", emoji.demojize(tweet))
-    tweet = re.sub(":\w+\’\w+:","", emoji.demojize(tweet)) #:woman's_boot:
+from keras.preprocessing.text import Tokenizer
+from keras.preprocessing.sequence import pad_sequences
 
-    #Remove mentions, usernames (@USER)
-    tweet = re.sub("\s*@USER\s*", '', tweet)
+def load_glove(embedding_file):
 
-    #Remove URL
-    tweet = re.sub("\s*URL\s*", '', tweet)
+    """Load GloVe file
+    Args:
+        embedding_file: (str) Directory of the embedding file
+    """
 
-    #And
-    tweet = re.sub("&amp;", "and", tweet)
-    tweet = re.sub("&lt;", "<", tweet)
-    tweet = re.sub("&gt", ">", tweet)
-    tweet = re.sub("&", "and", tweet)
+    EMBEDDING_FILE = embedding_file
+    embeddings_index = dict()
 
-    #Replace contractions and slang of word
-    tweet = re.sub("i'm", "I'm", tweet)
-    tweet = contractions.fix(tweet, slang=True)
+    for line in open(EMBEDDING_FILE):
+        values = line.split()
+        word = values[0]
+        coefs = np.asarray(values[1:], dtype='float32')
+        embeddings_index[word] = coefs
+    print("Loaded {} word vectors".format(len(embeddings_index)))
 
-    #Lowercase
-    tweet = tweet.lower()
+    return embeddings_index
 
-    #Remove Hashtags + Words
-    tweet = re.sub("#\s*\w+\s*", '', tweet)
+def create_weight_matrix(vocab_size, word_index, embedding_dim, embeddings_index):
 
-    #Remove repeating characters (whitespace)
-    tweet = re.sub("\s[2, ]"," ", tweet)
+    """Create weight matrix for the embeddings
+    Args:
+        vocab_size: Vocabulary size
+        word_index: Word index
+        embedding_dim: Dimension of the embeddings
+        embeddings_index: Index of the embedding
+    """
+    embedding_matrix = np.zeros((vocab_size, embedding_dim))
+    for word, i in word_index.items():
+        embedding_vector = embeddings_index.get(word)
 
-    #Remove non ascii characters
-    tweet.encode("ascii", errors="ignore").decode()
+        if embedding_vector is not None:
+            embedding_matrix[i] = embedding_vector
+        else:
+            embedding_vector = embeddings_index.get(word.capitalize())
 
-    #Tokenize tweet
-    tt = TweetTokenizer(preserve_case=False,
-                    strip_handles=True,
-                    reduce_len=True)
+            if embedding_vector is not None:
+                embedding_matrix[i] = embedding_vector
 
-    tweet_tokens = tt.tokenize(tweet)
+    return embedding_matrix
 
-    clean = " ".join(tweet_tokens)
-
-    return clean
 
 #Load data
 def load_data():
+    """Loads the data, if the data is not splitted yet the data will be split in a train and validation set
+    """
     RANDOM_STATE = 123
 
-    # Split normal data
-    train_cola = pd.read_csv("data/SemEval/olid-training-v1.0.tsv", delimiter="\t")
-    test_cola = pd.read_csv("data/SemEval/testset-levela.tsv", delimiter="\t")
-    labels_cola = pd.read_csv("data/SemEval/labels-levela.csv", header=None)
-    labels_cola.columns = ['id', 'subtask_a']
+    train_file = Path("data/split_train.csv")
 
-    test = pd.merge(test_cola, labels_cola, on='id')
+    if train_file.exists():
+        train = pd.read_csv("data/split_train.csv")
+        val = pd.read_csv("data/split_val.csv")
+        test = pd.read_csv("data/split_test.csv")
+    else:
+        # Split normal data
+        train_cola = pd.read_csv("data/SemEval/olid-training-v1.0.tsv", delimiter="\t")
+        test_cola = pd.read_csv("data/SemEval/testset-levela.tsv", delimiter="\t")
+        labels_cola = pd.read_csv("data/SemEval/labels-levela.csv", header=None)
+        labels_cola.columns = ['id', 'subtask_a']
 
-    # Remove duplicates
-    train_cola = train_cola.drop_duplicates("tweet")
-    test = test.drop_duplicates("tweet")
+        test = pd.merge(test_cola, labels_cola, on='id')
 
-    #train_cola.to_csv("./data/SemEval/train_no_val.csv", index=False)
+        # Remove duplicates
+        train_cola = train_cola.drop_duplicates("tweet")
+        test = test.drop_duplicates("tweet")
 
-    train, val = train_test_split(train_cola, test_size=0.2, random_state=RANDOM_STATE)
-    train.reset_index(drop=True)
-    val.reset_index(drop=True)
+        train, val = train_test_split(train_cola, test_size=0.2, random_state=RANDOM_STATE)
+        train.reset_index(drop=True)
+        val.reset_index(drop=True)
+
+        train.to_csv("data/split_train.csv", index=False)
+        val.to_csv("data/split_val.csv", index=False)
+        test.to_csv("data/split_test.csv", index=False)
 
     return train, val, test
 
 #Clean Data
 def clean_data(df):
+    """Clean the data and remove data which has a length of less than 3 words
+    Args:
+        df: Dataframe
+    """
     labels = [0 if label=="NOT" else 1 for label in df["subtask_a"]]
-    tweet_clean = [clean_bert(tweet) for tweet in df["tweet"]]
+    #labels = encode_label(df["subtask_a"])
+
+    tweet_clean = [clean_tweet(tweet) for tweet in df["tweet"]]
 
     df = pd.DataFrame({"tweet":tweet_clean, "label":labels})
 
     length = [len(text.split(' ')) for text in df.tweet]
-
     df["length"] = length
-
     df = df[df["length"]<=3]
-
     df = df.drop(columns="length")
 
     return df
 
 #Get Dataloader
 def get_dataloader(examples, batch_size):
+    """Make data iterator
+        Arguments:
+            X:  Features
+            y: Labels
+            batch_size: (int) Batch size
+    """
 
     all_input_ids = torch.tensor(list(examples.input_ids), dtype=torch.long)
     all_input_mask = torch.tensor(list(examples.input_mask), dtype=torch.long)
@@ -127,3 +151,38 @@ def get_dataloader(examples, batch_size):
     dataloader = DataLoader(data, sampler=sampler, batch_size=batch_size)
 
     return dataloader
+
+def get_data(max_seq_len, batch_sizes, embedding_file=None, use_bert=False):
+
+    """
+    Arguments:
+        max_num_words: (int) Max number of words as input for the Tokenizer
+        embedding_dim: (int) Embedding dim of the embeddings
+        max_seq_len: (int) Max sequence length of the sentences
+        batch_size: (int) Batch size for the DataLoader
+        use_bert: (bool) Use the BERT model or another model
+    Output:
+        word_index, embedding_matrix, X_train, y_train, X_test, y_test
+    """
+
+    #Load data
+    train, val, test = load_data()
+
+    #Clean data
+    train_df, val_df, test_df = clean_data(train), clean_data(val), clean_data(test)
+
+    #Features data
+    tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
+
+    train_examples = convert_examples_to_features(train_df, max_seq_length, tokenizer)
+    val_examples = convert_examples_to_features(val_df, max_seq_length, tokenizer)
+    test_examples = convert_examples_to_features(test_df, max_seq_length, tokenizer)
+
+    #Data loaders
+    train_loader = get_dataloader(train_examples, batch_sizes[0])
+    val_loader = get_dataloader(val_examples, batch_sizes[1])
+    test_loader = get_dataloader(test_examples, batch_sizes[2])
+
+    return train_dataloader, val_dataloader, test_dataloader
+
+    #return int(vocab_size), embedding_matrix, train_loader, valid_loader, test_loader
