@@ -42,6 +42,7 @@ warnings.filterwarnings('ignore')
 from sacred import Experiment
 from sacred.observers import FileStorageObserver
 from sacred.observers import MongoObserver
+from sacred.observers import SlackObserver
 
 EXPERIMENT_NAME = 'experiment'
 DATABASE_NAME = 'experiments'
@@ -50,6 +51,9 @@ URL_NAME = 'mongodb://localhost:27017/'
 ex = Experiment()
 ex.observers.append(FileStorageObserver.create('runs'))
 #ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
+
+slack_obs = SlackObserver.from_config('slack.json')
+ex.observers.append(slack_obs)
 
 #Device
 if torch.cuda.is_available():
@@ -162,7 +166,7 @@ def congig():
     max_seq_length = 50 #Maximum sequence length of the sentences (default=40)
     learning_rate = 3e-5 #Learning rate for the model (default=3e-5)
     warmup_proportion = 0.1 #Warmup proportion (default=0.1)
-    early_stopping_criteria = 5 #Early stopping criteria (default=10)
+    early_stopping_criteria = 1 #Early stopping criteria (default=10)
     embedding_dim = 200 #Embedding dimension (default=100)
     num_layers = 2 #Number of layers (default=2)
     hidden_dim = 100 #Hidden layers dimension (default=128)
