@@ -27,8 +27,9 @@ from pytorch_pretrained_bert.optimization import BertAdam, WarmupLinearSchedule
 
 from train import train_model
 from evaluate import evaluate_model
-from utils import accuracy_recall_precision_f1, set_logger, save_checkpoint, load_checkpoint
-from data_loader import load_data, clean_data, get_dataloader, convert_examples_to_features
+from utils import accuracy_recall_precision_f1, save_checkpoint, load_checkpoint
+from data_loader import get_data
+import models
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -47,8 +48,8 @@ DATABASE_NAME = 'experiments'
 URL_NAME = 'mongodb://localhost:27017/'
 
 ex = Experiment()
-#ex.observers.append(FileStorageObserver.create('runs'))
-ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
+ex.observers.append(FileStorageObserver.create('runs'))
+#ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
 
 #Device
 if torch.cuda.is_available():
@@ -147,12 +148,13 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, dataloader, val_da
 
     return train_metrics, val_metrics
 
+
 @ex.config
 def congig():
 
     """Configuration"""
 
-    num_labels = 2 #Number of labels (default=2)
+    output_dim = 2 #Number of labels (default=2)
     train_bs = 32 #Train batch size (default=32)
     val_bs = 32 #Validation batch size (default=32)
     test_bs = 32 #Test batch size (default=32)
@@ -160,38 +162,28 @@ def congig():
     max_seq_length = 50 #Maximum sequence length of the sentences (default=40)
     learning_rate = 3e-5 #Learning rate for the model (default=3e-5)
     warmup_proportion = 0.1 #Warmup proportion (default=0.1)
-    early_stopping_criteria = 5 #Early stopping cri(default=10)
-    model_name = "bert"
+    early_stopping_criteria = 5 #Early stopping criteria (default=10)
+    embedding_dim = 200 #Embedding dimension (default=100)
+    num_layers = 2 #Number of layers (default=2)
+    hidden_dim = 100 #Hidden layers dimension (default=128)
+    model_name = "BERT" #Model name: LSTM, BERT, MLP, CNN
+
 
 @ex.automain
-def run(num_labels, train_bs, val_bs, test_bs, num_epochs, max_seq_length, learning_rate, early_stopping_criteria, warmup_proportion, _run):
+def run(output_dim, train_bs, val_bs, test_bs, num_epochs, max_seq_length, learning_rate, warmup_proportion, early_stopping_criteria, embedding_dim, num_layers, hidden_dim, model_name, _run):
+
     #Logger
     directory = f"runs/{_run._id}/"
+    print(model_name)
 
-    #Tokenizer
-    tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
-
-    #Data
-    print('Load datasets...')
+    #Batch sizes
+    batch_sizes = [train_bs, val_bs, test_bs]
 
     #Data
-    train_data, val_data, test_data = load_data()
-    train_df, val_df, test_df = clean_data(train_data), clean_data(val_data), clean_data(test_data)
-
-    #Data _runamples
-    train_examples = convert_examples_to_features(train_df, max_seq_length, tokenizer)
-    val_examples = convert_examples_to_features(val_df, max_seq_length, tokenizer)
-    test_examples = convert_examples_to_features(test_df, max_seq_length, tokenizer)
-
-    #Dataloaders
-    train_dataloader = get_dataloader(train_examples, train_bs)
-    val_dataloader = get_dataloader(val_examples, val_bs)
-    test_dataloader = get_dataloader(test_examples, test_bs)
-
-    num_optimization_steps = int(len(train_df) / train_bs) * num_epochs
+    train_dataloader, val_dataloader, test_dataloader = get_data(max_seq_length, batch_sizes)
 
     #Model
-    model = BertForSequenceClassification.from_pretrained("bert-base-uncased", num_labels=num_labels)
+    model = BertForSequenceClassification.from_pretrained("bert-base-uncased", output_dim)
     model = model.to(device)
 
     #Loss and optimizer
