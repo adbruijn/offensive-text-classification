@@ -22,6 +22,9 @@ from nltk.tokenize import TweetTokenizer
 from wordcloud import STOPWORDS
 import numpy as np
 
+from nltk.stem.porter import *
+stemmer = PorterStemmer()
+
 #Metrics
 def accuracy_recall_precision_f1(y_pred, y_target):
 
