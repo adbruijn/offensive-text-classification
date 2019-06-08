@@ -4,7 +4,6 @@ from __future__ import print_function
 
 import numpy as np
 
-# from .BERT import BERT
 from .CNN import CNN
 from .LSTM import LSTM
 from .LSTMAttention import LSTMAttention
