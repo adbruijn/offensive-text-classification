@@ -152,13 +152,13 @@ def get_dataloader(examples, batch_size):
 
     return dataloader
 
-def get_data(max_seq_len, batch_sizes, embedding_file=None, use_bert=False):
+def get_data(max_seq_length, batch_sizes, embedding_file=None, use_bert=False):
 
     """
     Arguments:
         max_num_words: (int) Max number of words as input for the Tokenizer
         embedding_dim: (int) Embedding dim of the embeddings
-        max_seq_len: (int) Max sequence length of the sentences
+        max_seq_length: (int) Max sequence length of the sentences
         batch_size: (int) Batch size for the DataLoader
         use_bert: (bool) Use the BERT model or another model
     Output:
@@ -179,9 +179,9 @@ def get_data(max_seq_len, batch_sizes, embedding_file=None, use_bert=False):
     test_examples = convert_examples_to_features(test_df, max_seq_length, tokenizer)
 
     #Data loaders
-    train_loader = get_dataloader(train_examples, batch_sizes[0])
-    val_loader = get_dataloader(val_examples, batch_sizes[1])
-    test_loader = get_dataloader(test_examples, batch_sizes[2])
+    train_dataloader = get_dataloader(train_examples, batch_sizes[0])
+    val_dataloader = get_dataloader(val_examples, batch_sizes[1])
+    test_dataloader = get_dataloader(test_examples, batch_sizes[2])
 
     return train_dataloader, val_dataloader, test_dataloader
 
