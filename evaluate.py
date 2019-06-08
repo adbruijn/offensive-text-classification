@@ -40,7 +40,6 @@ def evaluate_model(model, optimizer, loss_fn, dataloader, device):
 
             #Step 1: Compute the forward pass of the model (model output)
             y_pred = model(input_ids, segment_ids, input_mask, labels=None)
-            y_target = label_ids
 
             #Step 2: Compute the loss
             loss = loss_fn(y_pred, y_target)
