@@ -34,9 +34,6 @@ from pytorch_pretrained_bert.tokenization import BertTokenizer
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 
-from keras.preprocessing.text import Tokenizer
-from keras.preprocessing.sequence import pad_sequences
-
 def load_glove(embedding_file):
 
     """Load GloVe file
@@ -110,10 +107,14 @@ def load_data():
         train, val = train_test_split(train_cola, test_size=0.2, random_state=RANDOM_STATE)
         train.reset_index(drop=True)
         val.reset_index(drop=True)
-        #
-        # train.columns = ['text', 'label']
-        # val.columns = ['text','label']
-        # test.columns = ['text', 'label']
+
+        train = train[["tweet","subtask_a"]]
+        val = val[["tweet","subtask_a"]]
+        test = test[["tweet","subtask_a"]]
+
+        train.columns = ['text', 'label']
+        val.columns = ['text','label']
+        test.columns = ['text', 'label']
 
         train.to_csv("data/train.csv", index=False)
         val.to_csv("data/val.csv", index=False)
@@ -128,8 +129,8 @@ def clean_data(df):
         df: Dataframe
     """
 
-    labels = [0 if label=="NOT" else 1 for label in df["subtask_a"]]
-    text_clean = [clean_text(text) for text in df["tweet"]]
+    labels = encode_label(df["label"])
+    text_clean = [clean_text(text) for text in df["text"]]
 
     df = pd.DataFrame({"text":text_clean, "label":labels})
 
@@ -138,22 +139,6 @@ def clean_data(df):
     # df = df[df["length"]<=3]
     # df = df.drop(columns="length")
 
-    #labels = [0 if label=="NOT" else 1 for label in df["subtask_a"]]
-    #labels = encode_label(df["subtask_a"])
-    #labels = encode_label(df["subtask_a"])
-
-    #df = pd.DataFrame({"text":text_clean, "label":labels})
-
-    # length = [len(text.split(' ')) for text in df.text]
-    # df["length"] = length
-    # df = df[df["length"]<=3]
-    # df = df.drop(columns="length")
-    #
-    # #labels = [0 if label=="NOT" else 1 for label in df["subtask_a"]]
-    # labels = encode_label(df["subtask_a"])
-    # #labels = encode_label(df["subtask_a"])
-    #
-    # tweet_clean = [clean_tweet(tweet) for tweet in df["tweet"]]
     return text_clean, labels
 
 #Get Dataloader
