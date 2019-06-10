@@ -5,7 +5,7 @@ Classifies offensive text using different machine learning models: MLP, LSTM/LST
 GloVe word vectors are used as input feature for the models. The features for the model BERT are extracted with the function convert_examples_to_features.
 
 ## Data
-There are 3 datasets in the folder data/: training, validation and test set. Each of datasets have the columns: text and label.
+There are 3 datasets in the folder data: training, validation and test set. Each of datasets have the columns: text and label.
 
 ## Usage
 Run from the command line
