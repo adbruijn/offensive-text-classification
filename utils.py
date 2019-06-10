@@ -117,7 +117,7 @@ def clean_tweet(tweet, remove_punt_number_special_chars=False,remove_stopwords=F
     return clean
 
 #BERT
-def convert_examples_to_features(data, max_seq_length, tokenizer):
+def convert_examples_to_features(X, y, max_seq_length, tokenizer):
 
     """Loads a data file and returns examples (input_ids, input_mask, segment_ids, label_id).
     Args:
@@ -129,7 +129,9 @@ def convert_examples_to_features(data, max_seq_length, tokenizer):
     col_names = ["input_ids","input_mask","segment_ids","label_id"]
     features = pd.DataFrame(columns=col_names)
 
-    for index, example in data.iterrows():
+    df = pd.DataFrame({"tweet":X, "label":y})
+
+    for index, example in df.iterrows():
 
         tokens_tweet = tokenizer.tokenize(example.tweet)
 
