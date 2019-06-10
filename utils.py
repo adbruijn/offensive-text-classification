@@ -51,68 +51,68 @@ def accuracy_recall_precision_f1(y_pred, y_target):
     return accuracy, recall, precision, f1
 
 #Preprocess Data
-def clean_tweet(tweet, remove_punt_number_special_chars=False,remove_stopwords=False, apply_stemming=False):
-    """Clean tweets
+def clean_text(text, remove_punt_number_special_chars=False,remove_stopwords=False, apply_stemming=False):
+    """Clean text
     Args:
-        tweet: (str) Tweet
+        text: (str) Text
         remove_punt_number_special_chars: (bool) Remove punctuations, numbers and special characters
         remove_stopwords: (bool) Remove stopwords
-        apply_stemming: (bool) Apply stemming on the words on the tweets
+        apply_stemming: (bool) Apply stemming on the words on the text
     """
     #Remove emojis
-    tweet = re.sub(":[a-zA-Z\-\_]*:","", emoji.demojize(tweet)) #:hear-no-evil_monkey:
-    tweet = re.sub(":\w+:","", emoji.demojize(tweet))
-    tweet = re.sub(":\w+\’\w+:","", emoji.demojize(tweet)) #:woman's_boot:
+    text = re.sub(":[a-zA-Z\-\_]*:","", emoji.demojize(text)) #:hear-no-evil_monkey:
+    text = re.sub(":\w+:","", emoji.demojize(text))
+    text = re.sub(":\w+\’\w+:","", emoji.demojize(text)) #:woman's_boot:
 
     #Remove mentions, usernames (@USER)
-    tweet = re.sub("\s*@USER\s*", '', tweet)
+    text = re.sub("\s*@USER\s*", '', text)
 
     #Remove URL
-    tweet = re.sub("\s*URL\s*", '', tweet)
+    text = re.sub("\s*URL\s*", '', text)
 
     #And
-    tweet = re.sub("&amp;", "and", tweet)
-    tweet = re.sub("&lt;", "<", tweet)
-    tweet = re.sub("&gt", ">", tweet)
-    tweet = re.sub("&", "and", tweet)
+    text = re.sub("&amp;", "and", text)
+    text = re.sub("&lt;", "<", text)
+    text = re.sub("&gt", ">", text)
+    text = re.sub("&", "and", text)
 
     #Replace contractions and slang of word
-    tweet = re.sub("i'm", "I'm", tweet)
-    tweet = contractions.fix(tweet, slang=True)
+    text = re.sub("i'm", "I'm", text)
+    text = contractions.fix(text, slang=True)
 
     #Lowercase
-    tweet = tweet.lower()
+    text = text.lower()
 
     #Remove Hashtags + Words
-    tweet = re.sub("#\s*\w+\s*", '', tweet)
+    text = re.sub("#\s*\w+\s*", '', text)
 
     #Remove repeating whitespaces
-    tweet = re.sub("\s[2, ]"," ", tweet)
+    text = re.sub("\s[2, ]"," ", text)
 
     #Remove non ascii characters
-    tweet.encode("ascii", errors="ignore").decode()
+    text.encode("ascii", errors="ignore").decode()
 
     #Remove punctuations, numbers and special characters (remove emoticons)
     if remove_punt_number_special_chars:
-        tweet = re.sub('[^a-zA-Z]', ' ', tweet)
+        text = re.sub('[^a-zA-Z]', ' ', text)
 
-    #Tokenize tweet
+    #Tokenize text
     tt = TweetTokenizer(preserve_case=False,
                     strip_handles=True,
                     reduce_len=True)
 
-    tweet_tokens = tt.tokenize(tweet)
+    text_tokens = tt.tokenize(text)
 
     #Remove stopwords
     if remove_stopwords:
         stopwords = set(STOPWORDS)
-        tweet_tokens = [token for token in tweet_tokens if token not in stopwords]
+        text_tokens = [token for token in text_tokens if token not in stopwords]
 
     #Stemming
     if apply_stemming:
-        tweet_stem = [stemmer.stem(token) for token in tweet_tokens]
+        text_stem = [stemmer.stem(token) for token in text_tokens]
 
-    clean = " ".join(tweet_tokens)
+    clean = " ".join(text_tokens)
 
     return clean
 
@@ -129,17 +129,17 @@ def convert_examples_to_features(X, y, max_seq_length, tokenizer):
     col_names = ["input_ids","input_mask","segment_ids","label_id"]
     features = pd.DataFrame(columns=col_names)
 
-    df = pd.DataFrame({"tweet":X, "label":y})
+    df = pd.DataFrame({"text":X, "label":y})
 
     for index, example in df.iterrows():
 
-        tokens_tweet = tokenizer.tokenize(example.tweet)
+        tokens_text = tokenizer.tokenize(example.text)
 
         # Account for [CLS] and [SEP] with "- 2"
-        if len(tokens_tweet) > max_seq_length - 2:
-            tokens_tweet = tokens_tweet[:(max_seq_length - 2)]
+        if len(tokens_text) > max_seq_length - 2:
+            tokens_text = tokens_text[:(max_seq_length - 2)]
 
-        tokens = ["[CLS]"] + tokens_tweet + ["[SEP]"]
+        tokens = ["[CLS]"] + tokens_text + ["[SEP]"]
         segment_ids = [0] * len(tokens)
         input_ids = tokenizer.convert_tokens_to_ids(tokens)
 

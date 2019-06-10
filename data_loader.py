@@ -25,7 +25,7 @@ from torch.utils.data import (DataLoader, RandomSampler, SequentialSampler,
                               TensorDataset)
 
 from utils import convert_examples_to_features
-from utils import clean_tweet
+from utils import clean_text
 
 from pytorch_pretrained_bert.file_utils import PYTORCH_PRETRAINED_BERT_CACHE, WEIGHTS_NAME, CONFIG_NAME
 from pytorch_pretrained_bert.modeling import BertForSequenceClassification, BertConfig
@@ -82,16 +82,18 @@ def create_weight_matrix(vocab_size, word_index, embedding_dim, embeddings_index
 
 #Load data
 def load_data():
-    """Loads the data, if the data is not splitted yet the data will be split in a train and validation set
     """
+    Loads the data, if the data is not splitted yet the data will be split in a train and validation set
+    """
+
     RANDOM_STATE = 123
 
-    train_file = Path("data/split_train.csv")
+    train_file = Path("data/train.csv")
 
     if train_file.exists():
-        train = pd.read_csv("data/split_train.csv")
-        val = pd.read_csv("data/split_val.csv")
-        test = pd.read_csv("data/split_test.csv")
+        train = pd.read_csv("data/train.csv")
+        val = pd.read_csv("data/val.csv")
+        test = pd.read_csv("data/test.csv")
     else:
         # Split normal data
         train_cola = pd.read_csv("data/SemEval/olid-training-v1.0.tsv", delimiter="\t")
@@ -109,9 +111,13 @@ def load_data():
         train.reset_index(drop=True)
         val.reset_index(drop=True)
 
-        train.to_csv("data/split_train.csv", index=False)
-        val.to_csv("data/split_val.csv", index=False)
-        test.to_csv("data/split_test.csv", index=False)
+        train.columns = ['text', 'label']
+        val.columns = ['text','label']
+        test.columns = ['text', 'label']
+
+        train.to_csv("data/train.csv", index=False)
+        val.to_csv("data/val.csv", index=False)
+        test.to_csv("data/test.csv", index=False)
 
     return train, val, test
 
@@ -121,20 +127,23 @@ def clean_data(df):
     Args:
         df: Dataframe
     """
-    #labels = [0 if label=="NOT" else 1 for label in df["subtask_a"]]
-    labels = encode_label(df["subtask_a"])
-    #labels = encode_label(df["subtask_a"])
+    labels = [0 if label=="NOT" else 1 for label in df["label"]]
+    text_clean = [clean_text(text) for text in df["text"]]
 
-    tweet_clean = [clean_tweet(tweet) for tweet in df["tweet"]]
+    df = pd.DataFrame({"text":text_clean, "label":labels})
 
-    # df = pd.DataFrame({"tweet":tweet_clean, "label":labels})
-    #
-    #length = [len(text.split(' ')) for text in tweet_clean]
+    # length = [len(text.split(' ')) for text in df.text]
     # df["length"] = length
     # df = df[df["length"]<=3]
     # df = df.drop(columns="length")
+    #
+    # #labels = [0 if label=="NOT" else 1 for label in df["subtask_a"]]
+    # labels = encode_label(df["subtask_a"])
+    # #labels = encode_label(df["subtask_a"])
+    #
+    # tweet_clean = [clean_tweet(tweet) for tweet in df["tweet"]]
 
-    return tweet_clean, labels
+    return text_clean, labels
 
 #Get Dataloader
 def get_dataloader(examples, batch_size):
@@ -172,7 +181,7 @@ def encode_label(y):
 def get_data_bert(max_seq_length, batch_sizes):
 
     """
-    Arguments:
+    Args:
         max_num_words: (int) Max number of words as input for the Tokenizer
         embedding_dim: (int) Embedding dim of the embeddings
         max_seq_length: (int) Max sequence length of the sentences
@@ -205,10 +214,11 @@ def get_data_bert(max_seq_length, batch_sizes):
 
     return train_dataloader, val_dataloader, test_dataloader
 
+
 def get_data(max_seq_len, embedding_file, batch_size):
 
     """
-    Arguments:
+    Args:
         max_seq_len: Max sequence length of the sentences
         batch_size: Batch size for the DataLoader
 
