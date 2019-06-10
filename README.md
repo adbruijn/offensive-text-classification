@@ -1,18 +1,29 @@
 # Offensive Text Classification
 
 ## Description
-Classify offensive text using different machine learning models.
+Classifies offensive text using different machine learning models: MLP, LSTM/LSTM (with and without attention), CNN and BERT.
+GloVe word vectors are used as input feature for the models. The features for the model BERT are extracted with the function convert_examples_to_features.
+
+## Data
+There are 3 datasets in the folder data/: training, validation and test set. Each of datasets have the columns: text and label.
 
 ## Usage
-
 Run from the command line
 ```python
 python main.py
 ```
+Sacred is used to for managing experiments
+Example command run from the command line for choosing another model
+```python
+python main.py with model_name="BERT"
+```
 
 You can either choose to store the experiments locally or on a MongoDB.
+Whe you choose to use to sore the results of the experiments in a MongoDB, a visualisation board, Omniboard can be used.
 
-OMNIBOARD\\
+
+## Instalation
+OMNIBOARD
 Install: ```npm install -g omniboard```
 
 Open a terminal:
@@ -59,3 +70,5 @@ for example
 Omniboard is listening on port 9000!
 ```
 Go to the page http://localhost:9000 to track the results.
+
+## Features

@@ -83,12 +83,12 @@ def load_data():
     """
     RANDOM_STATE = 123
 
-    train_file = Path("data/split_train.csv")
+    train_file = Path("data/train.csv")
 
     if train_file.exists():
-        train = pd.read_csv("data/split_train.csv")
-        val = pd.read_csv("data/split_val.csv")
-        test = pd.read_csv("data/split_test.csv")
+        train = pd.read_csv("data/train.csv")
+        val = pd.read_csv("data/val.csv")
+        test = pd.read_csv("data/test.csv")
     else:
         # Split normal data
         train_cola = pd.read_csv("data/SemEval/olid-training-v1.0.tsv", delimiter="\t")
@@ -106,9 +106,13 @@ def load_data():
         train.reset_index(drop=True)
         val.reset_index(drop=True)
 
-        train.to_csv("data/split_train.csv", index=False)
-        val.to_csv("data/split_val.csv", index=False)
-        test.to_csv("data/split_test.csv", index=False)
+        train.columns = ['text', 'label']
+        val.columns = ['text','label']
+        test.columns = ['text', 'label']
+
+        train.to_csv("data/train.csv", index=False)
+        val.to_csv("data/val.csv", index=False)
+        test.to_csv("data/test.csv", index=False)
 
     return train, val, test
 
@@ -118,14 +122,12 @@ def clean_data(df):
     Args:
         df: Dataframe
     """
-    labels = [0 if label=="NOT" else 1 for label in df["subtask_a"]]
-    #labels = encode_label(df["subtask_a"])
+    labels = [0 if label=="NOT" else 1 for label in df["label"]]
+    text_clean = [clean_text(text) for text in df["text"]]
 
-    tweet_clean = [clean_tweet(tweet) for tweet in df["tweet"]]
+    df = pd.DataFrame({"text":text_clean, "label":labels})
 
-    df = pd.DataFrame({"tweet":tweet_clean, "label":labels})
-
-    length = [len(text.split(' ')) for text in df.tweet]
+    length = [len(text.split(' ')) for text in df.text]
     df["length"] = length
     df = df[df["length"]<=3]
     df = df.drop(columns="length")
@@ -184,5 +186,3 @@ def get_data(max_seq_length, batch_sizes, embedding_file=None, use_bert=False):
     test_dataloader = get_dataloader(test_examples, batch_sizes[2])
 
     return train_dataloader, val_dataloader, test_dataloader
-
-    #return int(vocab_size), embedding_matrix, train_loader, valid_loader, test_loader
