@@ -169,7 +169,7 @@ def encode_label(y):
     le.fit(y)
     return np.array(le.transform(y))
 
-def get_data_bert(max_seq_length, batch_sizes, embedding_file=None, use_bert=False):
+def get_data_bert(max_seq_length, batch_sizes):
 
     """
     Arguments:
@@ -186,14 +186,17 @@ def get_data_bert(max_seq_length, batch_sizes, embedding_file=None, use_bert=Fal
     train, val, test = load_data()
 
     #Clean data
-    train_df, val_df, test_df = clean_data(train), clean_data(val), clean_data(test)
+
+    X_train, y_train = clean_data(train)
+    X_val, y_val = clean_data(val)
+    X_test, y_test = clean_data(test)
 
     #Features data
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
 
-    train_examples = convert_examples_to_features(train_df, max_seq_length, tokenizer)
-    val_examples = convert_examples_to_features(val_df, max_seq_length, tokenizer)
-    test_examples = convert_examples_to_features(test_df, max_seq_length, tokenizer)
+    train_examples = convert_examples_to_features(X_train, y_train, max_seq_length, tokenizer)
+    val_examples = convert_examples_to_features(X_val, y_val, max_seq_length, tokenizer)
+    test_examples = convert_examples_to_features(X_test, y_test, max_seq_length, tokenizer)
 
     #Data loaders
     train_dataloader = get_dataloader(train_examples, batch_sizes[0])

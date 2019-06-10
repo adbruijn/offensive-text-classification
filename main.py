@@ -172,8 +172,7 @@ def config():
     hidden_dim = 100 #Hidden layers dimension (default=128)
     bidirectional = False #Left and right LSTM
     dropout = 0.1 #Dropout percentage
-    filter_sizes = 100 #CNN
-    filter_dim = [2, 3, 4] #CNN
+    filter_sizes = [2, 3, 4] #CNN
     model_name = "LSTM" #Model name: LSTM, BERT, MLP, CNN
 
 
@@ -193,7 +192,6 @@ def run(output_dim,
         bidirectional,
         dropout,
         filter_sizes,
-        filter_dim,
         model_name,
         _run):
 
@@ -220,13 +218,13 @@ def run(output_dim,
         model = models.MLP(vocab_size, embedding_dim, embedding_matrix, hidden_dim, output_dim)
         print(model)
     elif model_name=="CNN":
-        model = models.CNN(vocab_size, embedding_dim, embedding_matrix, output_dim, filter_sizes, filter_dim, dropout)
+        model = models.CNN(vocab_size, embedding_dim, embedding_matrix, output_dim, filter_sizes, embedding_dim, dropout)
         print(model)
     elif model_name=="LSTM":
         model = models.LSTM(embedding_matrix, num_layers, hidden_dim, bidirectional, vocab_size, embedding_dim, dropout, output_dim)
         print(model)
     elif model_name=="LSTMAttention":
-        model = model.LSTMAttention(embedding_matrix, hidden_dim, vocab_size, embedding_dim, output_dim, batch_size)
+        model = models.LSTMAttention(embedding_matrix, hidden_dim, vocab_size, embedding_dim, output_dim, batch_size)
         print(model)
     elif model_name=="BERT":
         model = BertForSequenceClassification.from_pretrained("bert-base-uncased", output_dim)
