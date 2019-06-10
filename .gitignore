@@ -3,4 +3,3 @@ __pycache__/
 runs/
 data/GloVe/
 .DS_Store
-slack.json
