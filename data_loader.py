@@ -127,8 +127,25 @@ def clean_data(df):
     Args:
         df: Dataframe
     """
+<<<<<<< HEAD
     labels = [0 if label=="NOT" else 1 for label in df["label"]]
     text_clean = [clean_text(text) for text in df["text"]]
+=======
+<<<<<<< HEAD
+    labels = [0 if label=="NOT" else 1 for label in df["label"]]
+    text_clean = [clean_text(text) for text in df["text"]]
+
+    df = pd.DataFrame({"text":text_clean, "label":labels})
+
+    length = [len(text.split(' ')) for text in df.text]
+    df["length"] = length
+    df = df[df["length"]<=3]
+    df = df.drop(columns="length")
+=======
+    #labels = [0 if label=="NOT" else 1 for label in df["subtask_a"]]
+    labels = encode_label(df["subtask_a"])
+    #labels = encode_label(df["subtask_a"])
+>>>>>>> ac69b4c7473021c70beb54cc9eabd5e1cbdc663b
 
     df = pd.DataFrame({"text":text_clean, "label":labels})
 
@@ -136,12 +153,16 @@ def clean_data(df):
     # df["length"] = length
     # df = df[df["length"]<=3]
     # df = df.drop(columns="length")
+<<<<<<< HEAD
     #
     # #labels = [0 if label=="NOT" else 1 for label in df["subtask_a"]]
     # labels = encode_label(df["subtask_a"])
     # #labels = encode_label(df["subtask_a"])
     #
     # tweet_clean = [clean_tweet(tweet) for tweet in df["tweet"]]
+=======
+>>>>>>> 84c01cc1e8b8b4e17453aa409311c46544918b1e
+>>>>>>> ac69b4c7473021c70beb54cc9eabd5e1cbdc663b
 
     return text_clean, labels
 
@@ -213,6 +234,8 @@ def get_data_bert(max_seq_length, batch_sizes):
     test_dataloader = get_dataloader(test_examples, batch_sizes[2])
 
     return train_dataloader, val_dataloader, test_dataloader
+<<<<<<< HEAD
+=======
 
 
 def get_data(max_seq_len, embedding_file, batch_size):
@@ -260,3 +283,4 @@ def get_data(max_seq_len, embedding_file, batch_size):
     test_dataloader = make_iterator(X_test, y_test, batch_size)
 
     return int(vocab_size), embedding_matrix, train_dataloader, val_dataloader, test_dataloader
+>>>>>>> 84c01cc1e8b8b4e17453aa409311c46544918b1e
