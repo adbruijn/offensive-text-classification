@@ -34,6 +34,9 @@ from pytorch_pretrained_bert.tokenization import BertTokenizer
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 
+from keras.preprocessing.text import Tokenizer
+from keras.preprocessing.sequence import pad_sequences
+
 def load_glove(embedding_file):
 
     """Load GloVe file
@@ -118,19 +121,20 @@ def clean_data(df):
     Args:
         df: Dataframe
     """
-    labels = [0 if label=="NOT" else 1 for label in df["subtask_a"]]
+    #labels = [0 if label=="NOT" else 1 for label in df["subtask_a"]]
+    labels = encode_label(df["subtask_a"])
     #labels = encode_label(df["subtask_a"])
 
     tweet_clean = [clean_tweet(tweet) for tweet in df["tweet"]]
 
-    df = pd.DataFrame({"tweet":tweet_clean, "label":labels})
+    # df = pd.DataFrame({"tweet":tweet_clean, "label":labels})
+    #
+    #length = [len(text.split(' ')) for text in tweet_clean]
+    # df["length"] = length
+    # df = df[df["length"]<=3]
+    # df = df.drop(columns="length")
 
-    length = [len(text.split(' ')) for text in df.tweet]
-    df["length"] = length
-    df = df[df["length"]<=3]
-    df = df.drop(columns="length")
-
-    return df
+    return tweet_clean, labels
 
 #Get Dataloader
 def get_dataloader(examples, batch_size):
@@ -152,7 +156,20 @@ def get_dataloader(examples, batch_size):
 
     return dataloader
 
-def get_data(max_seq_length, batch_sizes, embedding_file=None, use_bert=False):
+def make_iterator(X, y, batch_size):
+    X = torch.tensor(X, dtype=torch.long)
+    y = torch.tensor(y, dtype=torch.float32)
+    ds = TensorDataset(X, y)
+    loader = DataLoader(ds, batch_size=batch_size)
+    return loader
+
+def encode_label(y):
+    y = y.values
+    le = LabelEncoder()
+    le.fit(y)
+    return np.array(le.transform(y))
+
+def get_data_bert(max_seq_length, batch_sizes):
 
     """
     Arguments:
@@ -169,14 +186,17 @@ def get_data(max_seq_length, batch_sizes, embedding_file=None, use_bert=False):
     train, val, test = load_data()
 
     #Clean data
-    train_df, val_df, test_df = clean_data(train), clean_data(val), clean_data(test)
+
+    X_train, y_train = clean_data(train)
+    X_val, y_val = clean_data(val)
+    X_test, y_test = clean_data(test)
 
     #Features data
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
 
-    train_examples = convert_examples_to_features(train_df, max_seq_length, tokenizer)
-    val_examples = convert_examples_to_features(val_df, max_seq_length, tokenizer)
-    test_examples = convert_examples_to_features(test_df, max_seq_length, tokenizer)
+    train_examples = convert_examples_to_features(X_train, y_train, max_seq_length, tokenizer)
+    val_examples = convert_examples_to_features(X_val, y_val, max_seq_length, tokenizer)
+    test_examples = convert_examples_to_features(X_test, y_test, max_seq_length, tokenizer)
 
     #Data loaders
     train_dataloader = get_dataloader(train_examples, batch_sizes[0])
@@ -185,4 +205,48 @@ def get_data(max_seq_length, batch_sizes, embedding_file=None, use_bert=False):
 
     return train_dataloader, val_dataloader, test_dataloader
 
-    #return int(vocab_size), embedding_matrix, train_loader, valid_loader, test_loader
+def get_data(max_seq_len, embedding_file, batch_size):
+
+    """
+    Arguments:
+        max_seq_len: Max sequence length of the sentences
+        batch_size: Batch size for the DataLoader
+
+    Output:
+        word_index, embedding_matrix, X_train, y_train, X_test, y_test
+    """
+    #Load data
+    train, val, test = load_data()
+
+    #Embedding dimension based on the embedding_file
+    embedding_dim = int(re.findall('\d{3,}', embedding_file)[0])
+
+    #Clean data
+    X_train, y_train = clean_data(train)
+    X_val, y_val = clean_data(val)
+    X_test, y_test = clean_data(test)
+
+    tokenizer = Tokenizer(num_words = 10000000)
+    tokenizer.fit_on_texts(list(X_train))
+
+    vocab_size = len(tokenizer.word_index) + 1
+    word_index = tokenizer.word_index
+
+    #Embeddings
+    embeddings_index = load_glove(embedding_file)
+    embedding_matrix = create_weight_matrix(vocab_size, word_index, embedding_dim, embeddings_index)
+
+    X_train = tokenizer.texts_to_sequences(X_train)
+    X_train = pad_sequences(X_train, maxlen=max_seq_len)
+
+    X_val = tokenizer.texts_to_sequences(X_val)
+    X_val = pad_sequences(X_val, maxlen=max_seq_len)
+
+    X_test = tokenizer.texts_to_sequences(X_test)
+    X_test = pad_sequences(X_test, maxlen=max_seq_len)
+
+    train_dataloader = make_iterator(X_train, y_train, batch_size)
+    val_dataloader = make_iterator(X_val, y_val, batch_size)
+    test_dataloader = make_iterator(X_test, y_test, batch_size)
+
+    return int(vocab_size), embedding_matrix, train_dataloader, val_dataloader, test_dataloader
