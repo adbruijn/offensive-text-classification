@@ -11,7 +11,7 @@ from utils import accuracy_recall_precision_f1
 
 import pandas as pd
 
-def evaluate_model(model, optimizer, loss_fn, dataloader, device):
+def evaluate_model(model, optimizer, loss_fn, dataloader, device, use_bert):
     """Evaluate model
     Args:
         model: Model either LSTM, LSTMAttention, CNN, MLP (torch.nn.Module)
@@ -36,12 +36,19 @@ def evaluate_model(model, optimizer, loss_fn, dataloader, device):
 
             #Step 0: Get batch
             batch = tuple(t.to(device) for t in batch)
-            input_ids, input_mask, segment_ids, label_ids = batch
+            if use_bert:
+                input_ids, input_mask, segment_ids, label_ids = batch
+            else:
+                X, y_target = batch
+                y_target = torch.autograd.Variable(y_target).long()
 
             #Step 1: Compute the forward pass of the model (model output)
-            y_pred = model(input_ids, segment_ids, input_mask, labels=None)
-            y_target = label_ids
-            
+            if use_bert:
+                y_pred = model(input_ids, segment_ids, input_mask, labels=None)
+                y_target = label_ids
+            else:
+                y_pred = model(X)
+
             #Step 2: Compute the loss
             loss = loss_fn(y_pred, y_target)
             loss_batch = loss.item()

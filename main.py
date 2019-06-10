@@ -28,7 +28,7 @@ from pytorch_pretrained_bert.optimization import BertAdam, WarmupLinearSchedule
 from train import train_model
 from evaluate import evaluate_model
 from utils import accuracy_recall_precision_f1, save_checkpoint, load_checkpoint
-from data_loader import get_data
+from data_loader import get_data, get_data_bert
 import models
 
 import warnings
@@ -80,7 +80,7 @@ def log_scalars(results, name_dataset):
 
 
 @ex.capture
-def train_and_evaluate(num_epochs, model, optimizer, loss_fn, dataloader, val_dataloader, scheduler, early_stopping_criteria, directory):
+def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, val_dataloader, scheduler, early_stopping_criteria, directory, use_bert):
 
     """Train on training set and evaluate on evaluation set
     Args:
@@ -106,12 +106,12 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, dataloader, val_da
     for epoch in trange(num_epochs, desc="Epoch"):
 
         ### TRAINING ###
-        train_results = train_model(model, optimizer, loss_fn, dataloader, device)
+        train_results = train_model(model, optimizer, loss_fn, train_dataloader, device, use_bert)
         train_metrics.loc[len(train_metrics)] = {'epoch':epoch, 'loss':train_results['loss'], 'accuracy':train_results['accuracy'], 'recall':train_results['recall'], 'precision':train_results['precision'], 'f1':train_results['f1']}
         log_scalars(train_results, "Train")
 
         ### EVALUATION ###
-        val_results = evaluate_model(model, optimizer, loss_fn, val_dataloader, device)
+        val_results = evaluate_model(model, optimizer, loss_fn, val_dataloader, device, use_bert)
         val_metrics.loc[len(val_metrics)] = {'epoch':epoch, 'loss':val_results['loss'], 'accuracy':val_results['accuracy'], 'recall':val_results['recall'], 'precision':val_results['precision'], 'f1':val_results['f1']}
         log_scalars(val_results, "Validation")
 
@@ -154,7 +154,7 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, dataloader, val_da
 
 
 @ex.config
-def congig():
+def config():
 
     """Configuration"""
 
@@ -162,32 +162,76 @@ def congig():
     train_bs = 32 #Train batch size (default=32)
     val_bs = 32 #Validation batch size (default=32)
     test_bs = 32 #Test batch size (default=32)
-    num_epochs = 100 #Number of epochs (default=1)
+    num_epochs = 5 #Number of epochs (default=1)
     max_seq_length = 50 #Maximum sequence length of the sentences (default=40)
     learning_rate = 3e-5 #Learning rate for the model (default=3e-5)
     warmup_proportion = 0.1 #Warmup proportion (default=0.1)
     early_stopping_criteria = 1 #Early stopping criteria (default=10)
-    embedding_dim = 200 #Embedding dimension (default=100)
+    embedding_dim = 100 #Embedding dimension (default=100)
     num_layers = 2 #Number of layers (default=2)
     hidden_dim = 100 #Hidden layers dimension (default=128)
-    model_name = "BERT" #Model name: LSTM, BERT, MLP, CNN
+    bidirectional = False #Left and right LSTM
+    dropout = 0.1 #Dropout percentage
+    filter_sizes = 100 #CNN
+    filter_dim = [2, 3, 4] #CNN
+    model_name = "LSTM" #Model name: LSTM, BERT, MLP, CNN
 
 
 @ex.automain
-def run(output_dim, train_bs, val_bs, test_bs, num_epochs, max_seq_length, learning_rate, warmup_proportion, early_stopping_criteria, embedding_dim, num_layers, hidden_dim, model_name, _run):
+def run(output_dim,
+        train_bs,
+        val_bs,
+        test_bs,
+        num_epochs,
+        max_seq_length,
+        learning_rate,
+        warmup_proportion,
+        early_stopping_criteria,
+        embedding_dim,
+        num_layers,
+        hidden_dim,
+        bidirectional,
+        dropout,
+        filter_sizes,
+        filter_dim,
+        model_name,
+        _run):
 
     #Logger
     directory = f"runs/{_run._id}/"
-    print(model_name)
 
     #Batch sizes
     batch_sizes = [train_bs, val_bs, test_bs]
+    batch_size = train_bs
+
+    if model_name=="BERT":#Default = False, if BERT model is used then use_bert is set to True
+        use_bert = True
+    else:
+        use_bert = False
 
     #Data
-    train_dataloader, val_dataloader, test_dataloader = get_data(max_seq_length, batch_sizes)
+    if use_bert:
+        train_dataloader, val_dataloader, test_dataloader = get_data(max_seq_length, batch_sizes)
+    else:
+        vocab_size, embedding_matrix, train_dataloader, val_dataloader, test_dataloader = get_data(max_seq_length, embedding_file='data/GloVe/glove.6B.100d.txt', batch_size=100)
 
     #Model
-    model = BertForSequenceClassification.from_pretrained("bert-base-uncased", output_dim)
+    if model_name=="MLP":
+        model = models.MLP(vocab_size, embedding_dim, embedding_matrix, hidden_dim, output_dim)
+        print(model)
+    elif model_name=="CNN":
+        model = models.CNN(vocab_size, embedding_dim, embedding_matrix, output_dim, filter_sizes, filter_dim, dropout)
+        print(model)
+    elif model_name=="LSTM":
+        model = models.LSTM(embedding_matrix, num_layers, hidden_dim, bidirectional, vocab_size, embedding_dim, dropout, output_dim)
+        print(model)
+    elif model_name=="LSTMAttention":
+        model = model.LSTMAttention(embedding_matrix, hidden_dim, vocab_size, embedding_dim, output_dim, batch_size)
+        print(model)
+    elif model_name=="BERT":
+        model = BertForSequenceClassification.from_pretrained("bert-base-uncased", output_dim)
+        print(model)
+
     model = model.to(device)
 
     #Loss and optimizer
@@ -201,13 +245,14 @@ def run(output_dim, train_bs, val_bs, test_bs, num_epochs, max_seq_length, learn
 
     #Training and evaluation
     print('Training and evaluation for {} epochs...'.format(num_epochs))
-    train_metrics, val_metrics = train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, val_dataloader, scheduler, early_stopping_criteria, directory)
+    train_metrics, val_metrics = train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, val_dataloader, scheduler, early_stopping_criteria, directory, use_bert)
+    print(train_metrics)
     train_metrics.to_csv(directory+"train_metrics.csv"), val_metrics.to_csv(directory+"val_metrics.csv")
 
     #Test
     print('Testing...')
     load_checkpoint(directory+"best_model.pth.tar", model)
-    test_results = evaluate_model(model, optimizer, loss_fn, test_dataloader, device)
+    test_results = evaluate_model(model, optimizer, loss_fn, test_dataloader, device, use_bert)
     log_scalars(test_results,"Test")
 
     test_results_df = pd.DataFrame(test_results, index=["NOT","OFF"])
