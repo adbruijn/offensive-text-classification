@@ -8,11 +8,12 @@ Classify offensive text using different machine learning models.
 Run from the command line
 ```python
 python main.py
+Example for chooising a different model: python main.py with model_name="BERT"
 ```
 
 You can either choose to store the experiments locally or on a MongoDB.
 
-OMNIBOARD\\
+OMNIBOARD
 Install: ```npm install -g omniboard```
 
 Open a terminal:

@@ -215,8 +215,8 @@ def get_data(max_seq_len, embedding_file, batch_size):
     #Load data
     train, val, test = load_data()
 
+    #Embedding dimension based on the embedding_file
     embedding_dim = int(re.findall('\d{3,}', embedding_file)[0])
-    print(embedding_dim)
 
     #Clean data
     X_train, y_train = clean_data(train)

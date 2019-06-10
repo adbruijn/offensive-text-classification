@@ -211,7 +211,7 @@ def run(output_dim,
 
     #Data
     if use_bert:
-        train_dataloader, val_dataloader, test_dataloader = get_data(max_seq_length, batch_sizes)
+        train_dataloader, val_dataloader, test_dataloader = get_data_bert(max_seq_length, batch_sizes)
     else:
         vocab_size, embedding_matrix, train_dataloader, val_dataloader, test_dataloader = get_data(max_seq_length, embedding_file='data/GloVe/glove.6B.100d.txt', batch_size=100)
 
@@ -246,7 +246,6 @@ def run(output_dim,
     #Training and evaluation
     print('Training and evaluation for {} epochs...'.format(num_epochs))
     train_metrics, val_metrics = train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, val_dataloader, scheduler, early_stopping_criteria, directory, use_bert)
-    print(train_metrics)
     train_metrics.to_csv(directory+"train_metrics.csv"), val_metrics.to_csv(directory+"val_metrics.csv")
 
     #Test
