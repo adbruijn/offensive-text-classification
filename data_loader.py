@@ -110,10 +110,10 @@ def load_data():
         train, val = train_test_split(train_cola, test_size=0.2, random_state=RANDOM_STATE)
         train.reset_index(drop=True)
         val.reset_index(drop=True)
-
-        train.columns = ['text', 'label']
-        val.columns = ['text','label']
-        test.columns = ['text', 'label']
+        #
+        # train.columns = ['text', 'label']
+        # val.columns = ['text','label']
+        # test.columns = ['text', 'label']
 
         train.to_csv("data/train.csv", index=False)
         val.to_csv("data/val.csv", index=False)
@@ -127,25 +127,9 @@ def clean_data(df):
     Args:
         df: Dataframe
     """
-<<<<<<< HEAD
-    labels = [0 if label=="NOT" else 1 for label in df["label"]]
-    text_clean = [clean_text(text) for text in df["text"]]
-=======
-<<<<<<< HEAD
-    labels = [0 if label=="NOT" else 1 for label in df["label"]]
-    text_clean = [clean_text(text) for text in df["text"]]
 
-    df = pd.DataFrame({"text":text_clean, "label":labels})
-
-    length = [len(text.split(' ')) for text in df.text]
-    df["length"] = length
-    df = df[df["length"]<=3]
-    df = df.drop(columns="length")
-=======
-    #labels = [0 if label=="NOT" else 1 for label in df["subtask_a"]]
-    labels = encode_label(df["subtask_a"])
-    #labels = encode_label(df["subtask_a"])
->>>>>>> ac69b4c7473021c70beb54cc9eabd5e1cbdc663b
+    labels = [0 if label=="NOT" else 1 for label in df["subtask_a"]]
+    text_clean = [clean_text(text) for text in df["tweet"]]
 
     df = pd.DataFrame({"text":text_clean, "label":labels})
 
@@ -153,17 +137,23 @@ def clean_data(df):
     # df["length"] = length
     # df = df[df["length"]<=3]
     # df = df.drop(columns="length")
-<<<<<<< HEAD
+
+    #labels = [0 if label=="NOT" else 1 for label in df["subtask_a"]]
+    #labels = encode_label(df["subtask_a"])
+    #labels = encode_label(df["subtask_a"])
+
+    #df = pd.DataFrame({"text":text_clean, "label":labels})
+
+    # length = [len(text.split(' ')) for text in df.text]
+    # df["length"] = length
+    # df = df[df["length"]<=3]
+    # df = df.drop(columns="length")
     #
     # #labels = [0 if label=="NOT" else 1 for label in df["subtask_a"]]
     # labels = encode_label(df["subtask_a"])
     # #labels = encode_label(df["subtask_a"])
     #
     # tweet_clean = [clean_tweet(tweet) for tweet in df["tweet"]]
-=======
->>>>>>> 84c01cc1e8b8b4e17453aa409311c46544918b1e
->>>>>>> ac69b4c7473021c70beb54cc9eabd5e1cbdc663b
-
     return text_clean, labels
 
 #Get Dataloader
@@ -186,6 +176,7 @@ def get_dataloader(examples, batch_size):
 
     return dataloader
 
+
 def make_iterator(X, y, batch_size):
     X = torch.tensor(X, dtype=torch.long)
     y = torch.tensor(y, dtype=torch.float32)
@@ -193,11 +184,13 @@ def make_iterator(X, y, batch_size):
     loader = DataLoader(ds, batch_size=batch_size)
     return loader
 
+
 def encode_label(y):
     y = y.values
     le = LabelEncoder()
     le.fit(y)
     return np.array(le.transform(y))
+
 
 def get_data_bert(max_seq_length, batch_sizes):
 
@@ -234,8 +227,6 @@ def get_data_bert(max_seq_length, batch_sizes):
     test_dataloader = get_dataloader(test_examples, batch_sizes[2])
 
     return train_dataloader, val_dataloader, test_dataloader
-<<<<<<< HEAD
-=======
 
 
 def get_data(max_seq_len, embedding_file, batch_size):
@@ -283,4 +274,3 @@ def get_data(max_seq_len, embedding_file, batch_size):
     test_dataloader = make_iterator(X_test, y_test, batch_size)
 
     return int(vocab_size), embedding_matrix, train_dataloader, val_dataloader, test_dataloader
->>>>>>> 84c01cc1e8b8b4e17453aa409311c46544918b1e
