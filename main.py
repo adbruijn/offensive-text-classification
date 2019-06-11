@@ -163,7 +163,7 @@ def config():
     val_bs = 32 #Validation batch size (default=32)
     test_bs = 32 #Test batch size (default=32)
     num_epochs = 1 #Number of epochs (default=1)
-    max_seq_length = 20 #Maximum sequence length of the sentences (default=40)
+    max_seq_length = 45 #Maximum sequence length of the sentences (default=40)
     learning_rate = 3e-5 #Learning rate for the model (default=3e-5)
     warmup_proportion = 0.1 #Warmup proportion (default=0.1)
     early_stopping_criteria = 10 #Early stopping criteria (default=10)
