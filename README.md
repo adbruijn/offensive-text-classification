@@ -75,3 +75,9 @@ for example
 Omniboard is listening on port 9000!
 ```
 Go to the page http://localhost:9000 to track the results.
+
+Shutdown the server
+```
+> use admin
+> db.shutdownServer()
+```
