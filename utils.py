@@ -172,7 +172,7 @@ def save_checkpoint(state, directory, checkpoint):
     filepath = directory + checkpoint
 
     if not os.path.exists(directory):
-        os.mkdir(directory)
+        os.makedirs(directory)
 
     torch.save(state, filepath)
 

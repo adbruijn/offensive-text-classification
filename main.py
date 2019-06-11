@@ -49,9 +49,10 @@ DATABASE_NAME = 'experiments'
 URL_NAME = 'mongodb://localhost:27017/'
 
 ex = Experiment()
-#ex.observers.append(FileStorageObserver.create('runs'))
-ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
+ex.observers.append(FileStorageObserver.create('results'))
+#ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
 
+#Send a message to slack if the run is succesfull or if it failed
 slack_obs = SlackObserver.from_config('slack.json')
 ex.observers.append(slack_obs)
 
@@ -119,6 +120,7 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, 
         best_model = val_results['loss'] <= best_val_loss
         last_model = epoch == num_epochs-1
 
+        print(directory)
         if best_model:
             save_checkpoint({'epoch': epoch+1,
                                    'state_dict': model.state_dict(),
@@ -162,7 +164,7 @@ def config():
     train_bs = 32 #Train batch size (default=32)
     val_bs = 32 #Validation batch size (default=32)
     test_bs = 32 #Test batch size (default=32)
-    num_epochs = 1 #Number of epochs (default=1)
+    num_epochs = 3 #Number of epochs (default=1)
     max_seq_length = 45 #Maximum sequence length of the sentences (default=40)
     learning_rate = 3e-5 #Learning rate for the model (default=3e-5)
     warmup_proportion = 0.1 #Warmup proportion (default=0.1)
@@ -173,7 +175,7 @@ def config():
     bidirectional = True #Left and right LSTM
     dropout = 0.1 #Dropout percentage
     filter_sizes = [2, 3, 4] #CNN
-    model_name = "BERT" #Model name: LSTM, BERT, MLP, CNN
+    model_name = "MLP" #Model name: LSTM, BERT, MLP, CNN
 
 
 @ex.automain
@@ -196,7 +198,8 @@ def run(output_dim,
         _run):
 
     #Logger
-    directory = f"runs/{_run._id}/"
+    directory_checkpoint = f"results/checkpoints/{_run._id}/"
+    directory = f"results/{_run._id}/"
 
     #Batch sizes
     batch_sizes = [train_bs, val_bs, test_bs]
@@ -244,15 +247,18 @@ def run(output_dim,
 
     #Training and evaluation
     print('Training and evaluation for {} epochs...'.format(num_epochs))
-    train_metrics, val_metrics = train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, val_dataloader, scheduler, early_stopping_criteria, directory, use_bert)
+    train_metrics, val_metrics = train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, val_dataloader, scheduler, early_stopping_criteria, directory_checkpoint, use_bert)
+    print(train_metrics)
     train_metrics.to_csv(directory+"train_metrics.csv"), val_metrics.to_csv(directory+"val_metrics.csv")
 
     #Test
     print('Testing...')
-    load_checkpoint(directory+"best_model.pth.tar", model)
+    load_checkpoint(directory_checkpoint+"best_model.pth.tar", model)
     test_results = evaluate_model(model, optimizer, loss_fn, test_dataloader, device, use_bert)
     log_scalars(test_results,"Test")
 
     test_results_df = pd.DataFrame(test_results, index=["NOT","OFF"])
     test_results_df = test_results_df.drop(columns=['loss','accuracy'])
     test_results_df.to_csv(directory+"test_metrics.csv")
+
+    return float(sum(train_metrics['loss'])/len(train_metrics))
