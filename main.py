@@ -49,8 +49,8 @@ DATABASE_NAME = 'experiments'
 URL_NAME = 'mongodb://localhost:27017/'
 
 ex = Experiment()
-ex.observers.append(FileStorageObserver.create('runs'))
-#ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
+#ex.observers.append(FileStorageObserver.create('runs'))
+ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
 
 slack_obs = SlackObserver.from_config('slack.json')
 ex.observers.append(slack_obs)
@@ -162,18 +162,18 @@ def config():
     train_bs = 32 #Train batch size (default=32)
     val_bs = 32 #Validation batch size (default=32)
     test_bs = 32 #Test batch size (default=32)
-    num_epochs = 100 #Number of epochs (default=1)
-    max_seq_length = 50 #Maximum sequence length of the sentences (default=40)
+    num_epochs = 1 #Number of epochs (default=1)
+    max_seq_length = 20 #Maximum sequence length of the sentences (default=40)
     learning_rate = 3e-5 #Learning rate for the model (default=3e-5)
     warmup_proportion = 0.1 #Warmup proportion (default=0.1)
     early_stopping_criteria = 10 #Early stopping criteria (default=10)
     embedding_dim = 100 #Embedding dimension (default=100)
     num_layers = 2 #Number of layers (default=2)
-    hidden_dim = 100 #Hidden layers dimension (default=128)
-    bidirectional = False #Left and right LSTM
+    hidden_dim = 64 #Hidden layers dimension (default=128)
+    bidirectional = True #Left and right LSTM
     dropout = 0.1 #Dropout percentage
     filter_sizes = [2, 3, 4] #CNN
-    model_name = "LSTM" #Model name: LSTM, BERT, MLP, CNN
+    model_name = "BERT" #Model name: LSTM, BERT, MLP, CNN
 
 
 @ex.automain
@@ -227,7 +227,8 @@ def run(output_dim,
         model = models.LSTMAttention(embedding_matrix, hidden_dim, vocab_size, embedding_dim, output_dim, batch_size)
         print(model)
     elif model_name=="BERT":
-        model = BertForSequenceClassification.from_pretrained("bert-base-uncased", output_dim)
+        #model = BertForSequenceClassification.from_pretrained("bert-base-uncased", output_dim)
+        model = models.BertLinear(dropout, output_dim)
         print(model)
 
     model = model.to(device)
