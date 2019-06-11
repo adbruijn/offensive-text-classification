@@ -7,6 +7,12 @@ GloVe word vectors are used as input feature for the models. The features for th
 ## Data
 There are 3 datasets in the folder data: training, validation and test set. Each of datasets have the columns: text and label.
 
+## Installation
+Install required packages
+```
+pip install -r requirements.txt
+```
+
 ## Usage
 Run from the command line
 ```python
@@ -16,7 +22,7 @@ python main.py
 Sacred is used for managing experiments.
 Example command run from the command line for choosing another model
 ```python
-python main.py with model_name="BERT"
+python main.py with model_name="BERT" output_dim=2
 ```
 
 You can either choose to store the experiments locally or on a MongoDB.
