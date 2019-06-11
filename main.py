@@ -49,8 +49,8 @@ DATABASE_NAME = 'experiments'
 URL_NAME = 'mongodb://localhost:27017/'
 
 ex = Experiment()
-#ex.observers.append(FileStorageObserver.create('runs'))
-ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
+ex.observers.append(FileStorageObserver.create('runs'))
+#ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
 
 slack_obs = SlackObserver.from_config('slack.json')
 ex.observers.append(slack_obs)
@@ -148,8 +148,8 @@ def config():
     train_bs = 32 #Train batch size (default=32)
     val_bs = 32 #Validation batch size (default=32)
     test_bs = 32 #Test batch size (default=32)
-    num_epochs = 1 #Number of epochs (default=1)
-    max_seq_length = 20 #Maximum sequence length of the sentences (default=40)
+    num_epochs = 50 #Number of epochs (default=1)
+    max_seq_length = 45 #Maximum sequence length of the sentences (default=40)
     learning_rate = 3e-5 #Learning rate for the model (default=3e-5)
     warmup_proportion = 0.1 #Warmup proportion (default=0.1)
     early_stopping_criteria = 10 #Early stopping criteria (default=10)
