@@ -64,8 +64,8 @@ def evaluate_model(model, optimizer, loss_fn, dataloader, device, use_bert):
 
         #Evaluation results
         results = {
-            'loss': epoch_loss / len(dataloader),
-            'accuracy': float(epoch_accuracy / len(dataloader)),
+            'loss': np.round(epoch_loss / len(dataloader),2),
+            'accuracy': np.round(float(epoch_accuracy / len(dataloader)),2),
             'recall': np.round(epoch_recall / len(dataloader), 2),
             'precision': np.round(epoch_precision / len(dataloader), 2),
             'f1': np.round(epoch_f1 / len(dataloader), 2)

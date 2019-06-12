@@ -38,10 +38,9 @@ def accuracy_recall_precision_f1(y_pred, y_target):
     y_target = y_target.cpu().numpy()
 
     predictions = torch.argmax(y_pred, dim=1).detach().numpy()
+    #predictions = torch.max(y_pred, 1)[1].view(y_target.size()).data
 
     correct = np.sum(predictions == y_target)
-    accuracy = correct / len(predictions)
-
     accuracy = correct / len(predictions)
 
     recall = recall_score(y_target, predictions, average=None)
