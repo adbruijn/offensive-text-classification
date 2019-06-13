@@ -2,4 +2,3 @@
 __pycache__/
 results/checkpoints/
 .DS_Store
-data/GloVe/
