@@ -13,7 +13,7 @@ import pandas as pd
 
 def train_model(model, optimizer, loss_fn, dataloader, device, use_bert):
     """Train model
-    Args:``
+    Args:
         model: Model either LSTM, LSTMAttention, CNN, MLP (torch.nn.Module)
         optimizer: Optimizer for parameters of the model (torch.optim)
         loss_fn: Loss function taht computs the loss for each batch based on the y_pred and y_target
@@ -27,7 +27,6 @@ def train_model(model, optimizer, loss_fn, dataloader, device, use_bert):
     epoch_recall = [0, 0]
     epoch_precision = [0, 0]
     epoch_f1 = [0, 0]
-
 
     #Set model in training mode
     model.train()
@@ -74,8 +73,8 @@ def train_model(model, optimizer, loss_fn, dataloader, device, use_bert):
 
     #Train results
     results = {
-        'loss': epoch_loss / len(dataloader),
-        'accuracy': float(epoch_accuracy / len(dataloader)),
+        'loss': np.round(epoch_loss / len(dataloader),2),
+        'accuracy': np.round(float(epoch_accuracy / len(dataloader)),2),
         'recall': np.round(epoch_recall / len(dataloader), 2),
         'precision': np.round(epoch_precision / len(dataloader), 2),
         'f1': np.round(epoch_f1 / len(dataloader), 2)

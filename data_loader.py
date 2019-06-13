@@ -80,7 +80,7 @@ def create_weight_matrix(vocab_size, word_index, embedding_dim, embeddings_index
 #Load data
 def load_data():
     """
-    Loads the data, if the data is not splitted yet the data will be split in a train and validation set
+    Loads the data, if the data is not splitted yet the data will be split in a train and val set
     """
 
     RANDOM_STATE = 123
@@ -123,14 +123,14 @@ def load_data():
     return train, val, test
 
 #Clean Data
-def clean_data(df):
+def clean_data(df, remove_punt_number_special_chars=False,remove_stopwords=False, apply_stemming=False):
     """Clean the data and remove data which has a length of less than 3 words
     Args:
         df: Dataframe
     """
 
     labels = encode_label(df["label"])
-    text_clean = [clean_text(text) for text in df["text"]]
+    text_clean = [clean_text(text, remove_punt_number_special_chars,remove_stopwords, apply_stemming) for text in df["text"]]
 
     df = pd.DataFrame({"text":text_clean, "label":labels})
 
@@ -145,7 +145,7 @@ def clean_data(df):
 def get_dataloader(examples, batch_size):
     """Make data iterator
         Arguments:
-            X:  Features
+            X: Features
             y: Labels
             batch_size: (int) Batch size
     """
@@ -163,17 +163,33 @@ def get_dataloader(examples, batch_size):
 
 
 def make_iterator(X, y, batch_size):
+
+    """Make iterator for a given X and y and batch size
+    Args:
+        X: X vector
+        y: y vector
+        batch_size: (int) Batch size
+    """
+
     X = torch.tensor(X, dtype=torch.long)
     y = torch.tensor(y, dtype=torch.float32)
     ds = TensorDataset(X, y)
     loader = DataLoader(ds, batch_size=batch_size)
+
     return loader
 
 
 def encode_label(y):
+
+    """Encode labels from str to numbers
+    Args:
+        y: y vector
+    """
+
     y = y.values
     le = LabelEncoder()
     le.fit(y)
+
     return np.array(le.transform(y))
 
 
@@ -219,11 +235,13 @@ def get_data(max_seq_len, embedding_file, batch_size):
     """
     Args:
         max_seq_len: Max sequence length of the sentences
+        embedding_file: Embedding file
         batch_size: Batch size for the DataLoader
 
     Output:
-        word_index, embedding_matrix, X_train, y_train, X_test, y_test
+        embedding_dim, word_index, embedding_matrix, X_train, y_train, X_test, y_test
     """
+
     #Load data
     train, val, test = load_data()
 
@@ -231,15 +249,19 @@ def get_data(max_seq_len, embedding_file, batch_size):
     embedding_dim = int(re.findall('\d{3,}', embedding_file)[0])
 
     #Clean data
-    X_train, y_train = clean_data(train)
-    X_val, y_val = clean_data(val)
-    X_test, y_test = clean_data(test)
+    X_train = [clean_text(text, remove_punt_number_special_chars=True,remove_stopwords=True, apply_stemming=False) for text in train["text"]]
+    X_val = [clean_text(text, remove_punt_number_special_chars=True,remove_stopwords=True, apply_stemming=False) for text in val["text"]]
+    X_test = [clean_text(text, remove_punt_number_special_chars=True,remove_stopwords=True, apply_stemming=False) for text in test["text"]]
+
+    y_train = encode_label(train["label"])
+    y_val = encode_label(val["label"])
+    y_test = encode_label(test["label"])
 
     tokenizer = Tokenizer(num_words = 10000000)
-    tokenizer.fit_on_texts(list(X_train))
+    tokenizer.fit_on_texts(list(X_train)+list(X_val))
 
-    vocab_size = len(tokenizer.word_index) + 1
     word_index = tokenizer.word_index
+    vocab_size = len(word_index) + 1
 
     #Embeddings
     embeddings_index = load_glove(embedding_file)
@@ -258,4 +280,4 @@ def get_data(max_seq_len, embedding_file, batch_size):
     val_dataloader = make_iterator(X_val, y_val, batch_size)
     test_dataloader = make_iterator(X_test, y_test, batch_size)
 
-    return int(vocab_size), embedding_matrix, train_dataloader, val_dataloader, test_dataloader
+    return embedding_dim, int(vocab_size), embedding_matrix, train_dataloader, val_dataloader, test_dataloader
