@@ -5,10 +5,10 @@ Classifies offensive text using different machine learning models: MLP, LSTM/LST
 GloVe word vectors are used as input feature for the models. The features for the model BERT are extracted with the function convert_examples_to_features.
 
 ## Data
-There are 3 datasets in the folder data: training, validation and test set. Each of datasets have the columns: text and label.
+There are 3 datasets in the folder data: training, validation and test set. Each of datasets contain the columns: text and label.
 
 ## Installation
-Install required packages
+Install the required packages with requirements.txt.
 ```
 pip install -r requirements.txt
 ```
@@ -19,14 +19,14 @@ Run from the command line
 python main.py
 ```
 
-Sacred is used for managing experiments.
+Sacred is used for managing experiments. To choose other parameters you have to use 'with' and then specify the other parameter.
 Example command run from the command line for choosing another model
 ```python
 python main.py with model_name="BERT" output_dim=2
 ```
 
-You can either choose to store the experiments locally or on a MongoDB.
-You can also choose to use to store the results of the experiments in a MongoDB, a visualisation board, Omniboard can be used.
+You can either choose to store the experiments locally or on a MongoDB, or both.
+If the results of the experiments are stored in a MongoDB. Omniboard, a visualuation board can be used to visualise the results. Locally the experiments will be stored in the 'results' folder.
 
 OMNIBOARD
 Install: ```npm install -g omniboard```
