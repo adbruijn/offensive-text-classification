@@ -16,7 +16,7 @@ pip install -r requirements.txt
 ## Usage
 Run from the command line
 ```python
-python main.py
+> python main.py
 ```
 
 Sacred is used for managing experiments. To choose other parameters you have to use 'with' and then specify the other parameter.
@@ -33,41 +33,41 @@ Install: ```npm install -g omniboard```
 
 Open a terminal:
 ```
-sudo mongod
+> sudo mongod
 ```
 
 Open another terminal:
 mongo
 
-```show dbs
+```
 > show dbs
 admin          0.000GB
 config         0.000GB
 local          0.000GB
-lstm           0.001GB
+dbs            0.001GB
 ```
 
 Drop a database:
 ```
-use lstm
-db.dropDatabase()
+> use dbs
+> db.dropDatabase()
 ```
 Create a database:
 ```
-use DATABASE_NAME
+> use DATABASE_NAME
 ```
 The created database is not present when using
 ```
-show dbs
+> show dbs
 ```
 There has to be at least one document in the database.
 ```
-db.movie.insert({"name":"hoi"})
+> db.movie.insert({"name":"hoi"})
 ```
 
 Run:
 ```
-omniboard -m hostname:port:database
+> omniboard -m hostname:port:database
 ```
 for example
 ```
