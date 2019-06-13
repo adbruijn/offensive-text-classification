@@ -135,7 +135,7 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, 
             return train_metrics, val_metrics
 
         #Scheduler
-        scheduler.step()
+        #scheduler.step()
 
     return train_metrics, val_metrics
 
