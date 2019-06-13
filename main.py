@@ -11,7 +11,7 @@ import click
 
 import torch
 from torch import nn
-import torch.functional as F
+from torch.nn import functional as F
 import torch.optim as optim
 from torch.nn import CrossEntropyLoss, MSELoss
 from torch.nn.utils.rnn import pack_padded_sequence
@@ -50,7 +50,7 @@ URL_NAME = 'mongodb://localhost:27017/'
 
 ex = Experiment()
 ex.observers.append(FileStorageObserver.create('results'))
-#ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
+ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
 
 #Send a message to slack if the run is succesfull or if it failed
 slack_obs = SlackObserver.from_config('slack.json')
@@ -81,7 +81,7 @@ def log_scalars(results, name_dataset):
 
 
 @ex.capture
-def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, val_dataloader, scheduler, early_stopping_criteria, directory, use_bert):
+def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, val_dataloader, early_stopping_criteria, directory, use_bert):
 
     """Train on training set and evaluate on evaluation set
     Args:
@@ -120,7 +120,6 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, 
         best_model = val_results['loss'] <= best_val_loss
         last_model = epoch == num_epochs-1
 
-        print(directory)
         if best_model:
             save_checkpoint({'epoch': epoch+1,
                                    'state_dict': model.state_dict(),
@@ -149,8 +148,14 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, 
             print("Stopping early at epoch {}".format(epoch))
             return train_metrics, val_metrics
 
+        print('\n')
+        print('Train Loss: {} | Train Acc: {}'.format(train_results['loss'], train_results['accuracy']))
+        print('Valid Loss: {} | Valid Acc: {}'.format(val_results['loss'], val_results['accuracy']))
+        print('Train recall: {} | Train precision: {}'.format(train_results['recall'], train_results['precision']))
+        print('Valid recall: {} | Valid precision: {}'.format(val_results['recall'], val_results['precision']))
+
         #Scheduler
-        scheduler.step()
+        #scheduler.step()
 
     return train_metrics, val_metrics
 
@@ -164,19 +169,20 @@ def config():
     train_bs = 32 #Train batch size (default=32)
     val_bs = 32 #Validation batch size (default=32)
     test_bs = 32 #Test batch size (default=32)
-    num_epochs = 3 #Number of epochs (default=1)
+    num_epochs = 100 #Number of epochs (default=10)
     max_seq_length = 45 #Maximum sequence length of the sentences (default=40)
     learning_rate = 3e-5 #Learning rate for the model (default=3e-5)
     warmup_proportion = 0.1 #Warmup proportion (default=0.1)
-    early_stopping_criteria = 10 #Early stopping criteria (default=10)
+    early_stopping_criteria = 10 #Early stopping criteria (default=5)
     embedding_dim = 100 #Embedding dimension (default=100)
     num_layers = 2 #Number of layers (default=2)
-    hidden_dim = 64 #Hidden layers dimension (default=128)
+    hidden_dim = 100 #Hidden layers dimension (default=128)
     bidirectional = True #Left and right LSTM
     dropout = 0.1 #Dropout percentage
     filter_sizes = [2, 3, 4] #CNN
+    embedding_file = 'data/GloVe/glove.6B.100d.txt' #Embedding file
     model_name = "MLP" #Model name: LSTM, BERT, MLP, CNN
-
+    directory = "results" #
 
 @ex.automain
 def run(output_dim,
@@ -194,6 +200,7 @@ def run(output_dim,
         bidirectional,
         dropout,
         filter_sizes,
+        embedding_file,
         model_name,
         _run):
 
@@ -205,7 +212,7 @@ def run(output_dim,
     batch_sizes = [train_bs, val_bs, test_bs]
     batch_size = train_bs
 
-    if model_name=="BERT":#Default = False, if BERT model is used then use_bert is set to True
+    if model_name=="BERT":  #Default = False, if BERT model is used then use_bert is set to True
         use_bert = True
     else:
         use_bert = False
@@ -214,7 +221,7 @@ def run(output_dim,
     if use_bert:
         train_dataloader, val_dataloader, test_dataloader = get_data_bert(max_seq_length, batch_sizes)
     else:
-        vocab_size, embedding_matrix, train_dataloader, val_dataloader, test_dataloader = get_data(max_seq_length, embedding_file='data/GloVe/glove.6B.100d.txt', batch_size=100)
+        embedding_dim, vocab_size, embedding_matrix, train_dataloader, val_dataloader, test_dataloader = get_data(max_seq_length, embedding_file=embedding_file, batch_size=batch_size)
 
     #Model
     if model_name=="MLP":
@@ -237,17 +244,16 @@ def run(output_dim,
     model = model.to(device)
 
     #Loss and optimizer
-    optimizer = optim.Adam([
-        {'params': model.parameters(), 'weight_decay': 0.1}], lr=learning_rate)
-
-    loss_fn = nn.CrossEntropyLoss()
+    #optimizer = optim.Adam([{'params': model.parameters(), 'weight_decay': 0.1}], lr=learning_rate)
+    optimizer = optim.Adam(model.parameters())
+    loss_fn = F.cross_entropy
 
     #Scheduler
-    scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[5,15], gamma=0.1)
+    #scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[5,15], gamma=0.1)
 
     #Training and evaluation
     print('Training and evaluation for {} epochs...'.format(num_epochs))
-    train_metrics, val_metrics = train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, val_dataloader, scheduler, early_stopping_criteria, directory_checkpoint, use_bert)
+    train_metrics, val_metrics = train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, val_dataloader, early_stopping_criteria, directory_checkpoint, use_bert)
     print(train_metrics)
     train_metrics.to_csv(directory+"train_metrics.csv"), val_metrics.to_csv(directory+"val_metrics.csv")
 
@@ -255,10 +261,26 @@ def run(output_dim,
     print('Testing...')
     load_checkpoint(directory_checkpoint+"best_model.pth.tar", model)
     test_results = evaluate_model(model, optimizer, loss_fn, test_dataloader, device, use_bert)
-    log_scalars(test_results,"Test")
-
+    # log_scalars(test_results,"Test")
+    #
+    print(test_results)
+    #print(pd.DataFrame(test_results, index=["NOT","OFF"]))
     test_results_df = pd.DataFrame(test_results, index=["NOT","OFF"])
     test_results_df = test_results_df.drop(columns=['loss','accuracy'])
+    print(directory)
     test_results_df.to_csv(directory+"test_metrics.csv")
 
-    return float(sum(train_metrics['loss'])/len(train_metrics))
+    results = {
+        'train_loss': np.round(train_metrics['loss'] / len(train_metrics), 2),
+        'train_accuracy': np.round(train_metrics['accuracy'] / len(train_metrics), 2),
+        'train_recall': train_metrics['recall'] / len(train_metrics),
+        'train_precision': train_metrics['precision'] / len(train_metrics),
+        'train_f1': train_metrics['f1'] / len(train_metrics),
+        'val_loss': np.round(val_metrics['loss'] / len(val_metrics), 2),
+        'val_accuracy': np.round(val_metrics['accuracy'] / len(val_metrics), 2),
+        'val_recall': val_metrics['recall'] / len(val_metrics),
+        'val_precision': val_metrics['precision'] / len(val_metrics),
+        'val_f1': val_metrics['f1'] / len(val_metrics)
+    }
+
+    return results

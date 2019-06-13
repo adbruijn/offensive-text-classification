@@ -1,0 +1,68 @@
+{
+  "metrics": [
+    {
+      "id": "5d01210d642339052e7a72df",
+      "name": "Train.loss"
+    },
+    {
+      "id": "5d01210d642339052e7a72e1",
+      "name": "Train.accuracy"
+    },
+    {
+      "id": "5d01210d642339052e7a72e3",
+      "name": "Train.recall.OFF"
+    },
+    {
+      "id": "5d01210d642339052e7a72e5",
+      "name": "Train.recall.NOT"
+    },
+    {
+      "id": "5d01210d642339052e7a72e7",
+      "name": "Train.precision.OFF"
+    },
+    {
+      "id": "5d01210d642339052e7a72e9",
+      "name": "Train.precision.NOT"
+    },
+    {
+      "id": "5d01210d642339052e7a72eb",
+      "name": "Train.f1.OFF"
+    },
+    {
+      "id": "5d01210d642339052e7a72ed",
+      "name": "Train.f1.NOT"
+    },
+    {
+      "id": "5d01210d642339052e7a72ef",
+      "name": "Validation.loss"
+    },
+    {
+      "id": "5d01210d642339052e7a72f1",
+      "name": "Validation.accuracy"
+    },
+    {
+      "id": "5d01210d642339052e7a72f3",
+      "name": "Validation.recall.OFF"
+    },
+    {
+      "id": "5d01210d642339052e7a72f5",
+      "name": "Validation.recall.NOT"
+    },
+    {
+      "id": "5d01210d642339052e7a72f7",
+      "name": "Validation.precision.OFF"
+    },
+    {
+      "id": "5d01210d642339052e7a72f9",
+      "name": "Validation.precision.NOT"
+    },
+    {
+      "id": "5d01210d642339052e7a72fb",
+      "name": "Validation.f1.OFF"
+    },
+    {
+      "id": "5d01210d642339052e7a72fd",
+      "name": "Validation.f1.NOT"
+    }
+  ]
+}

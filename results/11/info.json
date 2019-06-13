@@ -1,0 +1,68 @@
+{
+  "metrics": [
+    {
+      "id": "5d0123a5642339052e7a7766",
+      "name": "Train.loss"
+    },
+    {
+      "id": "5d0123a5642339052e7a7768",
+      "name": "Train.accuracy"
+    },
+    {
+      "id": "5d0123a5642339052e7a776a",
+      "name": "Train.recall.OFF"
+    },
+    {
+      "id": "5d0123a5642339052e7a776c",
+      "name": "Train.recall.NOT"
+    },
+    {
+      "id": "5d0123a5642339052e7a776e",
+      "name": "Train.precision.OFF"
+    },
+    {
+      "id": "5d0123a5642339052e7a7770",
+      "name": "Train.precision.NOT"
+    },
+    {
+      "id": "5d0123a5642339052e7a7772",
+      "name": "Train.f1.OFF"
+    },
+    {
+      "id": "5d0123a5642339052e7a7774",
+      "name": "Train.f1.NOT"
+    },
+    {
+      "id": "5d0123a5642339052e7a7776",
+      "name": "Validation.loss"
+    },
+    {
+      "id": "5d0123a5642339052e7a7778",
+      "name": "Validation.accuracy"
+    },
+    {
+      "id": "5d0123a5642339052e7a777a",
+      "name": "Validation.recall.OFF"
+    },
+    {
+      "id": "5d0123a5642339052e7a777c",
+      "name": "Validation.recall.NOT"
+    },
+    {
+      "id": "5d0123a5642339052e7a777e",
+      "name": "Validation.precision.OFF"
+    },
+    {
+      "id": "5d0123a5642339052e7a7780",
+      "name": "Validation.precision.NOT"
+    },
+    {
+      "id": "5d0123a5642339052e7a7782",
+      "name": "Validation.f1.OFF"
+    },
+    {
+      "id": "5d0123a5642339052e7a7784",
+      "name": "Validation.f1.NOT"
+    }
+  ]
+}

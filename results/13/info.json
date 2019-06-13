@@ -1,0 +1,68 @@
+{
+  "metrics": [
+    {
+      "id": "5d012681642339052e7a7b42",
+      "name": "Train.loss"
+    },
+    {
+      "id": "5d012681642339052e7a7b44",
+      "name": "Train.accuracy"
+    },
+    {
+      "id": "5d012681642339052e7a7b46",
+      "name": "Train.recall.OFF"
+    },
+    {
+      "id": "5d012681642339052e7a7b48",
+      "name": "Train.recall.NOT"
+    },
+    {
+      "id": "5d012681642339052e7a7b4a",
+      "name": "Train.precision.OFF"
+    },
+    {
+      "id": "5d012681642339052e7a7b4c",
+      "name": "Train.precision.NOT"
+    },
+    {
+      "id": "5d012681642339052e7a7b4e",
+      "name": "Train.f1.OFF"
+    },
+    {
+      "id": "5d012681642339052e7a7b50",
+      "name": "Train.f1.NOT"
+    },
+    {
+      "id": "5d01268b642339052e7a7b57",
+      "name": "Validation.loss"
+    },
+    {
+      "id": "5d01268b642339052e7a7b59",
+      "name": "Validation.accuracy"
+    },
+    {
+      "id": "5d01268b642339052e7a7b5b",
+      "name": "Validation.recall.OFF"
+    },
+    {
+      "id": "5d01268b642339052e7a7b5d",
+      "name": "Validation.recall.NOT"
+    },
+    {
+      "id": "5d01268b642339052e7a7b5f",
+      "name": "Validation.precision.OFF"
+    },
+    {
+      "id": "5d01268b642339052e7a7b61",
+      "name": "Validation.precision.NOT"
+    },
+    {
+      "id": "5d01268b642339052e7a7b63",
+      "name": "Validation.f1.OFF"
+    },
+    {
+      "id": "5d01268b642339052e7a7b65",
+      "name": "Validation.f1.NOT"
+    }
+  ]
+}
