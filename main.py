@@ -149,8 +149,8 @@ def config():
     train_bs = 32 #Train batch size (default=32)
     val_bs = 32 #Validation batch size (default=32)
     test_bs = 32 #Test batch size (default=32)
-    num_epochs = 50 #Number of epochs (default=1)
-    max_seq_length = 45 #Maximum sequence length of the sentences (default=40)
+    num_epochs = 100 #Number of epochs (default=1)
+    max_seq_length = 40 #Maximum sequence length of the sentences (default=40)
     learning_rate = 3e-5 #Learning rate for the model (default=3e-5)
     warmup_proportion = 0.1 #Warmup proportion (default=0.1)
     early_stopping_criteria = 10 #Early stopping criteria (default=10)
@@ -160,7 +160,7 @@ def config():
     bidirectional = True #Left and right LSTM
     dropout = 0.1 #Dropout percentage
     filter_sizes = [2, 3, 4] #CNN
-    model_name = "MLP" #Model name: LSTM, BERT, MLP, CNN
+    model_name = "BERT" #Model name: LSTM, BERT, MLP, CNN
 
 
 @ex.automain
