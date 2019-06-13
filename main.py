@@ -215,6 +215,8 @@ def run(output_dim,
     elif model_name=="BERT":
         #model = BertForSequenceClassification.from_pretrained("bert-base-uncased", output_dim)
         model = models.BertLinear(dropout, output_dim)
+    elif model_name=="BERTLSTM":
+        model = models.BertLSTM(dropout, output_dim)
         print(model)
 
     model = model.to(device)
