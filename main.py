@@ -120,6 +120,20 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, 
         best_model = val_results['loss'] <= best_val_loss
         last_model = epoch == num_epochs-1
 
+        if best_model:
+            save_checkpoint({'epoch': epoch+1,
+                                   'state_dict': model.state_dict(),
+                                   'optim_dict': optimizer.state_dict()},
+                                    directory=directory,
+                                    checkpoint='best_model.pth.tar')
+
+        if last_model:
+            save_checkpoint({'epoch': epoch+1,
+                                   'state_dict': model.state_dict(),
+                                   'optim_dict': optimizer.state_dict()},
+                                    directory=directory,
+                                    checkpoint='last_model.pth.tar')
+
         #Early stopping
         if val_results['loss'] >= best_val_loss:
             early_stop_step += 1
@@ -242,7 +256,6 @@ def run(output_dim,
     print('Testing...')
     load_checkpoint(directory_checkpoint+"best_model.pth.tar", model)
     test_results = evaluate_model(model, optimizer, loss_fn, test_dataloader, device, use_bert)
-    log_scalars(test_results,"Test")
 
     test_results_df = pd.DataFrame(test_results, index=["NOT","OFF"])
     test_results_df = test_results_df.drop(columns=['loss','accuracy'])
