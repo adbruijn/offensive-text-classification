@@ -50,7 +50,6 @@ URL_NAME = 'mongodb://localhost:27017/'
 
 ex = Experiment()
 ex.observers.append(FileStorageObserver.create('results'))
-ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
 
 #Send a message to slack if the run is succesfull or if it failed
 slack_obs = SlackObserver.from_config('slack.json')
@@ -81,7 +80,7 @@ def log_scalars(results, name_dataset):
 
 
 @ex.capture
-def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, val_dataloader, early_stopping_criteria, directory, use_bert):
+def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, val_dataloader, early_stopping_criteria, directory, use_bert, use_mongo):
 
     """Train on training set and evaluate on evaluation set
     Args:
@@ -109,12 +108,12 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, 
         ### TRAINING ###
         train_results = train_model(model, optimizer, loss_fn, train_dataloader, device, use_bert)
         train_metrics.loc[len(train_metrics)] = {'epoch':epoch, 'loss':train_results['loss'], 'accuracy':train_results['accuracy'], 'recall':train_results['recall'], 'precision':train_results['precision'], 'f1':train_results['f1']}
-        log_scalars(train_results, "Train")
+        if use_mongo: log_scalars(train_results, "Train")
 
         ### EVALUATION ###
         val_results = evaluate_model(model, optimizer, loss_fn, val_dataloader, device, use_bert)
         val_metrics.loc[len(val_metrics)] = {'epoch':epoch, 'loss':val_results['loss'], 'accuracy':val_results['accuracy'], 'recall':val_results['recall'], 'precision':val_results['precision'], 'f1':val_results['f1']}
-        log_scalars(val_results, "Validation")
+        if use_mongo: log_scalars(val_results, "Validation")
 
         #Save best and latest state
         best_model = val_results['loss'] <= best_val_loss
@@ -169,20 +168,20 @@ def config():
     train_bs = 32 #Train batch size (default=32)
     val_bs = 32 #Validation batch size (default=32)
     test_bs = 32 #Test batch size (default=32)
-    num_epochs = 100 #Number of epochs (default=10)
+    num_epochs = 100 #Number of epochs (default=100)
     max_seq_length = 45 #Maximum sequence length of the sentences (default=40)
     learning_rate = 3e-5 #Learning rate for the model (default=3e-5)
     warmup_proportion = 0.1 #Warmup proportion (default=0.1)
     early_stopping_criteria = 10 #Early stopping criteria (default=5)
     embedding_dim = 100 #Embedding dimension (default=100)
     num_layers = 2 #Number of layers (default=2)
-    hidden_dim = 100 #Hidden layers dimension (default=128)
+    hidden_dim = 128 #Hidden layers dimension (default=128)
     bidirectional = True #Left and right LSTM
     dropout = 0.1 #Dropout percentage
     filter_sizes = [2, 3, 4] #CNN
     embedding_file = 'data/GloVe/glove.6B.100d.txt' #Embedding file
     model_name = "MLP" #Model name: LSTM, BERT, MLP, CNN
-    directory = "results" #
+    use_mongo = False
 
 @ex.automain
 def run(output_dim,
@@ -202,8 +201,12 @@ def run(output_dim,
         filter_sizes,
         embedding_file,
         model_name,
+        use_mongo,
         _run):
 
+    #Mongo
+    if use_mongo: ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
+    
     #Logger
     directory_checkpoint = f"results/checkpoints/{_run._id}/"
     directory = f"results/{_run._id}/"
@@ -245,7 +248,7 @@ def run(output_dim,
 
     #Loss and optimizer
     #optimizer = optim.Adam([{'params': model.parameters(), 'weight_decay': 0.1}], lr=learning_rate)
-    optimizer = optim.Adam(model.parameters())
+    optimizer = optim.Adam(model.parameters(), lr=learning_rate)
     loss_fn = F.cross_entropy
 
     #Scheduler
@@ -253,7 +256,7 @@ def run(output_dim,
 
     #Training and evaluation
     print('Training and evaluation for {} epochs...'.format(num_epochs))
-    train_metrics, val_metrics = train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, val_dataloader, early_stopping_criteria, directory_checkpoint, use_bert)
+    train_metrics, val_metrics = train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, val_dataloader, early_stopping_criteria, directory_checkpoint, use_bert, use_mongo)
     print(train_metrics)
     train_metrics.to_csv(directory+"train_metrics.csv"), val_metrics.to_csv(directory+"val_metrics.csv")
 
@@ -261,13 +264,10 @@ def run(output_dim,
     print('Testing...')
     load_checkpoint(directory_checkpoint+"best_model.pth.tar", model)
     test_results = evaluate_model(model, optimizer, loss_fn, test_dataloader, device, use_bert)
-    # log_scalars(test_results,"Test")
-    #
-    print(test_results)
-    #print(pd.DataFrame(test_results, index=["NOT","OFF"]))
+    if use_mongo: log_scalars(test_results,"Test")
+
     test_results_df = pd.DataFrame(test_results, index=["NOT","OFF"])
     test_results_df = test_results_df.drop(columns=['loss','accuracy'])
-    print(directory)
     test_results_df.to_csv(directory+"test_metrics.csv")
 
     results = {
