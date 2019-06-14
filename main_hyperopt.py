@@ -21,6 +21,9 @@ import pickle
 def run(model_name, max_evals, num_epochs):
     #Space
     space = {'hidden_dim': hp.choice("hidden_dim", [4, 16, 32, 64, 128, 256])}
+    num_layers = {'num_layers': hp.choice()}
+    bidirectional = {'bidirectional': hp.choice("bidirectional", [True, False])}
+    dropout = {'dropout': }
 
     #Objective
     def objective(params):
