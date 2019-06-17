@@ -135,14 +135,14 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, 
                                     checkpoint='last_model.pth.tar')
 
         #Early stopping
-        if val_results['loss'] >= best_val_loss:
+        if val_results['loss'] > best_val_loss:
             early_stop_step += 1
             print("Early stop step:", early_stop_step)
         else:
             best_val_loss = val_results['loss']
             early_stop_step = 0
 
-        stop_early = early_stop_step >= early_stopping_criteria
+        stop_early = early_stop_step > early_stopping_criteria
 
         if stop_early:
             print("Stopping early at epoch {}".format(epoch))
