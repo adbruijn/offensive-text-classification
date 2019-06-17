@@ -206,7 +206,7 @@ def run(output_dim,
 
     #Mongo
     if use_mongo: ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
-    
+
     #Logger
     directory_checkpoint = f"results/checkpoints/{_run._id}/"
     directory = f"results/{_run._id}/"
