@@ -204,7 +204,7 @@ def run(output_dim,
     batch_sizes = [train_bs, val_bs, test_bs]
     batch_size = train_bs
 
-    if model_name=="BERT":#Default = False, if BERT model is used then use_bert is set to True
+    if model_name=="BERT" or model_name=="BERTLSTM":#Default = False, if BERT model is used then use_bert is set to True
         use_bert = True
     else:
         use_bert = False
@@ -213,7 +213,7 @@ def run(output_dim,
     if use_bert:
         train_dataloader, val_dataloader, test_dataloader = get_data_bert(max_seq_length, batch_sizes)
     else:
-        vocab_size, embedding_matrix, train_dataloader, val_dataloader, test_dataloader = get_data(max_seq_length, embedding_file='data/GloVe/glove.6B.100d.txt', batch_size=100)
+        vocab_size, embedding_matrix, train_dataloader, val_dataloader, test_dataloader = get_data(max_seq_length, embedding_file='data/GloVe/glove.6B.100d.txt', batch_size=batch_size)
 
     #Model
     if model_name=="MLP":
