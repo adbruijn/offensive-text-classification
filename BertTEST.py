@@ -21,3 +21,8 @@ lstm_model = models.BertLSTM(dropout, output_dim)
 print("Model - LSTM")
 logits = lstm_model(input_ids, token_type_ids, input_mask)
 print("Logits LSTM: \n", logits)
+
+linear_extra = models.Bert(dropout, output_dim)
+print("Model - LSTM")
+logits = linear_extra(input_ids, token_type_ids, input_mask)
+print("Logits LSTM: \n", logits)

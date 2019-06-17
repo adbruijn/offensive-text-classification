@@ -1,0 +1,1480 @@
+{
+  "artifacts": [],
+  "command": "run",
+  "experiment": {
+    "base_dir": "/Users/adebruijn/OneDrive/Documenten/Mobiquity/Code/Code",
+    "dependencies": [
+      "Click==7.0",
+      "numpy==1.16.1",
+      "pandas==0.24.1",
+      "pytorch-pretrained-bert==0.6.2",
+      "sacred==0.7.4",
+      "torch==0.4.1",
+      "tqdm==4.30.0"
+    ],
+    "mainfile": "main.py",
+    "name": "main",
+    "repositories": [],
+    "sources": [
+      [
+        "data_loader.py",
+        "_sources/data_loader_b669fe9eb05976292fe0479be07268b7.py"
+      ],
+      [
+        "evaluate.py",
+        "_sources/evaluate_a25a6cc58f005cc7fc1344f4fccc6673.py"
+      ],
+      [
+        "main.py",
+        "_sources/main_94742896bb9b99d726f2e4c8455b3ebe.py"
+      ],
+      [
+        "models/__init__.py",
+        "_sources/__init___9c80ecd0f6bea7e64051c36cfcf3cd46.py"
+      ],
+      [
+        "train.py",
+        "_sources/train_af558d8c5dc8a7a2dc2ba3bd73a2a3f9.py"
+      ],
+      [
+        "utils.py",
+        "_sources/utils_2bdb0505832b1e9609f01d84e743206e.py"
+      ]
+    ]
+  },
+  "heartbeat": "2019-06-17T09:29:25.696602",
+  "host": {
+    "ENV": {},
+    "cpu": "Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz",
+    "hostname": "AMSadebruijnMRJG5H",
+    "os": [
+      "Darwin",
+      "Darwin-18.6.0-x86_64-i386-64bit"
+    ],
+    "python_version": "3.6.8"
+  },
+  "meta": {
+    "command": "run",
+    "options": {
+      "--beat_interval": null,
+      "--capture": null,
+      "--comment": null,
+      "--debug": false,
+      "--enforce_clean": false,
+      "--file_storage": null,
+      "--force": false,
+      "--help": false,
+      "--loglevel": null,
+      "--mongo_db": null,
+      "--name": null,
+      "--pdb": false,
+      "--print_config": false,
+      "--priority": null,
+      "--queue": false,
+      "--sql": null,
+      "--tiny_db": null,
+      "--unobserved": false
+    }
+  },
+  "resources": [],
+  "result": {
+    "train_accuracy": {
+      "py/object": "pandas.core.series.Series",
+      "py/state": {
+        "_data": {
+          "py/object": "pandas.core.internals.managers.SingleBlockManager",
+          "py/state": {
+            "py/tuple": [
+              [
+                {
+                  "_cache": {
+                    "dtype": {
+                      "py/reduce": [
+                        {
+                          "py/type": "numpy.dtype"
+                        },
+                        {
+                          "py/tuple": [
+                            "i8",
+                            0,
+                            1
+                          ]
+                        },
+                        {
+                          "py/tuple": [
+                            3,
+                            "<",
+                            null,
+                            null,
+                            null,
+                            -1,
+                            -1,
+                            0
+                          ]
+                        },
+                        null,
+                        null
+                      ]
+                    }
+                  },
+                  "_data": {
+                    "dtype": "int64",
+                    "py/object": "numpy.ndarray",
+                    "values": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "_id": {
+                    "py/object": "builtins.object"
+                  },
+                  "_index_data": {
+                    "py/id": 17
+                  },
+                  "name": null,
+                  "py/object": "pandas.core.indexes.numeric.Int64Index",
+                  "py/seq": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                  ]
+                }
+              ],
+              [
+                {
+                  "dtype": "float64",
+                  "py/object": "numpy.ndarray",
+                  "values": [
+                    0.07,
+                    0.07,
+                    0.07,
+                    0.07,
+                    0.07,
+                    0.07,
+                    0.07,
+                    0.07,
+                    0.07,
+                    0.07
+                  ]
+                }
+              ],
+              [
+                {
+                  "_data": {
+                    "dtype": "int64",
+                    "py/object": "numpy.ndarray",
+                    "values": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "_id": {
+                    "py/object": "builtins.object"
+                  },
+                  "_index_data": {
+                    "py/id": 23
+                  },
+                  "name": null,
+                  "py/object": "pandas.core.indexes.numeric.Int64Index",
+                  "py/seq": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                  ]
+                }
+              ],
+              {
+                "0.14.1": {
+                  "axes": {
+                    "py/id": 14
+                  },
+                  "blocks": [
+                    {
+                      "mgr_locs": {
+                        "py/reduce": [
+                          {
+                            "py/type": "builtins.slice"
+                          },
+                          {
+                            "py/tuple": [
+                              0,
+                              10,
+                              1
+                            ]
+                          },
+                          null,
+                          null,
+                          null
+                        ]
+                      },
+                      "values": {
+                        "py/id": 20
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "_metadata": [
+          "name"
+        ],
+        "_typ": "series",
+        "name": "accuracy"
+      }
+    },
+    "train_f1": {
+      "py/object": "pandas.core.series.Series",
+      "py/state": {
+        "_data": {
+          "py/object": "pandas.core.internals.managers.SingleBlockManager",
+          "py/state": {
+            "py/tuple": [
+              [
+                {
+                  "py/id": 15
+                }
+              ],
+              [
+                {
+                  "dtype": "object",
+                  "py/object": "numpy.ndarray",
+                  "values": [
+                    [
+                      0.08,
+                      0.0
+                    ],
+                    [
+                      0.08,
+                      0.0
+                    ],
+                    [
+                      0.08,
+                      0.0
+                    ],
+                    [
+                      0.08,
+                      0.0
+                    ],
+                    [
+                      0.08,
+                      0.0
+                    ],
+                    [
+                      0.08,
+                      0.0
+                    ],
+                    [
+                      0.08,
+                      0.0
+                    ],
+                    [
+                      0.08,
+                      0.0
+                    ],
+                    [
+                      0.08,
+                      0.0
+                    ],
+                    [
+                      0.08,
+                      0.0
+                    ]
+                  ]
+                }
+              ],
+              [
+                {
+                  "_data": {
+                    "dtype": "int64",
+                    "py/object": "numpy.ndarray",
+                    "values": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "_id": {
+                    "py/object": "builtins.object"
+                  },
+                  "_index_data": {
+                    "py/id": 35
+                  },
+                  "name": null,
+                  "py/object": "pandas.core.indexes.numeric.Int64Index",
+                  "py/seq": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                  ]
+                }
+              ],
+              {
+                "0.14.1": {
+                  "axes": {
+                    "py/id": 30
+                  },
+                  "blocks": [
+                    {
+                      "mgr_locs": {
+                        "py/reduce": [
+                          {
+                            "py/type": "builtins.slice"
+                          },
+                          {
+                            "py/tuple": [
+                              0,
+                              10,
+                              1
+                            ]
+                          },
+                          null,
+                          null,
+                          null
+                        ]
+                      },
+                      "values": {
+                        "py/id": 32
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "_metadata": {
+          "py/id": 27
+        },
+        "_typ": "series",
+        "name": "f1"
+      }
+    },
+    "train_loss": {
+      "py/object": "pandas.core.series.Series",
+      "py/state": {
+        "_data": {
+          "py/object": "pandas.core.internals.managers.SingleBlockManager",
+          "py/state": {
+            "py/tuple": [
+              [
+                {
+                  "py/id": 15
+                }
+              ],
+              [
+                {
+                  "dtype": "float64",
+                  "py/object": "numpy.ndarray",
+                  "values": [
+                    0.07,
+                    0.06,
+                    0.06,
+                    0.06,
+                    0.06,
+                    0.06,
+                    0.06,
+                    0.06,
+                    0.06,
+                    0.06
+                  ]
+                }
+              ],
+              [
+                {
+                  "_data": {
+                    "dtype": "int64",
+                    "py/object": "numpy.ndarray",
+                    "values": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "_id": {
+                    "py/object": "builtins.object"
+                  },
+                  "_index_data": {
+                    "py/id": 46
+                  },
+                  "name": null,
+                  "py/object": "pandas.core.indexes.numeric.Int64Index",
+                  "py/seq": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                  ]
+                }
+              ],
+              {
+                "0.14.1": {
+                  "axes": {
+                    "py/id": 41
+                  },
+                  "blocks": [
+                    {
+                      "mgr_locs": {
+                        "py/reduce": [
+                          {
+                            "py/type": "builtins.slice"
+                          },
+                          {
+                            "py/tuple": [
+                              0,
+                              10,
+                              1
+                            ]
+                          },
+                          null,
+                          null,
+                          null
+                        ]
+                      },
+                      "values": {
+                        "py/id": 43
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "_metadata": {
+          "py/id": 27
+        },
+        "_typ": "series",
+        "name": "loss"
+      }
+    },
+    "train_precision": {
+      "py/object": "pandas.core.series.Series",
+      "py/state": {
+        "_data": {
+          "py/object": "pandas.core.internals.managers.SingleBlockManager",
+          "py/state": {
+            "py/tuple": [
+              [
+                {
+                  "py/id": 15
+                }
+              ],
+              [
+                {
+                  "dtype": "object",
+                  "py/object": "numpy.ndarray",
+                  "values": [
+                    [
+                      0.067,
+                      0.0
+                    ],
+                    [
+                      0.067,
+                      0.0
+                    ],
+                    [
+                      0.067,
+                      0.0
+                    ],
+                    [
+                      0.067,
+                      0.0
+                    ],
+                    [
+                      0.067,
+                      0.0
+                    ],
+                    [
+                      0.067,
+                      0.0
+                    ],
+                    [
+                      0.067,
+                      0.0
+                    ],
+                    [
+                      0.067,
+                      0.0
+                    ],
+                    [
+                      0.067,
+                      0.0
+                    ],
+                    [
+                      0.067,
+                      0.0
+                    ]
+                  ]
+                }
+              ],
+              [
+                {
+                  "_data": {
+                    "dtype": "int64",
+                    "py/object": "numpy.ndarray",
+                    "values": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "_id": {
+                    "py/object": "builtins.object"
+                  },
+                  "_index_data": {
+                    "py/id": 57
+                  },
+                  "name": null,
+                  "py/object": "pandas.core.indexes.numeric.Int64Index",
+                  "py/seq": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                  ]
+                }
+              ],
+              {
+                "0.14.1": {
+                  "axes": {
+                    "py/id": 52
+                  },
+                  "blocks": [
+                    {
+                      "mgr_locs": {
+                        "py/reduce": [
+                          {
+                            "py/type": "builtins.slice"
+                          },
+                          {
+                            "py/tuple": [
+                              0,
+                              10,
+                              1
+                            ]
+                          },
+                          null,
+                          null,
+                          null
+                        ]
+                      },
+                      "values": {
+                        "py/id": 54
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "_metadata": {
+          "py/id": 27
+        },
+        "_typ": "series",
+        "name": "precision"
+      }
+    },
+    "train_recall": {
+      "py/object": "pandas.core.series.Series",
+      "py/state": {
+        "_data": {
+          "py/object": "pandas.core.internals.managers.SingleBlockManager",
+          "py/state": {
+            "py/tuple": [
+              [
+                {
+                  "py/id": 15
+                }
+              ],
+              [
+                {
+                  "dtype": "object",
+                  "py/object": "numpy.ndarray",
+                  "values": [
+                    [
+                      0.1,
+                      0.0
+                    ],
+                    [
+                      0.1,
+                      0.0
+                    ],
+                    [
+                      0.1,
+                      0.0
+                    ],
+                    [
+                      0.1,
+                      0.0
+                    ],
+                    [
+                      0.1,
+                      0.0
+                    ],
+                    [
+                      0.1,
+                      0.0
+                    ],
+                    [
+                      0.1,
+                      0.0
+                    ],
+                    [
+                      0.1,
+                      0.0
+                    ],
+                    [
+                      0.1,
+                      0.0
+                    ],
+                    [
+                      0.1,
+                      0.0
+                    ]
+                  ]
+                }
+              ],
+              [
+                {
+                  "_data": {
+                    "dtype": "int64",
+                    "py/object": "numpy.ndarray",
+                    "values": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "_id": {
+                    "py/object": "builtins.object"
+                  },
+                  "_index_data": {
+                    "py/id": 68
+                  },
+                  "name": null,
+                  "py/object": "pandas.core.indexes.numeric.Int64Index",
+                  "py/seq": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                  ]
+                }
+              ],
+              {
+                "0.14.1": {
+                  "axes": {
+                    "py/id": 63
+                  },
+                  "blocks": [
+                    {
+                      "mgr_locs": {
+                        "py/reduce": [
+                          {
+                            "py/type": "builtins.slice"
+                          },
+                          {
+                            "py/tuple": [
+                              0,
+                              10,
+                              1
+                            ]
+                          },
+                          null,
+                          null,
+                          null
+                        ]
+                      },
+                      "values": {
+                        "py/id": 65
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "_metadata": {
+          "py/id": 27
+        },
+        "_typ": "series",
+        "name": "recall"
+      }
+    },
+    "val_accuracy": {
+      "py/object": "pandas.core.series.Series",
+      "py/state": {
+        "_data": {
+          "py/object": "pandas.core.internals.managers.SingleBlockManager",
+          "py/state": {
+            "py/tuple": [
+              [
+                {
+                  "_cache": {
+                    "dtype": {
+                      "py/id": 16
+                    }
+                  },
+                  "_data": {
+                    "dtype": "int64",
+                    "py/object": "numpy.ndarray",
+                    "values": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "_id": {
+                    "py/object": "builtins.object"
+                  },
+                  "_index_data": {
+                    "py/id": 76
+                  },
+                  "name": null,
+                  "py/object": "pandas.core.indexes.numeric.Int64Index",
+                  "py/seq": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                  ]
+                }
+              ],
+              [
+                {
+                  "dtype": "float64",
+                  "py/object": "numpy.ndarray",
+                  "values": [
+                    0.06,
+                    0.06,
+                    0.06,
+                    0.06,
+                    0.06,
+                    0.06,
+                    0.06,
+                    0.06,
+                    0.06,
+                    0.06
+                  ]
+                }
+              ],
+              [
+                {
+                  "_data": {
+                    "dtype": "int64",
+                    "py/object": "numpy.ndarray",
+                    "values": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "_id": {
+                    "py/object": "builtins.object"
+                  },
+                  "_index_data": {
+                    "py/id": 82
+                  },
+                  "name": null,
+                  "py/object": "pandas.core.indexes.numeric.Int64Index",
+                  "py/seq": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                  ]
+                }
+              ],
+              {
+                "0.14.1": {
+                  "axes": {
+                    "py/id": 74
+                  },
+                  "blocks": [
+                    {
+                      "mgr_locs": {
+                        "py/reduce": [
+                          {
+                            "py/type": "builtins.slice"
+                          },
+                          {
+                            "py/tuple": [
+                              0,
+                              10,
+                              1
+                            ]
+                          },
+                          null,
+                          null,
+                          null
+                        ]
+                      },
+                      "values": {
+                        "py/id": 79
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "_metadata": {
+          "py/id": 27
+        },
+        "_typ": "series",
+        "name": "accuracy"
+      }
+    },
+    "val_f1": {
+      "py/object": "pandas.core.series.Series",
+      "py/state": {
+        "_data": {
+          "py/object": "pandas.core.internals.managers.SingleBlockManager",
+          "py/state": {
+            "py/tuple": [
+              [
+                {
+                  "py/id": 75
+                }
+              ],
+              [
+                {
+                  "dtype": "object",
+                  "py/object": "numpy.ndarray",
+                  "values": [
+                    [
+                      0.079,
+                      0.0
+                    ],
+                    [
+                      0.079,
+                      0.0
+                    ],
+                    [
+                      0.079,
+                      0.0
+                    ],
+                    [
+                      0.079,
+                      0.0
+                    ],
+                    [
+                      0.079,
+                      0.0
+                    ],
+                    [
+                      0.079,
+                      0.0
+                    ],
+                    [
+                      0.079,
+                      0.0
+                    ],
+                    [
+                      0.079,
+                      0.0
+                    ],
+                    [
+                      0.079,
+                      0.0
+                    ],
+                    [
+                      0.079,
+                      0.0
+                    ]
+                  ]
+                }
+              ],
+              [
+                {
+                  "_data": {
+                    "dtype": "int64",
+                    "py/object": "numpy.ndarray",
+                    "values": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "_id": {
+                    "py/object": "builtins.object"
+                  },
+                  "_index_data": {
+                    "py/id": 93
+                  },
+                  "name": null,
+                  "py/object": "pandas.core.indexes.numeric.Int64Index",
+                  "py/seq": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                  ]
+                }
+              ],
+              {
+                "0.14.1": {
+                  "axes": {
+                    "py/id": 88
+                  },
+                  "blocks": [
+                    {
+                      "mgr_locs": {
+                        "py/reduce": [
+                          {
+                            "py/type": "builtins.slice"
+                          },
+                          {
+                            "py/tuple": [
+                              0,
+                              10,
+                              1
+                            ]
+                          },
+                          null,
+                          null,
+                          null
+                        ]
+                      },
+                      "values": {
+                        "py/id": 90
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "_metadata": {
+          "py/id": 27
+        },
+        "_typ": "series",
+        "name": "f1"
+      }
+    },
+    "val_loss": {
+      "py/object": "pandas.core.series.Series",
+      "py/state": {
+        "_data": {
+          "py/object": "pandas.core.internals.managers.SingleBlockManager",
+          "py/state": {
+            "py/tuple": [
+              [
+                {
+                  "py/id": 75
+                }
+              ],
+              [
+                {
+                  "dtype": "float64",
+                  "py/object": "numpy.ndarray",
+                  "values": [
+                    0.07,
+                    0.06,
+                    0.06,
+                    0.06,
+                    0.06,
+                    0.06,
+                    0.06,
+                    0.06,
+                    0.06,
+                    0.06
+                  ]
+                }
+              ],
+              [
+                {
+                  "_data": {
+                    "dtype": "int64",
+                    "py/object": "numpy.ndarray",
+                    "values": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "_id": {
+                    "py/object": "builtins.object"
+                  },
+                  "_index_data": {
+                    "py/id": 104
+                  },
+                  "name": null,
+                  "py/object": "pandas.core.indexes.numeric.Int64Index",
+                  "py/seq": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                  ]
+                }
+              ],
+              {
+                "0.14.1": {
+                  "axes": {
+                    "py/id": 99
+                  },
+                  "blocks": [
+                    {
+                      "mgr_locs": {
+                        "py/reduce": [
+                          {
+                            "py/type": "builtins.slice"
+                          },
+                          {
+                            "py/tuple": [
+                              0,
+                              10,
+                              1
+                            ]
+                          },
+                          null,
+                          null,
+                          null
+                        ]
+                      },
+                      "values": {
+                        "py/id": 101
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "_metadata": {
+          "py/id": 27
+        },
+        "_typ": "series",
+        "name": "loss"
+      }
+    },
+    "val_precision": {
+      "py/object": "pandas.core.series.Series",
+      "py/state": {
+        "_data": {
+          "py/object": "pandas.core.internals.managers.SingleBlockManager",
+          "py/state": {
+            "py/tuple": [
+              [
+                {
+                  "py/id": 75
+                }
+              ],
+              [
+                {
+                  "dtype": "object",
+                  "py/object": "numpy.ndarray",
+                  "values": [
+                    [
+                      0.065,
+                      0.0
+                    ],
+                    [
+                      0.065,
+                      0.0
+                    ],
+                    [
+                      0.065,
+                      0.0
+                    ],
+                    [
+                      0.065,
+                      0.0
+                    ],
+                    [
+                      0.065,
+                      0.0
+                    ],
+                    [
+                      0.065,
+                      0.0
+                    ],
+                    [
+                      0.065,
+                      0.0
+                    ],
+                    [
+                      0.065,
+                      0.0
+                    ],
+                    [
+                      0.065,
+                      0.0
+                    ],
+                    [
+                      0.065,
+                      0.0
+                    ]
+                  ]
+                }
+              ],
+              [
+                {
+                  "_data": {
+                    "dtype": "int64",
+                    "py/object": "numpy.ndarray",
+                    "values": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "_id": {
+                    "py/object": "builtins.object"
+                  },
+                  "_index_data": {
+                    "py/id": 115
+                  },
+                  "name": null,
+                  "py/object": "pandas.core.indexes.numeric.Int64Index",
+                  "py/seq": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                  ]
+                }
+              ],
+              {
+                "0.14.1": {
+                  "axes": {
+                    "py/id": 110
+                  },
+                  "blocks": [
+                    {
+                      "mgr_locs": {
+                        "py/reduce": [
+                          {
+                            "py/type": "builtins.slice"
+                          },
+                          {
+                            "py/tuple": [
+                              0,
+                              10,
+                              1
+                            ]
+                          },
+                          null,
+                          null,
+                          null
+                        ]
+                      },
+                      "values": {
+                        "py/id": 112
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "_metadata": {
+          "py/id": 27
+        },
+        "_typ": "series",
+        "name": "precision"
+      }
+    },
+    "val_recall": {
+      "py/object": "pandas.core.series.Series",
+      "py/state": {
+        "_data": {
+          "py/object": "pandas.core.internals.managers.SingleBlockManager",
+          "py/state": {
+            "py/tuple": [
+              [
+                {
+                  "py/id": 75
+                }
+              ],
+              [
+                {
+                  "dtype": "object",
+                  "py/object": "numpy.ndarray",
+                  "values": [
+                    [
+                      0.1,
+                      0.0
+                    ],
+                    [
+                      0.1,
+                      0.0
+                    ],
+                    [
+                      0.1,
+                      0.0
+                    ],
+                    [
+                      0.1,
+                      0.0
+                    ],
+                    [
+                      0.1,
+                      0.0
+                    ],
+                    [
+                      0.1,
+                      0.0
+                    ],
+                    [
+                      0.1,
+                      0.0
+                    ],
+                    [
+                      0.1,
+                      0.0
+                    ],
+                    [
+                      0.1,
+                      0.0
+                    ],
+                    [
+                      0.1,
+                      0.0
+                    ]
+                  ]
+                }
+              ],
+              [
+                {
+                  "_data": {
+                    "dtype": "int64",
+                    "py/object": "numpy.ndarray",
+                    "values": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  "_id": {
+                    "py/object": "builtins.object"
+                  },
+                  "_index_data": {
+                    "py/id": 126
+                  },
+                  "name": null,
+                  "py/object": "pandas.core.indexes.numeric.Int64Index",
+                  "py/seq": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                  ]
+                }
+              ],
+              {
+                "0.14.1": {
+                  "axes": {
+                    "py/id": 121
+                  },
+                  "blocks": [
+                    {
+                      "mgr_locs": {
+                        "py/reduce": [
+                          {
+                            "py/type": "builtins.slice"
+                          },
+                          {
+                            "py/tuple": [
+                              0,
+                              10,
+                              1
+                            ]
+                          },
+                          null,
+                          null,
+                          null
+                        ]
+                      },
+                      "values": {
+                        "py/id": 123
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "_metadata": {
+          "py/id": 27
+        },
+        "_typ": "series",
+        "name": "recall"
+      }
+    }
+  },
+  "start_time": "2019-06-17T09:28:49.603469",
+  "status": "COMPLETED",
+  "stop_time": "2019-06-17T09:29:25.694363"
+}

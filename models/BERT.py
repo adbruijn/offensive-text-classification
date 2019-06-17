@@ -71,3 +71,31 @@ class BertLSTM(nn.Module):
         logits = self.linear(out)
 
         return logits
+
+# class Bert(nn.Module):
+#     def __init__(self, dropout, output_dim):
+#         """
+#         Args:
+#             dropout: Dropout probability
+#             output_dim: Output dimension (number of labels)
+#         """
+#
+#         super(Bert, self).__init__()
+#         self.output_dim = output_dim
+#         self.dropout = dropout
+#
+#         self.bert = BertModel.from_pretrained('bert-base-uncased')
+#
+#         self.drop = nn.Dropout(dropout)
+#
+#         self.linear1 = nn.Linear(768, 100)
+#         self.batch_norm = nn.BatchNorm1d(100)
+#         #self.relu = nn.ReLU(inplace=True)
+#         self.linear2 = nn.Linear(100, 2)
+#
+#     def forward(self, input_ids, token_type_ids=None, attention_mask=None, labels=None):
+#         encoded_layers, pooled_output = self.bert(input_ids, token_type_ids, attention_mask, output_all_encoded_layers=False)
+#
+#         logits = self.linear2(self.batch_norm(self.linear1(encoded_layers)))
+#
+#         return logits
