@@ -1,0 +1,121 @@
+{
+  "artifacts": [],
+  "command": "run",
+  "experiment": {
+    "base_dir": "/home/ubuntu/offensive-text-classification",
+    "dependencies": [
+      "click==6.7",
+      "numpy==1.15.4",
+      "pandas==0.24.2",
+      "pytorch-pretrained-bert==0.6.2",
+      "sacred==0.7.4",
+      "torch==1.1.0",
+      "tqdm==4.31.1"
+    ],
+    "mainfile": "main.py",
+    "name": "main",
+    "repositories": [],
+    "sources": [
+      [
+        "data_loader.py",
+        "_sources/data_loader_b669fe9eb05976292fe0479be07268b7.py"
+      ],
+      [
+        "evaluate.py",
+        "_sources/evaluate_a25a6cc58f005cc7fc1344f4fccc6673.py"
+      ],
+      [
+        "main.py",
+        "_sources/main_2910ff3a508860d4ebddc5c64151d373.py"
+      ],
+      [
+        "models/__init__.py",
+        "_sources/__init___9c80ecd0f6bea7e64051c36cfcf3cd46.py"
+      ],
+      [
+        "train.py",
+        "_sources/train_af558d8c5dc8a7a2dc2ba3bd73a2a3f9.py"
+      ],
+      [
+        "utils.py",
+        "_sources/utils_2bdb0505832b1e9609f01d84e743206e.py"
+      ]
+    ]
+  },
+  "fail_trace": [
+    "Traceback (most recent call last):\n",
+    "  File \"/home/ubuntu/anaconda3/envs/pytorch_p36/lib/python3.6/site-packages/sacred/config/captured_function.py\", line 46, in captured_function\n    result = wrapped(*args, **kwargs)\n",
+    "  File \"main.py\", line 251, in run\n    train_metrics, val_metrics = train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, val_dataloader, scheduler, early_stopping_criteria, directory_checkpoint, use_bert)\n",
+    "  File \"/home/ubuntu/anaconda3/envs/pytorch_p36/lib/python3.6/site-packages/sacred/config/captured_function.py\", line 46, in captured_function\n    result = wrapped(*args, **kwargs)\n",
+    "  File \"main.py\", line 110, in train_and_evaluate\n    train_results = train_model(model, optimizer, loss_fn, train_dataloader, device, use_bert)\n",
+    "  File \"/home/ubuntu/offensive-text-classification/train.py\", line 50, in train_model\n    y_pred = model(input_ids, segment_ids, input_mask, labels=None)\n",
+    "  File \"/home/ubuntu/anaconda3/envs/pytorch_p36/lib/python3.6/site-packages/torch/nn/modules/module.py\", line 493, in __call__\n    result = self.forward(*input, **kwargs)\n",
+    "  File \"/home/ubuntu/offensive-text-classification/models/BERT.py\", line 35, in forward\n    encoded_layers, pooled_output = self.bert(input_ids, token_type_ids, attention_mask, output_all_encoded_layers=False)\n",
+    "  File \"/home/ubuntu/anaconda3/envs/pytorch_p36/lib/python3.6/site-packages/torch/nn/modules/module.py\", line 493, in __call__\n    result = self.forward(*input, **kwargs)\n",
+    "  File \"/home/ubuntu/anaconda3/envs/pytorch_p36/lib/python3.6/site-packages/pytorch_pretrained_bert/modeling.py\", line 733, in forward\n    output_all_encoded_layers=output_all_encoded_layers)\n",
+    "  File \"/home/ubuntu/anaconda3/envs/pytorch_p36/lib/python3.6/site-packages/torch/nn/modules/module.py\", line 493, in __call__\n    result = self.forward(*input, **kwargs)\n",
+    "  File \"/home/ubuntu/anaconda3/envs/pytorch_p36/lib/python3.6/site-packages/pytorch_pretrained_bert/modeling.py\", line 406, in forward\n    hidden_states = layer_module(hidden_states, attention_mask)\n",
+    "  File \"/home/ubuntu/anaconda3/envs/pytorch_p36/lib/python3.6/site-packages/torch/nn/modules/module.py\", line 493, in __call__\n    result = self.forward(*input, **kwargs)\n",
+    "  File \"/home/ubuntu/anaconda3/envs/pytorch_p36/lib/python3.6/site-packages/pytorch_pretrained_bert/modeling.py\", line 391, in forward\n    attention_output = self.attention(hidden_states, attention_mask)\n",
+    "  File \"/home/ubuntu/anaconda3/envs/pytorch_p36/lib/python3.6/site-packages/torch/nn/modules/module.py\", line 493, in __call__\n    result = self.forward(*input, **kwargs)\n",
+    "  File \"/home/ubuntu/anaconda3/envs/pytorch_p36/lib/python3.6/site-packages/pytorch_pretrained_bert/modeling.py\", line 349, in forward\n    self_output = self.self(input_tensor, attention_mask)\n",
+    "  File \"/home/ubuntu/anaconda3/envs/pytorch_p36/lib/python3.6/site-packages/torch/nn/modules/module.py\", line 493, in __call__\n    result = self.forward(*input, **kwargs)\n",
+    "  File \"/home/ubuntu/anaconda3/envs/pytorch_p36/lib/python3.6/site-packages/pytorch_pretrained_bert/modeling.py\", line 309, in forward\n    attention_scores = torch.matmul(query_layer, key_layer.transpose(-1, -2))\n",
+    "RuntimeError: CUDA out of memory. Tried to allocate 20.00 MiB (GPU 0; 11.17 GiB total capacity; 2.03 GiB already allocated; 11.06 MiB free; 69.81 MiB cached)\n"
+  ],
+  "heartbeat": "2019-06-17T11:18:58.242034",
+  "host": {
+    "ENV": {},
+    "cpu": "Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz",
+    "gpus": {
+      "driver_version": "418.40.04",
+      "gpus": [
+        {
+          "model": "Tesla K80",
+          "persistence_mode": true,
+          "total_memory": 11441
+        }
+      ]
+    },
+    "hostname": "ip-172-31-29-135",
+    "os": [
+      "Linux",
+      "Linux-4.4.0-1084-aws-x86_64-with-debian-stretch-sid"
+    ],
+    "python_version": "3.6.5"
+  },
+  "meta": {
+    "command": "run",
+    "options": {
+      "--beat_interval": null,
+      "--capture": null,
+      "--comment": null,
+      "--debug": false,
+      "--enforce_clean": false,
+      "--file_storage": null,
+      "--force": false,
+      "--help": false,
+      "--loglevel": null,
+      "--mongo_db": null,
+      "--name": null,
+      "--pdb": false,
+      "--print_config": false,
+      "--priority": null,
+      "--queue": false,
+      "--sql": null,
+      "--tiny_db": null,
+      "--unobserved": false,
+      "COMMAND": null,
+      "UPDATE": [
+        "max_seq_length=55"
+      ],
+      "help": false,
+      "with": true
+    }
+  },
+  "resources": [],
+  "result": null,
+  "start_time": "2019-06-17T11:16:43.264791",
+  "status": "FAILED",
+  "stop_time": "2019-06-17T11:18:58.243339"
+}
