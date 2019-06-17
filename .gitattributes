@@ -1,2 +1,0 @@
-data/Glove/ filter=lfs diff=lfs merge=lfs -text
-data/GloVe/*.txt filter=lfs diff=lfs merge=lfs -text
