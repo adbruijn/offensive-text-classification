@@ -1,2 +1,0 @@
-INFO - main - Running command 'run'
-INFO - main - Started run with ID "39"

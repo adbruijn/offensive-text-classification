@@ -34,6 +34,10 @@ from pytorch_pretrained_bert.tokenization import BertTokenizer
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
+
 def load_glove(embedding_file):
 
     """Load GloVe file
@@ -281,3 +285,31 @@ def get_data(max_seq_len, embedding_file, batch_size):
     test_dataloader = make_iterator(X_test, y_test, batch_size)
 
     return embedding_dim, int(vocab_size), embedding_matrix, train_dataloader, val_dataloader, test_dataloader
+
+def load_data_svm():
+
+    #Load data
+    train, val, test = load_data()
+
+    #Clean data
+    X_train = [clean_text(text, remove_punt_number_special_chars=True,remove_stopwords=True, apply_stemming=False) for text in train["text"]]
+    X_val = [clean_text(text, remove_punt_number_special_chars=True,remove_stopwords=True, apply_stemming=False) for text in val["text"]]
+    X_test = [clean_text(text, remove_punt_number_special_chars=True,remove_stopwords=True, apply_stemming=False) for text in test["text"]]
+
+    y_train = encode_label(train["label"])
+    y_val = encode_label(val["label"])
+    y_test = encode_label(test["label"])
+
+    bow_vec = CountVectorizer(ngram_range=(1,2), min_df=5, max_df=0.95, max_features=100000, stop_words='english')
+    bow = bow_vec.fit(X_train)
+
+    tfidf_vec = TfidfVectorizer(ngram_range=(1,2), min_df=5, max_df=0.95, use_idf=True, smooth_idf=True, sublinear_tf=True, max_features=100000, stop_words='english')
+    tfidf = tfidf_vec.fit(X_train)
+
+    X_bow_train = tfidf_vec.transform(X_train)
+    X_bow_test  = tfidf_vec.transform(X_test)
+
+    X_tfidf_train = tfidf_vec.transform(X_train)
+    X_tfidf_test  = tfidf_vec.transform(X_test)
+
+    return X_bow_train, X_bow_test, X_tfidf_train, X_tfidf_test, y_train, y_test

@@ -17,7 +17,7 @@ import pickle
 
 @click.command()
 @click.option('--model_name', default="MLP", help="Model name (LSTM, MLP, CNN, LSTMAttention)")
-@click.option('--max_evals', default=10, help="Maximum evaluations for the optimisation")
+@click.option('--max_evals', default=5, help="Maximum evaluations for the optimisation")
 @click.option('--num_epochs', default=100, help="Maximum number of epochs")
 @click.option('--embedding_file', default='data/GloVe/glove.twitter.27B.200d.txt', help="Default datapath data/GloVe/glove.twitter.27B.200d.txt'")
 

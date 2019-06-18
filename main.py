@@ -1,4 +1,4 @@
-import json
+  import json
 import logging
 import os
 import shutil
@@ -141,7 +141,7 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, 
             best_val_loss = val_results['loss']
             early_stop_step = 0
 
-        stop_early = early_stop_step >= early_stopping_criteria
+        stop_early = early_stop_step > early_stopping_criteria
 
         if stop_early:
             print("Stopping early at epoch {}".format(epoch))
@@ -172,7 +172,7 @@ def config():
     max_seq_length = 45 #Maximum sequence length of the sentences (default=40)
     learning_rate = 3e-3 #Learning rate for the model (default=3e-5)
     warmup_proportion = 0.1 #Warmup proportion (default=0.1)
-    early_stopping_criteria = 10 #Early stopping criteria (default=5)
+    early_stopping_criteria = 15 #Early stopping criteria (default=5)
     embedding_dim = 100 #Embedding dimension (default=100)
     num_layers = 2 #Number of layers (default=2)
     hidden_dim = 128 #Hidden layers dimension (default=128)
@@ -215,7 +215,7 @@ def run(output_dim,
     batch_sizes = [train_bs, val_bs, test_bs]
     batch_size = train_bs
 
-    if model_name=="BERT":  #Default = False, if BERT model is used then use_bert is set to True
+    if "Bert" in model_name:  #Default = False, if BERT model is used then use_bert is set to True
         use_bert = True
     else:
         use_bert = False
@@ -239,9 +239,12 @@ def run(output_dim,
     elif model_name=="LSTMAttention":
         model = models.LSTMAttention(embedding_matrix, hidden_dim, vocab_size, embedding_dim, output_dim, batch_size)
         print(model)
-    elif model_name=="BERT":
+    elif model_name=="BertLinear":
         #model = BertForSequenceClassification.from_pretrained("bert-base-uncased", output_dim)
         model = models.BertLinear(dropout, output_dim)
+        print(model)
+    elif model_name=="BertLSTM":
+        model = models.BertLSTM(dropout, output_dim)
         print(model)
 
     model = model.to(device)
