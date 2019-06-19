@@ -42,7 +42,7 @@
       ]
     ]
   },
-  "heartbeat": "2019-06-19T09:18:03.310255",
+  "heartbeat": "2019-06-19T09:18:29.955574",
   "host": {
     "ENV": {},
     "cpu": "Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz",
@@ -77,7 +77,38 @@
     }
   },
   "resources": [],
-  "result": null,
+  "result": {
+    "accuracy": 0.82,
+    "f1": {
+      "dtype": "float64",
+      "py/object": "numpy.ndarray",
+      "values": [
+        0.88,
+        0.63
+      ]
+    },
+    "id": "5",
+    "learning_rate": 0.021626756497695555,
+    "loss": 0.6773076923076923,
+    "precision": {
+      "dtype": "float64",
+      "py/object": "numpy.ndarray",
+      "values": [
+        0.85,
+        0.72
+      ]
+    },
+    "recall": {
+      "dtype": "float64",
+      "py/object": "numpy.ndarray",
+      "values": [
+        0.92,
+        0.57
+      ]
+    },
+    "status": "ok"
+  },
   "start_time": "2019-06-19T09:16:53.162677",
-  "status": "RUNNING"
+  "status": "COMPLETED",
+  "stop_time": "2019-06-19T09:18:29.954142"
 }
