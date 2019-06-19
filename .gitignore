@@ -3,3 +3,4 @@ __pycache__/
 results/checkpoints/
 data/GloVe/
 .DS_Store
+visualization.py

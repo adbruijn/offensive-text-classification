@@ -50,7 +50,6 @@ URL_NAME = 'mongodb://localhost:27017/'
 
 ex = Experiment()
 ex.observers.append(FileStorageObserver.create('results'))
-#ex.observers.append(Mongo)
 
 #Send a message to slack if the run is succesfull or if it failed
 slack_obs = SlackObserver.from_config('slack.json')
@@ -279,8 +278,17 @@ def run(output_dim,
     print("ID:", id_nummer)
 
     results = {
+        # 'train_loss': np.mean(train_metrics['loss'])/len(train_metrics), 2),
+        # 'train_accuracy': np.mean(train_metrics['accuracy'])
+        #'train_recall': train_metrics['recall'] / len(train_metrics),
+        #'train_precision': train_metrics['precision'] / len(train_metrics),
+        #'train_f1': train_metrics['f1'] / len(train_metrics),
         'id': id_nummer,
         'loss': np.round(np.mean(val_metrics['loss']), 4),
+        # 'val_accuracy': np.mean(val_metrics['accuracy']),
+        #'val_recall': val_metrics['recall'] / len(val_metrics),
+        #'val_precision': val_metrics['precision'] / len(val_metrics),
+        #'val_f1': val_metrics['f1'] / len(val_metrics)
         'accuracy': test_metrics['accuracy'],
         'recall': test_metrics['recall'],
         'precision': test_metrics['precision'],
@@ -289,4 +297,5 @@ def run(output_dim,
         'status': 'ok'
     }
 
+    #return np.round(sum(train_metrics['loss'])/len(train_metrics), 2), 'status': 'ok'
     return results
