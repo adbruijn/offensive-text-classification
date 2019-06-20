@@ -18,7 +18,9 @@ class LSTMAttention(nn.Module):
         """
 
         super(LSTMAttention, self).__init__()
+        self.num_layers =  num_layers
         self.hidden_dim =  hidden_dim
+        self.bidirectional =  bidirectional
         self.dropout = dropout
 
         #Word embeddings
