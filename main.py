@@ -53,8 +53,7 @@ ex.observers.append(FileStorageObserver.create('results'))
 #ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
 
 #Send a message to slack if the run is succesfull or if it failed
-#
-33slack_obs = SlackObserver.from_config('slack.json')
+slack_obs = SlackObserver.from_config('slack.json')
 ex.observers.append(slack_obs)
 
 #Device
@@ -172,9 +171,9 @@ def config():
     test_bs = 32.0  #Test batch size (default=32)
     num_epochs = 100 #Number of epochs (default=100)
     max_seq_length = 45 #Maximum sequence length of the sentences (default=40)
-    learning_rate = 3e-3 #Learning rate for the model (default=3e-5)
+    learning_rate = 3e-5 #Learning rate for the model (default=3e-5)
     warmup_proportion = 0.1 #Warmup proportion (default=0.1)
-    #early_stopping_criteria = 50 #Early stopping criteria (default=5)
+    early_stopping_criteria = 25 #Early stopping criteria (default=5)
     embedding_dim = 100 #Embedding dimension (default=100)
     num_layers = 2 #Number of layers (default=2)
     hidden_dim = 128 #Hidden layers dimension (default=128)
@@ -194,7 +193,7 @@ def run(output_dim,
         max_seq_length,
         learning_rate,
         warmup_proportion,
-        #early_stopping_criteria,
+        early_stopping_criteria,
         embedding_dim,
         num_layers,
         hidden_dim,
@@ -224,26 +223,26 @@ def run(output_dim,
 
     #Data
     if use_bert:
-        train_dataloader, val_dataloader, test_dataloader = get_data_bert(max_seq_length, batch_sizes)
+        train_dataloader, val_dataloader, test_dataloader = get_data_bert(int(max_seq_length), batch_sizes)
     else:
-        embedding_dim, vocab_size, embedding_matrix, train_dataloader, val_dataloader, test_dataloader = get_data(max_seq_length, embedding_file=embedding_file, batch_size=batch_size)
+        embedding_dim, vocab_size, embedding_matrix, train_dataloader, val_dataloader, test_dataloader = get_data(int(max_seq_length), embedding_file=embedding_file, batch_size=batch_size)
 
     #Model
     if model_name=="MLP":
-        model = models.MLP(vocab_size, embedding_dim, embedding_matrix, hidden_dim, dropout, output_dim)
+        model = models.MLP(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), dropout, output_dim)
         print(model)
     elif model_name=="CNN":
-        model = models.CNN(vocab_size, embedding_dim, embedding_matrix, output_dim, filter_sizes, embedding_dim, dropout)
+        model = models.CNN(embedding_matrix, embedding_dim, vocab_size, dropout, filter_sizes, filter_dim, output_dim)
         print(model)
     elif model_name=="LSTM":
-        model = models.LSTM(embedding_matrix, num_layers, hidden_dim, bidirectional, vocab_size, embedding_dim, dropout, output_dim)
+        model = models.LSTM(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), dropout, num_layers, bidirectional, output_dim)
         print(model)
     elif model_name=="LSTMAttention":
-        model = models.LSTMAttention(embedding_matrix, hidden_dim, vocab_size, embedding_dim, output_dim, batch_size)
+        model = models.LSTMAttention(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), dropout, num_layers, bidirectional, output_dim)
         print(model)
     elif model_name=="BertLinear":
         #model = BertForSequenceClassification.from_pretrained("bert-base-uncased", output_dim)
-        model = models.BertLinear(dropout, output_dim)
+        model = models.BertLinear(hidden_dim, dropout, output_dim)
         print(model)
     elif model_name=="BertLSTM":
         model = models.BertLSTM(dropout, output_dim)
@@ -257,12 +256,11 @@ def run(output_dim,
     loss_fn = F.cross_entropy
 
     #Scheduler
-    #scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[5,15], gamma=0.1)
+    #scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[5, 50], gamma=0.1)
 
     #Training and evaluation
     print('Training and evaluation for {} epochs...'.format(num_epochs))
-    train_metrics, val_metrics = train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, val_dataloader, int(num_epochs/2), directory_checkpoint, use_bert, use_mongo)
-    #print(train_metrics); print(val_metrics)
+    train_metrics, val_metrics = train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, val_dataloader, early_stopping_criteria, directory_checkpoint, use_bert, use_mongo)
     train_metrics.to_csv(directory+"train_metrics.csv"), val_metrics.to_csv(directory+"val_metrics.csv")
 
     #Test
@@ -277,7 +275,6 @@ def run(output_dim,
     test_metrics_df.to_csv(directory+"test_metrics.csv")
 
     id_nummer = f'{_run._id}'
-    print("ID:", id_nummer)
 
     results = {
         'id': id_nummer,
@@ -287,6 +284,7 @@ def run(output_dim,
         'precision': test_metrics['precision'],
         'f1': test_metrics['f1'],
         'learning_rate': learning_rate,
+        'hidden_dim': hidden_dim,
         'status': 'ok'
     }
 

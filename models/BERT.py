@@ -13,9 +13,10 @@ from torch.nn import functional as F
 import numpy as np
 
 class BertLinear(nn.Module):
-    def __init__(self, dropout, output_dim):
+    def __init__(self, hidden_dim, dropout, output_dim):
         """
         Args:
+            hidden_dim: Size hiddden state
             dropout: Dropout probability
             output_dim: Output dimension (number of labels)
         """
@@ -26,20 +27,27 @@ class BertLinear(nn.Module):
 
         self.bert = BertModel.from_pretrained('bert-base-uncased')
 
-        self.drop = nn.Dropout(dropout)
+        self.dropout = nn.Dropout(dropout)
+        self.relu = nn.LeakyReLU()
 
-        self.linear1 = nn.Linear(768, 100) #self.bert.config.hidden_size = 768
-        self.linear2 = nn.Linear(100, output_dim)
+        self.linear1 = nn.Linear(768, hidden_dim) #self.bert.config.hidden_size = 768
+        self.linear2 = nn.Linear(hidden_dim, hidden_dim)
+        self.linear3 = nn.Linear(hidden_dim, output_dim)
+
 
     def forward(self, input_ids, token_type_ids=None, attention_mask=None, labels=None):
-        encoded_layers, pooled_output = self.bert(input_ids, token_type_ids, attention_mask, output_all_encoded_layers=False)
-        output = self.linear1(self.drop(pooled_output))
-        logits = self.linear2(output)
 
-        return logits
+        encoded_layers, pooled_output = self.bert(input_ids, token_type_ids, attention_mask, output_all_encoded_layers=False)
+
+        x = self.relu(self.linear1(pooled_output))
+        x = self.dropout(x)
+        x = self.relu(self.linear2(x))
+        x = self.relu(self.linear3(x))
+
+        return x
 
 class BertLSTM(nn.Module):
-    def __init__(self, dropout, output_dim):
+    def __init__(self, hidden_dim, dropout, output_dim):
         """
         Args:
             dropout: Dropout probability
@@ -52,10 +60,10 @@ class BertLSTM(nn.Module):
 
         self.bert = BertModel.from_pretrained('bert-base-uncased')
 
-        self.drop = nn.Dropout(dropout)
+        self.dropout = nn.Dropout(dropout)
 
-        self.lstm = nn.LSTM(768, 100, bidirectional=True) #self.bert.config.hidden_size = 768
-        self.linear = nn.Linear(100 * 2, output_dim)
+        self.lstm = nn.LSTM(768, hidden_dim, bidirectional=True) #self.bert.config.hidden_size = 768
+        self.output = nn.Linear(hidden_dim * 2, output_dim)
 
 
     def forward(self, input_ids, token_type_ids=None, attention_mask=None, labels=None):
@@ -68,9 +76,9 @@ class BertLSTM(nn.Module):
 
         out = self.drop(out)
 
-        logits = self.linear(out)
+        x = self.output(out)
 
-        return logits
+        return x
 
 # class Bert(nn.Module):
 #     def __init__(self, dropout, output_dim):

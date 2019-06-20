@@ -26,7 +26,7 @@
       ],
       [
         "main.py",
-        "_sources/main_ce51eac5bdcb78b25f5229b38879a610.py"
+        "_sources/main_7daa7596bcd21cd35e0208c02d2b7de7.py"
       ],
       [
         "models/__init__.py",
@@ -42,7 +42,7 @@
       ]
     ]
   },
-  "heartbeat": "2019-06-19T09:12:00.987838",
+  "heartbeat": "2019-06-19T14:58:19.764499",
   "host": {
     "ENV": {},
     "cpu": "Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz",
@@ -83,32 +83,33 @@
       "dtype": "float64",
       "py/object": "numpy.ndarray",
       "values": [
-        0.87,
-        0.61
+        0.88,
+        0.6
       ]
     },
+    "hidden_dim": 110.0,
     "id": "1",
-    "learning_rate": 0.01645293746567057,
-    "loss": 0.6933333333333332,
+    "learning_rate": 2.3e-05,
+    "loss": 0.5212,
     "precision": {
       "dtype": "float64",
       "py/object": "numpy.ndarray",
       "values": [
         0.84,
-        0.7
+        0.72
       ]
     },
     "recall": {
       "dtype": "float64",
       "py/object": "numpy.ndarray",
       "values": [
-        0.91,
-        0.56
+        0.92,
+        0.53
       ]
     },
     "status": "ok"
   },
-  "start_time": "2019-06-19T09:10:25.299039",
+  "start_time": "2019-06-19T14:56:12.257271",
   "status": "COMPLETED",
-  "stop_time": "2019-06-19T09:12:00.983262"
+  "stop_time": "2019-06-19T14:58:19.763033"
 }

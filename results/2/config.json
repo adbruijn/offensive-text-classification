@@ -1,7 +1,8 @@
 {
   "__doc__": "Configuration",
   "bidirectional": true,
-  "dropout": 0.1,
+  "dropout": 0.14,
+  "early_stopping_criteria": 25,
   "embedding_dim": 100,
   "embedding_file": "data/GloVe/glove.twitter.27B.200d.txt",
   "filter_sizes": [
@@ -9,16 +10,16 @@
     3,
     4
   ],
-  "hidden_dim": 128,
-  "learning_rate": 0.025972115983621338,
-  "max_seq_length": 45,
+  "hidden_dim": 190.0,
+  "learning_rate": 0.000508,
+  "max_seq_length": 45.0,
   "model_name": "MLP",
-  "num_epochs": 50,
+  "num_epochs": 500,
   "num_layers": 2,
   "output_dim": 2,
-  "seed": 410589435,
+  "seed": 366048751,
   "test_bs": 32.0,
-  "train_bs": 32.0,
+  "train_bs": 40.0,
   "use_mongo": false,
   "val_bs": 32.0,
   "warmup_proportion": 0.1
