@@ -235,10 +235,10 @@ def run(output_dim,
         model = models.CNN(embedding_matrix, embedding_dim, vocab_size, dropout, filter_sizes, filter_dim, output_dim)
         print(model)
     elif model_name=="LSTM":
-        model = models.LSTM(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), dropout, num_layers, bidirectional, output_dim)
+        model = models.LSTM(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), dropout, int(num_layers), bidirectional, output_dim)
         print(model)
     elif model_name=="LSTMAttention":
-        model = models.LSTMAttention(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), dropout, num_layers, bidirectional, output_dim)
+        model = models.LSTMAttention(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), dropout, int(num_layers), bidirectional, output_dim)
         print(model)
     elif model_name=="BertLinear":
         #model = BertForSequenceClassification.from_pretrained("bert-base-uncased", output_dim)
