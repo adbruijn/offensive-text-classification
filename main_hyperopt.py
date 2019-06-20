@@ -43,8 +43,8 @@ def optimize(model_name, max_evals, num_epochs, embedding_file):
             'dropout': hp.quniform('dropout', 0.01, 0.5, 0.005),
             'max_seq_length': hp.quniform("max_seq_length", 40, 80, 5)
         }
-    elif model_name in "LSTM":
-        #LSTM / LSTMAttention
+    elif model_name=="LSTM":
+        #LSTM / LSTMAttention'
         space = {
             'learning_rate': hp.quniform('learning_rate', 0.00001, 0.001, 0.000001),
             'train_bs': hp.quniform('train_bs', 30, 150, 20),
@@ -53,6 +53,17 @@ def optimize(model_name, max_evals, num_epochs, embedding_file):
             'max_seq_length': hp.quniform("max_seq_length", 40, 80, 5),
             'num_layers': hp.quniform("num_layers", 2, 20, 1)
         }
+    elif model_name=="LSTMAttention":
+        #LSTM / LSTMAttention'
+        space = {
+            'learning_rate': hp.quniform('learning_rate', 0.00001, 0.001, 0.000001),
+            'train_bs': hp.quniform('train_bs', 30, 150, 20),
+            'hidden_dim': hp.quniform("hidden_dim", 50,  250, 10),
+            'dropout': hp.quniform('dropout', 0.01, 0.5, 0.005),
+            'max_seq_length': hp.quniform("max_seq_length", 40, 80, 5),
+            'num_layers': hp.quniform("num_layers", 2, 20, 1)
+        }
+    print(space)
     # elif model_name in "BERT":
     #     #BERT
     #     space = {
