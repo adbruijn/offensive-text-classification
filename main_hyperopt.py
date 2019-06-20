@@ -63,7 +63,6 @@ def optimize(model_name, max_evals, num_epochs, embedding_file):
             'max_seq_length': hp.quniform("max_seq_length", 40, 80, 5),
             'num_layers': hp.quniform("num_layers", 2, 20, 1)
         }
-    print(space)
     # elif model_name in "BERT":
     #     #BERT
     #     space = {
