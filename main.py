@@ -216,7 +216,7 @@ def run(output_dim,
     batch_sizes = [int(train_bs), int(val_bs), int(test_bs)]
     batch_size = int(train_bs)
 
-    if "Bert" in model_name:  #Default = False, if BERT model is used then use_bert is set to True
+    if "BERT" in model_name:  #Default = False, if BERT model is used then use_bert is set to True
         use_bert = True
     else:
         use_bert = False
@@ -240,11 +240,13 @@ def run(output_dim,
     elif model_name=="LSTMAttention":
         model = models.LSTMAttention(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), dropout, int(num_layers), bidirectional, output_dim)
         print(model)
-    elif model_name=="BertLinear":
-        #model = BertForSequenceClassification.from_pretrained("bert-base-uncased", output_dim)
+    elif model_name=="BERT":
+        model = BertForSequenceClassification.from_pretrained("bert-base-uncased", output_dim)
+        print(model)
+    elif model_name=="BERTLinear":
         model = models.BertLinear(hidden_dim, dropout, output_dim)
         print(model)
-    elif model_name=="BertLSTM":
+    elif model_name=="BERTLSTM":
         model = models.BertLSTM(dropout, output_dim)
         print(model)
 

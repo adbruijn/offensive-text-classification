@@ -1,7 +1,6 @@
 .DS_Store
 __pycache__/
-results/checkpoints/
+results/
 data/GloVe/
 .DS_Store
 visualization.py
-results/
