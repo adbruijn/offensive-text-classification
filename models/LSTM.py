@@ -6,7 +6,19 @@ import numpy as np
 
 class LSTM(nn.Module):
 
-    def __init__(self, embedding_matrix, num_layers, hidden_dim, bidirectional, vocab_size, embedding_dim, dropout, output_dim):
+    def __init__(self, embedding_matrix, embedding_dim, vocab_size, hidden_dim, dropout, num_layers, bidirectional, output_dim):
+
+        """
+        Args:
+            embedding_matrix: Pre-trained word embeddings
+            embedding_dim: Embedding dimension of the word embeddings
+            vocab_size: Size of the vocabulary
+            hidden_dim: Size hiddden state
+            dropout: Dropout probability
+            num_layers: Number of layers of the LSTM
+            bidirectional: Bidredctional
+            output_dim: Output classes (Subtask A: 2 = (OFF, NOT))
+        """
 
         super(LSTM, self).__init__()
         self.num_layers =  num_layers
@@ -14,7 +26,7 @@ class LSTM(nn.Module):
         self.bidirectional =  bidirectional
         self.dropout = dropout
 
-        #Embedding layer
+        #Word embeddings
         self.word_embeddings = nn.Embedding(vocab_size, embedding_dim)
         self.word_embeddings.weight = nn.Parameter(torch.tensor(embedding_matrix, dtype=torch.float32), requires_grad=False)
 
@@ -25,13 +37,12 @@ class LSTM(nn.Module):
             self.lstm = nn.LSTM(embedding_dim, hidden_dim, num_layers, dropout=self.dropout)
 
         #Linear layer
-        self.fc = nn.Linear(in_features=hidden_dim, out_features=output_dim)
+        self.output = nn.Linear(in_features=hidden_dim, out_features=output_dim)
 
 
     def forward(self, X):
 
         embedded = self.word_embeddings(X)
-
         embedded = embedded.permute(1,0,2)
 
         #Batch size
@@ -48,6 +59,6 @@ class LSTM(nn.Module):
         #Forward state
         output, (hidden_state, cell_state) = self.lstm(embedded, (h0, c0))
 
-        out = self.fc(output[-1])
+        x = self.output(output[-1])
 
-        return out
+        return x

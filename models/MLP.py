@@ -7,17 +7,32 @@ from torch.nn.utils.rnn import pack_padded_sequence
 from torch.nn.utils.rnn import pack_sequence
 
 class MLP(nn.Module):
-    def __init__(self, vocab_size, embedding_dim, embedding_matrix, hidden_dim, dropout, output_dim):
+
+    def __init__(self, embedding_matrix, embedding_dim, vocab_size, hidden_dim, dropout, output_dim):
+
+        """
+        Args:
+            embedding_matrix: Pre-trained word embeddings
+            embedding_dim: Embedding dimension of the word embeddings
+            vocab_size: Size of the vocabulary
+            hidden_dim: Size hiddden state
+            dropout: Dropout probability
+            output_dim: Output classes (Subtask A: 2 = (OFF, NOT))
+        """
+
         super(MLP, self).__init__()
 
+        #Word embeddings
         self.word_embeddings = nn.Embedding(vocab_size, embedding_dim)
         self.word_embeddings.weight = nn.Parameter(torch.tensor(embedding_matrix, dtype=torch.float32), requires_grad=False)
 
         self.linear1 = nn.Linear(embedding_dim, hidden_dim)
-        self.linear2 = nn.Linear(hidden_dim, int(hidden_dim/2))
-        self.linear3 = nn.Linear(int(hidden_dim/2), int(hidden_dim/4))
+        self.linear2 = nn.Linear(hidden_dim, hidden_dim)
+        self.linear3 = nn.Linear(hidden_dim, int(hidden_dim/2))
         self.dropout = nn.Dropout(dropout)
-        self.output = nn.Linear(int(hidden_dim/4), output_dim)
+
+        #Linear layer
+        self.output = nn.Linear(int(hidden_dim/2), output_dim)
 
     def forward(self, x):
 
@@ -25,9 +40,8 @@ class MLP(nn.Module):
         embedded = embedded.view(embedded.size(0), -1)
 
         x = F.relu(self.linear1(embedded))
-        x = F.relu(self.linear2(x))
+        x = F.relu(self.linear2(self.dropout(x)))
         x = F.relu(self.linear3(x))
-        x = self.dropout(x)
         x = self.output(x)
 
         return x
