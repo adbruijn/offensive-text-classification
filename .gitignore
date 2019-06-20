@@ -4,3 +4,4 @@ results/checkpoints/
 data/GloVe/
 .DS_Store
 visualization.py
+results/
