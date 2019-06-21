@@ -183,7 +183,7 @@ def config():
     max_seq_length = 45 #Maximum sequence length of the sentences (default=40)
     learning_rate = 3e-5 #Learning rate for the model (default=3e-5)
     warmup_proportion = 0.1 #Warmup proportion (default=0.1)
-    early_stopping_criteria = 1 #Early stopping criteria (default=5)
+    early_stopping_criteria = 50 #Early stopping criteria (default=5)
     num_layers = 2 #Number of layers (default=2)
     hidden_dim = 128 #Hidden layers dimension (default=128)
     bidirectional = False #Left and right LSTM
@@ -217,7 +217,7 @@ def main(output_dim,
     #if use_mongo: ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
 
     #Logger
-    directory_checkpoint = f"results/checkpoints/{_run._id}/"
+    #directory = f"results/checkpoints/{_run._id}/"
     directory = f"results/{_run._id}/"
 
     #Batch sizes
@@ -270,16 +270,16 @@ def main(output_dim,
 
     #Training and evaluation
     print('Training and evaluation for {} epochs...'.format(num_epochs))
-    train_metrics, val_metrics = train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, val_dataloader, early_stopping_criteria, directory_checkpoint, use_bert, use_mongo)
+    train_metrics, val_metrics = train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, val_dataloader, early_stopping_criteria, directory, use_bert, use_mongo)
     train_metrics.to_csv(directory+"train_metrics.csv"), val_metrics.to_csv(directory+"val_metrics.csv")
 
     #Test
     print('Testing...')
-    load_checkpoint(directory_checkpoint+"best_model.pth.tar", model)
+    load_checkpoint(directory+"best_model.pth.tar", model)
 
     #Add artifacts
-    #ex.add_artifact(directory_checkpoint+"best_model.pth.tar")
-    #ex.add_artifact(directory_checkpoint+"last_model.pth.tar")
+    ex.add_artifact(directory+"best_model.pth.tar")
+    ex.add_artifact(directory+"last_model.pth.tar")
 
     test_metrics = evaluate_model(model, optimizer, loss_fn, test_dataloader, device, use_bert)
     if use_mongo: log_scalars(test_metrics,"Test")
