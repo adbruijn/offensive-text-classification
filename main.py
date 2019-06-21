@@ -38,7 +38,6 @@ warnings.filterwarnings('ignore')
 #Sources
 #https://github.com/gereleth/kaggle-telstra/blob/master/Automatic%20model%20tuning%20with%20Sacred%20and%20Hyperopt.ipynb
 #https://github.com/maartjeth/sacred-example-pytorch
-from hyperopt import STATUS_OK
 from sacred import Experiment
 from sacred.observers import FileStorageObserver
 from sacred.observers import MongoObserver
@@ -300,7 +299,7 @@ def main(output_dim,
         'f1': test_metrics['f1'],
         'learning_rate': learning_rate,
         'hidden_dim': hidden_dim,
-        'status': STATUS_OK
+        'status': 'ok'
     }
 
     return results
