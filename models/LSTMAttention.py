@@ -28,10 +28,7 @@ class LSTMAttention(nn.Module):
         self.word_embeddings.weight = nn.Parameter(torch.tensor(embedding_matrix, dtype=torch.float32), requires_grad=False)
 
         #LSTM layer(s)
-        if(self.bidirectional):
-            self.lstm = nn.LSTM(embedding_dim, hidden_dim // 2 , num_layers, dropout=self.dropout, bidirectional=True)
-        else:
-            self.lstm = nn.LSTM(embedding_dim, hidden_dim, num_layers, dropout=self.dropout)
+        self.lstm = nn.LSTM(embedding_dim, hidden_dim)
 
         #Linear layer
         self.output = nn.Linear(in_features=hidden_dim, out_features=output_dim)
@@ -59,13 +56,8 @@ class LSTMAttention(nn.Module):
         batch_size = X.size(0)
 
         #Initial hidden state
-        if(self.bidirectional):
-            h0 = Variable(torch.zeros(2*self.num_layers, batch_size, self.hidden_dim // 2))
-            c0 = Variable(torch.zeros(2*self.num_layers, batch_size, self.hidden_dim // 2))
-        else:
-            h0 = Variable(torch.zeros(self.num_layers, batch_size, self.hidden_dim))
-            c0 = Variable(torch.zeros(self.num_layers, batch_size, self.hidden_dim))
-
+        h0 = Variable(torch.zeros(1, batch_size, self.hidden_dim))
+        c0 = Variable(torch.zeros(1, batch_size, self.hidden_dim))
 
         #Forward state
         output, (hidden_state, cell_state) = self.lstm(embedded, (h0, c0)) #hidden_size?, batch_size, hidden_size

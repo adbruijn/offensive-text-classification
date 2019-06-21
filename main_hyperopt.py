@@ -14,14 +14,13 @@ import datetime
 #Click: https://palletsprojects.com/p/click/
 
 # $ python main_hyperopt.py --model_name="MLP"
-URL = 'mongodb://localhost:27017/hyperopt/jobs'
+URL = 'mongo://localhost:27017/hyperopt/jobs'
 
 @click.command()
 @click.option('--model_name', default="MLP", help="Model name (LSTM, MLP, CNN, LSTMAttention)")
 @click.option('--max_evals', default=100, help="Maximum evaluations for the optimisation")
 @click.option('--num_epochs', default=500, help="Maximum number of epochs")
 @click.option('--embedding_file', default='data/GloVe/glove.twitter.27B.200d.txt', help="Default datapath data/GloVe/glove.twitter.27B.200d.txt'")
-
 def optimize(model_name, max_evals, num_epochs, embedding_file):
     #Space
     # hidden_dim = {'hidden_dim': hp.choice("hidden_dim", np.arange(5, 101, 5))}
@@ -63,15 +62,6 @@ def optimize(model_name, max_evals, num_epochs, embedding_file):
             'max_seq_length': hp.quniform("max_seq_length", 40, 80, 5),
             'num_layers': hp.quniform("num_layers", 2, 20, 1)
         }
-    # elif model_name in "BERT":
-    #     #BERT
-    #     space = {
-    #         'learning_rate': hp.quniform('learning_rate', 0.00001, 0.001, 0.000001),
-    #         'train_bs': hp.quniform('train_bs', 30, 150, 20),
-    #         'max_seq_length': hp.quniform("max_seq_length", 40, 80, 5),
-    #         'dropout': hp.quniform('dropout', 0.01, 0.5, 0.005),
-    #         'num_layers': hp.quniform("max_seq_length", 2, 20, 1)
-    #     }
     # elif model_name=="CNN":
     #     space = {
     #         'dropout': hp.quniform('dropout', 0.01, 0.5, 0.005),
@@ -101,11 +91,11 @@ def optimize(model_name, max_evals, num_epochs, embedding_file):
         print("Rerunning from {} trials to add {} trial(s)".format(len(trials.trials),max_evals-len(trials.trials)))
     except:
         trials = Trials()
-        #trials = MongoTrials('mongo://localhost:27017/hyperopt/jobs', exp_key='exp1')
+        #trials = MongoTrials(URL, exp_key='exp1')
         print("No previous trial found, starting new trials...")
 
     #Optimisation
-    best = fmin(fn=objective, space=space, algo=tpe.suggest, trials=trials, max_evals=max_evals)
+    best = fmin(fn=objective, space=space, algo=tpe.suggest, trials=trials, max_evals=max_evals, verbose=1)
     pickle.dump(trials, open('results/'+model_name+'_results.pkl', "wb"))
 
     for trial in trials.trials:

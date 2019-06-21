@@ -38,11 +38,12 @@ warnings.filterwarnings('ignore')
 #Sources
 #https://github.com/gereleth/kaggle-telstra/blob/master/Automatic%20model%20tuning%20with%20Sacred%20and%20Hyperopt.ipynb
 #https://github.com/maartjeth/sacred-example-pytorch
-
+from hyperopt import STATUS_OK
 from sacred import Experiment
 from sacred.observers import FileStorageObserver
 from sacred.observers import MongoObserver
 from sacred.observers import SlackObserver
+from sacred.utils import apply_backspaces_and_linefeeds
 
 EXPERIMENT_NAME = 'experiment'
 DATABASE_NAME = 'experiments'
@@ -51,6 +52,7 @@ URL_NAME = 'mongodb://localhost:27017/'
 ex = Experiment()
 ex.observers.append(FileStorageObserver.create('results'))
 ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
+ex.captured_out_filter = apply_backspaces_and_linefeeds
 
 #Send a message to slack if the run is succesfull or if it failed
 slack_obs = SlackObserver.from_config('slack.json')
@@ -146,6 +148,14 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, 
 
         if stop_early:
             print("Stopping early at epoch {}".format(epoch))
+
+            #Save last model when stop early
+            save_checkpoint({'epoch': epoch+1,
+                                   'state_dict': model.state_dict(),
+                                   'optim_dict': optimizer.state_dict()},
+                                    directory=directory,
+                                    checkpoint='last_model.pth.tar')
+
             return train_metrics, val_metrics
 
         print('\n')
@@ -173,19 +183,18 @@ def config():
     max_seq_length = 45 #Maximum sequence length of the sentences (default=40)
     learning_rate = 3e-5 #Learning rate for the model (default=3e-5)
     warmup_proportion = 0.1 #Warmup proportion (default=0.1)
-    early_stopping_criteria = 25 #Early stopping criteria (default=5)
-    embedding_dim = 100 #Embedding dimension (default=100)
+    early_stopping_criteria = 1 #Early stopping criteria (default=5)
     num_layers = 2 #Number of layers (default=2)
     hidden_dim = 128 #Hidden layers dimension (default=128)
-    bidirectional = True #Left and right LSTM
+    bidirectional = False #Left and right LSTM
     dropout = 0.1 #Dropout percentage
     filter_sizes = [2, 3, 4] #CNN
     embedding_file = 'data/GloVe/glove.twitter.27B.200d.txt' #Embedding file
     model_name = "MLP" #Model name: LSTM, BERT, MLP, CNN
-    use_mongo = False
+    use_mongo = True
 
 @ex.automain
-def run(output_dim,
+def main(output_dim,
         train_bs,
         val_bs,
         test_bs,
@@ -194,7 +203,6 @@ def run(output_dim,
         learning_rate,
         warmup_proportion,
         early_stopping_criteria,
-        embedding_dim,
         num_layers,
         hidden_dim,
         bidirectional,
@@ -206,7 +214,7 @@ def run(output_dim,
         _run):
 
     #Mongo
-    if use_mongo: ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
+    #if use_mongo: ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
 
     #Logger
     directory_checkpoint = f"results/checkpoints/{_run._id}/"
@@ -232,7 +240,7 @@ def run(output_dim,
         model = models.MLP(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), dropout, output_dim)
         print(model)
     elif model_name=="CNN":
-        model = models.CNN(embedding_matrix, embedding_dim, vocab_size, dropout, filter_sizes, filter_dim, output_dim)
+        model = models.CNN(embedding_matrix, embedding_dim, vocab_size, dropout, filter_sizes, output_dim)
         print(model)
     elif model_name=="LSTM":
         model = models.LSTM(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), dropout, int(num_layers), bidirectional, output_dim)
@@ -247,7 +255,7 @@ def run(output_dim,
         model = models.BertLinear(hidden_dim, dropout, output_dim)
         print(model)
     elif model_name=="BERTLSTM":
-        model = models.BertLSTM(dropout, output_dim)
+        model = models.BertLSTM(hidden_dim, dropout, output_dim)
         print(model)
 
     model = model.to(device)
@@ -268,11 +276,16 @@ def run(output_dim,
     #Test
     print('Testing...')
     load_checkpoint(directory_checkpoint+"best_model.pth.tar", model)
+
+    #Add artifacts
+    #ex.add_artifact(directory_checkpoint+"best_model.pth.tar")
+    #ex.add_artifact(directory_checkpoint+"last_model.pth.tar")
+
     test_metrics = evaluate_model(model, optimizer, loss_fn, test_dataloader, device, use_bert)
     if use_mongo: log_scalars(test_metrics,"Test")
 
+    test_metrics_df = pd.DataFrame(test_metrics)
     test_metrics_df = pd.DataFrame(test_metrics, index=["NOT","OFF"])
-    test_metrics_df = test_metrics_df.drop(columns=['loss','accuracy'])
     print(test_metrics)
     test_metrics_df.to_csv(directory+"test_metrics.csv")
 
@@ -287,7 +300,7 @@ def run(output_dim,
         'f1': test_metrics['f1'],
         'learning_rate': learning_rate,
         'hidden_dim': hidden_dim,
-        'status': 'ok'
+        'status': STATUS_OK
     }
 
     return results

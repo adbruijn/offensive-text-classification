@@ -124,7 +124,7 @@ def load_data():
         val.to_csv("data/val.csv", index=False)
         test.to_csv("data/test.csv", index=False)
 
-    return train, val, test
+    return train.head(10), val.head(10), test.head(10)
 
 #Clean Data
 def clean_data(df, remove_punt_number_special_chars=False,remove_stopwords=False, apply_stemming=False):

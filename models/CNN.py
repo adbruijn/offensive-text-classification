@@ -26,11 +26,11 @@ class CNN(nn.Module):
         self.word_embeddings = nn.Embedding(vocab_size, embedding_dim)
         self.word_embeddings.weight = nn.Parameter(torch.tensor(weights, dtype=torch.float32), requires_grad=False)
 
-        self.convs = nn.ModuleList([nn.Conv2d(in_channels = 1, out_channels=filter_dim, kernel_size = (ks, embedding_dim)) for ks in filter_sizes])
+        self.convs = nn.ModuleList([nn.Conv2d(in_channels = 1, out_channels=embedding_dim, kernel_size = (ks, embedding_dim)) for ks in filter_sizes])
         self.dropout = nn.Dropout(dropout)
 
         #Linear layer
-        self.output = nn.Linear(len(filter_sizes) * filter_dim, output_dim)
+        self.output = nn.Linear(len(filter_sizes) * embedding_dim, output_dim)
 
     def forward(self, X):
 

@@ -74,7 +74,7 @@ class BertLSTM(nn.Module):
 
         out = torch.cat((hidden_state[0], hidden_state[1]), dim=1)
 
-        out = self.drop(out)
+        out = self.dropout(out)
 
         x = self.output(out)
 
