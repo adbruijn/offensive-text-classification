@@ -6,7 +6,7 @@ import numpy as np
 
 class CNN(nn.Module):
 
-    def __init__(self, embedding_matrix, embedding_dim, vocab_size, dropout, filter_sizes, filter_dim, output_dim):
+    def __init__(self, embedding_matrix, embedding_dim, vocab_size, dropout, filter_sizes, output_dim):
 
         """
         Args:
@@ -14,7 +14,6 @@ class CNN(nn.Module):
             embedding_dim: Embedding dimension of the word embeddings
             vocab_size: Size of the vocabulary
             filter_sizes: List containing 3 different filter sizes
-            filter_dim:
             dropout: Dropout probability
             output_dim: Output classes (Subtask A: 2 = (OFF, NOT))
 
@@ -24,7 +23,7 @@ class CNN(nn.Module):
 
         #Word embeddings
         self.word_embeddings = nn.Embedding(vocab_size, embedding_dim)
-        self.word_embeddings.weight = nn.Parameter(torch.tensor(weights, dtype=torch.float32), requires_grad=False)
+        self.word_embeddings.weight = nn.Parameter(torch.tensor(embedding_matrix, dtype=torch.float32), requires_grad=False)
 
         self.convs = nn.ModuleList([nn.Conv2d(in_channels = 1, out_channels=embedding_dim, kernel_size = (ks, embedding_dim)) for ks in filter_sizes])
         self.dropout = nn.Dropout(dropout)

@@ -214,6 +214,12 @@ def main(output_dim,
 
     #Mongo
     #if use_mongo: ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
+    #Add slack
+
+
+    slack_obs = SlackObserver.from_config('slack.json')
+    ex.observers.append(slack_obs)
+
 
     #Logger
     #directory = f"results/checkpoints/{_run._id}/"

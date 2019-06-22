@@ -62,12 +62,10 @@ def optimize(model_name, max_evals, num_epochs, embedding_file):
             'max_seq_length': hp.quniform("max_seq_length", 40, 80, 5),
             'num_layers': hp.quniform("num_layers", 2, 20, 1)
         }
-    # elif model_name=="CNN":
-    #     space = {
-    #         'dropout': hp.quniform('dropout', 0.01, 0.5, 0.005),
-    #         #'filter_sizes': hp.quniform("filter_sizes", 40, 80, 5),
-    #         #'filter_dim': hp.quniform("filter_dim", 2, 20, 1)
-    #     }
+    elif model_name=="CNN":
+        space = {
+            'dropout': hp.quniform('dropout', 0.01, 0.5, 0.005),
+        }
 
     #Objective
     def objective(params):
