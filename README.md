@@ -18,8 +18,8 @@ Download GloVe embeddings
 mkdir data/GloVe
 cd data/GloVe
 wget http://nlp.stanford.edu/data/glove.twitter.27B.zip
-unzip
-rm -rf .zip
+unzip glove.twitter.27B.zip
+rm -rf glove.twitter.27B.zip
 ```
 
 ## Usage
