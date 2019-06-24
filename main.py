@@ -44,6 +44,8 @@ from sacred.observers import MongoObserver
 from sacred.observers import SlackObserver
 from sacred.utils import apply_backspaces_and_linefeeds
 
+from generate_json import generate_slack
+
 EXPERIMENT_NAME = 'experiment'
 DATABASE_NAME = 'experiments'
 URL_NAME = 'mongodb://localhost:27017/'
@@ -55,6 +57,9 @@ ex.captured_out_filter = apply_backspaces_and_linefeeds
 
 #Send a message to slack if the run is succesfull or if it failed
 slack_obs = SlackObserver.from_config('slack.json')
+ex.observers.append(slack_obs)
+
+slack_obs = SlackObserver.from_config('generate_slack.json')
 ex.observers.append(slack_obs)
 
 #Device
@@ -119,7 +124,7 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, 
 
         #Save best and latest state
         best_model = val_results['loss'] < best_val_loss
-        last_model = epoch == num_epochs-1
+        #last_model = epoch == num_epochs-1
 
         if best_model:
             save_checkpoint({'epoch': epoch+1,
@@ -128,12 +133,12 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, 
                                     directory=directory,
                                     checkpoint='best_model.pth.tar')
 
-        if last_model:
-            save_checkpoint({'epoch': epoch+1,
-                                   'state_dict': model.state_dict(),
-                                   'optim_dict': optimizer.state_dict()},
-                                    directory=directory,
-                                    checkpoint='last_model.pth.tar')
+        # if last_model:
+        #     save_checkpoint({'epoch': epoch+1,
+        #                            'state_dict': model.state_dict(),
+        #                            'optim_dict': optimizer.state_dict()},
+        #                             directory=directory,
+        #                             checkpoint='last_model.pth.tar')
 
         #Early stopping
         if val_results['loss'] >= best_val_loss:
@@ -149,11 +154,11 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, 
             print("Stopping early at epoch {}".format(epoch))
 
             #Save last model when stop early
-            save_checkpoint({'epoch': epoch+1,
-                                   'state_dict': model.state_dict(),
-                                   'optim_dict': optimizer.state_dict()},
-                                    directory=directory,
-                                    checkpoint='last_model.pth.tar')
+            # save_checkpoint({'epoch': epoch+1,
+            #                        'state_dict': model.state_dict(),
+            #                        'optim_dict': optimizer.state_dict()},
+            #                         directory=directory,
+            #                         checkpoint='last_model.pth.tar')
 
             return train_metrics, val_metrics
 
@@ -215,11 +220,9 @@ def main(output_dim,
     #Mongo
     #if use_mongo: ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
     #Add slack
+    from generate_json import generate_json
 
-
-    slack_obs = SlackObserver.from_config('slack.json')
-    ex.observers.append(slack_obs)
-
+    generate_json(model_name)
 
     #Logger
     #directory = f"results/checkpoints/{_run._id}/"
@@ -283,8 +286,8 @@ def main(output_dim,
     load_checkpoint(directory+"best_model.pth.tar", model)
 
     #Add artifacts
-    ex.add_artifact(directory+"best_model.pth.tar")
-    ex.add_artifact(directory+"last_model.pth.tar")
+    #ex.add_artifact(directory+"best_model.pth.tar")
+    #ex.add_artifact(directory+"last_model.pth.tar")
 
     test_metrics = evaluate_model(model, optimizer, loss_fn, test_dataloader, device, use_bert)
     if use_mongo: log_scalars(test_metrics,"Test")
