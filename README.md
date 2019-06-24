@@ -13,6 +13,15 @@ Install the required packages with requirements.txt.
 pip install -r requirements.txt
 ```
 
+Download GloVe embeddings
+```
+mkdir data/GloVe
+cd data/GloVe
+wget http://nlp.stanford.edu/data/glove.twitter.27B.zip
+unzip
+rm -rf .zip
+```
+
 ## Usage
 Run from the command line
 ```python
