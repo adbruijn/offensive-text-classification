@@ -245,7 +245,7 @@ def make_iterator_features(X, features, y, batch_size):
     """
 
     X = torch.tensor(X, dtype=torch.long)
-    features = torch.tensor(list(features), dtype=torch.long)
+    features = torch.tensor(features, dtype=torch.long)
     y = torch.tensor(y, dtype=torch.float32)
     ds = TensorDataset(X, features, y)
     loader = DataLoader(ds, batch_size=batch_size)

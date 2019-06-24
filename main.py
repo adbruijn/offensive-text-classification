@@ -44,8 +44,6 @@ from sacred.observers import MongoObserver
 from sacred.observers import SlackObserver
 from sacred.utils import apply_backspaces_and_linefeeds
 
-from generate_json import generate_slack
-
 EXPERIMENT_NAME = 'experiment'
 DATABASE_NAME = 'experiments'
 URL_NAME = 'mongodb://localhost:27017/'
@@ -57,9 +55,6 @@ ex.captured_out_filter = apply_backspaces_and_linefeeds
 
 #Send a message to slack if the run is succesfull or if it failed
 slack_obs = SlackObserver.from_config('slack.json')
-ex.observers.append(slack_obs)
-
-slack_obs = SlackObserver.from_config('generate_slack.json')
 ex.observers.append(slack_obs)
 
 #Device
@@ -220,9 +215,6 @@ def main(output_dim,
     #Mongo
     #if use_mongo: ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
     #Add slack
-    from generate_json import generate_json
-
-    generate_json(model_name)
 
     #Logger
     #directory = f"results/checkpoints/{_run._id}/"
@@ -246,6 +238,8 @@ def main(output_dim,
     #Model
     if model_name=="MLP":
         model = models.MLP(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), dropout, output_dim)
+    if model_name=="MLP_Features":
+        model = models.MLP_Features(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), 14, dropout, output_dim)
         print(model)
     elif model_name=="CNN":
         model = models.CNN(embedding_matrix, embedding_dim, vocab_size, dropout, filter_sizes, output_dim)
