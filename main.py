@@ -50,7 +50,7 @@ URL_NAME = 'mongodb://localhost:27017/'
 
 ex = Experiment()
 ex.observers.append(FileStorageObserver.create('results'))
-ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
+#ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
 ex.captured_out_filter = apply_backspaces_and_linefeeds
 
 #Send a message to slack if the run is succesfull or if it failed
@@ -211,10 +211,6 @@ def main(output_dim,
         model_name,
         use_mongo,
         _run):
-
-    #Mongo
-    #if use_mongo: ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
-    #Add slack
 
     #Logger
     #directory = f"results/checkpoints/{_run._id}/"
