@@ -3,6 +3,5 @@ __pycache__/
 results/
 data/GloVe/
 .DS_Store
-visualization.py
 generate_json.py
 tmp.py
