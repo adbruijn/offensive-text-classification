@@ -4,3 +4,4 @@ data/GloVe/
 .DS_Store
 generate_json.py
 tmp.py
+results/*.tar
