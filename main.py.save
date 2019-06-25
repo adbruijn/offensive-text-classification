@@ -25,10 +25,10 @@ from pytorch_pretrained_bert.modeling import BertForSequenceClassification, Bert
 from pytorch_pretrained_bert.tokenization import BertTokenizer
 from pytorch_pretrained_bert.optimization import BertAdam, WarmupLinearSchedule
 
-from train import train_model, train_model_features
-from evaluate import evaluate_model, evaluate_model_features
+from train import train_model
+from evaluate import evaluate_model
 from utils import accuracy_recall_precision_f1, save_checkpoint, load_checkpoint
-from data_loader import get_data, get_data_bert, get_data_features
+from data_loader import get_data, get_data_bert
 import models
 
 import warnings
@@ -49,8 +49,8 @@ DATABASE_NAME = 'experiments'
 URL_NAME = 'mongodb://localhost:27017/'
 
 ex = Experiment()
-ex.observers.append(FileStorageObserver.create('results_features'))
-ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
+ex.observers.append(FileStorageObserver.create('results'))
+#ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
 ex.captured_out_filter = apply_backspaces_and_linefeeds
 
 #Send a message to slack if the run is succesfull or if it failed
@@ -108,18 +108,18 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, 
     for epoch in trange(num_epochs, desc="Epoch"):
 
         ### TRAINING ###
-        train_results = train_model_features(model, optimizer, loss_fn, train_dataloader, device, use_bert)
+        train_results = train_model(model, optimizer, loss_fn, train_dataloader, device, use_bert)
         train_metrics.loc[len(train_metrics)] = {'epoch':epoch, 'loss':train_results['loss'], 'accuracy':train_results['accuracy'], 'recall':train_results['recall'], 'precision':train_results['precision'], 'f1':train_results['f1']}
         if use_mongo: log_scalars(train_results, "Train")
 
         ### EVALUATION ###
-        val_results = evaluate_model_features(model, optimizer, loss_fn, val_dataloader, device, use_bert)
+        val_results = evaluate_model(model, optimizer, loss_fn, val_dataloader, device, use_bert)
         val_metrics.loc[len(val_metrics)] = {'epoch':epoch, 'loss':val_results['loss'], 'accuracy':val_results['accuracy'], 'recall':val_results['recall'], 'precision':val_results['precision'], 'f1':val_results['f1']}
         if use_mongo: log_scalars(val_results, "Validation")
 
         #Save best and latest state
         best_model = val_results['loss'] < best_val_loss
-        #last_model = epoch == num_epochs-1
+        last_model = epoch == num_epochs-1
 
         if best_model:
             save_checkpoint({'epoch': epoch+1,
@@ -128,12 +128,12 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, 
                                     directory=directory,
                                     checkpoint='best_model.pth.tar')
 
-        # if last_model:
-        #     save_checkpoint({'epoch': epoch+1,
-        #                            'state_dict': model.state_dict(),
-        #                            'optim_dict': optimizer.state_dict()},
-        #                             directory=directory,
-        #                             checkpoint='last_model.pth.tar')
+        if last_model:
+            save_checkpoint({'epoch': epoch+1,
+                                   'state_dict': model.state_dict(),
+                                   'optim_dict': optimizer.state_dict()},
+                                    directory=directory,
+                                    checkpoint='last_model.pth.tar')
 
         #Early stopping
         if val_results['loss'] >= best_val_loss:
@@ -149,11 +149,11 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, 
             print("Stopping early at epoch {}".format(epoch))
 
             #Save last model when stop early
-            # save_checkpoint({'epoch': epoch+1,
-            #                        'state_dict': model.state_dict(),
-            #                        'optim_dict': optimizer.state_dict()},
-            #                         directory=directory,
-            #                         checkpoint='last_model.pth.tar')
+            save_checkpoint({'epoch': epoch+1,
+                                   'state_dict': model.state_dict(),
+                                   'optim_dict': optimizer.state_dict()},
+                                    directory=directory,
+                                    checkpoint='last_model.pth.tar')
 
             return train_metrics, val_metrics
 
@@ -178,11 +178,11 @@ def config():
     train_bs = 32.0 #Train batch size (default=32)
     val_bs = 32.0 #Validation batch size (default=32)
     test_bs = 32.0  #Test batch size (default=32)
-    num_epochs = 10 #Number of epochs (default=100)
+    num_epochs = 100 #Number of epochs (default=100)
     max_seq_length = 45 #Maximum sequence length of the sentences (default=40)
     learning_rate = 3e-5 #Learning rate for the model (default=3e-5)
     warmup_proportion = 0.1 #Warmup proportion (default=0.1)
-    early_stopping_criteria = 2 #Early stopping criteria (default=5)
+    early_stopping_criteria = 50 #Early stopping criteria (default=5)
     num_layers = 2 #Number of layers (default=2)
     hidden_dim = 128 #Hidden layers dimension (default=128)
     bidirectional = False #Left and right LSTM
@@ -216,6 +216,11 @@ def main(output_dim,
     #if use_mongo: ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
     #Add slack
 
+
+    slack_obs = SlackObserver.from_config('slack.json')
+    ex.observers.append(slack_obs)
+
+
     #Logger
     #directory = f"results/checkpoints/{_run._id}/"
     directory = f"results/{_run._id}/"
@@ -233,13 +238,11 @@ def main(output_dim,
     if use_bert:
         train_dataloader, val_dataloader, test_dataloader = get_data_bert(int(max_seq_length), batch_sizes)
     else:
-        embedding_dim, vocab_size, embedding_matrix, train_dataloader, val_dataloader, test_dataloader = get_data_features(int(max_seq_length), embedding_file=embedding_file, batch_size=batch_size)
+        embedding_dim, vocab_size, embedding_matrix, train_dataloader, val_dataloader, test_dataloader = get_data(int(max_seq_length), embedding_file=embedding_file, batch_size=batch_size)
 
     #Model
     if model_name=="MLP":
         model = models.MLP(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), dropout, output_dim)
-    if model_name=="MLP_Features":
-        model = models.MLP_Features(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), 14, dropout, output_dim)
         print(model)
     elif model_name=="CNN":
         model = models.CNN(embedding_matrix, embedding_dim, vocab_size, dropout, filter_sizes, output_dim)
@@ -280,8 +283,8 @@ def main(output_dim,
     load_checkpoint(directory+"best_model.pth.tar", model)
 
     #Add artifacts
-    #ex.add_artifact(directory+"best_model.pth.tar")
-    #ex.add_artifact(directory+"last_model.pth.tar")
+    ex.add_artifact(directory+"best_model.pth.tar")
+    ex.add_artifact(directory+"last_model.pth.tar")
 
     test_metrics = evaluate_model(model, optimizer, loss_fn, test_dataloader, device, use_bert)
     if use_mongo: log_scalars(test_metrics,"Test")
@@ -306,110 +309,3 @@ def main(output_dim,
     }
 
     return results
-
-#
-#
-#
-#
-#
-#
-#
-#
-#
-# # ## FEATURES ###
-# # text = "HALLO hallo how are you? 😐😐😥 #hashtag #hash"
-# #
-# # import emoji
-# # import re
-# #
-# # #Emooji
-# # print("Emojis:", emoji.emoji_count(text))
-# #
-# # #Hashtags
-# # print("Hashtags:", len(re.findall("#",text)))
-# #
-# # #Upper case
-# # print("Upper case:", len([x for x in text.split() if x.isupper()]))
-# #
-# # #Stopwords
-# # from wordcloud import STOPWORDS
-# # stopwords = set(STOPWORDS)
-# # print("Stopwords:", len([x for x in text.split() if x in stopwords]))
-# #
-# # #URL
-# # print("URL:", len(re.findall("URL",text)))
-# #
-# # #USER
-# # print("USER:", len(re.findall("USER",text)))
-# #
-# # #Punctuation
-# #
-# # #Upper case
-# # #Title case
-# #
-# # #Stopwords
-# # #Sentences
-# # #Words
-# # print(len(str(x)))
-# # #Unique words
-# # #Letters
-# # import numpy as np
-# # import pandas as pd
-# # from nltk.corpus import stopwords
-# # import re
-# # import emoji
-# # import string
-# # from textblob import TextBlob
-# #
-# # train = pd.read_csv('data/train.csv')
-# # train = train.head(100)
-# #
-# # stopwords = stopwords.words('english')
-# #
-# # #features['avg_word'] = features['text'].apply(lambda x:avg_word(x))
-# # pd.set_option('display.max_colwidth', -1)
-# # print(train.head(10))
-#
-# #Word frequency features
-# # - Count features
-# # - Bigrams
-# # - Trigrams
-#
-# # Count of senetences
-# # Count of words
-# # Count of unique words
-# # Count of letters
-# # Count of punctations
-# # Count of uppercase words/letters
-# # Count of stop words
-# # Avg length of each word
-#
-# #Sentiment
-#
-# # def generate_features(df):
-# #
-# #     features = pd.DataFrame({'text':df['text']})
-# #
-# #     features['emojis'] = features["text"].apply(lambda x: emoji.emoji_count(x))
-# #     features['urls'] = features["text"].apply(lambda x: len(re.findall("URL", str(x))))
-# #     features['hashtags'] = features["text"].apply(lambda x: len(re.findall("#", str(x))))
-# #     features['users'] = features["text"].apply(lambda x: len(re.findall("USER", str(x))))
-# #
-# #     features['words'] = features['text'].apply(lambda x: len(str(x).split(" ")))
-# #     features['unique_words'] = features['text'].apply(lambda x: len(set(str(x).split(" "))))
-# #     features['chars'] = features['text'].str.len()
-# #     features['stopwords'] = features['text'].apply(lambda x: len([x for x in x.split() if x in stopwords]))
-# #     features['punctuations'] = features["text"].apply(lambda x: len([c for c in str(x) if c in string.punctuation]))-features['users']-features['hashtags']
-# #     features['numerics'] = features['text'].apply(lambda x: len([x for x in x.split() if x.isdigit()]))
-# #
-# #     features['upper'] = features['text'].apply(lambda x: len([x for x in x.split() if x.isupper()]))-features['urls']-features['users']
-# #     features['title'] = features['text'].apply(lambda x: len([x for x in x.split() if x.istitle()]))
-# #
-# #     features['polarity'] = features['text'].apply(lambda x: np.round(TextBlob(x).sentiment.polarity, 2))
-# #     features['subjectivity'] = features['text'].apply(lambda x: np.round(TextBlob(x).sentiment.subjectivity, 2))
-# #
-# #     features = features.drop(columns='text', axis=1)
-# #
-# #     return features
-# #
-# # print(generate_features(train))
