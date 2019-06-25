@@ -186,7 +186,7 @@ def config():
     num_layers = 2 #Number of layers (default=2)
     hidden_dim = 128 #Hidden layers dimension (default=128)
     bidirectional = False #Left and right LSTM
-    dropout = 0.1 #Dropout percentage
+    dropout = 0.5 #Dropout percentage
     filter_sizes = [2, 3, 4] #CNN
     embedding_file = 'data/GloVe/glove.twitter.27B.200d.txt' #Embedding file
     model_name = "MLP" #Model name: LSTM, BERT, MLP, CNN
