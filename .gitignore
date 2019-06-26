@@ -4,8 +4,4 @@ data/GloVe/
 .DS_Store
 generate_json.py
 tmp.py
-<<<<<<< HEAD
-data/*.tar
-=======
-results/*.tar
->>>>>>> f004965f92f8920cc701c8d4a7c5b817800f2f1e
+results/checkpoints/
