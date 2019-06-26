@@ -239,9 +239,17 @@ def get_dataloader_features(X, features, y, batch_size):
         y: y vector
         batch_size: (int) Batch size
     """
-
+    print("X", X)
     X = torch.tensor(X, dtype=torch.long)
-    features = torch.tensor(features.values.tolist(), dtype=torch.float32)
+    print("X Tensor", X)
+    print("Features", features)
+
+    print(list(features))
+
+    print(features.values.tolist())
+    print(y)
+
+    features = torch.tensor(features.values.tolist(), dtype=torch.long)
     y = torch.tensor(y, dtype=torch.float32)
     ds = TensorDataset(X, features, y)
     loader = DataLoader(ds, batch_size=batch_size)

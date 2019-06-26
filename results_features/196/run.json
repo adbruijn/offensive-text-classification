@@ -1,0 +1,98 @@
+{
+  "artifacts": [],
+  "command": "main",
+  "experiment": {
+    "base_dir": "/Users/adebruijn/OneDrive/Documenten/Mobiquity/Code/Code",
+    "dependencies": [
+      "Click==7.0",
+      "numpy==1.16.1",
+      "pandas==0.24.1",
+      "pytorch-pretrained-bert==0.6.2",
+      "sacred==0.7.4",
+      "torch==0.4.1",
+      "tqdm==4.30.0"
+    ],
+    "mainfile": "tmp.py",
+    "name": "tmp",
+    "repositories": [],
+    "sources": [
+      [
+        "data_loader.py",
+        "_sources/data_loader_75378973ab70fe39b6d4b63c0cd39924.py"
+      ],
+      [
+        "evaluate.py",
+        "_sources/evaluate_be49f7b2ea64962dc9e106609e1cce84.py"
+      ],
+      [
+        "models/__init__.py",
+        "_sources/__init___54ba1310e623b12291b8f1e9f3e5cd85.py"
+      ],
+      [
+        "tmp.py",
+        "_sources/tmp_bc10bb0b4a926aeb2c6e15d915a9108b.py"
+      ],
+      [
+        "train.py",
+        "_sources/train_99159ffce1d14e9b571a97d2c111636a.py"
+      ],
+      [
+        "utils.py",
+        "_sources/utils_067d1c6e886b433457c597ba2449c935.py"
+      ]
+    ]
+  },
+  "fail_trace": [
+    "Traceback (most recent call last):\n",
+    "  File \"/anaconda3/lib/python3.6/site-packages/sacred/config/captured_function.py\", line 46, in captured_function\n    result = wrapped(*args, **kwargs)\n",
+    "  File \"tmp.py\", line 224, in main\n    embedding_dim, vocab_size, embedding_matrix, train_dataloader, val_dataloader, test_dataloader = get_data_features(int(max_seq_length), embedding_file=embedding_file, batch_size=batch_size)\n",
+    "  File \"/Users/adebruijn/OneDrive/Documenten/Mobiquity/Code/Code/data_loader.py\", line 395, in get_data_features\n    train_dataloader = get_dataloader_features(X_train, features_train, y_train, batch_size)\n",
+    "  File \"/Users/adebruijn/OneDrive/Documenten/Mobiquity/Code/Code/data_loader.py\", line 246, in get_dataloader_features\n    features = torch.tensor(list(features), dtype=torch.long)\n",
+    "ValueError: too many dimensions 'str'\n"
+  ],
+  "heartbeat": "2019-06-25T12:48:57.936855",
+  "host": {
+    "ENV": {},
+    "cpu": "Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz",
+    "hostname": "AMSadebruijnMRJG5H",
+    "os": [
+      "Darwin",
+      "Darwin-18.6.0-x86_64-i386-64bit"
+    ],
+    "python_version": "3.6.8"
+  },
+  "meta": {
+    "command": "main",
+    "options": {
+      "--beat_interval": null,
+      "--capture": null,
+      "--comment": null,
+      "--debug": false,
+      "--enforce_clean": false,
+      "--file_storage": null,
+      "--force": false,
+      "--help": false,
+      "--loglevel": null,
+      "--mongo_db": null,
+      "--name": null,
+      "--pdb": false,
+      "--print_config": false,
+      "--priority": null,
+      "--queue": false,
+      "--sql": null,
+      "--tiny_db": null,
+      "--unobserved": false,
+      "COMMAND": null,
+      "UPDATE": [
+        "model_name=MLP_Features"
+      ],
+      "help": false,
+      "with": true
+    }
+  },
+  "resources": [],
+  "result": null,
+  "start_time": "2019-06-25T12:47:50.932276",
+  "status": "FAILED",
+  "stop_time": "2019-06-25T12:48:57.938181"
+}

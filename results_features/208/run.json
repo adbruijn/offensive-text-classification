@@ -1,0 +1,89 @@
+{
+  "artifacts": [],
+  "command": "main",
+  "experiment": {
+    "base_dir": "/Users/adebruijn/OneDrive/Documenten/Mobiquity/Code/Code",
+    "dependencies": [
+      "Click==7.0",
+      "numpy==1.16.1",
+      "pandas==0.24.1",
+      "pytorch-pretrained-bert==0.6.2",
+      "sacred==0.7.4",
+      "torch==0.4.1",
+      "tqdm==4.30.0"
+    ],
+    "mainfile": "tmp.py",
+    "name": "tmp",
+    "repositories": [],
+    "sources": [
+      [
+        "data_loader.py",
+        "_sources/data_loader_7006b83a7a2a86072877a009771e3201.py"
+      ],
+      [
+        "evaluate.py",
+        "_sources/evaluate_be49f7b2ea64962dc9e106609e1cce84.py"
+      ],
+      [
+        "models/__init__.py",
+        "_sources/__init___54ba1310e623b12291b8f1e9f3e5cd85.py"
+      ],
+      [
+        "tmp.py",
+        "_sources/tmp_6cc583c11040f96fe14accba8bce71a2.py"
+      ],
+      [
+        "train.py",
+        "_sources/train_99159ffce1d14e9b571a97d2c111636a.py"
+      ],
+      [
+        "utils.py",
+        "_sources/utils_e7712e9936299524c11c276e2aa41361.py"
+      ]
+    ]
+  },
+  "heartbeat": "2019-06-25T14:22:19.613532",
+  "host": {
+    "ENV": {},
+    "cpu": "Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz",
+    "hostname": "AMSadebruijnMRJG5H",
+    "os": [
+      "Darwin",
+      "Darwin-18.6.0-x86_64-i386-64bit"
+    ],
+    "python_version": "3.6.8"
+  },
+  "meta": {
+    "command": "main",
+    "options": {
+      "--beat_interval": null,
+      "--capture": null,
+      "--comment": null,
+      "--debug": false,
+      "--enforce_clean": false,
+      "--file_storage": null,
+      "--force": false,
+      "--help": false,
+      "--loglevel": null,
+      "--mongo_db": null,
+      "--name": null,
+      "--pdb": false,
+      "--print_config": false,
+      "--priority": null,
+      "--queue": false,
+      "--sql": null,
+      "--tiny_db": null,
+      "--unobserved": false,
+      "COMMAND": null,
+      "UPDATE": [
+        "model_name=MLP_Features"
+      ],
+      "help": false,
+      "with": true
+    }
+  },
+  "resources": [],
+  "result": null,
+  "start_time": "2019-06-25T14:21:19.466560",
+  "status": "RUNNING"
+}

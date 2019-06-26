@@ -79,19 +79,39 @@ class MLP_Features(nn.Module):
 
     def forward(self, x, features):
 
+        print("x:", x.size(0))
+
         embedded = torch.mean(self.word_embeddings(x), dim=1)
         embedded = embedded.view(embedded.size(0), -1)
 
-        x = F.relu(self.linear1(embedded))
-        x = F.relu(self.linear2(self.dropout(x)))
-        x = F.relu(self.linear3(x))
-
-        features = self.linear_f(features)
-
+        print("\n")
         print("Features:", features.size(0))
-        print("X:", x.size(0))
+        print("Embedded:", embedded.size(0))
+        print("\n")
 
-        combined = torch.cat((x, features), dim=1)
+        x = F.relu(self.linear1(embedded))
+        # print("linear1:", x.size(0))
+
+        x = F.relu(self.linear2(self.dropout(x)))
+        # print("linear2:", x.size(0))
+
+        x = F.relu(self.linear3(x))
+        # print("linear3:", x.size(0))
+        #
+        # print("f0:", features.size(0))
+        # print("f1:", features.size(1))
+        features = self.linear_f(features.view(features.size(0), -1))
+
+
+        #combined = torch.cat((x, features), dim=1)
+        print(x.size(0))
+        print(x.size(1))
+
+        print(features.size(0))
+        print(features.size(1))
+
+        combined = torch.cat((x.view(x.size(0), -1),
+                          features.view(features.size(0), -1)), dim=1)
 
         out = self.output(combined)
 
