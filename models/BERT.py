@@ -62,7 +62,7 @@ class BertLinear2(nn.Module):
             output_dim: Output dimension (number of labels)
         """
 
-        super(BertLinear, self).__init__()
+        super(BertLinear2, self).__init__()
         self.output_dim = output_dim
         self.dropout = dropout
 
