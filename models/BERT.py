@@ -33,16 +33,21 @@ class BertLinear(nn.Module):
         self.linear1 = nn.Linear(768, hidden_dim) #self.bert.config.hidden_size = 768
         self.linear2 = nn.Linear(hidden_dim, hidden_dim)
         self.linear3 = nn.Linear(hidden_dim, output_dim)
-
+        self.linear4 = nn.Linear(768, output_dim)
 
     def forward(self, input_ids, token_type_ids=None, attention_mask=None, labels=None):
 
         encoded_layers, pooled_output = self.bert(input_ids, token_type_ids, attention_mask, output_all_encoded_layers=False)
+        x = self.dropout(pooled_output)
 
-        x = self.relu(self.linear1(pooled_output))
-        x = self.dropout(x)
-        x = self.relu(self.linear2(x))
-        x = self.relu(self.linear3(x))
+        x = self.linear4(x)
+        # x = self.linear2(x)
+        # x = self.linear3(x)
+
+        # x = self.relu(self.linear1(pooled_output))
+        # x = self.dropout(x)
+        # x = self.relu(self.linear2(x))
+        # x = self.relu(self.linear3(x))
 
         return x
 
