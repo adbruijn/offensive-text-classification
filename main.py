@@ -253,7 +253,7 @@ def main(output_dim,
         model = models.BertLinear(hidden_dim, dropout, output_dim)
         print(model)
     elif model_name=="BERTLSTM":
-        model = models.BertLSTM(hidden_dim, dropout, output_dim)
+        model = models.BertLSTM(hidden_dim, dropout, bidirectional, output_dim)
         print(model)
 
     model = model.to(device)

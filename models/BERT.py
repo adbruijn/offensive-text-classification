@@ -47,7 +47,7 @@ class BertLinear(nn.Module):
         return x
 
 class BertLSTM(nn.Module):
-    def __init__(self, hidden_dim, dropout, output_dim):
+    def __init__(self, hidden_dim, dropout, bidrectional, output_dim):
         """
         Args:
             dropout: Dropout probability
@@ -62,9 +62,12 @@ class BertLSTM(nn.Module):
 
         self.dropout = nn.Dropout(dropout)
 
-        self.lstm = nn.LSTM(768, hidden_dim, bidirectional=True) #self.bert.config.hidden_size = 768
-        self.output = nn.Linear(hidden_dim * 2, output_dim)
+        self.lstm = nn.LSTM(768, hidden_dim, bidirectional) #self.bert.config.hidden_size = 768
 
+        if bidrectional:
+            self.output = nn.Linear(hidden_dim*2, output_dim)
+        else:
+            self.output = nn.Linear(hidden_dim, output_dim)
 
     def forward(self, input_ids, token_type_ids=None, attention_mask=None, labels=None):
         encoded_layers, pooled_output = self.bert(input_ids, token_type_ids, attention_mask, output_all_encoded_layers=False)
