@@ -53,6 +53,45 @@ class BertLinear(nn.Module):
 
         return x
 
+class BertLinear2(nn.Module):
+    def __init__(self, hidden_dim, dropout, output_dim):
+        """
+        Args:
+            hidden_dim: Size hiddden state
+            dropout: Dropout probability
+            output_dim: Output dimension (number of labels)
+        """
+
+        super(BertLinear, self).__init__()
+        self.output_dim = output_dim
+        self.dropout = dropout
+
+        self.bert = BertModel.from_pretrained('bert-base-uncased')
+
+        self.dropout = nn.Dropout(dropout)
+        self.relu = nn.LeakyReLU()
+
+        self.linear1 = nn.Linear(768, hidden_dim) #self.bert.config.hidden_size = 768
+        self.linear2 = nn.Linear(hidden_dim, hidden_dim)
+        self.linear3 = nn.Linear(hidden_dim, output_dim)
+        self.linear4 = nn.Linear(768, output_dim)
+
+    def forward(self, input_ids, token_type_ids=None, attention_mask=None, labels=None):
+
+        encoded_layers, pooled_output = self.bert(input_ids, token_type_ids, attention_mask, output_all_encoded_layers=False)
+        x = self.dropout(pooled_output)
+
+        x = self.linear4(x)
+        # x = self.linear2(x)
+        # x = self.linear3(x)
+
+        # x = self.relu(self.linear1(pooled_output))
+        # x = self.dropout(x)
+        # x = self.relu(self.linear2(x))
+        # x = self.relu(self.linear3(x))
+
+        return x
+
 class BertLSTM(nn.Module):
     def __init__(self, hidden_dim, dropout, bidrectional, output_dim):
         """

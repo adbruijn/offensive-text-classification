@@ -248,11 +248,11 @@ def main(output_dim,
         print(model)
     elif model_name=="BERT":
         model = BertForSequenceClassification.from_pretrained("bert-base-uncased", output_dim)
-        for param in model.bert.parameters():
-            param.requires_grad = False
+        # for param in model.bert.parameters():
+        #     param.requires_grad = False
         print(model)
     elif model_name=="BERTLinear":
-        model = models.BertLinear(hidden_dim, dropout, output_dim)
+        model = models.BertLinear2(hidden_dim, dropout, output_dim)
         print(model)
     elif model_name=="BERTLSTM":
         model = models.BertLSTM(hidden_dim, dropout, bidirectional, output_dim)
