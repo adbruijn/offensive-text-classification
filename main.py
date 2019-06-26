@@ -213,7 +213,7 @@ def main(output_dim,
         _run):
 
     #Logger
-    #directory = f"results/checkpoints/{_run._id}/"
+    directory_checkpoints = f"results/checkpoints/{_run._id}/"
     directory = f"results/{_run._id}/"
 
     #Batch sizes
@@ -268,12 +268,12 @@ def main(output_dim,
 
     #Training and evaluation
     print('Training and evaluation for {} epochs...'.format(num_epochs))
-    train_metrics, val_metrics = train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, val_dataloader, early_stopping_criteria, directory, use_bert, use_mongo)
+    train_metrics, val_metrics = train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, val_dataloader, early_stopping_criteria, directory_checkpoints, use_bert, use_mongo)
     train_metrics.to_csv(directory+"train_metrics.csv"), val_metrics.to_csv(directory+"val_metrics.csv")
 
     #Test
     print('Testing...')
-    load_checkpoint(directory+"best_model.pth.tar", model)
+    load_checkpoint(directory_checkpoints+"best_model.pth.tar", model)
 
     #Add artifacts
     #ex.add_artifact(directory+"best_model.pth.tar")
