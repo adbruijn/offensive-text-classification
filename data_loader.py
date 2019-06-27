@@ -125,7 +125,7 @@ def load_data():
         val.to_csv("data/val.csv", index=False)
         test.to_csv("data/test.csv", index=False)
 
-    return train, val, test
+    return train.head(100), val.head(100), test.head(100)
 
 def load_data_features():
     """
@@ -162,13 +162,9 @@ def load_data_features():
         train.reset_index(drop=True)
         val.reset_index(drop=True)
 
-        train = train[["tweet","subtask_a"]]
-        val = val[["tweet","subtask_a"]]
-        test = test[["tweet","subtask_a"]]
+        train = train[["tweet","subtask_a"]]; val = val[["tweet","subtask_a"]]; test = test[["tweet","subtask_a"]]
 
-        train.columns = ['text', 'label']
-        val.columns = ['text','label']
-        test.columns = ['text', 'label']
+        train.columns = ['text', 'label']; val.columns = ['text','label']; test.columns = ['text', 'label']
 
         # Generate features
         features_train = generate_features(train)
@@ -200,7 +196,7 @@ def clean_data(df, remove_punt_number_special_chars=False,remove_stopwords=False
     return text_clean, labels
 
 #Get Dataloader
-def get_dataloader(examples, batch_size):
+def get_dataloader_bert(examples, batch_size):
     """Make data iterator
         Arguments:
             X: Features
@@ -219,7 +215,7 @@ def get_dataloader(examples, batch_size):
 
     return dataloader
 
-def make_iterator(X, y, batch_size):
+def get_dataloader(X, y, batch_size):
 
     """Make iterator for a given X and y and batch size
     Args:
@@ -235,7 +231,7 @@ def make_iterator(X, y, batch_size):
 
     return loader
 
-def make_iterator_features(X, features, y, batch_size):
+def get_dataloader_features(X, features, y, batch_size):
 
     """Make iterator for a given X and y and batch size
     Args:
@@ -245,7 +241,7 @@ def make_iterator_features(X, features, y, batch_size):
     """
 
     X = torch.tensor(X, dtype=torch.long)
-    features = torch.tensor(list(features), dtype=torch.long)
+    features = torch.tensor(features.values.tolist(), dtype=torch.float32)
     y = torch.tensor(y, dtype=torch.float32)
     ds = TensorDataset(X, features, y)
     loader = DataLoader(ds, batch_size=batch_size)
@@ -282,7 +278,6 @@ def get_data_bert(max_seq_length, batch_sizes):
     train, val, test = load_data()
 
     #Clean data
-
     X_train, y_train = clean_data(train)
     X_val, y_val = clean_data(val)
     X_test, y_test = clean_data(test)
@@ -295,9 +290,9 @@ def get_data_bert(max_seq_length, batch_sizes):
     test_examples = convert_examples_to_features(X_test, y_test, max_seq_length, tokenizer)
 
     #Data loaders
-    train_dataloader = get_dataloader(train_examples, batch_sizes[0])
-    val_dataloader = get_dataloader(val_examples, batch_sizes[1])
-    test_dataloader = get_dataloader(test_examples, batch_sizes[2])
+    train_dataloader = get_dataloader_bert(train_examples, batch_sizes[0])
+    val_dataloader = get_dataloader_bert(val_examples, batch_sizes[1])
+    test_dataloader = get_dataloader_bert(test_examples, batch_sizes[2])
 
     return train_dataloader, val_dataloader, test_dataloader
 
@@ -320,13 +315,9 @@ def get_data(max_seq_len, embedding_file, batch_size):
     embedding_dim = int(re.findall('\d{3,}', embedding_file)[0])
 
     #Clean data
-    X_train = [clean_text(text, remove_punt_number_special_chars=True,remove_stopwords=True, apply_stemming=False) for text in train["text"]]
-    X_val = [clean_text(text, remove_punt_number_special_chars=True,remove_stopwords=True, apply_stemming=False) for text in val["text"]]
-    X_test = [clean_text(text, remove_punt_number_special_chars=True,remove_stopwords=True, apply_stemming=False) for text in test["text"]]
-
-    y_train = encode_label(train["label"])
-    y_val = encode_label(val["label"])
-    y_test = encode_label(test["label"])
+    X_train, y_train = clean_data(train, remove_punt_number_special_chars=True,remove_stopwords=True, apply_stemming=False)
+    X_val, y_val = clean_data(val, remove_punt_number_special_chars=True,remove_stopwords=True, apply_stemming=False)
+    X_test, y_test = clean_data(train, remove_punt_number_special_chars=True,remove_stopwords=True, apply_stemming=False)
 
     tokenizer = Tokenizer(num_words = 10000000)
     tokenizer.fit_on_texts(list(X_train)+list(X_val))
@@ -347,9 +338,9 @@ def get_data(max_seq_len, embedding_file, batch_size):
     X_test = tokenizer.texts_to_sequences(X_test)
     X_test = pad_sequences(X_test, maxlen=max_seq_len)
 
-    train_dataloader = make_iterator(X_train, y_train, batch_size)
-    val_dataloader = make_iterator(X_val, y_val, batch_size)
-    test_dataloader = make_iterator(X_test, y_test, batch_size)
+    train_dataloader = get_dataloader(X_train, y_train, batch_size)
+    val_dataloader = get_dataloader(X_val, y_val, batch_size)
+    test_dataloader = get_dataloader(X_test, y_test, batch_size)
 
     return embedding_dim, int(vocab_size), embedding_matrix, train_dataloader, val_dataloader, test_dataloader
 
@@ -399,9 +390,9 @@ def get_data_features(max_seq_len, embedding_file, batch_size):
     X_test = tokenizer.texts_to_sequences(X_test)
     X_test = pad_sequences(X_test, maxlen=max_seq_len)
 
-    train_dataloader = make_iterator_features(X_train, features_train, y_train, batch_size)
-    val_dataloader = make_iterator_features(X_val, features_val, y_val, batch_size)
-    test_dataloader = make_iterator_features(X_test, features_test, y_test, batch_size)
+    train_dataloader = get_dataloader_features(X_train, features_train, y_train, batch_size)
+    val_dataloader = get_dataloader_features(X_val, features_val, y_val, batch_size)
+    test_dataloader = get_dataloader_features(X_test, features_test, y_test, batch_size)
 
     return embedding_dim, int(vocab_size), embedding_matrix, train_dataloader, val_dataloader, test_dataloader
 
