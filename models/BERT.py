@@ -29,7 +29,6 @@ class BertLinearFreeze(nn.Module):
         for name, param in self.bert.named_parameters():
             if name.startswith('embeddings'):
                 param.requires_grad = False
-
         # for param in self.bert.parameters():
         #     param.requires_grad = False
 
