@@ -50,7 +50,8 @@ URL_NAME = 'mongodb://localhost:27017/'
 
 ex = Experiment()
 ex.observers.append(FileStorageObserver.create('results'))
-ex.observers.append(FileStorageObserver.create('results-bert'))
+ex.observers.append(FileStorageObserver.create('results-bert-aws'))
+ex.observers.append(FileStorageObserver.create('results-bert-google'))
 #ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
 ex.captured_out_filter = apply_backspaces_and_linefeeds
 
@@ -192,6 +193,7 @@ def config():
     embedding_file = 'data/GloVe/glove.twitter.27B.200d.txt' #Embedding file
     model_name = "MLP" #Model name: LSTM, BERT, MLP, CNN
     use_mongo = False
+    vm = ""
 
 @ex.automain
 def main(output_dim,
@@ -211,6 +213,7 @@ def main(output_dim,
         embedding_file,
         model_name,
         use_mongo,
+        vm,
         _run):
 
     #Logger
@@ -223,10 +226,14 @@ def main(output_dim,
 
     if "BERT" in model_name:  #Default = False, if BERT model is used then use_bert is set to True
         use_bert = True
-        directory = f"results-bert/{_run._id}/"
     else:
         use_bert = False
 
+    if vm == "google":
+        directory = f"results-bert-google/{_run._id}/"
+    elif vm == "aws":
+        directory = f"results-bert-aws/{_run._id}/"
+        
     #Data
     if use_bert:
         train_dataloader, val_dataloader, test_dataloader = get_data_bert(int(max_seq_length), batch_sizes)
@@ -252,6 +259,9 @@ def main(output_dim,
         model = BertForSequenceClassification.from_pretrained("bert-base-uncased", output_dim)
         for param in model.bert.parameters():
             param.requires_grad = False
+            print(param)
+            print(param.requires_grad)
+
         print(model)
     elif model_name=="BERT":
         model = BertForSequenceClassification.from_pretrained("bert-base-uncased", output_dim)
