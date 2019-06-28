@@ -1,3 +1,0 @@
-,loss,accuracy,recall,precision,f1
-NOT,0.39,0.85,0.94,0.86,0.9
-OFF,0.39,0.85,0.6,0.8,0.68

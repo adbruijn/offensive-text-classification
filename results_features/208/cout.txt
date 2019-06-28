@@ -1,2 +1,0 @@
-INFO - tmp - Running command 'main'
-INFO - tmp - Started run with ID "208"
