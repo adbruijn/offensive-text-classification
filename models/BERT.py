@@ -26,11 +26,13 @@ class BertLinearFreeze(nn.Module):
         self.dropout = dropout
 
         self.bert = BertModel.from_pretrained('bert-base-uncased')
-        for name, param in self.bert.named_parameters():
-            if name.startswith('embeddings'):
-                param.requires_grad = False
-        # for param in self.bert.parameters():
-        #     param.requires_grad = False
+        # for name, param in self.bert.named_parameters():
+        #     if name.startswith('embeddings'):
+        #         param.requires_grad = False
+        for param in self.bert.parameters():
+            param.requires_grad = False
+            print(param)
+            print(param.requires_grad)
 
         self.dropout = nn.Dropout(dropout)
         self.relu = nn.LeakyReLU()
