@@ -52,6 +52,7 @@ ex = Experiment()
 ex.observers.append(FileStorageObserver.create('results'))
 ex.observers.append(FileStorageObserver.create('results-bert-aws'))
 ex.observers.append(FileStorageObserver.create('results-bert-google'))
+ex.observers.append(FileStorageObserver.create('results-features'))
 #ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
 ex.captured_out_filter = apply_backspaces_and_linefeeds
 
@@ -233,7 +234,7 @@ def main(output_dim,
         directory = f"results-bert-google/{_run._id}/"
     elif vm == "aws":
         directory = f"results-bert-aws/{_run._id}/"
-        
+
     #Data
     if use_bert:
         train_dataloader, val_dataloader, test_dataloader = get_data_bert(int(max_seq_length), batch_sizes)
@@ -261,7 +262,6 @@ def main(output_dim,
             param.requires_grad = False
             print(param)
             print(param.requires_grad)
-
         print(model)
     elif model_name=="BERT":
         model = BertForSequenceClassification.from_pretrained("bert-base-uncased", output_dim)

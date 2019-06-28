@@ -1,0 +1,98 @@
+{
+  "artifacts": [],
+  "command": "main",
+  "experiment": {
+    "base_dir": "/Users/adebruijn/OneDrive/Documenten/Mobiquity/Code/Code",
+    "dependencies": [
+      "Click==7.0",
+      "numpy==1.16.1",
+      "pandas==0.24.1",
+      "pytorch-pretrained-bert==0.6.2",
+      "sacred==0.7.4",
+      "torch==0.4.1",
+      "tqdm==4.30.0"
+    ],
+    "mainfile": "tmp.py",
+    "name": "tmp",
+    "repositories": [],
+    "sources": [
+      [
+        "data_loader.py",
+        "_sources/data_loader_3e2e77686b3133b74a71fcb54a367ce0.py"
+      ],
+      [
+        "evaluate.py",
+        "_sources/evaluate_be49f7b2ea64962dc9e106609e1cce84.py"
+      ],
+      [
+        "models/__init__.py",
+        "_sources/__init___4754420467fb8efcb3b2c239de5ee157.py"
+      ],
+      [
+        "tmp.py",
+        "_sources/tmp_4d78e3858fa3b6b7274a8336596459c3.py"
+      ],
+      [
+        "train.py",
+        "_sources/train_99159ffce1d14e9b571a97d2c111636a.py"
+      ],
+      [
+        "utils.py",
+        "_sources/utils_e7712e9936299524c11c276e2aa41361.py"
+      ]
+    ]
+  },
+  "fail_trace": [
+    "Traceback (most recent call last):\n",
+    "  File \"/anaconda3/lib/python3.6/site-packages/sacred/config/captured_function.py\", line 46, in captured_function\n    result = wrapped(*args, **kwargs)\n",
+    "  File \"tmp.py\", line 259, in main\n    train_metrics, val_metrics = train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, val_dataloader, early_stopping_criteria, directory, use_bert, use_mongo)\n",
+    "  File \"/anaconda3/lib/python3.6/site-packages/sacred/config/captured_function.py\", line 46, in captured_function\n    result = wrapped(*args, **kwargs)\n",
+    "  File \"tmp.py\", line 111, in train_and_evaluate\n    train_results = train_model_features(model, optimizer, loss_fn, train_dataloader, device, use_bert)\n",
+    "  File \"/Users/adebruijn/OneDrive/Documenten/Mobiquity/Code/Code/train.py\", line 124, in train_model_features\n    y_pred = model(X, features)\n",
+    "  File \"/anaconda3/lib/python3.6/site-packages/torch/nn/modules/module.py\", line 477, in __call__\n    result = self.forward(*input, **kwargs)\n",
+    "TypeError: forward() takes 2 positional arguments but 3 were given\n"
+  ],
+  "heartbeat": "2019-06-28T09:15:51.408257",
+  "host": {
+    "ENV": {},
+    "cpu": "Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz",
+    "hostname": "AMSadebruijnMRJG5H",
+    "os": [
+      "Darwin",
+      "Darwin-18.6.0-x86_64-i386-64bit"
+    ],
+    "python_version": "3.6.8"
+  },
+  "meta": {
+    "command": "main",
+    "options": {
+      "--beat_interval": null,
+      "--capture": null,
+      "--comment": null,
+      "--debug": false,
+      "--enforce_clean": false,
+      "--file_storage": null,
+      "--force": false,
+      "--help": false,
+      "--loglevel": null,
+      "--mongo_db": null,
+      "--name": null,
+      "--pdb": false,
+      "--print_config": false,
+      "--priority": null,
+      "--queue": false,
+      "--sql": null,
+      "--tiny_db": null,
+      "--unobserved": false,
+      "COMMAND": null,
+      "UPDATE": [],
+      "help": false,
+      "with": false
+    }
+  },
+  "resources": [],
+  "result": null,
+  "start_time": "2019-06-28T09:14:42.068068",
+  "status": "FAILED",
+  "stop_time": "2019-06-28T09:15:51.409771"
+}
