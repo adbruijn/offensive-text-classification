@@ -248,10 +248,13 @@ def main(output_dim,
     elif model_name=="LSTMAttention":
         model = models.LSTMAttention(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), dropout, int(num_layers), bidirectional, output_dim)
         print(model)
+    elif model_name=="BERTFreeze":
+        model = BertForSequenceClassification.from_pretrained("bert-base-uncased", output_dim)
+        for param in model.bert.parameters():
+            param.requires_grad = False
+        print(model)
     elif model_name=="BERT":
         model = BertForSequenceClassification.from_pretrained("bert-base-uncased", output_dim)
-        # for param in model.bert.parameters():
-        #     param.requires_grad = False
         print(model)
     elif model_name=="BERTLinear":
         model = models.BertLinear(hidden_dim, dropout, output_dim)
