@@ -1,7 +1,7 @@
 .DS_Store
 __pycache__/
-results/
 data/GloVe/
 .DS_Store
 generate_json.py
 tmp.py
+results/checkpoints/

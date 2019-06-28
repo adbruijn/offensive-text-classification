@@ -1,0 +1,2 @@
+INFO - main - Running command 'main'
+INFO - main - Started run with ID "20"

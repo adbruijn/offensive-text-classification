@@ -183,15 +183,15 @@ def config():
     max_seq_length = 45 #Maximum sequence length of the sentences (default=40)
     learning_rate = 3e-5 #Learning rate for the model (default=3e-5)
     warmup_proportion = 0.1 #Warmup proportion (default=0.1)
-    early_stopping_criteria = 50 #Early stopping criteria (default=5)
+    early_stopping_criteria = 25 #Early stopping criteria (default=5)
     num_layers = 2 #Number of layers (default=2)
     hidden_dim = 128 #Hidden layers dimension (default=128)
     bidirectional = False #Left and right LSTM
-    dropout = 0.1 #Dropout percentage
+    dropout = 0.5 #Dropout percentage
     filter_sizes = [2, 3, 4] #CNN
     embedding_file = 'data/GloVe/glove.twitter.27B.200d.txt' #Embedding file
     model_name = "MLP" #Model name: LSTM, BERT, MLP, CNN
-    use_mongo = True
+    use_mongo = False
 
 @ex.automain
 def main(output_dim,
@@ -214,7 +214,7 @@ def main(output_dim,
         _run):
 
     #Logger
-    #directory = f"results/checkpoints/{_run._id}/"
+    directory_checkpoints = f"results/checkpoints/{_run._id}/"
     directory = f"results/{_run._id}/"
 
     #Batch sizes
@@ -250,12 +250,17 @@ def main(output_dim,
         print(model)
     elif model_name=="BERT":
         model = BertForSequenceClassification.from_pretrained("bert-base-uncased", output_dim)
+        # for param in model.bert.parameters():
+        #     param.requires_grad = False
         print(model)
     elif model_name=="BERTLinear":
         model = models.BertLinear(hidden_dim, dropout, output_dim)
         print(model)
+    elif model_name=="BERTLinearFreeze":
+        model = models.BertLinearFreeze(hidden_dim, dropout, output_dim)
+        print(model)
     elif model_name=="BERTLSTM":
-        model = models.BertLSTM(hidden_dim, dropout, output_dim)
+        model = models.BertLSTM(hidden_dim, dropout, bidirectional, output_dim)
         print(model)
 
     model = model.to(device)
@@ -270,12 +275,12 @@ def main(output_dim,
 
     #Training and evaluation
     print('Training and evaluation for {} epochs...'.format(num_epochs))
-    train_metrics, val_metrics = train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, val_dataloader, early_stopping_criteria, directory, use_bert, use_mongo)
+    train_metrics, val_metrics = train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, val_dataloader, early_stopping_criteria, directory_checkpoints, use_bert, use_mongo)
     train_metrics.to_csv(directory+"train_metrics.csv"), val_metrics.to_csv(directory+"val_metrics.csv")
 
     #Test
     print('Testing...')
-    load_checkpoint(directory+"best_model.pth.tar", model)
+    load_checkpoint(directory_checkpoints+"best_model.pth.tar", model)
 
     #Add artifacts
     #ex.add_artifact(directory+"best_model.pth.tar")
