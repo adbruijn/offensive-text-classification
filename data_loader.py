@@ -125,7 +125,7 @@ def load_data():
         val.to_csv("data/val.csv", index=False)
         test.to_csv("data/test.csv", index=False)
 
-    return train.head(10), val.head(10), test.head(10)
+    return train, val, test
 
 def load_data_features():
     """
