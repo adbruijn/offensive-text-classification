@@ -50,6 +50,7 @@ URL_NAME = 'mongodb://localhost:27017/'
 
 ex = Experiment()
 ex.observers.append(FileStorageObserver.create('results'))
+ex.observers.append(FileStorageObserver.create('aws-bert'))
 #ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
 ex.captured_out_filter = apply_backspaces_and_linefeeds
 
@@ -222,6 +223,7 @@ def main(output_dim,
 
     if "BERT" in model_name:  #Default = False, if BERT model is used then use_bert is set to True
         use_bert = True
+        directory = f"aws-bert/{_run._id}/"
     else:
         use_bert = False
 
