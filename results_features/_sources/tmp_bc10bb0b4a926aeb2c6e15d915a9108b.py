@@ -227,7 +227,7 @@ def main(output_dim,
     if model_name=="MLP":
         model = models.MLP(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), dropout, output_dim)
     if model_name=="MLP_Features":
-        model = models.MLP_Features(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), 13, dropout, output_dim)
+        model = models.MLP_Features(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), 14, dropout, output_dim)
         print(model)
     elif model_name=="CNN":
         model = models.CNN(embedding_matrix, embedding_dim, vocab_size, dropout, filter_sizes, output_dim)

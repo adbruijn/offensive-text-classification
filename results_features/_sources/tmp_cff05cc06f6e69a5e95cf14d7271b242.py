@@ -205,7 +205,12 @@ def main(output_dim,
         use_mongo,
         _run):
 
+    #Mongo
+    #if use_mongo: ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
+    #Add slack
+
     #Logger
+    #directory = f"results/checkpoints/{_run._id}/"
     directory = f"results/{_run._id}/"
 
     #Batch sizes
@@ -227,7 +232,7 @@ def main(output_dim,
     if model_name=="MLP":
         model = models.MLP(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), dropout, output_dim)
     if model_name=="MLP_Features":
-        model = models.MLP_Features(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), 13, dropout, output_dim)
+        model = models.MLP_Features(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), 14, dropout, output_dim)
         print(model)
     elif model_name=="CNN":
         model = models.CNN(embedding_matrix, embedding_dim, vocab_size, dropout, filter_sizes, output_dim)
@@ -251,8 +256,12 @@ def main(output_dim,
     model = model.to(device)
 
     #Loss and optimizer
+    #optimizer = optim.Adam([{'params': model.parameters(), 'weight_decay': 0.1}], lr=learning_rate)
     optimizer = optim.Adam(model.parameters(), lr=learning_rate)
     loss_fn = F.cross_entropy
+
+    #Scheduler
+    #scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[5, 50], gamma=0.1)
 
     #Training and evaluation
     print('Training and evaluation for {} epochs...'.format(num_epochs))
@@ -263,10 +272,15 @@ def main(output_dim,
     print('Testing...')
     load_checkpoint(directory+"best_model.pth.tar", model)
 
+    #Add artifacts
+    #ex.add_artifact(directory+"best_model.pth.tar")
+    #ex.add_artifact(directory+"last_model.pth.tar")
+
     test_metrics = evaluate_model(model, optimizer, loss_fn, test_dataloader, device, use_bert)
     if use_mongo: log_scalars(test_metrics,"Test")
 
     test_metrics_df = pd.DataFrame(test_metrics)
+    test_metrics_df = pd.DataFrame(test_metrics, index=["NOT","OFF"])
     print(test_metrics)
     test_metrics_df.to_csv(directory+"test_metrics.csv")
 

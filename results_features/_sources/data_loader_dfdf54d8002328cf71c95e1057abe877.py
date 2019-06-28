@@ -125,7 +125,7 @@ def load_data():
         val.to_csv("data/val.csv", index=False)
         test.to_csv("data/test.csv", index=False)
 
-    return train.head(10), val.head(10), test.head(10)
+    return train, val, test
 
 def load_data_features():
     """
@@ -241,7 +241,7 @@ def get_dataloader_features(X, features, y, batch_size):
     """
 
     X = torch.tensor(X, dtype=torch.long)
-    features = torch.tensor(features.values.tolist(), dtype=torch.float32)
+    features = torch.tensor(list(features), dtype=torch.long)
     y = torch.tensor(y, dtype=torch.float32)
     ds = TensorDataset(X, features, y)
     loader = DataLoader(ds, batch_size=batch_size)
