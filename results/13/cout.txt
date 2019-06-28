@@ -1,0 +1,1222 @@
+INFO - main - Running command 'main'
+INFO - main - Started run with ID "13"
+INFO - pytorch_pretrained_bert.tokenization - loading vocabulary file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-uncased-vocab.txt from cache at /home/ubuntu/.pytorch_pretrained_bert/26bc1ad6c0ac742e9b52263248f6d0f00068293b33709fae12320c0e35ccfbbb.542ce4285a40d23a559526243235df47c5f75c197f04f37d1a0c124c32c9a084
+INFO - pytorch_pretrained_bert.modeling - loading archive file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-uncased.tar.gz from cache at /home/ubuntu/.pytorch_pretrained_bert/9c41111e2de84547a463fd39217199738d1e3deb72d4fec4399e6e241983c6f0.ae3cef932725ca7a30cdcb93fc6e09150a55e2a130ec7af63975a16c153ae2ba
+INFO - pytorch_pretrained_bert.modeling - extracting archive file /home/ubuntu/.pytorch_pretrained_bert/9c41111e2de84547a463fd39217199738d1e3deb72d4fec4399e6e241983c6f0.ae3cef932725ca7a30cdcb93fc6e09150a55e2a130ec7af63975a16c153ae2ba to temp dir /tmp/tmpn61vkdoc
+INFO - pytorch_pretrained_bert.modeling - Model config {
+  "attention_probs_dropout_prob": 0.1,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "max_position_embeddings": 512,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "type_vocab_size": 2,
+  "vocab_size": 30522
+}
+
+BertLinearFreeze(
+  (bert): BertModel(
+    (embeddings): BertEmbeddings(
+      (word_embeddings): Embedding(30522, 768, padding_idx=0)
+      (position_embeddings): Embedding(512, 768)
+      (token_type_embeddings): Embedding(2, 768)
+      (LayerNorm): BertLayerNorm()
+      (dropout): Dropout(p=0.1)
+    )
+    (encoder): BertEncoder(
+      (layer): ModuleList(
+        (0): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): BertLayerNorm()
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): BertLayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+        (1): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): BertLayerNorm()
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): BertLayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+        (2): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): BertLayerNorm()
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): BertLayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+        (3): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): BertLayerNorm()
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): BertLayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+        (4): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): BertLayerNorm()
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): BertLayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+        (5): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): BertLayerNorm()
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): BertLayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+        (6): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): BertLayerNorm()
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): BertLayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+        (7): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): BertLayerNorm()
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): BertLayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+        (8): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): BertLayerNorm()
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): BertLayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+        (9): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): BertLayerNorm()
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): BertLayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+        (10): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): BertLayerNorm()
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): BertLayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+        (11): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): BertLayerNorm()
+              (dropout): Dropout(p=0.1)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): BertLayerNorm()
+            (dropout): Dropout(p=0.1)
+          )
+        )
+      )
+    )
+    (pooler): BertPooler(
+      (dense): Linear(in_features=768, out_features=768, bias=True)
+      (activation): Tanh()
+    )
+  )
+  (dropout): Dropout(p=0.5)
+  (relu): LeakyReLU(negative_slope=0.01)
+  (linear1): Linear(in_features=768, out_features=128, bias=True)
+  (linear2): Linear(in_features=128, out_features=128, bias=True)
+  (linear3): Linear(in_features=128, out_features=2, bias=True)
+  (linear4): Linear(in_features=768, out_features=2, bias=True)
+)
+Training and evaluation for 100 epochs...
+
+Epoch:   0%|          | 0/100 [00:00<?, ?it/s]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:02,  1.26it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:01<00:01,  1.42it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  1.61it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.10it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.98it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.97it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.94it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.95it/s][A
+
+Train Loss: 0.59 | Train Acc: 0.69
+Valid Loss: 0.68 | Valid Acc: 0.62
+Train recall: [0.72 0.61] | Train precision: [0.83 0.48]
+Valid recall: [1. 0.] | Valid precision: [0.62 0.  ]
+
+Epoch:   1%|1         | 1/100 [00:03<05:14,  3.17s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.34it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.34it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.34it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.97it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.96it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.97it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.95it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.96it/s][A
+
+Train Loss: 0.61 | Train Acc: 0.7
+Valid Loss: 0.63 | Valid Acc: 0.68
+Train recall: [0.94 0.02] | Train precision: [0.73 0.08]
+Valid recall: [1. 0.] | Valid precision: [0.68 0.  ]
+
+Epoch:   2%|2         | 2/100 [00:13<08:30,  5.21s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  1.56it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:01<00:01,  1.68it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  1.82it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.37it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.99it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.99it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.99it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00, 10.01it/s][A
+
+Train Loss: 0.54 | Train Acc: 0.78
+Valid Loss: 0.58 | Valid Acc: 0.73
+Train recall: [0.97 0.29] | Train precision: [0.8 0.5]
+Valid recall: [1.   0.25] | Valid precision: [0.73 0.25]
+
+Epoch:   3%|3         | 3/100 [00:23<10:50,  6.71s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.34it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.34it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.34it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.97it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.94it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.94it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.96it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.98it/s][AEarly stop step: 1
+
+
+Train Loss: 0.6 | Train Acc: 0.75
+Valid Loss: 0.65 | Valid Acc: 0.68
+Train recall: [1.   0.03] | Train precision: [0.75 0.25]
+Valid recall: [1. 0.] | Valid precision: [0.68 0.  ]
+
+Epoch:   4%|4         | 4/100 [00:25<08:23,  5.24s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.34it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.34it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.34it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.95it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.92it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.92it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.92it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.84it/s][AEarly stop step: 2
+
+
+Train Loss: 0.55 | Train Acc: 0.74
+Valid Loss: 0.65 | Valid Acc: 0.68
+Train recall: [0.99 0.05] | Train precision: [0.75 0.12]
+Valid recall: [1. 0.] | Valid precision: [0.68 0.  ]
+
+Epoch:   5%|5         | 5/100 [00:27<06:40,  4.22s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.34it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.33it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.34it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.96it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.97it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.94it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.92it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.91it/s][AEarly stop step: 3
+
+
+Train Loss: 0.44 | Train Acc: 0.8
+Valid Loss: 0.63 | Valid Acc: 0.68
+Train recall: [1.   0.25] | Train precision: [0.8  0.25]
+Valid recall: [1. 0.] | Valid precision: [0.68 0.  ]
+
+Epoch:   6%|6         | 6/100 [00:28<05:29,  3.50s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.33it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.34it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.34it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.96it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.95it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.96it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.95it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.97it/s][A
+
+Train Loss: 0.45 | Train Acc: 0.84
+Valid Loss: 0.56 | Valid Acc: 0.73
+Train recall: [1.  0.4] | Train precision: [0.83 1.  ]
+Valid recall: [1.   0.25] | Valid precision: [0.73 0.25]
+
+Epoch:   7%|7         | 7/100 [00:38<08:24,  5.43s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.34it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.34it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.34it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.97it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.97it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.94it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.93it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.92it/s][AEarly stop step: 1
+
+
+Train Loss: 0.39 | Train Acc: 0.79
+Valid Loss: 0.61 | Valid Acc: 0.73
+Train recall: [1.   0.17] | Train precision: [0.78 0.75]
+Valid recall: [1.   0.25] | Valid precision: [0.73 0.25]
+
+Epoch:   8%|8         | 8/100 [00:40<06:39,  4.35s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.33it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.33it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.33it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.95it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.90it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.90it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.93it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.94it/s][AEarly stop step: 2
+
+
+Train Loss: 0.26 | Train Acc: 0.89
+Valid Loss: 0.68 | Valid Acc: 0.66
+Train recall: [1.   0.63] | Train precision: [0.88 1.  ]
+Valid recall: [0.94 0.07] | Valid precision: [0.68 0.38]
+
+Epoch:   9%|9         | 9/100 [00:42<05:26,  3.59s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.34it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.34it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.34it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.96it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.99it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.95it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.94it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.94it/s][AEarly stop step: 3
+
+
+Train Loss: 0.3 | Train Acc: 0.88
+Valid Loss: 0.94 | Valid Acc: 0.55
+Train recall: [0.98 0.62] | Train precision: [0.88 0.87]
+Valid recall: [0.83 0.07] | Valid precision: [0.59 0.44]
+
+Epoch:  10%|#         | 10/100 [00:44<04:35,  3.06s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.34it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.34it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.34it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.97it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.92it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.91it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.89it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.88it/s][AEarly stop step: 4
+
+
+Train Loss: 0.15 | Train Acc: 0.96
+Valid Loss: 1.02 | Valid Acc: 0.61
+Train recall: [0.99 0.9 ] | Train precision: [0.96 0.97]
+Valid recall: [0.94 0.06] | Valid precision: [0.63 0.21]
+
+Epoch:  11%|#1        | 11/100 [00:46<03:59,  2.69s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.34it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.34it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.34it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.96it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.97it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.97it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.97it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.98it/s][AEarly stop step: 5
+
+
+Train Loss: 0.13 | Train Acc: 0.99
+Valid Loss: 0.87 | Valid Acc: 0.58
+Train recall: [1.   0.98] | Train precision: [0.99 1.  ]
+Valid recall: [0.76 0.18] | Valid precision: [0.66 0.34]
+
+Epoch:  12%|#2        | 12/100 [00:47<03:33,  2.43s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.34it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.34it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.33it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.96it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.97it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.96it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.80it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.75it/s][AEarly stop step: 6
+
+
+Train Loss: 0.07 | Train Acc: 1.0
+Valid Loss: 0.92 | Valid Acc: 0.55
+Train recall: [1. 1.] | Train precision: [1. 1.]
+Valid recall: [0.68 0.29] | Valid precision: [0.67 0.29]
+
+Epoch:  13%|#3        | 13/100 [00:49<03:15,  2.25s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.34it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.34it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.34it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.96it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.97it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.97it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.93it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.93it/s][AEarly stop step: 7
+
+
+Train Loss: 0.05 | Train Acc: 1.0
+Valid Loss: 1.07 | Valid Acc: 0.58
+Train recall: [1. 1.] | Train precision: [1. 1.]
+Valid recall: [0.73 0.24] | Valid precision: [0.68 0.31]
+
+Epoch:  14%|#4        | 14/100 [00:51<03:02,  2.12s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.33it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.33it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.33it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.95it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.96it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.93it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.90it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.88it/s][AEarly stop step: 8
+
+
+Train Loss: 0.03 | Train Acc: 1.0
+Valid Loss: 1.08 | Valid Acc: 0.65
+Train recall: [1. 1.] | Train precision: [1. 1.]
+Valid recall: [0.83 0.23] | Valid precision: [0.69 0.31]
+
+Epoch:  15%|#5        | 15/100 [00:53<02:52,  2.03s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.33it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.33it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.33it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.96it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.88it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.87it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.87it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.88it/s][AEarly stop step: 9
+
+
+Train Loss: 0.02 | Train Acc: 1.0
+Valid Loss: 1.39 | Valid Acc: 0.54
+Train recall: [1. 1.] | Train precision: [1. 1.]
+Valid recall: [0.84 0.23] | Valid precision: [0.59 0.31]
+
+Epoch:  16%|#6        | 16/100 [00:55<02:45,  1.97s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.35it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.34it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.34it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.96it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.95it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.93it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.92it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.91it/s][AEarly stop step: 10
+
+
+Train Loss: 0.02 | Train Acc: 1.0
+Valid Loss: 1.0 | Valid Acc: 0.64
+Train recall: [1. 1.] | Train precision: [1. 1.]
+Valid recall: [0.74 0.49] | Valid precision: [0.76 0.43]
+
+Epoch:  17%|#7        | 17/100 [00:57<02:40,  1.93s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.33it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.33it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.33it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.95it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.92it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.93it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.92it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.93it/s][AEarly stop step: 11
+
+
+Train Loss: 0.01 | Train Acc: 1.0
+Valid Loss: 1.06 | Valid Acc: 0.64
+Train recall: [1. 1.] | Train precision: [1. 1.]
+Valid recall: [0.74 0.48] | Valid precision: [0.76 0.44]
+
+Epoch:  18%|#8        | 18/100 [00:58<02:35,  1.90s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.33it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.33it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.33it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.95it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.96it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.95it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.93it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.93it/s][AEarly stop step: 12
+
+
+Train Loss: 0.01 | Train Acc: 1.0
+Valid Loss: 1.07 | Valid Acc: 0.64
+Train recall: [1. 1.] | Train precision: [1. 1.]
+Valid recall: [0.74 0.25] | Valid precision: [0.76 0.3 ]
+
+Epoch:  19%|#9        | 19/100 [01:00<02:32,  1.88s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.32it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.33it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.32it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.95it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.98it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.93it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.93it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.93it/s][AEarly stop step: 13
+
+
+Train Loss: 0.01 | Train Acc: 1.0
+Valid Loss: 1.26 | Valid Acc: 0.59
+Train recall: [1. 1.] | Train precision: [1. 1.]
+Valid recall: [0.73 0.29] | Valid precision: [0.69 0.31]
+
+Epoch:  20%|##        | 20/100 [01:02<02:29,  1.86s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.32it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.32it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.32it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.95it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  8.00it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.98it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.94it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.94it/s][AEarly stop step: 14
+
+
+Train Loss: 0.01 | Train Acc: 1.0
+Valid Loss: 1.41 | Valid Acc: 0.59
+Train recall: [1. 1.] | Train precision: [1. 1.]
+Valid recall: [0.69 0.39] | Valid precision: [0.65 0.43]
+
+Epoch:  21%|##1       | 21/100 [01:04<02:26,  1.85s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.33it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.33it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.33it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.96it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.98it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.96it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.94it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.92it/s][AEarly stop step: 15
+
+
+Train Loss: 0.01 | Train Acc: 1.0
+Valid Loss: 1.45 | Valid Acc: 0.59
+Train recall: [1. 1.] | Train precision: [1. 1.]
+Valid recall: [0.8  0.36] | Valid precision: [0.62 0.54]
+
+Epoch:  22%|##2       | 22/100 [01:06<02:23,  1.85s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.31it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.32it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.32it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.95it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  8.00it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  8.00it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.98it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00, 10.00it/s][AEarly stop step: 16
+
+
+Train Loss: 0.0 | Train Acc: 1.0
+Valid Loss: 1.36 | Valid Acc: 0.59
+Train recall: [1. 1.] | Train precision: [1. 1.]
+Valid recall: [0.69 0.37] | Valid precision: [0.65 0.42]
+
+Epoch:  23%|##3       | 23/100 [01:07<02:21,  1.84s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.34it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.33it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.33it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.96it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.87it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.88it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.87it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.87it/s][AEarly stop step: 17
+
+
+Train Loss: 0.0 | Train Acc: 1.0
+Valid Loss: 1.58 | Valid Acc: 0.59
+Train recall: [1. 1.] | Train precision: [1. 1.]
+Valid recall: [0.82 0.35] | Valid precision: [0.62 0.55]
+
+Epoch:  24%|##4       | 24/100 [01:09<02:19,  1.84s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.34it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.33it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.33it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.95it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.90it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.88it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.88it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.87it/s][AEarly stop step: 18
+
+
+Train Loss: 0.0 | Train Acc: 1.0
+Valid Loss: 1.46 | Valid Acc: 0.65
+Train recall: [1. 1.] | Train precision: [1. 1.]
+Valid recall: [0.77 0.45] | Valid precision: [0.76 0.45]
+
+Epoch:  25%|##5       | 25/100 [01:11<02:17,  1.84s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.34it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.33it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.33it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.96it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.92it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.91it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.90it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.89it/s][AEarly stop step: 19
+
+
+Train Loss: 0.0 | Train Acc: 1.0
+Valid Loss: 1.62 | Valid Acc: 0.58
+Train recall: [1. 1.] | Train precision: [1. 1.]
+Valid recall: [0.83 0.2 ] | Valid precision: [0.63 0.3 ]
+
+Epoch:  26%|##6       | 26/100 [01:13<02:15,  1.83s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.33it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.33it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.33it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.95it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.86it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.89it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.91it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.92it/s][AEarly stop step: 20
+
+
+Train Loss: 0.0 | Train Acc: 1.0
+Valid Loss: 1.89 | Valid Acc: 0.58
+Train recall: [1. 1.] | Train precision: [1. 1.]
+Valid recall: [0.84 0.15] | Valid precision: [0.63 0.22]
+
+Epoch:  27%|##7       | 27/100 [01:15<02:13,  1.83s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.32it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.32it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.32it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.95it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.88it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.87it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.88it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.87it/s][AEarly stop step: 21
+
+
+Train Loss: 0.0 | Train Acc: 1.0
+Valid Loss: 1.28 | Valid Acc: 0.7
+Train recall: [1. 1.] | Train precision: [1. 1.]
+Valid recall: [0.83 0.45] | Valid precision: [0.74 0.54]
+
+Epoch:  28%|##8       | 28/100 [01:17<02:11,  1.83s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.32it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.32it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.32it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.95it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.86it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.86it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.83it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.82it/s][AEarly stop step: 22
+
+
+Train Loss: 0.0 | Train Acc: 1.0
+Valid Loss: 1.81 | Valid Acc: 0.59
+Train recall: [1. 1.] | Train precision: [1. 1.]
+Valid recall: [0.7  0.37] | Valid precision: [0.64 0.42]
+
+Epoch:  29%|##9       | 29/100 [01:18<02:10,  1.83s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.32it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.32it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.32it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.95it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.87it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.87it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.85it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.84it/s][AEarly stop step: 23
+
+
+Train Loss: 0.0 | Train Acc: 1.0
+Valid Loss: 1.32 | Valid Acc: 0.7
+Train recall: [1. 1.] | Train precision: [1. 1.]
+Valid recall: [0.8  0.52] | Valid precision: [0.76 0.55]
+
+Epoch:  30%|###       | 30/100 [01:20<02:08,  1.83s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.31it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.31it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.32it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.94it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.91it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.90it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.88it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.86it/s][AEarly stop step: 24
+
+
+Train Loss: 0.0 | Train Acc: 1.0
+Valid Loss: 2.09 | Valid Acc: 0.53
+Train recall: [1. 1.] | Train precision: [1. 1.]
+Valid recall: [0.8  0.29] | Valid precision: [0.6  0.31]
+
+Epoch:  31%|###1      | 31/100 [01:22<02:06,  1.83s/it]
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:01,  2.31it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  2.31it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:01<00:00,  2.32it/s][A
+
+Iteration: 100%|##########| 4/4 [00:01<00:00,  2.94it/s][A
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.85it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.86it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.87it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.87it/s][AEarly stop step: 25
+Stopping early at epoch 31
+Testing...
+
+
+Iteration:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Iteration:  25%|##5       | 1/4 [00:00<00:00,  7.94it/s][A
+
+Iteration:  50%|#####     | 2/4 [00:00<00:00,  7.92it/s][A
+
+Iteration:  75%|#######5  | 3/4 [00:00<00:00,  7.91it/s][A
+
+Iteration: 100%|##########| 4/4 [00:00<00:00,  9.90it/s][A{'loss': 0.66, 'accuracy': 0.7, 'recall': array([1., 0.]), 'precision': array([0.7, 0. ]), 'f1': array([0.82, 0.  ])}
+INFO - main - Result: {'id': '13', 'loss': 1.1244, 'accuracy': 0.7, 'recall': array([1., 0.]), 'precision': array([0.7, 0. ]), 'f1': array([0.82, 0.  ]), 'learning_rate': 3e-05, 'hidden_dim': 128, 'status': 'ok'}
+INFO - main - Completed after 0:01:36
