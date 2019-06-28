@@ -1,0 +1,138 @@
+{
+  "artifacts": [],
+  "command": "main",
+  "experiment": {
+    "base_dir": "/home/ubuntu/offensive-text-classification",
+    "dependencies": [
+      "click==6.7",
+      "numpy==1.15.4",
+      "pandas==0.24.2",
+      "pytorch-pretrained-bert==0.6.2",
+      "sacred==0.7.4",
+      "torch==1.1.0",
+      "tqdm==4.31.1"
+    ],
+    "mainfile": "main.py",
+    "name": "main",
+    "repositories": [],
+    "sources": [
+      [
+        "data_loader.py",
+        "_sources/data_loader_3e2e77686b3133b74a71fcb54a367ce0.py"
+      ],
+      [
+        "evaluate.py",
+        "_sources/evaluate_be49f7b2ea64962dc9e106609e1cce84.py"
+      ],
+      [
+        "main.py",
+        "_sources/main_042612329ffe5426e42bb4072674d9e1.py"
+      ],
+      [
+        "models/__init__.py",
+        "_sources/__init___4754420467fb8efcb3b2c239de5ee157.py"
+      ],
+      [
+        "train.py",
+        "_sources/train_99159ffce1d14e9b571a97d2c111636a.py"
+      ],
+      [
+        "utils.py",
+        "_sources/utils_e7712e9936299524c11c276e2aa41361.py"
+      ]
+    ]
+  },
+  "heartbeat": "2019-06-28T09:54:20.096714",
+  "host": {
+    "ENV": {},
+    "cpu": "Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz",
+    "gpus": {
+      "driver_version": "418.40.04",
+      "gpus": [
+        {
+          "model": "Tesla M60",
+          "persistence_mode": true,
+          "total_memory": 7618
+        },
+        {
+          "model": "Tesla M60",
+          "persistence_mode": true,
+          "total_memory": 7618
+        }
+      ]
+    },
+    "hostname": "ip-172-31-44-104",
+    "os": [
+      "Linux",
+      "Linux-4.4.0-1085-aws-x86_64-with-debian-stretch-sid"
+    ],
+    "python_version": "3.6.5"
+  },
+  "meta": {
+    "command": "main",
+    "options": {
+      "--beat_interval": null,
+      "--capture": null,
+      "--comment": null,
+      "--debug": false,
+      "--enforce_clean": false,
+      "--file_storage": null,
+      "--force": false,
+      "--help": false,
+      "--loglevel": null,
+      "--mongo_db": null,
+      "--name": null,
+      "--pdb": false,
+      "--print_config": false,
+      "--priority": null,
+      "--queue": false,
+      "--sql": null,
+      "--tiny_db": null,
+      "--unobserved": false,
+      "COMMAND": null,
+      "UPDATE": [
+        "model_name=BERT",
+        "num_epochs=10",
+        "max_seq_length=80"
+      ],
+      "help": false,
+      "with": true
+    }
+  },
+  "resources": [],
+  "result": {
+    "accuracy": 0.84,
+    "f1": {
+      "dtype": "float64",
+      "py/object": "numpy.ndarray",
+      "values": [
+        0.9,
+        0.63
+      ]
+    },
+    "hidden_dim": 128,
+    "id": "2",
+    "learning_rate": 3e-05,
+    "loss": 0.854,
+    "precision": {
+      "dtype": "float64",
+      "py/object": "numpy.ndarray",
+      "values": [
+        0.84,
+        0.87
+      ]
+    },
+    "recall": {
+      "dtype": "float64",
+      "py/object": "numpy.ndarray",
+      "values": [
+        0.97,
+        0.52
+      ]
+    },
+    "status": "ok"
+  },
+  "start_time": "2019-06-28T09:09:20.389793",
+  "status": "COMPLETED",
+  "stop_time": "2019-06-28T09:54:20.016232"
+}
