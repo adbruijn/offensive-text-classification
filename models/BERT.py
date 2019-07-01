@@ -20,7 +20,7 @@ class BertNonLinear(nn.Module):
             output_dim: Output dimension (number of labels)
         """
 
-        super(Bert, self).__init__()
+        super(BertNonLinear, self).__init__()
         self.output_dim = output_dim
         self.dropout = dropout
 
@@ -51,7 +51,7 @@ class BertNorm(nn.Module):
             output_dim: Output dimension (number of labels)
         """
 
-        super(Bert, self).__init__()
+        super(BertNorm, self).__init__()
         self.output_dim = output_dim
         self.dropout = dropout
 
@@ -114,13 +114,13 @@ class BertLinearFreezeEmbeddings(nn.Module):
             output_dim: Output dimension (number of labels)
         """
 
-        super(BertLinearFreeze, self).__init__()
+        super(BertLinearFreezeEmbeddings, self).__init__()
         self.output_dim = output_dim
         self.dropout = dropout
 
         self.bert = BertModel.from_pretrained('bert-base-uncased')
 
-        for name, param in bert.named_parameters():                
+        for name, param in bert.named_parameters():
             if name.startswith('embeddings'):
                 param.requires_grad = False
 
