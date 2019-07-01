@@ -6,3 +6,4 @@ generate_json.py
 tmp.py
 results/*/best_model.pth.tar
 results/*/last_model.pth.tar
+check_results.py

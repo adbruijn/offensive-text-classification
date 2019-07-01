@@ -1,0 +1,3 @@
+BertLinearFreeze
+INFO - main - Completed after 0:09:51
+INFO - main - Result: {'id': '353', 'loss': 0.638, 'accuracy': 0.72, 'recall': array([1., 0.]), 'precision': array([0.72, 0.04]), 'f1': array([0.83, 0.01]), 'learning_rate': 3e-05, 'hidden_dim': 128, 'status': 'ok'}

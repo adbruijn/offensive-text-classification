@@ -260,6 +260,9 @@ def main(output_dim,
     elif model_name=="BERTLinearFreeze":
         model = models.BertLinearFreeze(hidden_dim, dropout, output_dim)
         print(model)
+    elif model_name=="BERTLinearFreezeEmbeddings":
+        model = models.BertLinearFreezeEmbeddings(hidden_dim, dropout, output_dim)
+        print(model)
     elif model_name=="BERTLSTM":
         model = models.BertLSTM(hidden_dim, dropout, bidirectional, output_dim)
         print(model)

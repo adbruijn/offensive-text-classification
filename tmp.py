@@ -128,13 +128,6 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, 
                                     directory=directory,
                                     checkpoint='best_model.pth.tar')
 
-        # if last_model:
-        #     save_checkpoint({'epoch': epoch+1,
-        #                            'state_dict': model.state_dict(),
-        #                            'optim_dict': optimizer.state_dict()},
-        #                             directory=directory,
-        #                             checkpoint='last_model.pth.tar')
-
         #Early stopping
         if val_results['loss'] >= best_val_loss:
             early_stop_step += 1
@@ -155,9 +148,6 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, 
         print('Valid Loss: {} | Valid Acc: {}'.format(val_results['loss'], val_results['accuracy']))
         print('Train recall: {} | Train precision: {}'.format(train_results['recall'], train_results['precision']))
         print('Valid recall: {} | Valid precision: {}'.format(val_results['recall'], val_results['precision']))
-
-        #Scheduler
-        #scheduler.step()
 
     return train_metrics, val_metrics
 
