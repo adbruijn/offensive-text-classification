@@ -35,7 +35,7 @@ class BertNonLinear(nn.Module):
     def forward(self, input_ids, token_type_ids=None, attention_mask=None, labels=None):
         encoded_layers, pooled_output = self.bert(input_ids, token_type_ids, attention_mask, output_all_encoded_layers=False)
 
-        x = self.linear1(pooled_output)))
+        x = self.linear1(pooled_output)
         x = self.relu(x)
         x = self.dropout(x)
         x = self.relu(self.linear2(x))
