@@ -270,7 +270,7 @@ def main(output_dim,
         model = models.BertNonLinear(dropout, output_dim)
         print(model)
     elif model_name=="BERTNorm":
-        model = models.BertNorm(hidden_dim, dropout, output_dim)
+        model = models.BertNorm(dropout, output_dim)
         print(model)
 
     model = model.to(device)
@@ -300,7 +300,7 @@ def main(output_dim,
     if use_mongo: log_scalars(test_metrics,"Test")
 
     test_metrics_df = pd.DataFrame(test_metrics)
-    test_metrics_df = pd.DataFrame(test_metrics, index=["NOT","OFF"])
+    #test_metrics_df = pd.DataFrame(test_metrics, index=["NOT","OFF"])
     print(test_metrics)
     test_metrics_df.to_csv(directory+"test_metrics.csv")
 
