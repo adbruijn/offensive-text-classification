@@ -263,10 +263,10 @@ def main(output_dim,
     elif model_name=="BERTLSTM":
         model = models.BertLSTM(hidden_dim, dropout, bidirectional, output_dim)
         print(model)
-    elif model_name=="BertNonLinear":
+    elif model_name=="BERTNonLinear":
         model = models.BertNonLinear(hidden_dim, dropout, bidirectional, output_dim)
         print(model)
-    elif model_name=="BertNorm":
+    elif model_name=="BERTNorm":
         model = models.BertNorm(hidden_dim, dropout, bidirectional, output_dim)
         print(model)
 
