@@ -1,0 +1,124 @@
+{
+  "artifacts": [],
+  "command": "main",
+  "experiment": {
+    "base_dir": "/Users/adebruijn/OneDrive/Documenten/Mobiquity/Code/Code",
+    "dependencies": [
+      "Click==7.0",
+      "numpy==1.16.1",
+      "pandas==0.24.1",
+      "pytorch-pretrained-bert==0.6.2",
+      "sacred==0.7.4",
+      "torch==0.4.1",
+      "tqdm==4.30.0"
+    ],
+    "mainfile": "main.py",
+    "name": "main",
+    "repositories": [],
+    "sources": [
+      [
+        "data_loader.py",
+        "_sources/data_loader_7f082224bf346baab9d05f7bc1c9bc6e.py"
+      ],
+      [
+        "evaluate.py",
+        "_sources/evaluate_be49f7b2ea64962dc9e106609e1cce84.py"
+      ],
+      [
+        "main.py",
+        "_sources/main_2ff36208416810bf7d1edc6cd3591eec.py"
+      ],
+      [
+        "models/__init__.py",
+        "_sources/__init___e93c5799dea2b2dda2f45886f351bc03.py"
+      ],
+      [
+        "train.py",
+        "_sources/train_99159ffce1d14e9b571a97d2c111636a.py"
+      ],
+      [
+        "utils.py",
+        "_sources/utils_e7712e9936299524c11c276e2aa41361.py"
+      ]
+    ]
+  },
+  "heartbeat": "2019-07-01T12:26:56.406084",
+  "host": {
+    "ENV": {},
+    "cpu": "Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz",
+    "hostname": "AMSadebruijnMRJG5H",
+    "os": [
+      "Darwin",
+      "Darwin-18.6.0-x86_64-i386-64bit"
+    ],
+    "python_version": "3.6.8"
+  },
+  "meta": {
+    "command": "main",
+    "options": {
+      "--beat_interval": null,
+      "--capture": null,
+      "--comment": null,
+      "--debug": false,
+      "--enforce_clean": false,
+      "--file_storage": null,
+      "--force": false,
+      "--help": false,
+      "--loglevel": null,
+      "--mongo_db": null,
+      "--name": null,
+      "--pdb": false,
+      "--print_config": false,
+      "--priority": null,
+      "--queue": false,
+      "--sql": null,
+      "--tiny_db": null,
+      "--unobserved": false,
+      "COMMAND": null,
+      "UPDATE": [
+        "model_name=LSTMAttention",
+        "max_seq_length=55",
+        "train_bs=100",
+        "learning_rate=1e-4"
+      ],
+      "help": false,
+      "with": true
+    }
+  },
+  "resources": [],
+  "result": {
+    "accuracy": 0.79,
+    "f1": {
+      "dtype": "float64",
+      "py/object": "numpy.ndarray",
+      "values": [
+        0.85,
+        0.62
+      ]
+    },
+    "hidden_dim": 128,
+    "id": "354",
+    "learning_rate": 0.0001,
+    "loss": 0.4894,
+    "precision": {
+      "dtype": "float64",
+      "py/object": "numpy.ndarray",
+      "values": [
+        0.8,
+        0.76
+      ]
+    },
+    "recall": {
+      "dtype": "float64",
+      "py/object": "numpy.ndarray",
+      "values": [
+        0.92,
+        0.53
+      ]
+    },
+    "status": "ok"
+  },
+  "start_time": "2019-07-01T12:12:12.064514",
+  "status": "COMPLETED",
+  "stop_time": "2019-07-01T12:26:56.288007"
+}

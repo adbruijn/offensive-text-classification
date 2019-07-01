@@ -25,7 +25,7 @@ class BertNonLinear(nn.Module):
         self.dropout = dropout
 
         self.bert = BertModel.from_pretrained('bert-base-uncased')
-        self.drop = nn.Dropout(dropout)
+        self.dropout = nn.Dropout(dropout)
         self.relu = nn.LeakyReLU()
 
         self.linear1 = nn.Linear(768, 768)
