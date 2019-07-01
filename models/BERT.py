@@ -120,7 +120,7 @@ class BertLinearFreezeEmbeddings(nn.Module):
 
         self.bert = BertModel.from_pretrained('bert-base-uncased')
 
-        for name, param in bert.named_parameters():
+        for name, param in self.bert.named_parameters():
             if name.startswith('embeddings'):
                 param.requires_grad = False
 
