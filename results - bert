@@ -7,3 +7,21 @@ INFO - main - Completed after 0:23:15
 INFO - main - Result: {'id': '352', 'loss': 0.568, 'accuracy': 0.83, 'recall': array([0.96, 0.48]), 'precision': array([0.83, 0.83]), 'f1': array([0.89, 0.58]), 'learning_rate': 3e-05, 'hidden_dim': 128, 'status': 'ok'}
 
 BertLinearFreezeEmbeddings
+INFO - main - Completed after 0:22:36
+INFO - main - Result: {'id': '2', 'loss': 0.63, 'accuracy': 0.84, 'recall': array([0.92, 0.63]), 'precision': array([0.87, 0.74]), 'f1': array([0.89, 0.66]), 'learning_rate': 3e-05, 'hidden_dim': 128, 'status': 'ok'}
+
+BERTLinear
+INFO - main - Completed after 0:23:18
+INFO - main - Result: {'id': '3', 'loss': 0.582, 'accuracy': 0.84, 'recall': array([0.96, 0.55]), 'precision': array([0.84, 0.83]), 'f1': array([0.89, 0.65]), 'learning_rate': 3e-05, 'hidden_dim': 128, 'status': 'ok'}
+
+BertNonLinear
+INFO - main - Completed after 0:23:18
+INFO - main - Result: {'id': '358', 'loss': 0.556, 'accuracy': 0.85, 'recall': array([0.95, 0.59]), 'precision': array([0.86, 0.8 ]), 'f1': array([0.9 , 0.66]), 'learning_rate': 3e-05, 'hidden_dim': 128, 'status': 'ok'}
+
+BERTNorm
+INFO - main - Completed after 0:23:20
+INFO - main - Result: {'id': '360', 'loss': 0.566, 'accuracy': 0.84, 'recall': array([0.92, 0.62]), 'precision': array([0.86, 0.78]), 'f1': array([0.89, 0.68]), 'learning_rate': 3e-05, 'hidden_dim': 128, 'status': 'ok'}
+
+Bert
+INFO - main - Completed after 0:23:26
+INFO - main - Result: {'id': '361', 'loss': 0.638, 'accuracy': 0.84, 'recall': array([0.96, 0.52]), 'precision': array([0.84, 0.83]), 'f1': array([0.89, 0.63]), 'learning_rate': 3e-05, 'hidden_dim': 128, 'status': 'ok'}

@@ -92,12 +92,12 @@ def load_data(subtask):
 
     RANDOM_STATE = 123
 
-    train_file = Path("data/train.csv")
+    train_file = Path("data/train_"+subtask+".csv")
 
     if train_file.exists():
-        train = pd.read_csv("data/train.csv")
-        val = pd.read_csv("data/val.csv")
-        test = pd.read_csv("data/test.csv")
+        train = pd.read_csv("data/train_"+subtask+".csv")
+        val = pd.read_csv("data/val_"+subtask+".csv")
+        test = pd.read_csv("data/test_"+subtask+".csv")
     else:
         # Split normal data
         train_cola = pd.read_csv("data/SemEval/olid-training-v1.0.tsv", delimiter="\t")

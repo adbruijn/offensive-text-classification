@@ -35,9 +35,7 @@ class BertNonLinear(nn.Module):
     def forward(self, input_ids, token_type_ids=None, attention_mask=None, labels=None):
         encoded_layers, pooled_output = self.bert(input_ids, token_type_ids, attention_mask, output_all_encoded_layers=False)
 
-        x = self.linear1(pooled_output)
-        x = self.relu(x)
-        x = self.dropout(x)
+        x = self.reulu(self.dropout(self.linear1(pooled_output)))
         x = self.relu(self.linear2(x))
         x = self.relu(self.linear3(x))
 
@@ -135,6 +133,40 @@ class BertLinearFreezeEmbeddings(nn.Module):
 
         x = self.linear1(pooled_output)
 
+        return x
+
+class BertLinearFreezeEmbeddingsMultiple(nn.Module):
+    def __init__(self, hidden_dim, dropout, output_dim):
+        """
+        Args:
+            hidden_dim: Size hiddden state
+            dropout: Dropout probability
+            output_dim: Output dimension (number of labels)
+        """
+
+        super(BertLinearFreezeEmbeddings, self).__init__()
+        self.output_dim = output_dim
+        self.dropout = dropout
+
+        self.bert = BertModel.from_pretrained('bert-base-uncased')
+
+        for name, param in self.bert.named_parameters():
+            if name.startswith('embeddings'):
+                param.requires_grad = False
+
+        self.dropout = nn.Dropout(dropout)
+        self.relu = nn.LeakyReLU()
+
+        self.linear1 = nn.Linear(768, output_dim)
+
+    def forward(self, input_ids, token_type_ids=None, attention_mask=None, labels=None):
+
+        encoded_layers, pooled_output = self.bert(input_ids, token_type_ids, attention_mask, output_all_encoded_layers=False)
+
+        x = self.linear1(pooled_output)
+        x = self.linear2(x)
+        x = self.linear3(x)
+        
         return x
 
 class BertLinear(nn.Module):

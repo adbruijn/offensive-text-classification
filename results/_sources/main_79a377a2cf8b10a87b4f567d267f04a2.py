@@ -49,6 +49,10 @@ DATABASE_NAME = 'experiments'
 URL_NAME = 'mongodb://localhost:27017/'
 
 ex = Experiment()
+ex.observers.append(FileStorageObserver.create('results'))
+ex.observers.append(FileStorageObserver.create('results-bert-aws'))
+ex.observers.append(FileStorageObserver.create('results-bert-google'))
+ex.observers.append(FileStorageObserver.create('results-features'))
 #ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
 ex.captured_out_filter = apply_backspaces_and_linefeeds
 
@@ -177,17 +181,11 @@ def config():
     vm = "aws"
     subtask = "a" #Subtask name: a, b or c
 
-    #ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
-    if "BERT" not in model_name:
-        ex.observers.append(FileStorageObserver.create('results'))
-    elif vm == "aws":
-        ex.observers.append(FileStorageObserver.create('results-bert-aws'))
-    elif vm == "google":
-        ex.observers.append(FileStorageObserver.create('results-bert-google'))
-
 @ex.automain
 def main(output_dim,
-        batch_size,
+        train_bs,
+        val_bs,
+        test_bs,
         num_epochs,
         max_seq_length,
         learning_rate,
@@ -216,10 +214,8 @@ def main(output_dim,
 
     if vm == "google":
         directory = f"results-bert-google/{_run._id}/"
-        directory_checkpoints =  f"results-bert-google/checkpoints/{_run._id}/"
     elif vm == "aws":
         directory = f"results-bert-aws/{_run._id}/"
-        directory_checkpoints =  f"results-bert-aws/checkpoints/{_run._id}/"
 
     #Data
     if use_bert:
@@ -292,11 +288,13 @@ def main(output_dim,
 
     #Add artifacts
     #ex.add_artifact(directory+"best_model.pth.tar")
+    #ex.add_artifact(directory+"last_model.pth.tar")
 
     test_metrics = evaluate_model(model, optimizer, loss_fn, test_dataloader, device, use_bert)
     if use_mongo: log_scalars(test_metrics,"Test")
 
     test_metrics_df = pd.DataFrame(test_metrics)
+    #test_metrics_df = pd.DataFrame(test_metrics, index=["NOT","OFF"])
     print(test_metrics)
     test_metrics_df.to_csv(directory+"test_metrics.csv")
 
@@ -311,8 +309,6 @@ def main(output_dim,
         'f1': test_metrics['f1'],
         'learning_rate': learning_rate,
         'hidden_dim': hidden_dim,
-        'dropout': dropout,
-        'max_seq_length': max_seq_length,
         'status': 'ok'
     }
 

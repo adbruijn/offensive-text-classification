@@ -9,3 +9,7 @@ results/*/last_model.pth.tar
 check_results.py
 results - bert
 data/clean_total.csv
+generated_slack.json
+load_data_tmp.py
+results - overview
+results/checkpoints

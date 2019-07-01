@@ -49,6 +49,10 @@ DATABASE_NAME = 'experiments'
 URL_NAME = 'mongodb://localhost:27017/'
 
 ex = Experiment()
+ex.observers.append(FileStorageObserver.create('results'))
+ex.observers.append(FileStorageObserver.create('results-bert-aws'))
+ex.observers.append(FileStorageObserver.create('results-bert-google'))
+ex.observers.append(FileStorageObserver.create('results-features'))
 #ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
 ex.captured_out_filter = apply_backspaces_and_linefeeds
 
@@ -160,7 +164,9 @@ def config():
     """Configuration"""
 
     output_dim = 2 #Number of labels (default=2)
-    batch_size = 32.0 #Batch size (default=32)
+    train_bs = 32.0 #Train batch size (default=32)
+    val_bs = 32.0 #Validation batch size (default=32)
+    test_bs = 32.0  #Test batch size (default=32)
     num_epochs = 100 #Number of epochs (default=100)
     max_seq_length = 45 #Maximum sequence length of the sentences (default=40)
     learning_rate = 3e-5 #Learning rate for the model (default=3e-5)
@@ -177,17 +183,11 @@ def config():
     vm = "aws"
     subtask = "a" #Subtask name: a, b or c
 
-    #ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
-    if "BERT" not in model_name:
-        ex.observers.append(FileStorageObserver.create('results'))
-    elif vm == "aws":
-        ex.observers.append(FileStorageObserver.create('results-bert-aws'))
-    elif vm == "google":
-        ex.observers.append(FileStorageObserver.create('results-bert-google'))
-
 @ex.automain
 def main(output_dim,
-        batch_size,
+        train_bs,
+        val_bs,
+        test_bs,
         num_epochs,
         max_seq_length,
         learning_rate,
@@ -209,6 +209,10 @@ def main(output_dim,
     directory_checkpoints = f"results/checkpoints/{_run._id}/"
     directory = f"results/{_run._id}/"
 
+    #Batch sizes
+    batch_sizes = [int(train_bs), int(val_bs), int(test_bs)]
+    batch_size = int(train_bs)
+
     if "BERT" in model_name:  #Default = False, if BERT model is used then use_bert is set to True
         use_bert = True
     else:
@@ -216,14 +220,12 @@ def main(output_dim,
 
     if vm == "google":
         directory = f"results-bert-google/{_run._id}/"
-        directory_checkpoints =  f"results-bert-google/checkpoints/{_run._id}/"
     elif vm == "aws":
         directory = f"results-bert-aws/{_run._id}/"
-        directory_checkpoints =  f"results-bert-aws/checkpoints/{_run._id}/"
 
     #Data
     if use_bert:
-        train_dataloader, val_dataloader, test_dataloader = get_data_bert(int(max_seq_length), batch_size, subtask)
+        train_dataloader, val_dataloader, test_dataloader = get_data_bert(int(max_seq_length), batch_sizes, subtask)
     else:
         embedding_dim, vocab_size, embedding_matrix, train_dataloader, val_dataloader, test_dataloader = get_data(int(max_seq_length), embedding_file=embedding_file, batch_size=batch_size, subtask=subtask)
 
@@ -268,7 +270,7 @@ def main(output_dim,
         model = models.BertNonLinear(dropout, output_dim)
         print(model)
     elif model_name=="BERTNorm":
-        model = models.BertNorm(dropout, output_dim)
+        model = models.BertNorm(hidden_dim, dropout, output_dim)
         print(model)
 
     model = model.to(device)
@@ -292,11 +294,13 @@ def main(output_dim,
 
     #Add artifacts
     #ex.add_artifact(directory+"best_model.pth.tar")
+    #ex.add_artifact(directory+"last_model.pth.tar")
 
     test_metrics = evaluate_model(model, optimizer, loss_fn, test_dataloader, device, use_bert)
     if use_mongo: log_scalars(test_metrics,"Test")
 
     test_metrics_df = pd.DataFrame(test_metrics)
+    #test_metrics_df = pd.DataFrame(test_metrics, index=["NOT","OFF"])
     print(test_metrics)
     test_metrics_df.to_csv(directory+"test_metrics.csv")
 
@@ -311,8 +315,6 @@ def main(output_dim,
         'f1': test_metrics['f1'],
         'learning_rate': learning_rate,
         'hidden_dim': hidden_dim,
-        'dropout': dropout,
-        'max_seq_length': max_seq_length,
         'status': 'ok'
     }
 
