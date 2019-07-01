@@ -131,13 +131,6 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, 
                                     directory=directory,
                                     checkpoint='best_model.pth.tar')
 
-        # if last_model:
-        #     save_checkpoint({'epoch': epoch+1,
-        #                            'state_dict': model.state_dict(),
-        #                            'optim_dict': optimizer.state_dict()},
-        #                             directory=directory,
-        #                             checkpoint='last_model.pth.tar')
-
         #Early stopping
         if val_results['loss'] >= best_val_loss:
             early_stop_step += 1
@@ -150,13 +143,6 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, 
 
         if stop_early:
             print("Stopping early at epoch {}".format(epoch))
-
-            #Save last model when stop early
-            # save_checkpoint({'epoch': epoch+1,
-            #                        'state_dict': model.state_dict(),
-            #                        'optim_dict': optimizer.state_dict()},
-            #                         directory=directory,
-            #                         checkpoint='last_model.pth.tar')
 
             return train_metrics, val_metrics
 
@@ -194,7 +180,7 @@ def config():
     embedding_file = 'data/GloVe/glove.twitter.27B.200d.txt' #Embedding file
     model_name = "MLP" #Model name: LSTM, BERT, MLP, CNN
     use_mongo = False
-    vm = ""
+    vm = "aws"
     subtask = "a" #Subtask name: a, b or c
 
 @ex.automain
@@ -276,6 +262,12 @@ def main(output_dim,
         print(model)
     elif model_name=="BERTLSTM":
         model = models.BertLSTM(hidden_dim, dropout, bidirectional, output_dim)
+        print(model)
+    elif model_name=="BertNonLinear":
+        model = models.BertNonLinear(hidden_dim, dropout, bidirectional, output_dim)
+        print(model)
+    elif model_name=="BertNorm":
+        model = models.BertNorm(hidden_dim, dropout, bidirectional, output_dim)
         print(model)
 
     model = model.to(device)

@@ -8,4 +8,4 @@ from .CNN import CNN
 from .LSTM import LSTM
 from .LSTMAttention import LSTMAttention
 from .MLP import MLP, MLP_Features
-from .BERT import BertLinear, BertLSTM, BertLinearFreeze
+from .BERT import *
