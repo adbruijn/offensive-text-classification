@@ -57,9 +57,9 @@ class BertNorm(nn.Module):
 
         self.bert = BertModel.from_pretrained('bert-base-uncased')
         self.fc = nn.Sequential(
-            nn.Linear(768,768)
-            nn.BatchNorm1d(768)
-            nn.ReLU(inplace=True)
+            nn.Linear(768,768),
+            nn.BatchNorm1d(768),
+            nn.ReLU(inplace=True),
             nn.Linear(768, output_dim)
         )
 
