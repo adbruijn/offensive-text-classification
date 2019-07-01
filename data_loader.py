@@ -83,10 +83,12 @@ def create_weight_matrix(vocab_size, word_index, embedding_dim, embeddings_index
     return embedding_matrix
 
 #Load data
-def load_data():
+def load_data(subtask):
     """
     Loads the data, if the data is not splitted yet the data will be split in a train and val set
     """
+
+    subtask_name = "subtask_" + subtask
 
     RANDOM_STATE = 123
 
@@ -99,9 +101,9 @@ def load_data():
     else:
         # Split normal data
         train_cola = pd.read_csv("data/SemEval/olid-training-v1.0.tsv", delimiter="\t")
-        test_cola = pd.read_csv("data/SemEval/testset-levela.tsv", delimiter="\t")
-        labels_cola = pd.read_csv("data/SemEval/labels-levela.csv", header=None)
-        labels_cola.columns = ['id', 'subtask_a']
+        test_cola = pd.read_csv("data/SemEval/testset-level"+subtask+".tsv", delimiter="\t")
+        labels_cola = pd.read_csv("data/SemEval/labels-level"+subtask+".csv", header=None)
+        labels_cola.columns = ['id', subtask_name]
 
         test = pd.merge(test_cola, labels_cola, on='id')
 
@@ -109,21 +111,25 @@ def load_data():
         train_cola = train_cola.drop_duplicates("tweet")
         test = test.drop_duplicates("tweet")
 
-        train, val = train_test_split(train_cola, test_size=0.2, random_state=RANDOM_STATE)
+        #Remove nan in a certain column
+        train_cola = train_cola.dropna(subset=[subtask_name])
+        test = test.dropna(subset=[subtask_name])
+
+        train, val = train_test_split(train_cola, test_size=0.2, random_state=123)
         train.reset_index(drop=True)
         val.reset_index(drop=True)
 
-        train = train[["tweet","subtask_a"]]
-        val = val[["tweet","subtask_a"]]
-        test = test[["tweet","subtask_a"]]
+        train = train[["tweet",subtask_name]]
+        val = val[["tweet",subtask_name]]
+        test = test[["tweet",subtask_name]]
 
         train.columns = ['text', 'label']
         val.columns = ['text','label']
         test.columns = ['text', 'label']
 
-        train.to_csv("data/train.csv", index=False)
-        val.to_csv("data/val.csv", index=False)
-        test.to_csv("data/test.csv", index=False)
+        train.to_csv("data/train_"+subtask+".csv", index=False)
+        val.to_csv("data/val_"+subtask+".csv", index=False)
+        test.to_csv("data/test_"+subtask+".csv", index=False)
 
     return train, val, test
 
@@ -261,7 +267,7 @@ def encode_label(y):
 
     return np.array(le.transform(y))
 
-def get_data_bert(max_seq_length, batch_sizes):
+def get_data_bert(max_seq_length, batch_sizes, subtask):
 
     """
     Args:
@@ -275,7 +281,7 @@ def get_data_bert(max_seq_length, batch_sizes):
     """
 
     #Load data
-    train, val, test = load_data()
+    train, val, test = load_data(subtask)
 
     #Clean data
     X_train, y_train = clean_data(train)
@@ -296,7 +302,7 @@ def get_data_bert(max_seq_length, batch_sizes):
 
     return train_dataloader, val_dataloader, test_dataloader
 
-def get_data(max_seq_len, embedding_file, batch_size):
+def get_data(max_seq_len, embedding_file, batch_size, subtask):
 
     """
     Args:
@@ -309,7 +315,7 @@ def get_data(max_seq_len, embedding_file, batch_size):
     """
 
     #Load data
-    train, val, test = load_data()
+    train, val, test = load_data(subtask)
 
     #Embedding dimension based on the embedding_file
     embedding_dim = int(re.findall('\d{3,}', embedding_file)[0])

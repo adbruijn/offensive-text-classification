@@ -1,0 +1,25 @@
+{
+  "__doc__": "Configuration",
+  "bidirectional": false,
+  "dropout": 0.195,
+  "early_stopping_criteria": 20,
+  "embedding_file": "data/GloVe/glove.twitter.27B.200d.txt",
+  "filter_sizes": [
+    2,
+    3,
+    4
+  ],
+  "hidden_dim": 160.0,
+  "learning_rate": 0.00028199999999999997,
+  "max_seq_length": 50.0,
+  "model_name": "LSTMAttention",
+  "num_epochs": 500,
+  "num_layers": 12.0,
+  "output_dim": 2,
+  "seed": 878616929,
+  "test_bs": 32.0,
+  "train_bs": 120.0,
+  "use_mongo": false,
+  "val_bs": 32.0,
+  "warmup_proportion": 0.1
+}

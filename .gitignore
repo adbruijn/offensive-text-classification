@@ -4,4 +4,5 @@ data/GloVe/
 .DS_Store
 generate_json.py
 tmp.py
-results/checkpoints/
+results/*/best_model.pth.tar
+results/*/last_model.pth.tar

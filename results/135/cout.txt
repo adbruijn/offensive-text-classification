@@ -1,0 +1,2391 @@
+INFO - main - Running command 'main'
+
+INFO - main - Started run with ID "135"
+
+
+                                                                                                    
+Loaded 1193515 word vectors
+
+ 36%|███▌      | 36/100 [3:10:04<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+MLP(
+  (word_embeddings): Embedding(17401, 200)
+  (linear1): Linear(in_features=200, out_features=90, bias=True)
+  (linear2): Linear(in_features=90, out_features=90, bias=True)
+  (linear3): Linear(in_features=90, out_features=45, bias=True)
+  (dropout): Dropout(p=0.335)
+  (output): Linear(in_features=45, out_features=2, bias=True)
+)
+
+ 36%|███▌      | 36/100 [3:10:07<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Training and evaluation for 500 epochs...
+
+ 36%|███▌      | 36/100 [3:10:07<5:40:59, 319.68s/it, best loss: 0.4787]
+Epoch:   0%|          | 0/500 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/106 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   4%|3         | 4/106 [00:00<00:02, 38.20it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   8%|8         | 9/106 [00:00<00:02, 40.38it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  13%|#3        | 14/106 [00:00<00:02, 40.75it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  18%|#7        | 19/106 [00:00<00:02, 42.84it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  23%|##2       | 24/106 [00:00<00:01, 44.47it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  28%|##8       | 30/106 [00:00<00:01, 46.41it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  34%|###3      | 36/106 [00:00<00:01, 48.49it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  40%|###9      | 42/106 [00:00<00:01, 49.60it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  45%|####5     | 48/106 [00:00<00:01, 51.46it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  52%|#####1    | 55/106 [00:01<00:00, 54.20it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  58%|#####7    | 61/106 [00:01<00:00, 55.46it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  64%|######4   | 68/106 [00:01<00:00, 57.79it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  70%|######9   | 74/106 [00:01<00:00, 56.68it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  75%|#######5  | 80/106 [00:01<00:00, 55.48it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  81%|########1 | 86/106 [00:01<00:00, 53.14it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  87%|########6 | 92/106 [00:01<00:00, 51.71it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  92%|#########2| 98/106 [00:01<00:00, 52.16it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  98%|#########8| 104/106 [00:02<00:00, 52.80it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 106/106 [00:02<00:00, 51.97it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/27 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  33%|###3      | 9/27 [00:00<00:00, 82.63it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  63%|######2   | 17/27 [00:00<00:00, 79.15it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  85%|########5 | 23/27 [00:00<00:00, 71.76it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 27/27 [00:00<00:00, 71.44it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+                                                                        
+Train Loss: 0.63 | Train Acc: 0.67
+
+ 36%|███▌      | 36/100 [3:10:10<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid Loss: 0.59 | Valid Acc: 0.65
+
+ 36%|███▌      | 36/100 [3:10:10<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train recall: [1. 0.] | Train precision: [0.67 0.  ]
+
+ 36%|███▌      | 36/100 [3:10:10<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid recall: [1. 0.] | Valid precision: [0.65 0.  ]
+
+ 36%|███▌      | 36/100 [3:10:10<5:40:59, 319.68s/it, best loss: 0.4787]
+Epoch:   0%|          | 1/500 [00:02<20:42,  2.49s/it]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/106 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   5%|4         | 5/106 [00:00<00:02, 43.43it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  11%|#1        | 12/106 [00:00<00:01, 47.53it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  17%|#6        | 18/106 [00:00<00:01, 50.41it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  22%|##1       | 23/106 [00:00<00:01, 48.05it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  26%|##6       | 28/106 [00:00<00:01, 45.14it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  32%|###2      | 34/106 [00:00<00:01, 47.21it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  38%|###7      | 40/106 [00:00<00:01, 50.01it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  43%|####3     | 46/106 [00:00<00:01, 50.65it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  50%|#####     | 53/106 [00:01<00:00, 53.40it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  56%|#####5    | 59/106 [00:01<00:00, 54.23it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  61%|######1   | 65/106 [00:01<00:00, 51.71it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  68%|######7   | 72/106 [00:01<00:00, 54.22it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  75%|#######4  | 79/106 [00:01<00:00, 56.00it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  80%|########  | 85/106 [00:01<00:00, 57.09it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  86%|########5 | 91/106 [00:01<00:00, 55.45it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  92%|#########1| 97/106 [00:01<00:00, 56.41it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  98%|#########8| 104/106 [00:01<00:00, 57.66it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 106/106 [00:01<00:00, 54.26it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/27 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  33%|###3      | 9/27 [00:00<00:00, 89.45it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  67%|######6   | 18/27 [00:00<00:00, 87.30it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  93%|#########2| 25/27 [00:00<00:00, 80.36it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 27/27 [00:00<00:00, 80.19it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+                                                                        
+Train Loss: 0.54 | Train Acc: 0.72
+
+ 36%|███▌      | 36/100 [3:10:12<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid Loss: 0.51 | Valid Acc: 0.75
+
+ 36%|███▌      | 36/100 [3:10:12<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train recall: [0.91 0.33] | Train precision: [0.74 0.55]
+
+ 36%|███▌      | 36/100 [3:10:12<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid recall: [0.89 0.48] | Valid precision: [0.76 0.7 ]
+
+ 36%|███▌      | 36/100 [3:10:12<5:40:59, 319.68s/it, best loss: 0.4787]
+Epoch:   0%|          | 2/500 [00:04<20:21,  2.45s/it]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/106 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   8%|7         | 8/106 [00:00<00:01, 76.02it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  15%|#5        | 16/106 [00:00<00:01, 75.46it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  23%|##2       | 24/106 [00:00<00:01, 74.10it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  28%|##8       | 30/106 [00:00<00:01, 68.58it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  34%|###3      | 36/106 [00:00<00:01, 64.22it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  41%|####      | 43/106 [00:00<00:00, 63.14it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  46%|####6     | 49/106 [00:00<00:00, 61.00it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  52%|#####1    | 55/106 [00:00<00:00, 56.69it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  58%|#####7    | 61/106 [00:01<00:00, 53.89it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  64%|######4   | 68/106 [00:01<00:00, 56.77it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  71%|#######   | 75/106 [00:01<00:00, 59.61it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  77%|#######7  | 82/106 [00:01<00:00, 60.42it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  84%|########3 | 89/106 [00:01<00:00, 62.26it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  91%|######### | 96/106 [00:01<00:00, 61.34it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  97%|#########7| 103/106 [00:01<00:00, 59.92it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 106/106 [00:01<00:00, 61.60it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/27 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  33%|###3      | 9/27 [00:00<00:00, 88.92it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  67%|######6   | 18/27 [00:00<00:00, 87.18it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  96%|#########6| 26/27 [00:00<00:00, 84.23it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 27/27 [00:00<00:00, 85.02it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+                                                                        
+Train Loss: 0.5 | Train Acc: 0.76
+
+ 36%|███▌      | 36/100 [3:10:14<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid Loss: 0.49 | Valid Acc: 0.75
+
+ 36%|███▌      | 36/100 [3:10:14<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train recall: [0.87 0.55] | Train precision: [0.8  0.67]
+
+ 36%|███▌      | 36/100 [3:10:14<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid recall: [0.89 0.5 ] | Valid precision: [0.77 0.71]
+
+ 36%|███▌      | 36/100 [3:10:14<5:40:59, 319.68s/it, best loss: 0.4787]
+Epoch:   1%|          | 3/500 [00:06<19:26,  2.35s/it]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/106 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   6%|5         | 6/106 [00:00<00:01, 54.08it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  12%|#2        | 13/106 [00:00<00:01, 56.12it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  19%|#8        | 20/106 [00:00<00:01, 57.82it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  25%|##4       | 26/106 [00:00<00:01, 58.31it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  30%|###       | 32/106 [00:00<00:01, 58.56it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  37%|###6      | 39/106 [00:00<00:01, 60.21it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  43%|####3     | 46/106 [00:00<00:00, 62.26it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  50%|#####     | 53/106 [00:00<00:00, 62.01it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  57%|#####6    | 60/106 [00:00<00:00, 61.67it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  62%|######2   | 66/106 [00:01<00:00, 58.58it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  68%|######7   | 72/106 [00:01<00:00, 50.21it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  74%|#######3  | 78/106 [00:01<00:00, 52.70it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  79%|#######9  | 84/106 [00:01<00:00, 54.45it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  85%|########4 | 90/106 [00:01<00:00, 55.33it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  91%|######### | 96/106 [00:01<00:00, 55.68it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  98%|#########8| 104/106 [00:01<00:00, 59.47it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 106/106 [00:01<00:00, 58.55it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/27 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  37%|###7      | 10/27 [00:00<00:00, 92.65it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  78%|#######7  | 21/27 [00:00<00:00, 96.19it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 27/27 [00:00<00:00, 97.03it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+                                                                        
+Early stop step:
+
+ 36%|███▌      | 36/100 [3:10:17<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+1
+
+ 36%|███▌      | 36/100 [3:10:17<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train Loss: 0.48 | Train Acc: 0.77
+
+ 36%|███▌      | 36/100 [3:10:17<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid Loss: 0.49 | Valid Acc: 0.75
+
+ 36%|███▌      | 36/100 [3:10:17<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train recall: [0.87 0.56] | Train precision: [0.8  0.68]
+
+ 36%|███▌      | 36/100 [3:10:17<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid recall: [0.91 0.47] | Valid precision: [0.76 0.73]
+
+ 36%|███▌      | 36/100 [3:10:17<5:40:59, 319.68s/it, best loss: 0.4787]
+Epoch:   1%|          | 4/500 [00:09<18:50,  2.28s/it]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/106 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   7%|6         | 7/106 [00:00<00:01, 67.54it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  13%|#3        | 14/106 [00:00<00:01, 68.01it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  20%|#9        | 21/106 [00:00<00:01, 68.27it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  26%|##6       | 28/106 [00:00<00:01, 66.48it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  32%|###2      | 34/106 [00:00<00:01, 64.13it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  39%|###8      | 41/106 [00:00<00:01, 62.58it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  45%|####5     | 48/106 [00:00<00:00, 61.58it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  52%|#####1    | 55/106 [00:00<00:00, 62.32it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  58%|#####7    | 61/106 [00:00<00:00, 61.49it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  63%|######3   | 67/106 [00:01<00:00, 60.95it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  70%|######9   | 74/106 [00:01<00:00, 61.27it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  76%|#######6  | 81/106 [00:01<00:00, 58.78it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  83%|########3 | 88/106 [00:01<00:00, 61.33it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  90%|########9 | 95/106 [00:01<00:00, 60.43it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  96%|#########6| 102/106 [00:01<00:00, 60.86it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 106/106 [00:01<00:00, 61.68it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/27 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  33%|###3      | 9/27 [00:00<00:00, 81.87it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  67%|######6   | 18/27 [00:00<00:00, 83.23it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  96%|#########6| 26/27 [00:00<00:00, 79.80it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 27/27 [00:00<00:00, 80.60it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+                                                                        
+Train Loss: 0.47 | Train Acc: 0.78
+
+ 36%|███▌      | 36/100 [3:10:19<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid Loss: 0.48 | Valid Acc: 0.76
+
+ 36%|███▌      | 36/100 [3:10:19<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train recall: [0.88 0.56] | Train precision: [0.81 0.69]
+
+ 36%|███▌      | 36/100 [3:10:19<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid recall: [0.9  0.48] | Valid precision: [0.76 0.72]
+
+ 36%|███▌      | 36/100 [3:10:19<5:40:59, 319.68s/it, best loss: 0.4787]
+Epoch:   1%|1         | 5/500 [00:11<18:23,  2.23s/it]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/106 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   7%|6         | 7/106 [00:00<00:01, 66.90it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  13%|#3        | 14/106 [00:00<00:01, 65.33it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  19%|#8        | 20/106 [00:00<00:01, 61.43it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  25%|##4       | 26/106 [00:00<00:01, 60.86it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  31%|###1      | 33/106 [00:00<00:01, 62.16it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  37%|###6      | 39/106 [00:00<00:01, 60.41it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  42%|####2     | 45/106 [00:00<00:01, 55.05it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  48%|####8     | 51/106 [00:00<00:00, 55.13it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  55%|#####4    | 58/106 [00:00<00:00, 56.80it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  61%|######1   | 65/106 [00:01<00:00, 59.06it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  67%|######6   | 71/106 [00:01<00:00, 58.81it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  74%|#######3  | 78/106 [00:01<00:00, 59.87it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  79%|#######9  | 84/106 [00:01<00:00, 59.18it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  86%|########5 | 91/106 [00:01<00:00, 61.27it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  92%|#########2| 98/106 [00:01<00:00, 62.60it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 106/106 [00:01<00:00, 65.17it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/27 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  37%|###7      | 10/27 [00:00<00:00, 96.89it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  74%|#######4  | 20/27 [00:00<00:00, 97.43it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 27/27 [00:00<00:00, 92.53it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+                                                                        
+Early stop step:
+
+ 36%|███▌      | 36/100 [3:10:21<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+1
+
+ 36%|███▌      | 36/100 [3:10:21<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train Loss: 0.47 | Train Acc: 0.78
+
+ 36%|███▌      | 36/100 [3:10:21<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid Loss: 0.48 | Valid Acc: 0.75
+
+ 36%|███▌      | 36/100 [3:10:21<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train recall: [0.88 0.56] | Train precision: [0.81 0.7 ]
+
+ 36%|███▌      | 36/100 [3:10:21<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid recall: [0.91 0.47] | Valid precision: [0.76 0.73]
+
+ 36%|███▌      | 36/100 [3:10:21<5:40:59, 319.68s/it, best loss: 0.4787]
+Epoch:   1%|1         | 6/500 [00:13<17:58,  2.18s/it]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/106 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   7%|6         | 7/106 [00:00<00:01, 63.11it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  13%|#3        | 14/106 [00:00<00:01, 63.85it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  20%|#9        | 21/106 [00:00<00:01, 63.82it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  26%|##6       | 28/106 [00:00<00:01, 63.35it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  31%|###1      | 33/106 [00:00<00:01, 58.43it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  37%|###6      | 39/106 [00:00<00:01, 58.16it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  43%|####3     | 46/106 [00:00<00:00, 60.81it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  50%|#####     | 53/106 [00:00<00:00, 60.95it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  57%|#####6    | 60/106 [00:00<00:00, 61.99it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  62%|######2   | 66/106 [00:01<00:00, 59.67it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  68%|######7   | 72/106 [00:01<00:00, 58.99it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  74%|#######3  | 78/106 [00:01<00:00, 58.92it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  80%|########  | 85/106 [00:01<00:00, 60.09it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  87%|########6 | 92/106 [00:01<00:00, 60.65it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  93%|#########3| 99/106 [00:01<00:00, 58.97it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  99%|#########9| 105/106 [00:01<00:00, 55.15it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 106/106 [00:01<00:00, 59.70it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/27 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  37%|###7      | 10/27 [00:00<00:00, 89.02it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  74%|#######4  | 20/27 [00:00<00:00, 90.95it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 27/27 [00:00<00:00, 91.32it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+                                                                        
+Early stop step:
+
+ 36%|███▌      | 36/100 [3:10:23<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+2
+
+ 36%|███▌      | 36/100 [3:10:23<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train Loss: 0.46 | Train Acc: 0.78
+
+ 36%|███▌      | 36/100 [3:10:23<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid Loss: 0.48 | Valid Acc: 0.76
+
+ 36%|███▌      | 36/100 [3:10:23<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train recall: [0.88 0.57] | Train precision: [0.81 0.7 ]
+
+ 36%|███▌      | 36/100 [3:10:23<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid recall: [0.91 0.48] | Valid precision: [0.77 0.73]
+
+ 36%|███▌      | 36/100 [3:10:23<5:40:59, 319.68s/it, best loss: 0.4787]
+Epoch:   1%|1         | 7/500 [00:15<17:45,  2.16s/it]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/106 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   8%|7         | 8/106 [00:00<00:01, 67.55it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  13%|#3        | 14/106 [00:00<00:01, 63.65it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  20%|#9        | 21/106 [00:00<00:01, 63.44it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  26%|##6       | 28/106 [00:00<00:01, 62.34it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  32%|###2      | 34/106 [00:00<00:01, 61.13it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  38%|###7      | 40/106 [00:00<00:01, 60.25it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  43%|####3     | 46/106 [00:00<00:01, 58.57it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  49%|####9     | 52/106 [00:00<00:00, 57.27it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  55%|#####4    | 58/106 [00:00<00:00, 54.64it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  60%|######    | 64/106 [00:01<00:00, 54.43it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  67%|######6   | 71/106 [00:01<00:00, 57.48it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  74%|#######3  | 78/106 [00:01<00:00, 59.27it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  79%|#######9  | 84/106 [00:01<00:00, 59.01it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  86%|########5 | 91/106 [00:01<00:00, 60.66it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  92%|#########2| 98/106 [00:01<00:00, 60.57it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  99%|#########9| 105/106 [00:01<00:00, 59.84it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 106/106 [00:01<00:00, 59.29it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/27 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  37%|###7      | 10/27 [00:00<00:00, 97.41it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  70%|#######   | 19/27 [00:00<00:00, 94.53it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 27/27 [00:00<00:00, 96.32it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+                                                                        
+Early stop step:
+
+ 36%|███▌      | 36/100 [3:10:25<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+3
+
+ 36%|███▌      | 36/100 [3:10:25<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train Loss: 0.46 | Train Acc: 0.78
+
+ 36%|███▌      | 36/100 [3:10:25<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid Loss: 0.48 | Valid Acc: 0.76
+
+ 36%|███▌      | 36/100 [3:10:25<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train recall: [0.89 0.58] | Train precision: [0.81 0.71]
+
+ 36%|███▌      | 36/100 [3:10:25<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid recall: [0.9 0.5] | Valid precision: [0.77 0.72]
+
+ 36%|███▌      | 36/100 [3:10:25<5:40:59, 319.68s/it, best loss: 0.4787]
+Epoch:   2%|1         | 8/500 [00:17<17:33,  2.14s/it]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/106 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   7%|6         | 7/106 [00:00<00:01, 62.07it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  13%|#3        | 14/106 [00:00<00:01, 61.76it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  19%|#8        | 20/106 [00:00<00:01, 60.33it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  25%|##5       | 27/106 [00:00<00:01, 61.02it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  31%|###1      | 33/106 [00:00<00:01, 58.55it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  37%|###6      | 39/106 [00:00<00:01, 57.27it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  43%|####3     | 46/106 [00:00<00:01, 58.64it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  49%|####9     | 52/106 [00:00<00:00, 56.71it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  55%|#####4    | 58/106 [00:01<00:00, 56.18it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  60%|######    | 64/106 [00:01<00:00, 55.09it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  67%|######6   | 71/106 [00:01<00:00, 57.00it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  73%|#######2  | 77/106 [00:01<00:00, 57.47it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  78%|#######8  | 83/106 [00:01<00:00, 56.09it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  85%|########4 | 90/106 [00:01<00:00, 59.18it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  92%|#########1| 97/106 [00:01<00:00, 59.53it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  97%|#########7| 103/106 [00:01<00:00, 56.69it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 106/106 [00:01<00:00, 57.87it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/27 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  30%|##9       | 8/27 [00:00<00:00, 77.06it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  56%|#####5    | 15/27 [00:00<00:00, 74.76it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  85%|########5 | 23/27 [00:00<00:00, 74.78it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 27/27 [00:00<00:00, 73.38it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+                                                                        
+Early stop step:
+
+ 36%|███▌      | 36/100 [3:10:27<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+4
+
+ 36%|███▌      | 36/100 [3:10:27<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train Loss: 0.45 | Train Acc: 0.79
+
+ 36%|███▌      | 36/100 [3:10:27<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid Loss: 0.48 | Valid Acc: 0.76
+
+ 36%|███▌      | 36/100 [3:10:27<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train recall: [0.89 0.59] | Train precision: [0.82 0.71]
+
+ 36%|███▌      | 36/100 [3:10:27<5:40:59, 319.68s/it, best loss: 0.4787]
+Epoch:   2%|1         | 9/500 [00:19<17:45,  2.17s/it]
+
+                                                                        
+Valid recall: [0.89 0.51] | Valid precision: [0.77 0.71]
+
+ 36%|███▌      | 36/100 [3:10:27<5:40:59, 319.68s/it, best loss: 0.4787][A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/106 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   6%|5         | 6/106 [00:00<00:01, 55.33it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  11%|#1        | 12/106 [00:00<00:01, 55.70it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  17%|#6        | 18/106 [00:00<00:01, 53.93it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  22%|##1       | 23/106 [00:00<00:01, 50.98it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  27%|##7       | 29/106 [00:00<00:01, 52.67it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  32%|###2      | 34/106 [00:00<00:01, 48.74it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  38%|###7      | 40/106 [00:00<00:01, 51.14it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  42%|####2     | 45/106 [00:00<00:01, 45.73it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  48%|####8     | 51/106 [00:01<00:01, 48.83it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  55%|#####4    | 58/106 [00:01<00:00, 51.58it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  60%|######    | 64/106 [00:01<00:00, 53.45it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  66%|######6   | 70/106 [00:01<00:00, 53.45it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  72%|#######1  | 76/106 [00:01<00:00, 55.10it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  77%|#######7  | 82/106 [00:01<00:00, 54.36it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  83%|########3 | 88/106 [00:01<00:00, 52.05it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  89%|########8 | 94/106 [00:01<00:00, 52.98it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  94%|#########4| 100/106 [00:01<00:00, 54.57it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 106/106 [00:02<00:00, 55.28it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/27 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  30%|##9       | 8/27 [00:00<00:00, 72.47it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  52%|#####1    | 14/27 [00:00<00:00, 66.75it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  85%|########5 | 23/27 [00:00<00:00, 70.68it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 27/27 [00:00<00:00, 71.90it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+                                                                        
+Early stop step:
+
+ 36%|███▌      | 36/100 [3:10:30<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+5
+
+ 36%|███▌      | 36/100 [3:10:30<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train Loss: 0.45 | Train Acc: 0.79
+
+ 36%|███▌      | 36/100 [3:10:30<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid Loss: 0.48 | Valid Acc: 0.76
+
+ 36%|███▌      | 36/100 [3:10:30<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train recall: [0.89 0.59] | Train precision: [0.82 0.72]
+
+ 36%|███▌      | 36/100 [3:10:30<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid recall: [0.9 0.5] | Valid precision: [0.77 0.72]
+
+ 36%|███▌      | 36/100 [3:10:30<5:40:59, 319.68s/it, best loss: 0.4787]
+Epoch:   2%|2         | 10/500 [00:22<18:19,  2.24s/it]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/106 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   6%|5         | 6/106 [00:00<00:01, 54.57it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  11%|#1        | 12/106 [00:00<00:01, 55.39it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  17%|#6        | 18/106 [00:00<00:01, 55.69it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  23%|##2       | 24/106 [00:00<00:01, 54.86it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  29%|##9       | 31/106 [00:00<00:01, 57.41it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  36%|###5      | 38/106 [00:00<00:01, 57.58it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  42%|####2     | 45/106 [00:00<00:01, 59.03it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  48%|####8     | 51/106 [00:00<00:00, 56.59it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  55%|#####4    | 58/106 [00:00<00:00, 59.09it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  61%|######1   | 65/106 [00:01<00:00, 59.99it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  67%|######6   | 71/106 [00:01<00:00, 58.49it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  74%|#######3  | 78/106 [00:01<00:00, 59.64it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  79%|#######9  | 84/106 [00:01<00:00, 59.71it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  85%|########4 | 90/106 [00:01<00:00, 58.03it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  91%|######### | 96/106 [00:01<00:00, 56.61it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  97%|#########7| 103/106 [00:01<00:00, 58.36it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 106/106 [00:01<00:00, 58.63it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/27 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  30%|##9       | 8/27 [00:00<00:00, 76.78it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  63%|######2   | 17/27 [00:00<00:00, 80.17it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  96%|#########6| 26/27 [00:00<00:00, 80.69it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 27/27 [00:00<00:00, 83.24it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+                                                                        
+Early stop step:
+
+ 36%|███▌      | 36/100 [3:10:32<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+6
+
+ 36%|███▌      | 36/100 [3:10:32<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train Loss: 0.44 | Train Acc: 0.8
+
+ 36%|███▌      | 36/100 [3:10:32<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid Loss: 0.48 | Valid Acc: 0.76
+
+ 36%|███▌      | 36/100 [3:10:32<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train recall: [0.89 0.61] | Train precision: [0.83 0.72]
+
+ 36%|███▌      | 36/100 [3:10:32<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid recall: [0.9 0.5] | Valid precision: [0.77 0.72]
+
+Epoch:   2%|2         | 11/500 [00:24<18:05,  2.22s/it]
+ 36%|███▌      | 36/100 [3:10:32<5:40:59, 319.68s/it, best loss: 0.4787]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/106 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   6%|5         | 6/106 [00:00<00:01, 55.08it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  11%|#1        | 12/106 [00:00<00:01, 53.95it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  18%|#7        | 19/106 [00:00<00:01, 57.32it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  23%|##2       | 24/106 [00:00<00:01, 54.81it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  28%|##8       | 30/106 [00:00<00:01, 54.39it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  34%|###3      | 36/106 [00:00<00:01, 54.57it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  41%|####      | 43/106 [00:00<00:01, 56.22it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  46%|####6     | 49/106 [00:00<00:01, 53.26it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  52%|#####1    | 55/106 [00:01<00:00, 52.22it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  58%|#####7    | 61/106 [00:01<00:00, 53.97it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  64%|######4   | 68/106 [00:01<00:00, 57.26it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  70%|######9   | 74/106 [00:01<00:00, 56.13it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  75%|#######5  | 80/106 [00:01<00:00, 56.59it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  82%|########2 | 87/106 [00:01<00:00, 57.58it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  89%|########8 | 94/106 [00:01<00:00, 59.08it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  96%|#########6| 102/106 [00:01<00:00, 62.68it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 106/106 [00:01<00:00, 57.65it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/27 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  30%|##9       | 8/27 [00:00<00:00, 76.30it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  63%|######2   | 17/27 [00:00<00:00, 77.79it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  93%|#########2| 25/27 [00:00<00:00, 78.20it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 27/27 [00:00<00:00, 79.35it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+                                                                        
+Early stop step:
+
+ 36%|███▌      | 36/100 [3:10:34<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+7
+
+ 36%|███▌      | 36/100 [3:10:34<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train Loss: 0.44 | Train Acc: 0.8
+
+ 36%|███▌      | 36/100 [3:10:34<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid Loss: 0.48 | Valid Acc: 0.77
+
+ 36%|███▌      | 36/100 [3:10:34<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train recall: [0.89 0.61] | Train precision: [0.83 0.73]
+
+ 36%|███▌      | 36/100 [3:10:34<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid recall: [0.89 0.53] | Valid precision: [0.78 0.72]
+
+ 36%|███▌      | 36/100 [3:10:34<5:40:59, 319.68s/it, best loss: 0.4787]
+Epoch:   2%|2         | 12/500 [00:26<18:03,  2.22s/it]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/106 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   6%|5         | 6/106 [00:00<00:01, 55.09it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  11%|#1        | 12/106 [00:00<00:01, 56.27it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  17%|#6        | 18/106 [00:00<00:01, 55.89it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  23%|##2       | 24/106 [00:00<00:01, 54.93it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  27%|##7       | 29/106 [00:00<00:01, 51.34it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  33%|###3      | 35/106 [00:00<00:01, 53.35it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  39%|###8      | 41/106 [00:00<00:01, 54.06it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  44%|####4     | 47/106 [00:00<00:01, 54.49it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  50%|#####     | 53/106 [00:00<00:00, 55.87it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  56%|#####5    | 59/106 [00:01<00:00, 54.11it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  61%|######1   | 65/106 [00:01<00:00, 55.54it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  68%|######7   | 72/106 [00:01<00:00, 57.46it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  75%|#######5  | 80/106 [00:01<00:00, 60.87it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  83%|########3 | 88/106 [00:01<00:00, 63.45it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  90%|########9 | 95/106 [00:01<00:00, 65.04it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  96%|#########6| 102/106 [00:01<00:00, 63.03it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 106/106 [00:01<00:00, 58.59it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/27 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  33%|###3      | 9/27 [00:00<00:00, 78.85it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  67%|######6   | 18/27 [00:00<00:00, 80.53it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  93%|#########2| 25/27 [00:00<00:00, 76.47it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 27/27 [00:00<00:00, 77.01it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+                                                                        
+Early stop step:
+
+ 36%|███▌      | 36/100 [3:10:36<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+8
+
+ 36%|███▌      | 36/100 [3:10:36<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train Loss: 0.43 | Train Acc: 0.8
+
+ 36%|███▌      | 36/100 [3:10:36<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid Loss: 0.48 | Valid Acc: 0.77
+
+ 36%|███▌      | 36/100 [3:10:36<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train recall: [0.89 0.62] | Train precision: [0.83 0.74]
+
+ 36%|███▌      | 36/100 [3:10:36<5:40:59, 319.68s/it, best loss: 0.4787]
+Epoch:   3%|2         | 13/500 [00:28<17:56,  2.21s/it]
+
+                                                                        
+Valid recall: [0.89 0.53] | Valid precision: [0.78 0.72]
+
+ 36%|███▌      | 36/100 [3:10:36<5:40:59, 319.68s/it, best loss: 0.4787][A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/106 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   6%|5         | 6/106 [00:00<00:01, 52.50it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  11%|#1        | 12/106 [00:00<00:01, 51.86it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  16%|#6        | 17/106 [00:00<00:01, 49.93it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  21%|##        | 22/106 [00:00<00:01, 49.89it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  26%|##6       | 28/106 [00:00<00:01, 52.53it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  32%|###2      | 34/106 [00:00<00:01, 53.96it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  38%|###7      | 40/106 [00:00<00:01, 55.44it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  44%|####4     | 47/106 [00:00<00:01, 58.58it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  51%|#####     | 54/106 [00:00<00:00, 60.34it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  57%|#####6    | 60/106 [00:01<00:00, 56.35it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  62%|######2   | 66/106 [00:01<00:00, 56.22it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  68%|######7   | 72/106 [00:01<00:00, 52.59it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  74%|#######3  | 78/106 [00:01<00:00, 53.54it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  79%|#######9  | 84/106 [00:01<00:00, 53.40it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  85%|########4 | 90/106 [00:01<00:00, 53.68it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  91%|######### | 96/106 [00:01<00:00, 50.20it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  96%|#########6| 102/106 [00:01<00:00, 43.17it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 106/106 [00:02<00:00, 51.73it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/27 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  30%|##9       | 8/27 [00:00<00:00, 74.07it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  67%|######6   | 18/27 [00:00<00:00, 77.68it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  96%|#########6| 26/27 [00:00<00:00, 77.81it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 27/27 [00:00<00:00, 80.95it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+                                                                        
+Early stop step:
+
+ 36%|███▌      | 36/100 [3:10:39<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+9
+
+ 36%|███▌      | 36/100 [3:10:39<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train Loss: 0.43 | Train Acc: 0.81
+
+ 36%|███▌      | 36/100 [3:10:39<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid Loss: 0.48 | Valid Acc: 0.76
+
+ 36%|███▌      | 36/100 [3:10:39<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train recall: [0.89 0.63] | Train precision: [0.83 0.74]
+
+ 36%|███▌      | 36/100 [3:10:39<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid recall: [0.9  0.51] | Valid precision: [0.77 0.73]
+
+ 36%|███▌      | 36/100 [3:10:39<5:40:59, 319.68s/it, best loss: 0.4787]
+Epoch:   3%|2         | 14/500 [00:31<18:24,  2.27s/it]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/106 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   6%|5         | 6/106 [00:00<00:01, 58.25it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  11%|#1        | 12/106 [00:00<00:01, 58.46it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  18%|#7        | 19/106 [00:00<00:01, 59.07it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  24%|##3       | 25/106 [00:00<00:01, 58.01it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  29%|##9       | 31/106 [00:00<00:01, 57.55it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  35%|###4      | 37/106 [00:00<00:01, 57.64it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  41%|####      | 43/106 [00:00<00:01, 58.14it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  47%|####7     | 50/106 [00:00<00:00, 59.51it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  53%|#####2    | 56/106 [00:00<00:00, 59.22it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  59%|#####9    | 63/106 [00:01<00:00, 60.66it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  65%|######5   | 69/106 [00:01<00:00, 57.74it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  71%|#######   | 75/106 [00:01<00:00, 57.53it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  76%|#######6  | 81/106 [00:01<00:00, 55.95it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  83%|########3 | 88/106 [00:01<00:00, 57.70it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  89%|########8 | 94/106 [00:01<00:00, 56.34it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  94%|#########4| 100/106 [00:01<00:00, 54.89it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 106/106 [00:01<00:00, 53.43it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/27 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  33%|###3      | 9/27 [00:00<00:00, 88.55it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  59%|#####9    | 16/27 [00:00<00:00, 79.16it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  89%|########8 | 24/27 [00:00<00:00, 79.02it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 27/27 [00:00<00:00, 74.40it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+                                                                        
+Early stop step:
+
+ 36%|███▌      | 36/100 [3:10:41<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+10
+
+ 36%|███▌      | 36/100 [3:10:41<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train Loss: 0.42 | Train Acc: 0.81
+
+ 36%|███▌      | 36/100 [3:10:41<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid Loss: 0.48 | Valid Acc: 0.77
+
+ 36%|███▌      | 36/100 [3:10:41<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train recall: [0.9  0.64] | Train precision: [0.84 0.75]
+
+ 36%|███▌      | 36/100 [3:10:41<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid recall: [0.9  0.53] | Valid precision: [0.78 0.73]
+
+ 36%|███▌      | 36/100 [3:10:41<5:40:59, 319.68s/it, best loss: 0.4787]
+Epoch:   3%|3         | 15/500 [00:33<18:19,  2.27s/it]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/106 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   5%|4         | 5/106 [00:00<00:02, 42.72it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   9%|9         | 10/106 [00:00<00:02, 42.62it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  14%|#4        | 15/106 [00:00<00:02, 44.00it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  19%|#8        | 20/106 [00:00<00:01, 44.93it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  25%|##4       | 26/106 [00:00<00:01, 47.72it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  30%|###       | 32/106 [00:00<00:01, 48.97it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  35%|###4      | 37/106 [00:00<00:01, 47.19it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  41%|####      | 43/106 [00:00<00:01, 50.37it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  46%|####6     | 49/106 [00:00<00:01, 52.61it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  52%|#####1    | 55/106 [00:01<00:00, 53.65it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  58%|#####7    | 61/106 [00:01<00:00, 54.10it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  63%|######3   | 67/106 [00:01<00:00, 53.93it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  69%|######8   | 73/106 [00:01<00:00, 51.23it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  75%|#######4  | 79/106 [00:01<00:00, 50.28it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  80%|########  | 85/106 [00:01<00:00, 49.66it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  86%|########5 | 91/106 [00:01<00:00, 50.80it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  92%|#########2| 98/106 [00:01<00:00, 54.08it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  98%|#########8| 104/106 [00:02<00:00, 55.01it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 106/106 [00:02<00:00, 51.47it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/27 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  33%|###3      | 9/27 [00:00<00:00, 89.54it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  67%|######6   | 18/27 [00:00<00:00, 88.39it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  96%|#########6| 26/27 [00:00<00:00, 84.00it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 27/27 [00:00<00:00, 83.87it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+                                                                        
+Early stop step:
+
+ 36%|███▌      | 36/100 [3:10:43<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+11
+
+ 36%|███▌      | 36/100 [3:10:43<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train Loss: 0.41 | Train Acc: 0.82
+
+ 36%|███▌      | 36/100 [3:10:43<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid Loss: 0.48 | Valid Acc: 0.77
+
+ 36%|███▌      | 36/100 [3:10:43<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train recall: [0.9  0.65] | Train precision: [0.84 0.75]
+
+ 36%|███▌      | 36/100 [3:10:43<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid recall: [0.89 0.56] | Valid precision: [0.79 0.72]
+
+Epoch:   3%|3         | 16/500 [00:35<18:39,  2.31s/it]
+
+ 36%|███▌      | 36/100 [3:10:43<5:40:59, 319.68s/it, best loss: 0.4787][A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/106 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   5%|4         | 5/106 [00:00<00:02, 49.03it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  10%|#         | 11/106 [00:00<00:01, 49.86it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  15%|#5        | 16/106 [00:00<00:01, 49.20it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  20%|#9        | 21/106 [00:00<00:01, 47.92it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  25%|##5       | 27/106 [00:00<00:01, 48.42it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  32%|###2      | 34/106 [00:00<00:01, 52.35it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  39%|###8      | 41/106 [00:00<00:01, 55.19it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  44%|####4     | 47/106 [00:00<00:01, 55.09it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  50%|#####     | 53/106 [00:00<00:00, 55.33it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  56%|#####5    | 59/106 [00:01<00:00, 54.91it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  61%|######1   | 65/106 [00:01<00:00, 51.85it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  67%|######6   | 71/106 [00:01<00:00, 53.98it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  73%|#######2  | 77/106 [00:01<00:00, 54.81it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  78%|#######8  | 83/106 [00:01<00:00, 53.16it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  84%|########3 | 89/106 [00:01<00:00, 54.32it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  90%|########9 | 95/106 [00:01<00:00, 54.44it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  95%|#########5| 101/106 [00:01<00:00, 52.48it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 106/106 [00:01<00:00, 53.35it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/27 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  30%|##9       | 8/27 [00:00<00:00, 78.99it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  59%|#####9    | 16/27 [00:00<00:00, 77.20it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  89%|########8 | 24/27 [00:00<00:00, 75.89it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 27/27 [00:00<00:00, 74.76it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+                                                                        
+Early stop step:
+
+ 36%|███▌      | 36/100 [3:10:46<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+12
+
+ 36%|███▌      | 36/100 [3:10:46<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train Loss: 0.41 | Train Acc: 0.82
+
+ 36%|███▌      | 36/100 [3:10:46<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid Loss: 0.49 | Valid Acc: 0.77
+
+ 36%|███▌      | 36/100 [3:10:46<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train recall: [0.9  0.66] | Train precision: [0.84 0.76]
+
+ 36%|███▌      | 36/100 [3:10:46<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid recall: [0.9  0.52] | Valid precision: [0.78 0.73]
+
+ 36%|███▌      | 36/100 [3:10:46<5:40:59, 319.68s/it, best loss: 0.4787]
+Epoch:   3%|3         | 17/500 [00:38<18:48,  2.34s/it]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/106 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   6%|5         | 6/106 [00:00<00:01, 57.94it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  12%|#2        | 13/106 [00:00<00:01, 59.25it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  19%|#8        | 20/106 [00:00<00:01, 59.60it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  25%|##5       | 27/106 [00:00<00:01, 60.71it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  32%|###2      | 34/106 [00:00<00:01, 61.58it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  38%|###7      | 40/106 [00:00<00:01, 58.48it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  44%|####4     | 47/106 [00:00<00:00, 59.49it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  50%|#####     | 53/106 [00:00<00:00, 56.18it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  56%|#####5    | 59/106 [00:01<00:00, 55.55it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  62%|######2   | 66/106 [00:01<00:00, 56.90it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  69%|######8   | 73/106 [00:01<00:00, 57.90it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  75%|#######4  | 79/106 [00:01<00:00, 53.87it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  80%|########  | 85/106 [00:01<00:00, 55.07it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  86%|########5 | 91/106 [00:01<00:00, 54.65it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  92%|#########1| 97/106 [00:01<00:00, 52.68it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  97%|#########7| 103/106 [00:01<00:00, 51.58it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 106/106 [00:01<00:00, 56.30it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/27 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  33%|###3      | 9/27 [00:00<00:00, 85.63it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  63%|######2   | 17/27 [00:00<00:00, 83.43it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  93%|#########2| 25/27 [00:00<00:00, 81.65it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 27/27 [00:00<00:00, 81.11it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+                                                                        
+Early stop step:
+
+ 36%|███▌      | 36/100 [3:10:48<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+13
+
+ 36%|███▌      | 36/100 [3:10:48<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train Loss: 0.4 | Train Acc: 0.82
+
+ 36%|███▌      | 36/100 [3:10:48<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid Loss: 0.49 | Valid Acc: 0.77
+
+ 36%|███▌      | 36/100 [3:10:48<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train recall: [0.9  0.66] | Train precision: [0.85 0.77]
+
+ 36%|███▌      | 36/100 [3:10:48<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid recall: [0.89 0.55] | Valid precision: [0.79 0.72]
+
+Epoch:   4%|3         | 18/500 [00:40<18:33,  2.31s/it]
+ 36%|███▌      | 36/100 [3:10:48<5:40:59, 319.68s/it, best loss: 0.4787]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/106 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   5%|4         | 5/106 [00:00<00:02, 46.35it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  11%|#1        | 12/106 [00:00<00:02, 42.88it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  17%|#6        | 18/106 [00:00<00:01, 46.70it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  23%|##2       | 24/106 [00:00<00:01, 49.78it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  28%|##8       | 30/106 [00:00<00:01, 51.82it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  35%|###4      | 37/106 [00:00<00:01, 54.36it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  42%|####1     | 44/106 [00:00<00:01, 56.54it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  47%|####7     | 50/106 [00:00<00:00, 56.48it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  54%|#####3    | 57/106 [00:01<00:00, 58.01it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  59%|#####9    | 63/106 [00:01<00:00, 58.54it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  66%|######6   | 70/106 [00:01<00:00, 59.40it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  72%|#######1  | 76/106 [00:01<00:00, 57.59it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  79%|#######9  | 84/106 [00:01<00:00, 61.43it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  86%|########5 | 91/106 [00:01<00:00, 62.88it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  92%|#########2| 98/106 [00:01<00:00, 64.57it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  99%|#########9| 105/106 [00:01<00:00, 62.55it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 106/106 [00:01<00:00, 57.97it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/27 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  41%|####      | 11/27 [00:00<00:00, 103.79it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  74%|#######4  | 20/27 [00:00<00:00, 98.91it/s] 
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 27/27 [00:00<00:00, 96.49it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+                                                                        
+Early stop step:
+
+ 36%|███▌      | 36/100 [3:10:50<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+14
+
+ 36%|███▌      | 36/100 [3:10:50<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train Loss: 0.4 | Train Acc: 0.83
+
+ 36%|███▌      | 36/100 [3:10:50<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid Loss: 0.49 | Valid Acc: 0.77
+
+ 36%|███▌      | 36/100 [3:10:50<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train recall: [0.9  0.68] | Train precision: [0.85 0.77]
+
+ 36%|███▌      | 36/100 [3:10:50<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid recall: [0.89 0.56] | Valid precision: [0.79 0.72]
+
+ 36%|███▌      | 36/100 [3:10:50<5:40:59, 319.68s/it, best loss: 0.4787]
+Epoch:   4%|3         | 19/500 [00:42<18:07,  2.26s/it]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/106 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   7%|6         | 7/106 [00:00<00:01, 63.83it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  13%|#3        | 14/106 [00:00<00:01, 62.34it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  20%|#9        | 21/106 [00:00<00:01, 64.26it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  27%|##7       | 29/106 [00:00<00:01, 66.64it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  34%|###3      | 36/106 [00:00<00:01, 65.83it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  40%|###9      | 42/106 [00:00<00:01, 61.48it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  46%|####6     | 49/106 [00:00<00:00, 62.03it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  52%|#####1    | 55/106 [00:00<00:00, 61.33it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  58%|#####8    | 62/106 [00:00<00:00, 63.23it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  65%|######5   | 69/106 [00:01<00:00, 64.28it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  72%|#######1  | 76/106 [00:01<00:00, 61.74it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  78%|#######8  | 83/106 [00:01<00:00, 61.42it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  85%|########4 | 90/106 [00:01<00:00, 59.92it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  92%|#########1| 97/106 [00:01<00:00, 60.46it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  98%|#########8| 104/106 [00:01<00:00, 60.14it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 106/106 [00:01<00:00, 62.15it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/27 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  33%|###3      | 9/27 [00:00<00:00, 84.90it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  70%|#######   | 19/27 [00:00<00:00, 86.64it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 27/27 [00:00<00:00, 88.01it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+                                                                        
+Early stop step:
+
+ 36%|███▌      | 36/100 [3:10:52<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+15
+
+ 36%|███▌      | 36/100 [3:10:52<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train Loss: 0.39 | Train Acc: 0.83
+
+ 36%|███▌      | 36/100 [3:10:52<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid Loss: 0.49 | Valid Acc: 0.77
+
+ 36%|███▌      | 36/100 [3:10:52<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train recall: [0.91 0.68] | Train precision: [0.85 0.78]
+
+ 36%|███▌      | 36/100 [3:10:52<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid recall: [0.9  0.54] | Valid precision: [0.78 0.74]
+
+ 36%|███▌      | 36/100 [3:10:52<5:40:59, 319.68s/it, best loss: 0.4787]
+Epoch:   4%|4         | 20/500 [00:44<17:34,  2.20s/it]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/106 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   6%|5         | 6/106 [00:00<00:01, 53.72it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  11%|#1        | 12/106 [00:00<00:01, 53.22it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  16%|#6        | 17/106 [00:00<00:01, 51.52it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  21%|##        | 22/106 [00:00<00:01, 50.89it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  26%|##6       | 28/106 [00:00<00:01, 52.30it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  32%|###2      | 34/106 [00:00<00:01, 52.45it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  38%|###7      | 40/106 [00:00<00:01, 53.22it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  42%|####2     | 45/106 [00:00<00:01, 51.05it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  48%|####8     | 51/106 [00:00<00:01, 51.86it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  54%|#####3    | 57/106 [00:01<00:00, 53.78it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  60%|######    | 64/106 [00:01<00:00, 56.34it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  66%|######6   | 70/106 [00:01<00:00, 57.24it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  72%|#######1  | 76/106 [00:01<00:00, 55.87it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  77%|#######7  | 82/106 [00:01<00:00, 53.48it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  83%|########3 | 88/106 [00:01<00:00, 54.27it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  89%|########8 | 94/106 [00:01<00:00, 49.28it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  94%|#########4| 100/106 [00:01<00:00, 46.98it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  99%|#########9| 105/106 [00:02<00:00, 47.42it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 106/106 [00:02<00:00, 51.72it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/27 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  26%|##5       | 7/27 [00:00<00:00, 59.61it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  63%|######2   | 17/27 [00:00<00:00, 66.10it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 27/27 [00:00<00:00, 73.42it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+                                                                        
+Early stop step:
+
+ 36%|███▌      | 36/100 [3:10:55<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+16
+
+ 36%|███▌      | 36/100 [3:10:55<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train Loss: 0.38 | Train Acc: 0.84
+
+ 36%|███▌      | 36/100 [3:10:55<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid Loss: 0.5 | Valid Acc: 0.77
+
+ 36%|███▌      | 36/100 [3:10:55<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train recall: [0.9 0.7] | Train precision: [0.86 0.78]
+
+ 36%|███▌      | 36/100 [3:10:55<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid recall: [0.88 0.56] | Valid precision: [0.79 0.71]
+
+Epoch:   4%|4         | 21/500 [00:47<18:02,  2.26s/it]
+ 36%|███▌      | 36/100 [3:10:55<5:40:59, 319.68s/it, best loss: 0.4787]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/106 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   7%|6         | 7/106 [00:00<00:01, 62.54it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  11%|#1        | 12/106 [00:00<00:01, 56.70it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  18%|#7        | 19/106 [00:00<00:01, 58.64it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  25%|##4       | 26/106 [00:00<00:01, 61.49it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  32%|###2      | 34/106 [00:00<00:01, 65.41it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  38%|###7      | 40/106 [00:00<00:01, 62.29it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  43%|####3     | 46/106 [00:00<00:00, 61.05it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  49%|####9     | 52/106 [00:00<00:00, 59.23it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  55%|#####4    | 58/106 [00:00<00:00, 56.39it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  60%|######    | 64/106 [00:01<00:00, 55.78it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  67%|######6   | 71/106 [00:01<00:00, 59.23it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  73%|#######2  | 77/106 [00:01<00:00, 57.49it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  78%|#######8  | 83/106 [00:01<00:00, 57.04it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  84%|########3 | 89/106 [00:01<00:00, 55.34it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  91%|######### | 96/106 [00:01<00:00, 58.09it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  96%|#########6| 102/106 [00:01<00:00, 58.18it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 106/106 [00:01<00:00, 59.26it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/27 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  33%|###3      | 9/27 [00:00<00:00, 82.91it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  67%|######6   | 18/27 [00:00<00:00, 84.67it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  96%|#########6| 26/27 [00:00<00:00, 83.20it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 27/27 [00:00<00:00, 85.21it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+                                                                        
+Early stop step:
+
+ 36%|███▌      | 36/100 [3:10:57<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+17
+
+ 36%|███▌      | 36/100 [3:10:57<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train Loss: 0.38 | Train Acc: 0.84
+
+ 36%|███▌      | 36/100 [3:10:57<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid Loss: 0.5 | Valid Acc: 0.77
+
+ 36%|███▌      | 36/100 [3:10:57<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train recall: [0.91 0.7 ] | Train precision: [0.86 0.79]
+
+ 36%|███▌      | 36/100 [3:10:57<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid recall: [0.89 0.54] | Valid precision: [0.78 0.72]
+
+ 36%|███▌      | 36/100 [3:10:57<5:40:59, 319.68s/it, best loss: 0.4787]
+Epoch:   4%|4         | 22/500 [00:49<17:44,  2.23s/it]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/106 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   6%|5         | 6/106 [00:00<00:01, 59.91it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  11%|#1        | 12/106 [00:00<00:01, 59.59it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  17%|#6        | 18/106 [00:00<00:01, 59.13it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  23%|##2       | 24/106 [00:00<00:01, 58.31it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  29%|##9       | 31/106 [00:00<00:01, 59.40it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  36%|###5      | 38/106 [00:00<00:01, 60.33it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  42%|####1     | 44/106 [00:00<00:01, 54.81it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  47%|####7     | 50/106 [00:00<00:01, 52.45it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  52%|#####1    | 55/106 [00:01<00:01, 49.90it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  58%|#####7    | 61/106 [00:01<00:00, 52.09it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  63%|######3   | 67/106 [00:01<00:00, 53.68it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  70%|######9   | 74/106 [00:01<00:00, 56.91it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  77%|#######7  | 82/106 [00:01<00:00, 60.58it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  84%|########3 | 89/106 [00:01<00:00, 61.23it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  91%|######### | 96/106 [00:01<00:00, 51.64it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  96%|#########6| 102/106 [00:01<00:00, 53.44it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 106/106 [00:01<00:00, 55.93it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/27 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  30%|##9       | 8/27 [00:00<00:00, 77.65it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  63%|######2   | 17/27 [00:00<00:00, 79.16it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  96%|#########6| 26/27 [00:00<00:00, 78.46it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 27/27 [00:00<00:00, 79.89it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+                                                                        
+Early stop step:
+
+ 36%|███▌      | 36/100 [3:10:59<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+18
+
+ 36%|███▌      | 36/100 [3:10:59<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train Loss: 0.37 | Train Acc: 0.84
+
+ 36%|███▌      | 36/100 [3:10:59<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid Loss: 0.51 | Valid Acc: 0.77
+
+ 36%|███▌      | 36/100 [3:10:59<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train recall: [0.91 0.71] | Train precision: [0.87 0.79]
+
+ 36%|███▌      | 36/100 [3:10:59<5:40:59, 319.68s/it, best loss: 0.4787]
+Epoch:   5%|4         | 23/500 [00:51<17:47,  2.24s/it]
+                                                                        
+Valid recall: [0.89 0.53] | Valid precision: [0.78 0.73]
+
+ 36%|███▌      | 36/100 [3:10:59<5:40:59, 319.68s/it, best loss: 0.4787]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/106 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   6%|5         | 6/106 [00:00<00:01, 55.83it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  11%|#1        | 12/106 [00:00<00:01, 56.25it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  17%|#6        | 18/106 [00:00<00:01, 56.81it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  23%|##2       | 24/106 [00:00<00:01, 56.09it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  29%|##9       | 31/106 [00:00<00:01, 58.18it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  35%|###4      | 37/106 [00:00<00:01, 58.16it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  41%|####      | 43/106 [00:00<00:01, 58.04it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  46%|####6     | 49/106 [00:00<00:00, 57.39it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  52%|#####1    | 55/106 [00:00<00:00, 56.39it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  58%|#####7    | 61/106 [00:01<00:00, 56.82it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  64%|######4   | 68/106 [00:01<00:00, 58.86it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  71%|#######   | 75/106 [00:01<00:00, 60.46it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  77%|#######7  | 82/106 [00:01<00:00, 60.06it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  83%|########3 | 88/106 [00:01<00:00, 59.15it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  89%|########8 | 94/106 [00:01<00:00, 58.33it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  95%|#########5| 101/106 [00:01<00:00, 60.10it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 106/106 [00:01<00:00, 58.01it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/27 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  30%|##9       | 8/27 [00:00<00:00, 73.39it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  56%|#####5    | 15/27 [00:00<00:00, 69.15it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  85%|########5 | 23/27 [00:00<00:00, 71.84it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 27/27 [00:00<00:00, 73.00it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+                                                                        
+Early stop step:
+
+ 36%|███▌      | 36/100 [3:11:01<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+19
+
+ 36%|███▌      | 36/100 [3:11:01<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train Loss: 0.36 | Train Acc: 0.84
+
+ 36%|███▌      | 36/100 [3:11:01<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid Loss: 0.51 | Valid Acc: 0.77
+
+ 36%|███▌      | 36/100 [3:11:01<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Train recall: [0.91 0.71] | Train precision: [0.87 0.79]
+
+ 36%|███▌      | 36/100 [3:11:01<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Valid recall: [0.89 0.55] | Valid precision: [0.78 0.72]
+
+Epoch:   5%|4         | 24/500 [00:53<17:45,  2.24s/it]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/106 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+ 36%|███▌      | 36/100 [3:11:01<5:40:59, 319.68s/it, best loss: 0.4787]
+Iteration:   6%|5         | 6/106 [00:00<00:01, 57.74it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  12%|#2        | 13/106 [00:00<00:01, 57.84it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  19%|#8        | 20/106 [00:00<00:01, 59.37it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  25%|##4       | 26/106 [00:00<00:01, 58.02it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  30%|###       | 32/106 [00:00<00:01, 57.93it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  36%|###5      | 38/106 [00:00<00:01, 56.55it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  42%|####2     | 45/106 [00:00<00:01, 58.87it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  48%|####8     | 51/106 [00:00<00:01, 53.29it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  54%|#####3    | 57/106 [00:01<00:00, 50.75it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  60%|######    | 64/106 [00:01<00:00, 55.08it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  67%|######6   | 71/106 [00:01<00:00, 57.58it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  73%|#######2  | 77/106 [00:01<00:00, 55.10it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  79%|#######9  | 84/106 [00:01<00:00, 57.99it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  86%|########5 | 91/106 [00:01<00:00, 60.71it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  92%|#########2| 98/106 [00:01<00:00, 61.56it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  99%|#########9| 105/106 [00:01<00:00, 60.28it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 106/106 [00:01<00:00, 58.02it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:   0%|          | 0/27 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  30%|##9       | 8/27 [00:00<00:00, 79.77it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration:  63%|######2   | 17/27 [00:00<00:00, 82.39it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 27/27 [00:00<00:00, 86.69it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+                                                                        
+Early stop step:
+
+ 36%|███▌      | 36/100 [3:11:03<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+20
+
+ 36%|███▌      | 36/100 [3:11:03<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Stopping early at epoch 24
+
+ 36%|███▌      | 36/100 [3:11:03<5:40:59, 319.68s/it, best loss: 0.4787]
+                                                                        
+Testing...
+
+ 36%|███▌      | 36/100 [3:11:03<5:40:59, 319.68s/it, best loss: 0.4787]
+Iteration:   0%|          | 0/9 [00:00<?, ?it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+Iteration: 100%|##########| 9/9 [00:00<00:00, 89.48it/s]
+[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A
+
+                                                                        
+{'loss': 0.43, 'accuracy': 0.81, 'recall': array([0.95, 0.46]), 'precision': array([0.82, 0.77]), 'f1': array([0.88, 0.57])}
+
+ 36%|███▌      | 36/100 [3:11:04<5:40:59, 319.68s/it, best loss: 0.4787]INFO - main - Result: {'id': '135', 'loss': 0.4936, 'accuracy': 0.81, 'recall': array([0.95, 0.46]), 'precision': array([0.82, 0.77]), 'f1': array([0.88, 0.57]), 'learning_rate': 0.000584, 'hidden_dim': 90.0, 'status': 'ok'}
+
+INFO - main - Completed after 0:05:06
+

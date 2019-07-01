@@ -1,0 +1,25 @@
+{
+  "__doc__": "Configuration",
+  "bidirectional": false,
+  "dropout": 0.2,
+  "early_stopping_criteria": 20,
+  "embedding_file": "data/GloVe/glove.twitter.27B.200d.txt",
+  "filter_sizes": [
+    2,
+    3,
+    4
+  ],
+  "hidden_dim": 90.0,
+  "learning_rate": 0.000937,
+  "max_seq_length": 70.0,
+  "model_name": "LSTM",
+  "num_epochs": 500,
+  "num_layers": 10.0,
+  "output_dim": 2,
+  "seed": 939117866,
+  "test_bs": 32.0,
+  "train_bs": 100.0,
+  "use_mongo": false,
+  "val_bs": 32.0,
+  "warmup_proportion": 0.1
+}

@@ -1,0 +1,115 @@
+{
+  "artifacts": [],
+  "command": "main",
+  "experiment": {
+    "base_dir": "/Users/adebruijn/Documents/Code",
+    "dependencies": [
+      "Click==7.0",
+      "numpy==1.16.4",
+      "pandas==0.24.2",
+      "pytorch-pretrained-bert==0.6.2",
+      "sacred==0.7.4",
+      "torch==1.1.0.post2",
+      "tqdm==4.32.2"
+    ],
+    "mainfile": "main.py",
+    "name": "main",
+    "repositories": [],
+    "sources": [
+      [
+        "data_loader.py",
+        "_sources/data_loader_f0b72ff16ccbf794e3c45e6ec18e2dcd.py"
+      ],
+      [
+        "evaluate.py",
+        "_sources/evaluate_0ae5323ef1f75a670398912b30acb36a.py"
+      ],
+      [
+        "main.py",
+        "_sources/main_7be9ecf71c2e2ed44f815cd22fc0c883.py"
+      ],
+      [
+        "models/__init__.py",
+        "_sources/__init___9c80ecd0f6bea7e64051c36cfcf3cd46.py"
+      ],
+      [
+        "train.py",
+        "_sources/train_af558d8c5dc8a7a2dc2ba3bd73a2a3f9.py"
+      ],
+      [
+        "utils.py",
+        "_sources/utils_2bdb0505832b1e9609f01d84e743206e.py"
+      ]
+    ]
+  },
+  "heartbeat": "2019-06-25T12:49:01.596809",
+  "host": {
+    "ENV": {},
+    "cpu": "Intel(R) Core(TM) i7-4770HQ CPU @ 2.20GHz",
+    "hostname": "Alissas-MacBook-Pro.local",
+    "os": [
+      "Darwin",
+      "Darwin-18.6.0-x86_64-i386-64bit"
+    ],
+    "python_version": "3.7.3"
+  },
+  "meta": {
+    "command": "main",
+    "options": {
+      "--beat_interval": null,
+      "--capture": null,
+      "--comment": null,
+      "--debug": false,
+      "--enforce_clean": false,
+      "--file_storage": null,
+      "--force": false,
+      "--help": false,
+      "--loglevel": null,
+      "--mongo_db": null,
+      "--name": null,
+      "--pdb": false,
+      "--print_config": false,
+      "--priority": null,
+      "--queue": false,
+      "--sql": null,
+      "--tiny_db": null,
+      "--unobserved": false
+    }
+  },
+  "resources": [],
+  "result": {
+    "accuracy": 0.82,
+    "f1": {
+      "dtype": "float64",
+      "py/object": "numpy.ndarray",
+      "values": [
+        0.88,
+        0.64
+      ]
+    },
+    "hidden_dim": 80.0,
+    "id": "176",
+    "learning_rate": 0.000306,
+    "loss": 0.478,
+    "precision": {
+      "dtype": "float64",
+      "py/object": "numpy.ndarray",
+      "values": [
+        0.84,
+        0.75
+      ]
+    },
+    "recall": {
+      "dtype": "float64",
+      "py/object": "numpy.ndarray",
+      "values": [
+        0.93,
+        0.56
+      ]
+    },
+    "status": "ok"
+  },
+  "start_time": "2019-06-25T12:43:54.387981",
+  "status": "COMPLETED",
+  "stop_time": "2019-06-25T12:49:01.393520"
+}

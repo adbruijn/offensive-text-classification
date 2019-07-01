@@ -195,6 +195,7 @@ def config():
     model_name = "MLP" #Model name: LSTM, BERT, MLP, CNN
     use_mongo = False
     vm = ""
+    subtask = "a" #Subtask name: a, b or c
 
 @ex.automain
 def main(output_dim,
@@ -215,6 +216,7 @@ def main(output_dim,
         model_name,
         use_mongo,
         vm,
+        subtask,
         _run):
 
     #Logger
@@ -237,9 +239,9 @@ def main(output_dim,
 
     #Data
     if use_bert:
-        train_dataloader, val_dataloader, test_dataloader = get_data_bert(int(max_seq_length), batch_sizes)
+        train_dataloader, val_dataloader, test_dataloader = get_data_bert(int(max_seq_length), batch_sizes, subtask)
     else:
-        embedding_dim, vocab_size, embedding_matrix, train_dataloader, val_dataloader, test_dataloader = get_data(int(max_seq_length), embedding_file=embedding_file, batch_size=batch_size)
+        embedding_dim, vocab_size, embedding_matrix, train_dataloader, val_dataloader, test_dataloader = get_data(int(max_seq_length), embedding_file=embedding_file, batch_size=batch_size, subtask=subtask)
 
     #Model
     if model_name=="MLP":
