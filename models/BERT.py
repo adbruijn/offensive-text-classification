@@ -93,13 +93,16 @@ class BertLinearFreeze(nn.Module):
         self.dropout = nn.Dropout(dropout)
         self.relu = nn.LeakyReLU()
 
-        self.linear1 = nn.Linear(768, output_dim)
+        self.linear1 = nn.Linear(768, 128)
+        self.linear2 = nn.Linear(128 , output_dim)
 
     def forward(self, input_ids, token_type_ids=None, attention_mask=None, labels=None):
 
         encoded_layers, pooled_output = self.bert(input_ids, token_type_ids, attention_mask, output_all_encoded_layers=False)
 
         x = self.linear1(pooled_output)
+        x = self.relu(x)
+        x = self.linear2(x)
 
         return x
 
@@ -166,7 +169,7 @@ class BertLinearFreezeEmbeddingsMultiple(nn.Module):
         x = self.linear1(pooled_output)
         x = self.linear2(x)
         x = self.linear3(x)
-        
+
         return x
 
 class BertLinear(nn.Module):
