@@ -1,7 +1,8 @@
 import pandas as pd
 import torch
 import numpy as np
-from sklearn.metrics import recall_score, precision_score, f1_score, classification_report
+from sklearn.metrics import recall_score, precision_score, f1_score, classification_report, confusion_matrix
+from sklearn.metrics import multilabel_confusion_matrix
 
 import json
 import logging
@@ -77,11 +78,30 @@ def accuracy_recall_precision_f1(y_pred, y_target):
     correct = np.sum(predictions == y_target)
     accuracy = correct / len(predictions)
 
-    recall = recall_score(y_target, predictions, average=None)
+    recall = recall_score(y_target, predictions, average=None) #average=None (the scores for each class are returned)
     precision = precision_score(y_target, predictions, average=None)
     f1 = f1_score(y_target, predictions, average=None)
 
     return accuracy, recall, precision, f1
+
+def calculate_confusion_matrix(y_pred, y_target):
+
+    y_pred = y_pred.cpu()
+    y_target = y_target.cpu().numpy()
+
+    predictions = torch.argmax(y_pred, dim=1).detach().numpy()
+
+    #Confusion matrix
+    cm = confusion_matrix(y_target, predictions)
+
+    multi_cm = multilabel_confusion_matrix(y_target, predictions)
+    print(multi_cm)
+    #print(confusion_matrix(y_target, predictions))
+
+    #Classification report
+    #print(classification_report(y_target, predictions))
+
+    return cm
 
 #Preprocess Data
 def clean_text(text, remove_punt_number_special_chars=False,remove_stopwords=False, apply_stemming=False):

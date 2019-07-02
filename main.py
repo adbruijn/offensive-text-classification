@@ -145,9 +145,12 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, 
         print('\n')
         print('Train Loss: {} | Train Acc: {}'.format(train_results['loss'], train_results['accuracy']))
         print('Valid Loss: {} | Valid Acc: {}'.format(val_results['loss'], val_results['accuracy']))
-        print('Train recall: {} | Train precision: {}'.format(train_results['recall'], train_results['precision']))
-        print('Valid recall: {} | Valid precision: {}'.format(val_results['recall'], val_results['precision']))
-
+        print('Train recall: {} | Train precision: {} | Train f1: {}'.format(train_results['recall'], train_results['precision'], train_results['f1']))
+        print('Valid recall: {} | Valid precision: {} | Valid f1 {}'.format(val_results['recall'], val_results['precision'], val_results['f1']))
+        print('Train cm: {} | Val cm: {}'.format(train_results['cm'], val_results['cm']))
+        print('Calculated recall train: {} | Caclulated precision train: {}'.format(train_results['calculated_recall'], train_results['calculated_precision']))
+        print('Calculated recall val: {} | Caclulated precision val: {}'.format(val_results['calculated_recall'], val_results['calculated_precision']))
+        print('Calculated f1 train {} | Calculated f1 val {}'.format(2*((train_results['calculated_recall']*train_results['calculated_precision'])/(train_results['calculated_recall']+train_results['calculated_precision'])),2*((val_results['calculated_recall']*val_results['calculated_precision'])/(val_results['calculated_recall']+val_results['calculated_precision']))))
         #Scheduler
         #scheduler.step()
 
@@ -160,9 +163,9 @@ def config():
     """Configuration"""
 
     output_dim = 2 #Number of labels (default=2)
-    batch_size = 32.0 #Batch size (default=32)
+    batch_size = 100 #Batch size (default=32)
     num_epochs = 100 #Number of epochs (default=100)
-    max_seq_length = 45 #Maximum sequence length of the sentences (default=40)
+    max_seq_length = 55 #Maximum sequence length of the sentences (default=40)
     learning_rate = 3e-5 #Learning rate for the model (default=3e-5)
     warmup_proportion = 0.1 #Warmup proportion (default=0.1)
     early_stopping_criteria = 25 #Early stopping criteria (default=5)
@@ -174,11 +177,11 @@ def config():
     embedding_file = 'data/GloVe/glove.twitter.27B.200d.txt' #Embedding file
     model_name = "MLP" #Model name: LSTM, BERT, MLP, CNN
     use_mongo = False
-    vm = "aws"
+    vm = ""
     subtask = "a" #Subtask name: a, b or c
 
     #ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
-    if "BERT" not in model_name:
+    if vm == "":
         ex.observers.append(FileStorageObserver.create('results'))
     elif vm == "aws":
         ex.observers.append(FileStorageObserver.create('results-bert-aws'))
@@ -232,16 +235,16 @@ def main(output_dim,
         model = models.MLP(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), dropout, output_dim)
     if model_name=="MLP_Features":
         model = models.MLP_Features(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), 14, dropout, output_dim)
-        print(model)
+        #print(model)
     elif model_name=="CNN":
         model = models.CNN(embedding_matrix, embedding_dim, vocab_size, dropout, filter_sizes, output_dim)
-        print(model)
+        #print(model)
     elif model_name=="LSTM":
         model = models.LSTM(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), dropout, int(num_layers), bidirectional, output_dim)
-        print(model)
+        #print(model)
     elif model_name=="LSTMAttention":
         model = models.LSTMAttention(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), dropout, int(num_layers), bidirectional, output_dim)
-        print(model)
+        #print(model)
     elif model_name=="BERTFreeze":
         model = BertForSequenceClassification.from_pretrained("bert-base-uncased", output_dim)
         for param in model.bert.parameters():
@@ -251,25 +254,25 @@ def main(output_dim,
         print(model)
     elif model_name=="BERT":
         model = BertForSequenceClassification.from_pretrained("bert-base-uncased", output_dim)
-        print(model)
+        #print(model)
     elif model_name=="BERTLinear":
         model = models.BertLinear(hidden_dim, dropout, output_dim)
-        print(model)
+        #print(model)
     elif model_name=="BERTLinearFreeze":
         model = models.BertLinearFreeze(hidden_dim, dropout, output_dim)
-        print(model)
+        #print(model)
     elif model_name=="BERTLinearFreezeEmbeddings":
         model = models.BertLinearFreezeEmbeddings(hidden_dim, dropout, output_dim)
-        print(model)
+        #print(model)
     elif model_name=="BERTLSTM":
         model = models.BertLSTM(hidden_dim, dropout, bidirectional, output_dim)
-        print(model)
+        #print(model)
     elif model_name=="BERTNonLinear":
         model = models.BertNonLinear(dropout, output_dim)
-        print(model)
+        #print(model)
     elif model_name=="BERTNorm":
         model = models.BertNorm(dropout, output_dim)
-        print(model)
+        #print(model)
 
     model = model.to(device)
 
@@ -296,15 +299,16 @@ def main(output_dim,
     test_metrics = evaluate_model(model, optimizer, loss_fn, test_dataloader, device, use_bert)
     if use_mongo: log_scalars(test_metrics,"Test")
 
-    test_metrics_df = pd.DataFrame(test_metrics)
+    #test_metrics_df = pd.DataFrame(test_metrics)
     print(test_metrics)
-    test_metrics_df.to_csv(directory+"test_metrics.csv")
+    #test_metrics_df.to_csv(directory+"test_metrics.csv")
 
     id_nummer = f'{_run._id}'
 
     results = {
         'id': id_nummer,
-        'loss': np.round(np.mean(val_metrics['loss']), 4),
+        #'loss': np.round(np.mean(val_metrics['loss']), 4),
+        'loss': 1-test_metrics['accuracy'],
         'accuracy': test_metrics['accuracy'],
         'recall': test_metrics['recall'],
         'precision': test_metrics['precision'],

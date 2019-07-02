@@ -18,7 +18,7 @@ URL = 'mongo://localhost:27017/hyperopt/jobs'
 
 @click.command()
 @click.option('--model_name', default="MLP", help="Model name (LSTM, MLP, CNN, LSTMAttention)")
-@click.option('--max_evals', default=100, help="Maximum evaluations for the optimisation")
+@click.option('--max_evals', default=30, help="Maximum evaluations for the optimisation")
 @click.option('--num_epochs', default=500, help="Maximum number of epochs")
 @click.option('--embedding_file', default='data/GloVe/glove.twitter.27B.200d.txt', help="Default datapath data/GloVe/glove.twitter.27B.200d.txt'")
 def optimize(model_name, max_evals, num_epochs, embedding_file):
@@ -36,35 +36,36 @@ def optimize(model_name, max_evals, num_epochs, embedding_file):
     if model_name=="MLP":
         #MLP
         space = {
-            'learning_rate': hp.quniform('learning_rate', 0.00001, 0.001, 0.000001),
-            'train_bs': hp.quniform('train_bs', 30, 150, 20),
-            'hidden_dim': hp.quniform("hidden_dim", 50,  250, 10),
+            'learning_rate': hp.quniform('learning_rate', 0.00001, 0.0001, 0.000001),
+            #'train_bs': hp.quniform('train_bs', 30, 150, 20),
+            'hidden_dim': hp.quniform("hidden_dim", 50,  200, 10),
             'dropout': hp.quniform('dropout', 0.01, 0.5, 0.005),
-            'max_seq_length': hp.quniform("max_seq_length", 40, 80, 5)
+            #'max_seq_length': hp.quniform("max_seq_length", 40, 80, 5)
         }
     elif model_name=="LSTM":
         #LSTM / LSTMAttention'
         space = {
-            'learning_rate': hp.quniform('learning_rate', 0.00001, 0.001, 0.000001),
-            'train_bs': hp.quniform('train_bs', 30, 150, 20),
-            'hidden_dim': hp.quniform("hidden_dim", 50,  250, 10),
+            'learning_rate': hp.quniform('learning_rate', 0.00001, 0.0001, 0.000001),
+            #'train_bs': hp.quniform('train_bs', 30, 150, 20),
+            'hidden_dim': hp.quniform("hidden_dim", 50,  200, 10),
             'dropout': hp.quniform('dropout', 0.01, 0.5, 0.005),
-            'max_seq_length': hp.quniform("max_seq_length", 40, 80, 5),
+            #'max_seq_length': hp.quniform("max_seq_length", 40, 80, 5),
             'num_layers': hp.quniform("num_layers", 2, 20, 1)
         }
     elif model_name=="LSTMAttention":
         #LSTM / LSTMAttention'
         space = {
-            'learning_rate': hp.quniform('learning_rate', 0.00001, 0.001, 0.000001),
-            'train_bs': hp.quniform('train_bs', 30, 150, 20),
-            'hidden_dim': hp.quniform("hidden_dim", 50,  250, 10),
+            'learning_rate': hp.quniform('learning_rate', 0.00001, 0.0001, 0.000001),
+            #'train_bs': hp.quniform('train_bs', 30, 150, 20),
+            'hidden_dim': hp.quniform("hidden_dim", 50,  200, 10),
             'dropout': hp.quniform('dropout', 0.01, 0.5, 0.005),
-            'max_seq_length': hp.quniform("max_seq_length", 40, 80, 5),
+            #'max_seq_length': hp.quniform("max_seq_length", 40, 80, 5),
             'num_layers': hp.quniform("num_layers", 2, 20, 1)
         }
     elif model_name=="CNN":
         space = {
-            'dropout': hp.quniform('dropout', 0.01, 0.5, 0.005),
+            'learning_rate': hp.quniform('learning_rate', 0.00001, 0.0001, 0.000001),
+            'dropout': hp.quniform('dropout', 0.01, 0.5, 0.005)
         }
 
     #Objective
@@ -84,7 +85,7 @@ def optimize(model_name, max_evals, num_epochs, embedding_file):
         date = date.strftime("%Y/%m/%d")
         date = str(date)
 
-        trials = pickle.load(open('results/'+model_name+'_results.pkl', 'rb'))
+        trials = pickle.load(open('results/'+model_name+'_new_results.pkl', 'rb'))
         print("Load {} Trials...".format(model_name))
         print("Rerunning from {} trials to add {} trial(s)".format(len(trials.trials),max_evals-len(trials.trials)))
     except:
@@ -94,7 +95,7 @@ def optimize(model_name, max_evals, num_epochs, embedding_file):
 
     #Optimisation
     best = fmin(fn=objective, space=space, algo=tpe.suggest, trials=trials, max_evals=max_evals, verbose=1)
-    pickle.dump(trials, open('results/'+model_name+'_results.pkl', "wb"))
+    pickle.dump(trials, open('results/'+model_name+'_new_results.pkl', "wb"))
 
     for trial in trials.trials:
         print(trial['result'])

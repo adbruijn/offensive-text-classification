@@ -7,9 +7,10 @@ import torch
 import torch.optim as optim
 from tqdm import tqdm, trange
 
-from utils import accuracy_recall_precision_f1
+from utils import accuracy_recall_precision_f1, calculate_confusion_matrix
 
 import pandas as pd
+from sklearn.metrics import classification_report, confusion_matrix
 
 def train_model(model, optimizer, loss_fn, dataloader, device, use_bert):
     """Train model
@@ -27,6 +28,7 @@ def train_model(model, optimizer, loss_fn, dataloader, device, use_bert):
     epoch_recall = [0, 0]
     epoch_precision = [0, 0]
     epoch_f1 = [0, 0]
+    cm = np.zeros((2,2))
 
     #Set model in training mode
     model.train()
@@ -71,13 +73,21 @@ def train_model(model, optimizer, loss_fn, dataloader, device, use_bert):
         epoch_precision += precision
         epoch_f1 += f1
 
+        #Compute confusion metrics
+        cm += calculate_confusion_matrix(y_pred, y_target)
+        tn, fp, fn, tp = cm.ravel()
+
     #Train results
     results = {
         'loss': np.round(epoch_loss / len(dataloader),2),
         'accuracy': np.round(float(epoch_accuracy / len(dataloader)),2),
         'recall': np.round(epoch_recall / len(dataloader), 2),
         'precision': np.round(epoch_precision / len(dataloader), 2),
-        'f1': np.round(epoch_f1 / len(dataloader), 2)
+        'f1': np.round(epoch_f1 / len(dataloader), 2),
+        #'cm': cm,
+        #'calculated_recall': tp / (tp + fn),
+        #'calculated_precision': tp / (tp + fp),
+        #'calculated_f1': 2*(tp / (tp + fn))*(tp / (tp + fp)) / (tp / (tp + fn))+(tp / (tp + fp))
     }
 
     return results
@@ -141,6 +151,9 @@ def train_model_features(model, optimizer, loss_fn, dataloader, device, use_bert
         epoch_recall += recall
         epoch_precision += precision
         epoch_f1 += f1
+
+        #Compute confusion metrics
+        cm += calculate_confusion_matrix(y_pred, y_target)
 
     #Train results
     results = {
