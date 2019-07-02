@@ -168,7 +168,7 @@ def config():
     max_seq_length = 55 #Maximum sequence length of the sentences (default=40)
     learning_rate = 3e-5 #Learning rate for the model (default=3e-5)
     warmup_proportion = 0.1 #Warmup proportion (default=0.1)
-    early_stopping_criteria = 25 #Early stopping criteria (default=5)
+    early_stopping_criteria = 20 #Early stopping criteria (default=5)
     num_layers = 2 #Number of layers (default=2)
     hidden_dim = 128 #Hidden layers dimension (default=128)
     bidirectional = False #Left and right LSTM
@@ -177,16 +177,19 @@ def config():
     embedding_file = 'data/GloVe/glove.twitter.27B.200d.txt' #Embedding file
     model_name = "MLP" #Model name: LSTM, BERT, MLP, CNN
     use_mongo = False
-    vm = ""
     subtask = "a" #Subtask name: a, b or c
 
     #ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
-    if vm == "":
-        ex.observers.append(FileStorageObserver.create('results'))
-    elif vm == "aws":
-        ex.observers.append(FileStorageObserver.create('results-bert-aws'))
-    elif vm == "google":
-        ex.observers.append(FileStorageObserver.create('results-bert-google'))
+    if model_name == "MLP":
+        ex.observers.append(FileStorageObserver.create('results-mlp'))
+    elif model_name == "LSTM":
+        ex.observers.append(FileStorageObserver.create('results-lstm'))
+    elif model_name == "LSTMAttention":
+        ex.observers.append(FileStorageObserver.create('results-lstm-attention'))
+    elif model_name == "CNN":
+        ex.observers.append(FileStorageObserver.create('results-cnn'))
+    elif model_name == "BERT":
+        ex.observers.append(FileStorageObserver.create('results-bert'))
 
 @ex.automain
 def main(output_dim,
@@ -209,20 +212,16 @@ def main(output_dim,
         _run):
 
     #Logger
-    directory_checkpoints = f"results/checkpoints/{_run._id}/"
-    directory = f"results/{_run._id}/"
+    #directory_checkpoints = f"results/checkpoints/{_run._id}/"
+    #directory = f"results/{_run._id}/"
+
+    directory = f"results-"+model_name+"/{_run._id}/"
+    directory_checkpoints =  f"results-"+model_name+"/checkpoints/{_run._id}/"
 
     if "BERT" in model_name:  #Default = False, if BERT model is used then use_bert is set to True
         use_bert = True
     else:
         use_bert = False
-
-    if vm == "google":
-        directory = f"results-bert-google/{_run._id}/"
-        directory_checkpoints =  f"results-bert-google/checkpoints/{_run._id}/"
-    elif vm == "aws":
-        directory = f"results-bert-aws/{_run._id}/"
-        directory_checkpoints =  f"results-bert-aws/checkpoints/{_run._id}/"
 
     #Data
     if use_bert:
@@ -301,7 +300,7 @@ def main(output_dim,
 
     #test_metrics_df = pd.DataFrame(test_metrics)
     print(test_metrics)
-    #test_metrics_df.to_csv(directory+"test_metrics.csv")
+    test_metrics_df.to_csv(directory+"test_metrics.csv")
 
     id_nummer = f'{_run._id}'
 

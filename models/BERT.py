@@ -129,7 +129,7 @@ class BertLinearFreezeEmbeddings(nn.Module):
         self.relu = nn.LeakyReLU()
 
         self.linear1 = nn.Linear(768, 128)
-        self.linear1 = nn.Linear(128, 2)
+        self.linear2 = nn.Linear(128, 2)
 
     def forward(self, input_ids, token_type_ids=None, attention_mask=None, labels=None):
 
