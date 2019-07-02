@@ -147,10 +147,10 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, 
         print('Valid Loss: {} | Valid Acc: {}'.format(val_results['loss'], val_results['accuracy']))
         print('Train recall: {} | Train precision: {} | Train f1: {}'.format(train_results['recall'], train_results['precision'], train_results['f1']))
         print('Valid recall: {} | Valid precision: {} | Valid f1 {}'.format(val_results['recall'], val_results['precision'], val_results['f1']))
-        print('Train cm: {} | Val cm: {}'.format(train_results['cm'], val_results['cm']))
-        print('Calculated recall train: {} | Caclulated precision train: {}'.format(train_results['calculated_recall'], train_results['calculated_precision']))
-        print('Calculated recall val: {} | Caclulated precision val: {}'.format(val_results['calculated_recall'], val_results['calculated_precision']))
-        print('Calculated f1 train {} | Calculated f1 val {}'.format(2*((train_results['calculated_recall']*train_results['calculated_precision'])/(train_results['calculated_recall']+train_results['calculated_precision'])),2*((val_results['calculated_recall']*val_results['calculated_precision'])/(val_results['calculated_recall']+val_results['calculated_precision']))))
+        #print('Train cm: {} | Val cm: {}'.format(train_results['cm'], val_results['cm']))
+        #print('Calculated recall train: {} | Caclulated precision train: {}'.format(train_results['calculated_recall'], train_results['calculated_precision']))
+        #print('Calculated recall val: {} | Caclulated precision val: {}'.format(val_results['calculated_recall'], val_results['calculated_precision']))
+        #print('Calculated f1 train {} | Calculated f1 val {}'.format(2*((train_results['calculated_recall']*train_results['calculated_precision'])/(train_results['calculated_recall']+train_results['calculated_precision'])),2*((val_results['calculated_recall']*val_results['calculated_precision'])/(val_results['calculated_recall']+val_results['calculated_precision']))))
         #Scheduler
         #scheduler.step()
 

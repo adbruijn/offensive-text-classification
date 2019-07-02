@@ -2,7 +2,6 @@ import pandas as pd
 import torch
 import numpy as np
 from sklearn.metrics import recall_score, precision_score, f1_score, classification_report, confusion_matrix
-from sklearn.metrics import multilabel_confusion_matrix
 
 import json
 import logging
@@ -94,8 +93,8 @@ def calculate_confusion_matrix(y_pred, y_target):
     #Confusion matrix
     cm = confusion_matrix(y_target, predictions)
 
-    multi_cm = multilabel_confusion_matrix(y_target, predictions)
-    print(multi_cm)
+    #multi_cm = multilabel_confusion_matrix(y_target, predictions)
+    #print(multi_cm)
     #print(confusion_matrix(y_target, predictions))
 
     #Classification report
