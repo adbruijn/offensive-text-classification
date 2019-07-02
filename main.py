@@ -207,7 +207,6 @@ def main(output_dim,
         embedding_file,
         model_name,
         use_mongo,
-        vm,
         subtask,
         _run):
 

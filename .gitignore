@@ -18,3 +18,7 @@ results/
 env/
 execute_other_models.sh
 calculate_f1.py
+results-cnn/
+results-lstm/
+results-lstm-attention/
+results-mlp
