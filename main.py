@@ -188,7 +188,7 @@ def config():
         ex.observers.append(FileStorageObserver.create('results-lstmattention'))
     elif model_name == "CNN":
         ex.observers.append(FileStorageObserver.create('results-cnn'))
-    elif model_name == "BERT":
+    elif "BERT" in model_name:
         ex.observers.append(FileStorageObserver.create('results-bert'))
 
 @ex.automain
@@ -216,10 +216,11 @@ def main(output_dim,
 
     id_nummer = f'{_run._id}'
     print(id_nummer)
+
     if "BERT" in model_name:  #Default = False, if BERT model is used then use_bert is set to True
         use_bert = True
-        directory = "results-bert/{_run._id}"
-        directory_checkpoints =  "results-bert/checkpoints/{_run._id}"
+        directory = f"results-bert/{_run._id}/"
+        directory_checkpoints =  f"results-bert/checkpoints/{_run._id}/"
     else:
         use_bert = False
         directory = f"results-"+model_name.lower()+"/"+id_nummer+"/"
