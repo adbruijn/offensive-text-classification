@@ -215,11 +215,11 @@ def main(output_dim,
     #directory = f"results/{_run._id}/"
 
     id_nummer = f'{_run._id}'
-
+    print(id_nummer)
     if "BERT" in model_name:  #Default = False, if BERT model is used then use_bert is set to True
         use_bert = True
-        directory = "results-bert/"
-        directory_checkpoints =  "results-bert/checkpoints/"
+        directory = "results-bert/{_run._id}"
+        directory_checkpoints =  "results-bert/checkpoints/{_run._id}"
     else:
         use_bert = False
         directory = f"results-"+model_name.lower()+"/"+id_nummer+"/"
