@@ -7,10 +7,10 @@ for epoch in ${array_num_epochs[@]}; do
     for bs in ${array_batch_size[@]}; do
         for lr in ${array_learning_rate[@]}; do
             python main.py with model_name="BERTLinearFreezeEmbeddings" num_epochs=$epoch batch_size=$bs learning_rate=$lr max_seq_length=40
-            python main.py with model_name="BERTNonLinear" num_epochs=$epoch batch_size=$bs learning_rate=$lr max_seq_length=40
-            python main.py with model_name="BERTNorm" num_epochs=$epoch batch_size=$bs learning_rate=$lr max_seq_length=40
-            python main.py with model_name="BERTLinear" num_epochs=$epoch batch_size=$bs learning_rate=$lr max_seq_length=40
-            python main.py with model_name="BERTLinearFreeze" num_epochs=$epoch batch_size=$bs learning_rate=$lr max_seq_length=40
+            # python main.py with model_name="BERTNonLinear" num_epochs=$epoch batch_size=$bs learning_rate=$lr max_seq_length=40
+            # python main.py with model_name="BERTNorm" num_epochs=$epoch batch_size=$bs learning_rate=$lr max_seq_length=40
+            # python main.py with model_name="BERTLinear" num_epochs=$epoch batch_size=$bs learning_rate=$lr max_seq_length=40
+            # python main.py with model_name="BERTLinearFreeze" num_epochs=$epoch batch_size=$bs learning_rate=$lr max_seq_length=40
         done
     done
 done
