@@ -32,6 +32,8 @@ from textblob import TextBlob
 
 stopwords = stopwords.words('english')
 
+from pytorch_pretrained_bert.tokenization import BertTokenizer
+
 #Features
 def generate_features(df):
 
