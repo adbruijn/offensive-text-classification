@@ -185,7 +185,7 @@ def config():
     elif model_name == "LSTM":
         ex.observers.append(FileStorageObserver.create('results-lstm'))
     elif model_name == "LSTMAttention":
-        ex.observers.append(FileStorageObserver.create('results-lstm-attention'))
+        ex.observers.append(FileStorageObserver.create('results-lstmattention'))
     elif model_name == "CNN":
         ex.observers.append(FileStorageObserver.create('results-cnn'))
     elif model_name == "BERT":
@@ -214,8 +214,10 @@ def main(output_dim,
     #directory_checkpoints = f"results/checkpoints/{_run._id}/"
     #directory = f"results/{_run._id}/"
 
-    directory = f"results-"+model_name+"/{_run._id}/"
-    directory_checkpoints =  f"results-"+model_name+"/checkpoints/{_run._id}/"
+    id_nummer = f'{_run._id}'
+
+    directory = f"results-"+model_name.lower()+"/"+id_nummer+"/"
+    directory_checkpoints =  f"results-"+model_name.lower()+"/checkpoints"+"/"+id_nummer+"/"
 
     if "BERT" in model_name:  #Default = False, if BERT model is used then use_bert is set to True
         use_bert = True
@@ -297,11 +299,9 @@ def main(output_dim,
     test_metrics = evaluate_model(model, optimizer, loss_fn, test_dataloader, device, use_bert)
     if use_mongo: log_scalars(test_metrics,"Test")
 
-    #test_metrics_df = pd.DataFrame(test_metrics)
+    test_metrics_df = pd.DataFrame(test_metrics)
     print(test_metrics)
     test_metrics_df.to_csv(directory+"test_metrics.csv")
-
-    id_nummer = f'{_run._id}'
 
     results = {
         'id': id_nummer,
