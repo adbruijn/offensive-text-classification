@@ -289,9 +289,11 @@ def get_data_bert(max_seq_length, batch_size, subtask):
     X_test, y_test = clean_data(test)
 
     #Features data
-    train_examples = convert_examples_to_features(X_train, y_train, max_seq_length)
-    val_examples = convert_examples_to_features(X_val, y_val, max_seq_length)
-    test_examples = convert_examples_to_features(X_test, y_test, max_seq_length)
+    tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
+    
+    train_examples = convert_examples_to_features(X_train, y_train, max_seq_length, tokenizer)
+    val_examples = convert_examples_to_features(X_val, y_val, max_seq_length, tokenizer)
+    test_examples = convert_examples_to_features(X_test, y_test, max_seq_length, tokenizer)
 
     #Data loaders
     train_dataloader = get_dataloader_bert(train_examples, batch_size)

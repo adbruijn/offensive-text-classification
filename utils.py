@@ -32,8 +32,6 @@ from textblob import TextBlob
 
 stopwords = stopwords.words('english')
 
-from pytorch_pretrained_bert.tokenization import BertTokenizer
-
 #Features
 def generate_features(df):
 
@@ -171,7 +169,7 @@ def clean_text(text, remove_punt_number_special_chars=False,remove_stopwords=Fal
     return clean
 
 #BERT
-def convert_examples_to_features(X, y, max_seq_length):
+def convert_examples_to_features(X, y, max_seq_length, tokenizer):
 
     """Loads a data file and returns examples (input_ids, input_mask, segment_ids, label_id).
     Args:
@@ -183,8 +181,6 @@ def convert_examples_to_features(X, y, max_seq_length):
     features = pd.DataFrame(columns=col_names)
 
     df = pd.DataFrame({"text":X, "label":y})
-
-    tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
 
     for index, example in df.iterrows():
 
