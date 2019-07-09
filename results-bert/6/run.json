@@ -1,0 +1,142 @@
+{
+  "artifacts": [],
+  "command": "main",
+  "experiment": {
+    "base_dir": "/home/ubuntu/offensive-text-classification",
+    "dependencies": [
+      "click==6.7",
+      "numpy==1.15.4",
+      "pandas==0.24.2",
+      "pytorch-pretrained-bert==0.6.2",
+      "sacred==0.7.4",
+      "torch==1.1.0",
+      "tqdm==4.31.1"
+    ],
+    "mainfile": "main.py",
+    "name": "main",
+    "repositories": [],
+    "sources": [
+      [
+        "data_loader.py",
+        "_sources/data_loader_f381a02d7bfabb7d80b5f01407838c16.py"
+      ],
+      [
+        "evaluate.py",
+        "_sources/evaluate_c0d838fdc0f3b5539688da0fd1af8dbd.py"
+      ],
+      [
+        "main.py",
+        "_sources/main_c3951c21dd9da690bc06d66e51c28bff.py"
+      ],
+      [
+        "models/__init__.py",
+        "_sources/__init___e93c5799dea2b2dda2f45886f351bc03.py"
+      ],
+      [
+        "train.py",
+        "_sources/train_c50d2d21befcac4801e0e0a81c1064d2.py"
+      ],
+      [
+        "utils.py",
+        "_sources/utils_dcab3a1d3fe1ea6096b1f0b0dda02750.py"
+      ]
+    ]
+  },
+  "heartbeat": "2019-07-05T13:13:37.300965",
+  "host": {
+    "ENV": {},
+    "cpu": "Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz",
+    "gpus": {
+      "driver_version": "418.40.04",
+      "gpus": [
+        {
+          "model": "Tesla M60",
+          "persistence_mode": true,
+          "total_memory": 7618
+        },
+        {
+          "model": "Tesla M60",
+          "persistence_mode": true,
+          "total_memory": 7618
+        }
+      ]
+    },
+    "hostname": "ip-172-31-44-104",
+    "os": [
+      "Linux",
+      "Linux-4.4.0-1087-aws-x86_64-with-debian-stretch-sid"
+    ],
+    "python_version": "3.6.5"
+  },
+  "meta": {
+    "command": "main",
+    "options": {
+      "--beat_interval": null,
+      "--capture": null,
+      "--comment": null,
+      "--debug": false,
+      "--enforce_clean": false,
+      "--file_storage": null,
+      "--force": false,
+      "--help": false,
+      "--loglevel": null,
+      "--mongo_db": null,
+      "--name": null,
+      "--pdb": false,
+      "--print_config": false,
+      "--priority": null,
+      "--queue": false,
+      "--sql": null,
+      "--tiny_db": null,
+      "--unobserved": false,
+      "COMMAND": null,
+      "UPDATE": [
+        "model_name=BERTLinearFreezeEmbeddings",
+        "num_epochs=4",
+        "batch_size=32",
+        "learning_rate=2e-5",
+        "max_seq_length=40"
+      ],
+      "help": false,
+      "with": true
+    }
+  },
+  "resources": [],
+  "result": {
+    "accuracy": 0.84,
+    "dropout": 0.5,
+    "f1": {
+      "dtype": "float64",
+      "py/object": "numpy.ndarray",
+      "values": [
+        0.89,
+        0.64
+      ]
+    },
+    "hidden_dim": 128,
+    "id": "6",
+    "learning_rate": 2e-05,
+    "loss": 0.16000000000000003,
+    "max_seq_length": 40,
+    "precision": {
+      "dtype": "float64",
+      "py/object": "numpy.ndarray",
+      "values": [
+        0.84,
+        0.8
+      ]
+    },
+    "recall": {
+      "dtype": "float64",
+      "py/object": "numpy.ndarray",
+      "values": [
+        0.95,
+        0.55
+      ]
+    },
+    "status": "ok"
+  },
+  "start_time": "2019-07-05T13:02:59.517101",
+  "status": "COMPLETED",
+  "stop_time": "2019-07-05T13:13:37.268836"
+}
