@@ -164,7 +164,7 @@ def config():
 
     output_dim = 2 #Number of labels (default=2)
     batch_size = 100 #Batch size (default=32)
-    num_epochs = 100 #Number of epochs (default=100)
+    num_epochs = 10 #Number of epochs (default=100)
     max_seq_length = 55 #Maximum sequence length of the sentences (default=40)
     learning_rate = 3e-5 #Learning rate for the model (default=3e-5)
     warmup_proportion = 0.1 #Warmup proportion (default=0.1)
@@ -275,6 +275,8 @@ def main(output_dim,
     elif model_name=="BERTNorm":
         model = models.BertNorm(dropout, output_dim)
         #print(model)
+    elif model_name=="BERTTest":
+        model = models.BertTest(dropout, output_dim)
 
     model = model.to(device)
 
@@ -303,7 +305,7 @@ def main(output_dim,
 
     test_metrics_df = pd.DataFrame(test_metrics)
     print(test_metrics)
-    test_metrics_df.to_csv(directory+"test_metrics.csv")
+    #test_metrics_df.to_csv(directory+"test_metrics.csv")
 
     results = {
         'id': id_nummer,

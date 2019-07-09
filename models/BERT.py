@@ -12,12 +12,48 @@ from torch.autograd import Variable
 from torch.nn import functional as F
 import numpy as np
 
+class BertTest(nn.Module):
+
+    def __init__(self, dropout, output_dim):
+
+        """
+        Args:
+            embedding_matrix: Pre-trained word embeddings
+            embedding_dim: Embedding dimension of the word embeddings
+            vocab_size: Size of the vocabulary
+            hidden_dim: Size hiddden state
+            dropout: Dropout probability
+            output_dim: Output classes (Subtask A: 2 = (OFF, NOT))
+        """
+
+        super(BertTest, self).__init__()
+
+        self.bert = BertModel.from_pretrained('bert-base-uncased')
+        self.classifier = nn.Linear(768, output_dim)
+        self.dropout = nn.Dropout(dropout)
+        nn.init.xavier_normal_(self.classifier.weight)
+
+    def forward(self, input_ids, token_type_ids=None, attention_mask=None, labels=None):
+
+        encoded_layers, pooled_output = self.bert(input_ids, token_type_ids, attention_mask, output_all_encoded_layers=False)
+
+        x = self.dropout(pooled_output)
+        x = self.classifier(x)
+
+        return x
+
+
 class BertNonLinear(nn.Module):
     def __init__(self, dropout, output_dim):
         """
         Args:
             dropout: Dropout probability
             output_dim: Output dimension (number of labels)
+        Output:
+            encoded layers: outputs a list of the full sequences of encoded-hidden-states at the end oof ech attention block
+            pooled_output: a torch.FloatTensor of size [batch_size, hidden_size] which is the output of a
+            classifier pretrained on top of the hidden state associated to the first character of the
+            input (`CLS`) to train on the Next-Sentence task (see BERT's paper).
         """
 
         super(BertNonLinear, self).__init__()
@@ -62,7 +98,7 @@ class BertNorm(nn.Module):
         )
 
     def forward(self, input_ids, token_type_ids=None, attention_mask=None, labels=None):
-        encoded_layers, pooled_output = self.bert(input_ids, token_type_ids, attention_mask, output_all_encoded_layers=False)
+        all_encoded_layers, pooled_output = self.bert(input_ids, token_type_ids, attention_mask, output_all_encoded_layers=False)
 
         x = self.fc(pooled_output)
 
