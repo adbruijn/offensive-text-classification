@@ -32,73 +32,58 @@ class BertExtractEmbeddings(nn.Module):
         self.classifier = nn.Linear(768, output_dim)
         self.dropout = nn.Dropout(dropout)
 
-    def extract_embedding(enc_layers):
+    def extract_bert_embedding(self, enc_layers):
 
         max_seq_length = len(enc_layers[0][0])
-        token_embeddings = []
 
-        for token_i in range(max_seq_length):
-            hidden_layers = []
+        batch_tokens = []
+        for batch_i in range(len(enc_layers[0])):
+            token_embeddings = []
 
-            for layer_i in range(len(enc_layers)):
-                vec = enc_layers[layer_i][0][token_i]
-                hidden_layers.append(vec)
+            for token_i in range(max_seq_length):
+                hidden_layers = []
 
-        token_embeddings.append(hidden_layers)
+                for layer_i in range(len(enc_layers)):
+                    vec = enc_layers[layer_i][batch_i][token_i]
+                    hidden_layers.append(vec)
+
+                token_embeddings.append(hidden_layers)
+            batch_tokens.append(token_embeddings)
 
         first_layer = torch.mean(enc_layers[0], 1)
-        # second_to_last = torch.mean(encoded_layers[11], 1)
-        # token_last_four_sum = [torch.sum(torch.stack(token)[-4:], 0) for token in token_embeddings] #sum last four hidden layers
-        # token_last_four_cat = [torch.cat((token[-1], token[-2], token[-3], token[-4]), 0) for token in token_embeddings]
-        # token_sum_all = [torch.sum(torch.stack(token)[0:], 0) for token in token_embeddings]
+        second_to_last = torch.mean(enc_layers[11], 1)
 
-        return first_layer
+        batch_token_last_four_sum = []
+        for i, batch in enumerate(batch_tokens):
+            for j, token in enumerate(batch_tokens[i]):
+                token_last_four_sum = torch.sum(torch.stack(token)[-4:], 0)
+            batch_token_last_four_sum.append(token_last_four_sum)
+        last_four_sum = torch.stack(batch_token_last_four_sum)
 
-    # def extract_bert_embeddings(encoded_layers):
-    #     max_seq_length = len(encoded_layers[0][0])
-    #     token_embeddings = []
-    #
-    #     for token_i in range(max_seq_length):
-    #         hidden_layers = []
-    #
-    #         for layer_i in range(len(encoded_layers)):
-    #             vec = encoded_layers[layer_i][0][token_i]
-    #             hidden_layers.append(vec)
-    #
-    #         token_embeddings.append(hidden_layers)
-    #
-    #     return "hoi"
-    #     #first_layer = torch.mean(encoded_layers[0], 1)
+        batch_token_last_four_cat = []
+        for i, batch in enumerate(batch_tokens):
+            for j, token in enumerate(batch_tokens[i]):
+                token_last_four_cat = torch.cat((token[-1], token[-2], token[-3], token[-4]), 0)
+            batch_token_last_four_cat.append(token_last_four_cat)
+        last_four_cat = torch.stack(batch_token_last_four_cat)
 
-        #return first_layer
+        batch_token_sum_all = []
+        for i, batch in enumerate(batch_tokens):
+            for j, token in enumerate(batch_tokens[i]):
+                token_sum_all = torch.sum(torch.stack(token)[0:], 0)
+            batch_token_sum_all.append(token_sum_all)
+        sum_all = torch.stack(batch_token_sum_all)
 
+        return sum_all
 
     def forward(self, input_ids, token_type_ids=None, attention_mask=None, labels=None):
 
         with torch.no_grad():
             encoded_layers, pooled_output = self.bert(input_ids, token_type_ids, attention_mask, output_all_encoded_layers=True)
 
-            max_seq_length = len(encoded_layers[0][0])
-            token_embeddings = []
+            bert_embeddings = self.extract_bert_embedding(encoded_layers)
 
-            for token_i in range(max_seq_length):
-                hidden_layers = []
-
-                for layer_i in range(len(encoded_layers)):
-                    vec = encoded_layers[layer_i][0][token_i]
-                    hidden_layers.append(vec)
-
-                token_embeddings.append(hidden_layers)
-
-            first_layer = torch.mean(encoded_layers[0], 1)
-
-            #first_layer = self.extract_bert_embeddings(encoded_layers)
-
-            #first_layer = self.get_embedding(encoded_layers)
-            #first_layer = torch.mean(encoded_layers[0], 1)
-            #print(p)
-
-        x = self.classifier(first_layer)
+        x = self.classifier(bert_embeddings)
 
         return x
 

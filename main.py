@@ -161,7 +161,7 @@ def config():
 
     output_dim = 2 #Number of labels (default=2)
     batch_size = 100 #Batch size (default=32)
-    num_epochs = 5 #Number of epochs (default=100)
+    num_epochs = 10 #Number of epochs (default=100)
     max_seq_length = 45 #Maximum sequence length of the sentences (default=40)
     learning_rate = 3e-5 #Learning rate for the model (default=3e-5)
     warmup_proportion = 0.1 #Warmup proportion (default=0.1)
@@ -304,7 +304,7 @@ def main(output_dim,
     test_metrics = evaluate_model(model, optimizer, loss_fn, test_dataloader, device, use_bert)
     if use_mongo: log_scalars(test_metrics,"Test")
 
-    test_metrics_df = pd.DataFrame(test_metrics)
+    #test_metrics_df = pd.DataFrame(test_metrics)
     print(test_metrics)
     #test_metrics_df.to_csv(directory+"test_metrics.csv")
 
