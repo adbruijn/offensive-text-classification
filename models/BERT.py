@@ -29,7 +29,7 @@ class BertExtractEmbeddings(nn.Module):
         super(BertExtractEmbeddings, self).__init__()
 
         self.bert = BertModel.from_pretrained('bert-base-uncased')
-        self.classifier = nn.Linear(768, output_dim)
+        self.classifier = nn.Linear(3072, output_dim)
         self.dropout = nn.Dropout(dropout)
 
     def extract_bert_embedding(self, enc_layers):
@@ -74,7 +74,7 @@ class BertExtractEmbeddings(nn.Module):
             batch_token_sum_all.append(token_sum_all)
         sum_all = torch.stack(batch_token_sum_all)
 
-        return first_layer
+        return last_four_cat
 
     def forward(self, input_ids, token_type_ids=None, attention_mask=None, labels=None):
 
