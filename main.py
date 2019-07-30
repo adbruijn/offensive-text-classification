@@ -147,10 +147,7 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, 
         print('Valid Loss: {} | Valid Acc: {}'.format(val_results['loss'], val_results['accuracy']))
         print('Train recall: {} | Train precision: {} | Train f1: {}'.format(train_results['recall'], train_results['precision'], train_results['f1']))
         print('Valid recall: {} | Valid precision: {} | Valid f1 {}'.format(val_results['recall'], val_results['precision'], val_results['f1']))
-        #print('Train cm: {} | Val cm: {}'.format(train_results['cm'], val_results['cm']))
-        #print('Calculated recall train: {} | Caclulated precision train: {}'.format(train_results['calculated_recall'], train_results['calculated_precision']))
-        #print('Calculated recall val: {} | Caclulated precision val: {}'.format(val_results['calculated_recall'], val_results['calculated_precision']))
-        #print('Calculated f1 train {} | Calculated f1 val {}'.format(2*((train_results['calculated_recall']*train_results['calculated_precision'])/(train_results['calculated_recall']+train_results['calculated_precision'])),2*((val_results['calculated_recall']*val_results['calculated_precision'])/(val_results['calculated_recall']+val_results['calculated_precision']))))
+
         #Scheduler
         #scheduler.step()
 
@@ -164,8 +161,8 @@ def config():
 
     output_dim = 2 #Number of labels (default=2)
     batch_size = 100 #Batch size (default=32)
-    num_epochs = 10 #Number of epochs (default=100)
-    max_seq_length = 55 #Maximum sequence length of the sentences (default=40)
+    num_epochs = 5 #Number of epochs (default=100)
+    max_seq_length = 45 #Maximum sequence length of the sentences (default=40)
     learning_rate = 3e-5 #Learning rate for the model (default=3e-5)
     warmup_proportion = 0.1 #Warmup proportion (default=0.1)
     early_stopping_criteria = 20 #Early stopping criteria (default=5)
@@ -275,9 +272,13 @@ def main(output_dim,
     elif model_name=="BERTNorm":
         model = models.BertNorm(dropout, output_dim)
         #print(model)
-    elif model_name=="BERTTest":
-        model = models.BertTest(dropout, output_dim)
-
+    elif model_name=="BERTPooling":
+        model = models.BertPooling(dropout, output_dim)
+    elif model_name=="BERTExtractEmbeddings":
+        model = models.BertExtractEmbeddings(dropout, output_dim)
+    else:
+        Exception("Model name not recoginized")
+        return
     model = model.to(device)
 
     #Loss and optimizer

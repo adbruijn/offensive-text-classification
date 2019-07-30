@@ -22,3 +22,6 @@ results-cnn/
 results-lstm/
 results-lstmattention/
 results-mlp/
+slack.json
+results-bert/
+data/

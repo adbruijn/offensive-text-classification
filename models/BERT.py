@@ -12,6 +12,135 @@ from torch.autograd import Variable
 from torch.nn import functional as F
 import numpy as np
 
+class BertExtractEmbeddings(nn.Module):
+
+    def __init__(self, dropout, output_dim):
+
+        """
+        Args:
+            embedding_matrix: Pre-trained word embeddings
+            embedding_dim: Embedding dimension of the word embeddings
+            vocab_size: Size of the vocabulary
+            hidden_dim: Size hiddden state
+            dropout: Dropout probability
+            output_dim: Output classes (Subtask A: 2 = (OFF, NOT))
+        """
+
+        super(BertExtractEmbeddings, self).__init__()
+
+        self.bert = BertModel.from_pretrained('bert-base-uncased')
+        self.classifier = nn.Linear(768, output_dim)
+        self.dropout = nn.Dropout(dropout)
+
+    def extract_embedding(enc_layers):
+
+        max_seq_length = len(enc_layers[0][0])
+        token_embeddings = []
+
+        for token_i in range(max_seq_length):
+            hidden_layers = []
+
+            for layer_i in range(len(enc_layers)):
+                vec = enc_layers[layer_i][0][token_i]
+                hidden_layers.append(vec)
+
+        token_embeddings.append(hidden_layers)
+
+        first_layer = torch.mean(enc_layers[0], 1)
+        # second_to_last = torch.mean(encoded_layers[11], 1)
+        # token_last_four_sum = [torch.sum(torch.stack(token)[-4:], 0) for token in token_embeddings] #sum last four hidden layers
+        # token_last_four_cat = [torch.cat((token[-1], token[-2], token[-3], token[-4]), 0) for token in token_embeddings]
+        # token_sum_all = [torch.sum(torch.stack(token)[0:], 0) for token in token_embeddings]
+
+        return first_layer
+
+    # def extract_bert_embeddings(encoded_layers):
+    #     max_seq_length = len(encoded_layers[0][0])
+    #     token_embeddings = []
+    #
+    #     for token_i in range(max_seq_length):
+    #         hidden_layers = []
+    #
+    #         for layer_i in range(len(encoded_layers)):
+    #             vec = encoded_layers[layer_i][0][token_i]
+    #             hidden_layers.append(vec)
+    #
+    #         token_embeddings.append(hidden_layers)
+    #
+    #     return "hoi"
+    #     #first_layer = torch.mean(encoded_layers[0], 1)
+
+        #return first_layer
+
+
+    def forward(self, input_ids, token_type_ids=None, attention_mask=None, labels=None):
+
+        with torch.no_grad():
+            encoded_layers, pooled_output = self.bert(input_ids, token_type_ids, attention_mask, output_all_encoded_layers=True)
+
+            max_seq_length = len(encoded_layers[0][0])
+            token_embeddings = []
+
+            for token_i in range(max_seq_length):
+                hidden_layers = []
+
+                for layer_i in range(len(encoded_layers)):
+                    vec = encoded_layers[layer_i][0][token_i]
+                    hidden_layers.append(vec)
+
+                token_embeddings.append(hidden_layers)
+
+            first_layer = torch.mean(encoded_layers[0], 1)
+
+            #first_layer = self.extract_bert_embeddings(encoded_layers)
+
+            #first_layer = self.get_embedding(encoded_layers)
+            #first_layer = torch.mean(encoded_layers[0], 1)
+            #print(p)
+
+        x = self.classifier(first_layer)
+
+        return x
+
+class BertPooling(nn.Module):
+
+    def __init__(self, dropout, output_dim):
+
+        """
+        Args:
+            embedding_matrix: Pre-trained word embeddings
+            embedding_dim: Embedding dimension of the word embeddings
+            vocab_size: Size of the vocabulary
+            hidden_dim: Size hiddden state
+            dropout: Dropout probability
+            output_dim: Output classes (Subtask A: 2 = (OFF, NOT))
+        """
+
+        super(BertPooling, self).__init__()
+
+        self.bert = BertModel.from_pretrained('bert-base-uncased')
+        for param in self.bert.parameters():
+            param.requires_grad = False
+
+        self.classifier = nn.Linear(768, output_dim)
+        self.dropout = nn.Dropout(dropout)
+        nn.init.xavier_normal_(self.classifier.weight)
+
+    def forward(self, input_ids, token_type_ids=None, attention_mask=None, labels=None):
+
+        with torch.no_grad():
+            encoded_layers, pooled_output = self.bert(input_ids, token_type_ids, attention_mask, output_all_encoded_layers=True)
+            input = encoded_layers[-1]
+            print("Pooled output size", pooled_output.size())
+            print(pooled_output)
+            mean_encoded_layers = torch.stack(encoded_layers, dim=0).mean(dim=0).mean(dim=0)
+            print("Mean encoded layers size:", mean_encoded_layers)
+
+        #x = self.dropout(pooled_output)
+        x = self.classifier(mean_encoded_layers)
+
+        return x
+
 class BertTest(nn.Module):
 
     def __init__(self, dropout, output_dim):
@@ -29,6 +158,9 @@ class BertTest(nn.Module):
         super(BertTest, self).__init__()
 
         self.bert = BertModel.from_pretrained('bert-base-uncased')
+        for param in self.bert.parameters():
+            param.requires_grad = False
+
         self.classifier = nn.Linear(768, output_dim)
         self.dropout = nn.Dropout(dropout)
         nn.init.xavier_normal_(self.classifier.weight)

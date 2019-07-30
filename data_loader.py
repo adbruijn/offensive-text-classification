@@ -86,6 +86,9 @@ def create_weight_matrix(vocab_size, word_index, embedding_dim, embeddings_index
 def load_data(subtask):
     """
     Loads the data, if the data is not splitted yet the data will be split in a train and val set
+
+    Args:
+        subtask = a, b, c
     """
 
     subtask_name = "subtask_" + subtask
@@ -290,7 +293,7 @@ def get_data_bert(max_seq_length, batch_size, subtask):
 
     #Features data
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
-    
+
     train_examples = convert_examples_to_features(X_train, y_train, max_seq_length, tokenizer)
     val_examples = convert_examples_to_features(X_val, y_val, max_seq_length, tokenizer)
     test_examples = convert_examples_to_features(X_test, y_test, max_seq_length, tokenizer)
