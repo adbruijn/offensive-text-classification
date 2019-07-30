@@ -74,7 +74,7 @@ class BertExtractEmbeddings(nn.Module):
             batch_token_sum_all.append(token_sum_all)
         sum_all = torch.stack(batch_token_sum_all)
 
-        return last_four_cat
+        return last_four_sum
 
     def forward(self, input_ids, token_type_ids=None, attention_mask=None, labels=None):
 
