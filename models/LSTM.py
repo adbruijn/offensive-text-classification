@@ -10,25 +10,27 @@ class LSTM(nn.Module):
 
         """
         Args:
-            embedding_matrix: Pre-trained word embeddings
+            embedding_matrix: Pre-trained word embeddings matrix
             embedding_dim: Embedding dimension of the word embeddings
-            vocab_size: Size of the vocabulary
-            hidden_dim: Size hiddden state
+            vocab_size: Dimension of the vocabulary
+            hidden_dim: Dimension of the hiddden states
             dropout: Dropout probability
             num_layers: Number of layers of the LSTM
-            bidirectional: Bidredctional
-            output_dim: Output classes (Subtask A: 2 = (OFF, NOT))
+            bidirectional: Bidiredctional
+            output_dim: Number of output classes (Subtask A: 2 = (OFF, NOT))
         """
 
         super(LSTM, self).__init__()
         self.num_layers =  num_layers
         self.hidden_dim =  hidden_dim
         self.bidirectional =  bidirectional
-        self.dropout = dropout
 
         #Word embeddings
         self.word_embeddings = nn.Embedding(vocab_size, embedding_dim)
         self.word_embeddings.weight = nn.Parameter(torch.tensor(embedding_matrix, dtype=torch.float32), requires_grad=False)
+
+        #Dropout
+        self.dropout = dropout
 
         #LSTM layer(s)
         if(self.bidirectional):
@@ -42,6 +44,7 @@ class LSTM(nn.Module):
 
     def forward(self, X):
 
+        #Word embeddings
         embedded = self.word_embeddings(X)
         embedded = embedded.permute(1,0,2)
 

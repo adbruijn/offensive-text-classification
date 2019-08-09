@@ -20,15 +20,13 @@ from torch.utils.data import (DataLoader, RandomSampler, SequentialSampler,
 
 from tqdm import tqdm, trange
 
-from pytorch_pretrained_bert.file_utils import PYTORCH_PRETRAINED_BERT_CACHE, WEIGHTS_NAME, CONFIG_NAME
-from pytorch_pretrained_bert.modeling import BertForSequenceClassification, BertConfig
-from pytorch_pretrained_bert.tokenization import BertTokenizer
-from pytorch_pretrained_bert.optimization import BertAdam, WarmupLinearSchedule
+from pytorch_transformers import *
 
 from train import train_model
 from evaluate import evaluate_model
 from utils import accuracy_recall_precision_f1, save_checkpoint, load_checkpoint
-from data_loader import get_data, get_data_bert
+from data_loader import get_data
+#from data_loader import get_data_bert
 import models
 
 import warnings
@@ -148,11 +146,10 @@ def train_and_evaluate(num_epochs, model, optimizer, loss_fn, train_dataloader, 
         print('Train recall: {} | Train precision: {} | Train f1: {}'.format(train_results['recall'], train_results['precision'], train_results['f1']))
         print('Valid recall: {} | Valid precision: {} | Valid f1 {}'.format(val_results['recall'], val_results['precision'], val_results['f1']))
 
-        #Scheduler
-        #scheduler.step()
-
     return train_metrics, val_metrics
 
+#embedding_file = 'data/GloVe/glove.twitter.27B.200d.txt'
+#embedding_file = 'data/Word2Vec/GoogleNews-vectors-negative300.bin'
 
 @ex.config
 def config():
@@ -160,21 +157,22 @@ def config():
     """Configuration"""
 
     output_dim = 2 #Number of labels (default=2)
-    batch_size = 100 #Batch size (default=32)
-    num_epochs = 10 #Number of epochs (default=100)
+    batch_size = 64 #Batch size (default=32)
+    num_epochs = 50 #Number of epochs (default=100)
     max_seq_length = 45 #Maximum sequence length of the sentences (default=40)
-    learning_rate = 3e-5 #Learning rate for the model (default=3e-5)
+    learning_rate = 3e-3 #Learning rate for the model (default=3e-5)
     warmup_proportion = 0.1 #Warmup proportion (default=0.1)
-    early_stopping_criteria = 20 #Early stopping criteria (default=5)
+    early_stopping_criteria = 10 #Early stopping criteria (default=5)
     num_layers = 2 #Number of layers (default=2)
     hidden_dim = 128 #Hidden layers dimension (default=128)
     bidirectional = False #Left and right LSTM
     dropout = 0.5 #Dropout percentage
     filter_sizes = [2, 3, 4] #CNN
-    embedding_file = 'data/GloVe/glove.twitter.27B.200d.txt' #Embedding file
-    model_name = "MLP" #Model name: LSTM, BERT, MLP, CNN
+    embedding_file = 'data/GloVe/glove.twitter.27B.200d.txt'
+    model_name = "MLP_Features" #Model name: LSTM, BERT, MLP, CNN
     use_mongo = False
     subtask = "a" #Subtask name: a, b or c
+    use_features = True
 
     #ex.observers.append(MongoObserver.create(url=URL_NAME, db_name=DATABASE_NAME))
     if model_name == "MLP":
@@ -186,6 +184,7 @@ def config():
     elif model_name == "CNN":
         ex.observers.append(FileStorageObserver.create('results-cnn'))
     elif "BERT" in model_name:
+        #use_bert = True
         ex.observers.append(FileStorageObserver.create('results-bert'))
 
 @ex.automain
@@ -205,6 +204,7 @@ def main(output_dim,
         model_name,
         use_mongo,
         subtask,
+        use_features,
         _run):
 
     #Logger
@@ -212,7 +212,6 @@ def main(output_dim,
     #directory = f"results/{_run._id}/"
 
     id_nummer = f'{_run._id}'
-    print(id_nummer)
 
     if "BERT" in model_name:  #Default = False, if BERT model is used then use_bert is set to True
         use_bert = True
@@ -227,60 +226,53 @@ def main(output_dim,
     if use_bert:
         train_dataloader, val_dataloader, test_dataloader = get_data_bert(int(max_seq_length), batch_size, subtask)
     else:
-        embedding_dim, vocab_size, embedding_matrix, train_dataloader, val_dataloader, test_dataloader = get_data(int(max_seq_length), embedding_file=embedding_file, batch_size=batch_size, subtask=subtask)
+        embedding_dim, vocab_size, embedding_matrix, train_dataloader, val_dataloader, test_dataloader = get_data(int(max_seq_length), embedding_file, batch_size, use_features, subtask)
 
     #Model
     if model_name=="MLP":
         model = models.MLP(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), dropout, output_dim)
     if model_name=="MLP_Features":
-        model = models.MLP_Features(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), 14, dropout, output_dim)
-        #print(model)
+        model = models.MLP_Features(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), dropout, output_dim)
     elif model_name=="CNN":
         model = models.CNN(embedding_matrix, embedding_dim, vocab_size, dropout, filter_sizes, output_dim)
-        #print(model)
     elif model_name=="LSTM":
         model = models.LSTM(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), dropout, int(num_layers), bidirectional, output_dim)
-        #print(model)
     elif model_name=="LSTMAttention":
         model = models.LSTMAttention(embedding_matrix, embedding_dim, vocab_size, int(hidden_dim), dropout, int(num_layers), bidirectional, output_dim)
-        #print(model)
-    elif model_name=="BERTFreeze":
-        model = BertForSequenceClassification.from_pretrained("bert-base-uncased", output_dim)
-        for param in model.bert.parameters():
-            param.requires_grad = False
-            print(param)
-            print(param.requires_grad)
-        print(model)
-    elif model_name=="BERT":
-        model = BertForSequenceClassification.from_pretrained("bert-base-uncased", output_dim)
-        #print(model)
-    elif model_name=="BERTLinear":
-        model = models.BertLinear(hidden_dim, dropout, output_dim)
-        #print(model)
-    elif model_name=="BERTLinearFreeze":
-        model = models.BertLinearFreeze(hidden_dim, dropout, output_dim)
-        #print(model)
-    elif model_name=="BERTLinearFreezeEmbeddings":
-        model = models.BertLinearFreezeEmbeddings(hidden_dim, dropout, output_dim)
-        #print(model)
-    elif model_name=="BERTLSTM":
-        model = models.BertLSTM(hidden_dim, dropout, bidirectional, output_dim)
-        #print(model)
-    elif model_name=="BERTNonLinear":
-        model = models.BertNonLinear(dropout, output_dim)
-        #print(model)
-    elif model_name=="BERTNorm":
-        model = models.BertNorm(dropout, output_dim)
-        #print(model)
-    elif model_name=="BERTPooling":
-        model = models.BertPooling(dropout, output_dim)
-    elif model_name=="BERTExtractEmbeddings":
-        model = models.BertExtractEmbeddings(dropout, output_dim)
-    else:
-        Exception("Model name not recoginized")
-        return
-    model = model.to(device)
+    # elif model_name=="BERTFreeze":
+    #     model = BertForSequenceClassification.from_pretrained("bert-base-uncased", output_dim)
+    #     for param in model.bert.parameters():
+    #         param.requires_grad = False
+    #         print(param)
+    #         print(param.requires_grad)
+    #     print(model)
+    # elif model_name=="BERT":
+    #     model = BertForSequenceClassification.from_pretrained("bert-base-uncased", output_dim)
+    #     #print(model)
+    # elif model_name=="BERTLinear":
+    #     model = models.BertLinear(hidden_dim, dropout, output_dim)
+    #     #print(model)
+    # elif model_name=="BERTLinearFreeze":
+    #     model = models.BertLinearFreeze(hidden_dim, dropout, output_dim)
+    #     #print(model)
+    # elif model_name=="BERTLinearFreezeEmbeddings":
+    #     model = models.BertLinearFreezeEmbeddings(hidden_dim, dropout, output_dim)
+    #     #print(model)
+    # elif model_name=="BERTLSTM":
+    #     model = models.BertLSTM(hidden_dim, dropout, bidirectional, output_dim)
+    #     #print(model)
+    # elif model_name=="BERTNonLinear":
+    #     model = models.BertNonLinear(dropout, output_dim)
+    #     #print(model)
+    # elif model_name=="BERTNorm":
+    #     model = models.BertNorm(dropout, output_dim)
+    #     #print(model)
+    # elif model_name=="BERTPooling":
+    #     model = models.BertPooling(dropout, output_dim)
+    # elif model_name=="BERTExtractEmbeddings":
+    #     model = models.BertExtractEmbeddings(dropout, output_dim)
 
+    model = model.to(device)
     #Loss and optimizer
     #optimizer = optim.Adam([{'params': model.parameters(), 'weight_decay': 0.1}], lr=learning_rate)
     optimizer = optim.Adam(model.parameters(), lr=learning_rate)
@@ -298,15 +290,12 @@ def main(output_dim,
     print('Testing...')
     load_checkpoint(directory_checkpoints+"best_model.pth.tar", model)
 
-    #Add artifacts
-    #ex.add_artifact(directory+"best_model.pth.tar")
-
     test_metrics = evaluate_model(model, optimizer, loss_fn, test_dataloader, device, use_bert)
     if use_mongo: log_scalars(test_metrics,"Test")
 
-    #test_metrics_df = pd.DataFrame(test_metrics)
+    test_metrics_df = pd.DataFrame(test_metrics)
     print(test_metrics)
-    #test_metrics_df.to_csv(directory+"test_metrics.csv")
+    test_metrics_df.to_csv(directory+"test_metrics.csv")
 
     results = {
         'id': id_nummer,

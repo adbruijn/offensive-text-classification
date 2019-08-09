@@ -14,6 +14,8 @@ from nltk.tokenize import TweetTokenizer
 from wordcloud import STOPWORDS
 import numpy as np
 
+from gensim.models import KeyedVectors
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -24,12 +26,13 @@ from sklearn.model_selection import train_test_split
 from torch.utils.data import (DataLoader, RandomSampler, SequentialSampler,
                               TensorDataset)
 
-from utils import convert_examples_to_features
-from utils import clean_text
+#from utils import convert_examples_to_features
+from utils import clean_glove, clean_fasttext, clean_word2vec
+from utils import generate_features
 
-from pytorch_pretrained_bert.file_utils import PYTORCH_PRETRAINED_BERT_CACHE, WEIGHTS_NAME, CONFIG_NAME
-from pytorch_pretrained_bert.modeling import BertForSequenceClassification, BertConfig
-from pytorch_pretrained_bert.tokenization import BertTokenizer
+# from pytorch_pretrained_bert.file_utils import PYTORCH_PRETRAINED_BERT_CACHE, WEIGHTS_NAME, CONFIG_NAME
+# from pytorch_pretrained_bert.modeling import BertForSequenceClassification, BertConfig
+# from pytorch_pretrained_bert.tokenization import BertTokenizer
 
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
@@ -38,24 +41,17 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 
-from utils import generate_features
+def get_coefs(word, *arr):
+    return word, np.asarray(arr, dtype='float32')
 
-def load_glove(embedding_file):
+def load_embeddings(path):
 
-    """Load GloVe file
+    """Load embeddings file
     Args:
         embedding_file: (str) Directory of the embedding file
     """
 
-    EMBEDDING_FILE = embedding_file
-    embeddings_index = dict()
-
-    for line in open(EMBEDDING_FILE):
-        values = line.split()
-        word = values[0]
-        coefs = np.asarray(values[1:], dtype='float32')
-        embeddings_index[word] = coefs
-    print("Loaded {} word vectors".format(len(embeddings_index)))
+    embeddings_index = dict(get_coefs(*line.split(" ")) for line in open(path))
 
     return embeddings_index
 
@@ -68,6 +64,7 @@ def create_weight_matrix(vocab_size, word_index, embedding_dim, embeddings_index
         embedding_dim: Dimension of the embeddings
         embeddings_index: Index of the embedding
     """
+
     embedding_matrix = np.zeros((vocab_size, embedding_dim))
     for word, i in word_index.items():
         embedding_vector = embeddings_index.get(word)
@@ -82,8 +79,33 @@ def create_weight_matrix(vocab_size, word_index, embedding_dim, embeddings_index
 
     return embedding_matrix
 
+def load_embedding_matrix(vocab_size, word_index, embedding_file):
+
+    embedding_type = re.findall('\w+', embedding_file)[1]
+
+    if (embedding_type == 'GloVe' or embedding_type == 'fastText'):
+        embedding_dim = int(re.findall('\d{3,}', embedding_file)[0])
+
+        embeddings_index = load_embeddings(embedding_file)
+        print("Loaded {} word vectors".format(len(embeddings_index)))
+
+    elif embedding_type == 'Word2Vec':
+        embedding_dim = 300
+        word2vec_dict = KeyedVectors.load_word2vec_format(embedding_file, binary=True)
+
+        embeddings_index = dict()
+
+        for word in word2vec_dict.wv.vocab:
+            embeddings_index[word] = word2vec_dict.word_vec(word)
+
+        print("Loaded {} word vectors".format(len(embeddings_index)))
+
+    embedding_matrix = create_weight_matrix(vocab_size, word_index, embedding_dim, embeddings_index)
+
+    return embedding_matrix
+
 #Load data
-def load_data(subtask):
+def load_data(subtask, use_features=False):
     """
     Loads the data, if the data is not splitted yet the data will be split in a train and val set
 
@@ -101,6 +123,12 @@ def load_data(subtask):
         train = pd.read_csv("data/train_"+subtask+".csv")
         val = pd.read_csv("data/val_"+subtask+".csv")
         test = pd.read_csv("data/test_"+subtask+".csv")
+
+        if use_features:
+            features_train = pd.read_csv("data/features_train_"+subtask+".csv")
+            features_val = pd.read_csv("data/features_val_"+subtask+".csv")
+            features_test = pd.read_csv("data/features_test_"+subtask+".csv")
+
     else:
         # Split normal data
         train_cola = pd.read_csv("data/SemEval/olid-training-v1.0.tsv", delimiter="\t")
@@ -134,95 +162,65 @@ def load_data(subtask):
         val.to_csv("data/val_"+subtask+".csv", index=False)
         test.to_csv("data/test_"+subtask+".csv", index=False)
 
+        if use_features:
+            # Generate features
+            features_train = generate_features(train)
+            features_val = generate_features(val)
+            features_test = generate_features(test)
+
+            features_train.to_csv("data/features_train_"+subtask+".csv", index=False)
+            features_val.to_csv("data/features_val_"+subtask+".csv", index=False)
+            features_test.to_csv("data/features_test_"+subtask+".csv", index=False)
+
+            return train.head(10), val.head(10), test.head(10), features_train.head(10), features_val.head(10), features_test.head(10)
+
     return train, val, test
 
-def load_data_features():
-    """
-    Loads the data, if the data is not splitted yet the data will be split in a train and val set
-    """
-
-    RANDOM_STATE = 123
-
-    train_file = Path("data/train.csv")
-
-    if train_file.exists():
-        train = pd.read_csv("data/train.csv")
-        val = pd.read_csv("data/val.csv")
-        test = pd.read_csv("data/test.csv")
-
-        features_train = pd.read_csv("data/features_train.csv")
-        features_val = pd.read_csv("data/features_val.csv")
-        features_test = pd.read_csv("data/features_test.csv")
-
-    else:
-        # Split normal data
-        train_cola = pd.read_csv("data/SemEval/olid-training-v1.0.tsv", delimiter="\t")
-        test_cola = pd.read_csv("data/SemEval/testset-levela.tsv", delimiter="\t")
-        labels_cola = pd.read_csv("data/SemEval/labels-levela.csv", header=None)
-        labels_cola.columns = ['id', 'subtask_a']
-
-        test = pd.merge(test_cola, labels_cola, on='id')
-
-        # Remove duplicates
-        train_cola = train_cola.drop_duplicates("tweet")
-        test = test.drop_duplicates("tweet")
-
-        train, val = train_test_split(train_cola, test_size=0.2, random_state=RANDOM_STATE)
-        train.reset_index(drop=True)
-        val.reset_index(drop=True)
-
-        train = train[["tweet","subtask_a"]]; val = val[["tweet","subtask_a"]]; test = test[["tweet","subtask_a"]]
-
-        train.columns = ['text', 'label']; val.columns = ['text','label']; test.columns = ['text', 'label']
-
-        # Generate features
-        features_train = generate_features(train)
-        features_val = generate_features(val)
-        features_test = generate_features(test)
-
-        train.to_csv("data/train.csv", index=False)
-        val.to_csv("data/val.csv", index=False)
-        test.to_csv("data/test.csv", index=False)
-
-        features_train.to_csv("data/features_train.csv")
-        features_val.to_csv("data/features_val.csv")
-        features_test.to_csv("data/features_test.csv")
-
-    return train, val, test, features_train, features_val, features_test
-
 #Clean Data
-def clean_data(df, remove_punt_number_special_chars=False,remove_stopwords=False, apply_stemming=False):
+def clean_data(df, embedding_file):
     """Clean the data and remove data which has a length of less than 3 words
     Args:
         df: Dataframe
     """
 
     labels = encode_label(df["label"])
-    text_clean = [clean_text(text, remove_punt_number_special_chars,remove_stopwords, apply_stemming) for text in df["text"]]
+
+    embedding_type = re.findall('\w+', embedding_file)[1]
+
+    if (embedding_type == 'GloVe'):
+        text_clean = [clean_glove(text) for text in df["text"]]
+
+    elif(embedding_type == 'fastText'):
+        text_clean = [clean_fasttext(text) for text in df["text"]]
+
+    elif embedding_type == 'Word2Vec':
+        text_clean = [clean_word2vec(text) for text in df["text"]]
+
+    #text_clean = [clean_text(text, remove_punt_number_special_chars,remove_stopwords, apply_stemming) for text in df["text"]]
 
     df = pd.DataFrame({"text":text_clean, "label":labels})
 
     return text_clean, labels
 
 #Get Dataloader
-def get_dataloader_bert(examples, batch_size):
-    """Make data iterator
-        Arguments:
-            X: Features
-            y: Labels
-            batch_size: (int) Batch size
-    """
-
-    all_input_ids = torch.tensor(list(examples.input_ids), dtype=torch.long)
-    all_input_mask = torch.tensor(list(examples.input_mask), dtype=torch.long)
-    all_segment_ids = torch.tensor(list(examples.segment_ids), dtype=torch.long)
-    all_label_ids = torch.tensor(list(examples.label_id), dtype=torch.long)
-
-    data = TensorDataset(all_input_ids, all_input_mask, all_segment_ids, all_label_ids)
-    sampler = RandomSampler(data)
-    dataloader = DataLoader(data, sampler=sampler, batch_size=batch_size)
-
-    return dataloader
+# def get_dataloader_bert(examples, batch_size):
+#     """Make data iterator
+#         Arguments:
+#             X: Features
+#             y: Labels
+#             batch_size: (int) Batch size
+#     """
+#
+#     all_input_ids = torch.tensor(list(examples.input_ids), dtype=torch.long)
+#     all_input_mask = torch.tensor(list(examples.input_mask), dtype=torch.long)
+#     all_segment_ids = torch.tensor(list(examples.segment_ids), dtype=torch.long)
+#     all_label_ids = torch.tensor(list(examples.label_id), dtype=torch.long)
+#
+#     data = TensorDataset(all_input_ids, all_input_mask, all_segment_ids, all_label_ids)
+#     sampler = RandomSampler(data)
+#     dataloader = DataLoader(data, sampler=sampler, batch_size=batch_size)
+#
+#     return dataloader
 
 def get_dataloader(X, y, batch_size):
 
@@ -270,138 +268,98 @@ def encode_label(y):
 
     return np.array(le.transform(y))
 
-def get_data_bert(max_seq_length, batch_size, subtask):
+# def get_data_bert(max_seq_length, batch_size, subtask):
+#
+#     """
+#     Args:
+#         max_num_words: (int) Max number of words as input for the Tokenizer
+#         embedding_dim: (int) Embedding dim of the embeddings
+#         max_seq_length: (int) Max sequence length of the sentences
+#         batch_size: (int) Batch size for the DataLoader
+#         use_bert: (bool) Use the BERT model or another model
+#     Output:
+#         word_index, embedding_matrix, X_train, y_train, X_test, y_test
+#     """
+#
+#     #Load data
+#     train, val, test = load_data(subtask)
+#
+#     #Clean data
+#     X_train, y_train = clean_data(train)
+#     X_val, y_val = clean_data(val)
+#     X_test, y_test = clean_data(test)
+#
+#     #Features data
+#     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
+#
+#     train_examples = convert_examples_to_features(X_train, y_train, max_seq_length, tokenizer)
+#     val_examples = convert_examples_to_features(X_val, y_val, max_seq_length, tokenizer)
+#     test_examples = convert_examples_to_features(X_test, y_test, max_seq_length, tokenizer)
+#
+#     #Data loaders
+#     train_dataloader = get_dataloader_bert(train_examples, batch_size)
+#     val_dataloader = get_dataloader_bert(val_examples, batch_size)
+#     test_dataloader = get_dataloader_bert(test_examples, batch_size)
+#
+#     return train_dataloader, val_dataloader, test_dataloader
 
-    """
-    Args:
-        max_num_words: (int) Max number of words as input for the Tokenizer
-        embedding_dim: (int) Embedding dim of the embeddings
-        max_seq_length: (int) Max sequence length of the sentences
-        batch_size: (int) Batch size for the DataLoader
-        use_bert: (bool) Use the BERT model or another model
-    Output:
-        word_index, embedding_matrix, X_train, y_train, X_test, y_test
-    """
-
-    #Load data
-    train, val, test = load_data(subtask)
-
-    #Clean data
-    X_train, y_train = clean_data(train)
-    X_val, y_val = clean_data(val)
-    X_test, y_test = clean_data(test)
-
-    #Features data
-    tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', do_lower_case=True)
-
-    train_examples = convert_examples_to_features(X_train, y_train, max_seq_length, tokenizer)
-    val_examples = convert_examples_to_features(X_val, y_val, max_seq_length, tokenizer)
-    test_examples = convert_examples_to_features(X_test, y_test, max_seq_length, tokenizer)
-
-    #Data loaders
-    train_dataloader = get_dataloader_bert(train_examples, batch_size)
-    val_dataloader = get_dataloader_bert(val_examples, batch_size)
-    test_dataloader = get_dataloader_bert(test_examples, batch_size)
-
-    return train_dataloader, val_dataloader, test_dataloader
-
-def get_data(max_seq_len, embedding_file, batch_size, subtask):
+def get_data(max_seq_len, embedding_file, batch_size, use_features, subtask):
 
     """
     Args:
         max_seq_len: Max sequence length of the sentences
         embedding_file: Embedding file
         batch_size: Batch size for the DataLoader
-
+        subtask: Subtask
     Output:
         embedding_dim, word_index, embedding_matrix, X_train, y_train, X_test, y_test
     """
 
     #Load data
-    train, val, test = load_data(subtask)
+    if use_features:
+        train, val, test, features_train, features_val, features_test = load_data(subtask, use_features)
+    else:
+        train, val, test = load_data(subtask)
 
     #Embedding dimension based on the embedding_file
     embedding_dim = int(re.findall('\d{3,}', embedding_file)[0])
 
     #Clean data
-    X_train, y_train = clean_data(train, remove_punt_number_special_chars=True,remove_stopwords=True, apply_stemming=False)
-    X_val, y_val = clean_data(val, remove_punt_number_special_chars=True,remove_stopwords=True, apply_stemming=False)
-    X_test, y_test = clean_data(train, remove_punt_number_special_chars=True,remove_stopwords=True, apply_stemming=False)
+    X_train, y_train = clean_data(train, embedding_file)
+    X_val, y_val = clean_data(val, embedding_file)
+    X_test, y_test = clean_data(train, embedding_file)
 
-    tokenizer = Tokenizer(num_words = 10000000)
-    tokenizer.fit_on_texts(list(X_train)+list(X_val))
+    #Tokenize tweets
+    max_words = 10000000
+    tokenizer = Tokenizer(num_words = max_words)
+    tokenizer.fit_on_texts(list(X_train))
 
     word_index = tokenizer.word_index
+    print('Found %s unique tokens.' % len(word_index))
     vocab_size = len(word_index) + 1
 
-    #Embeddings
-    embeddings_index = load_glove(embedding_file)
-    embedding_matrix = create_weight_matrix(vocab_size, word_index, embedding_dim, embeddings_index)
-
     X_train = tokenizer.texts_to_sequences(X_train)
-    X_train = pad_sequences(X_train, maxlen=max_seq_len)
-
     X_val = tokenizer.texts_to_sequences(X_val)
-    X_val = pad_sequences(X_val, maxlen=max_seq_len)
-
     X_test = tokenizer.texts_to_sequences(X_test)
+
+    #Pad tweets
+    X_train = pad_sequences(X_train, maxlen=max_seq_len)
+    X_val = pad_sequences(X_val, maxlen=max_seq_len)
     X_test = pad_sequences(X_test, maxlen=max_seq_len)
+
+    #Embeddings
+    embedding_matrix = load_embedding_matrix(vocab_size, word_index, embedding_file)
+
+    if use_features:
+        train_dataloader = get_dataloader_features(X_train, features_train, y_train, batch_size)
+        val_dataloader = get_dataloader_features(X_val, features_val, y_val, batch_size)
+        test_dataloader = get_dataloader_features(X_test, features_test, y_test, batch_size)
+
+        return embedding_dim, int(vocab_size), embedding_matrix, train_dataloader, val_dataloader, test_dataloader
 
     train_dataloader = get_dataloader(X_train, y_train, batch_size)
     val_dataloader = get_dataloader(X_val, y_val, batch_size)
     test_dataloader = get_dataloader(X_test, y_test, batch_size)
-
-    return embedding_dim, int(vocab_size), embedding_matrix, train_dataloader, val_dataloader, test_dataloader
-
-def get_data_features(max_seq_len, embedding_file, batch_size):
-
-    """
-    Args:
-        max_seq_len: Max sequence length of the sentences
-        embedding_file: Embedding file
-        batch_size: Batch size for the DataLoader
-
-    Output:
-        embedding_dim, word_index, embedding_matrix, X_train, y_train, X_test, y_test
-    """
-
-    #Load data
-    train, val, test, features_train, features_val, features_test = load_data_features()
-
-    #Embedding dimension based on the embedding_file
-    embedding_dim = int(re.findall('\d{3,}', embedding_file)[0])
-
-    #Clean data
-    X_train = [clean_text(text, remove_punt_number_special_chars=True,remove_stopwords=True, apply_stemming=False) for text in train["text"]]
-    X_val = [clean_text(text, remove_punt_number_special_chars=True,remove_stopwords=True, apply_stemming=False) for text in val["text"]]
-    X_test = [clean_text(text, remove_punt_number_special_chars=True,remove_stopwords=True, apply_stemming=False) for text in test["text"]]
-
-    y_train = encode_label(train["label"])
-    y_val = encode_label(val["label"])
-    y_test = encode_label(test["label"])
-
-    tokenizer = Tokenizer(num_words = 10000000)
-    tokenizer.fit_on_texts(list(X_train)+list(X_val))
-
-    word_index = tokenizer.word_index
-    vocab_size = len(word_index) + 1
-
-    #Embeddings
-    embeddings_index = load_glove(embedding_file)
-    embedding_matrix = create_weight_matrix(vocab_size, word_index, embedding_dim, embeddings_index)
-
-    X_train = tokenizer.texts_to_sequences(X_train)
-    X_train = pad_sequences(X_train, maxlen=max_seq_len)
-
-    X_val = tokenizer.texts_to_sequences(X_val)
-    X_val = pad_sequences(X_val, maxlen=max_seq_len)
-
-    X_test = tokenizer.texts_to_sequences(X_test)
-    X_test = pad_sequences(X_test, maxlen=max_seq_len)
-
-    train_dataloader = get_dataloader_features(X_train, features_train, y_train, batch_size)
-    val_dataloader = get_dataloader_features(X_val, features_val, y_val, batch_size)
-    test_dataloader = get_dataloader_features(X_test, features_test, y_test, batch_size)
 
     return embedding_dim, int(vocab_size), embedding_matrix, train_dataloader, val_dataloader, test_dataloader
 

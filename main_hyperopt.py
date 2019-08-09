@@ -22,16 +22,6 @@ URL = 'mongo://localhost:27017/hyperopt/jobs'
 @click.option('--num_epochs', default=500, help="Maximum number of epochs")
 @click.option('--embedding_file', default='data/GloVe/glove.twitter.27B.200d.txt', help="Default datapath data/GloVe/glove.twitter.27B.200d.txt'")
 def optimize(model_name, max_evals, num_epochs, embedding_file):
-    #Space
-    # hidden_dim = {'hidden_dim': hp.choice("hidden_dim", np.arange(5, 101, 5))}
-    # num_layers = {'num_layers': hp.quniform('num_layers', 1, 10)}
-    # bidirectional = {'bidirectional': hp.choice("bidirectional", [True, False])}
-    # dropout = {'dropout': hp.quniform('dropout', 0.01, 0.2)}
-    # max_seq_length = {'max_seq_length': hp.choice("hidden_dim", np.arange(40,71,5))}
-    # learning_rate = {'learning_rate': hp.loguniform('learning_rate', -5, 0)} #Learning rate for the model (default=3e-5)
-    #dropout = {'dropout': } #Dropout percentage
-    #embedding_file = 'data/GloVe/glove.twitter.27B.200d.txt' #Embedding file
-    #use_mongo = False
 
     if model_name=="MLP":
         #MLP
@@ -90,7 +80,6 @@ def optimize(model_name, max_evals, num_epochs, embedding_file):
         print("Rerunning from {} trials to add {} trial(s)".format(len(trials.trials),max_evals-len(trials.trials)))
     except:
         trials = Trials()
-        #trials = MongoTrials(URL, exp_key='exp1')
         print("No previous trial found, starting new trials...")
 
     #Optimisation
